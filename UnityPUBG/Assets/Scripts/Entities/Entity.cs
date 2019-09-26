@@ -45,9 +45,10 @@ namespace Assets.Scripts.Entities
         #endregion
 
         #region 메서드
-        protected void Move(Vector3 direction)
+        protected void Move(float x, float z)
         {
-            Vector3 targetVelocity = new Vector3(direction.x * movementSpeed, entityRigidbody.velocity.y, direction.z * movementSpeed);
+            Vector3 targetVelocity = new Vector3(x, 0, z) * movementSpeed * Time.deltaTime;
+            targetVelocity.y = entityRigidbody.velocity.y;
             entityRigidbody.velocity = Vector3.SmoothDamp(entityRigidbody.velocity, targetVelocity, ref currentVelocity, smoothTime);
         } 
         #endregion

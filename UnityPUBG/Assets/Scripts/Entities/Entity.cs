@@ -12,9 +12,10 @@ namespace Assets.Scripts.Entities
         [SerializeField] protected float currentHealth;
 
         [Header("Movement")]
-        [SerializeField] protected float movementSpeed;
-        [SerializeField] private Vector3 currentVelocity;
-        [SerializeField] private float smoothTime;
+        [SerializeField] [Range(0f, 20f)] protected float movementSpeed = 5f;
+        [SerializeField] [Range(0f, 1f)] protected float rotationSpeed = 0.2f;
+        protected Vector3 movementDirection;
+        protected Vector3 facingDirection;
 
         protected ItemContainer itemContainer;
 
@@ -40,16 +41,41 @@ namespace Assets.Scripts.Entities
 
         protected virtual void FixedUpdate()
         {
-
+            MoveEntity();
+            RotateEntity();
         }
         #endregion
 
         #region 메서드
-        protected void Move(Vector3 direction)
+        /// <summary>
+        /// movementDirection 방향으로 Entity를 이동
+        /// </summary>
+        private void MoveEntity()
         {
-            Vector3 targetVelocity = new Vector3(direction.x * movementSpeed, entityRigidbody.velocity.y, direction.z * movementSpeed);
-            entityRigidbody.velocity = Vector3.SmoothDamp(entityRigidbody.velocity, targetVelocity, ref currentVelocity, smoothTime);
-        } 
+            if (movementDirection == Vector3.zero)
+            {
+                return;
+            }
+
+            Vector3 direction = movementDirection * movementSpeed * Time.fixedDeltaTime;
+            entityRigidbody.MovePosition(transform.position + direction);
+        }
+
+        /// <summary>
+        /// movementDirection 방향을 Entity가 바라보도록 함
+        /// </summary>
+        private void RotateEntity()
+        {
+            if (movementDirection == Vector3.zero)
+            {
+                return;
+            }
+
+            facingDirection = movementDirection;
+
+            var targetRotation = Quaternion.LookRotation(facingDirection);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed);
+        }
         #endregion
     }
 }

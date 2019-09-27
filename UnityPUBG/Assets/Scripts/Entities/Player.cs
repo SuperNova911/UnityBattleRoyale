@@ -34,12 +34,13 @@ namespace Assets.Scripts.Entities
         protected override void Update()
         {
             base.Update();
+
+            ControlMovement();
         }
 
         protected override void FixedUpdate()
         {
             base.FixedUpdate();
-            ControlMovement();
         }
 
         private void OnEnable()
@@ -54,10 +55,13 @@ namespace Assets.Scripts.Entities
         #endregion
 
         #region 메서드
+        /// <summary>
+        /// InputSystem으로부터 입력받은 값을 기반으로 Player의 움직임을 컨트롤
+        /// </summary>
         private void ControlMovement()
         {
             Vector2 direction = inputManager.Player.Movement.ReadValue<Vector2>();
-            Move(direction.x, direction.y);
+            movementDirection = new Vector3(direction.x, 0, direction.y);
         } 
         #endregion
     }

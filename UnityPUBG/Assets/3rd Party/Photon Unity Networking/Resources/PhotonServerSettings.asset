@@ -43,4 +43,9 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
+  - SendEntry
+  - SendLeaveRoom
+  - SendMakeList
+  - SendMsg
+  - SendReadyMessage
   DisableAutoOpenWizard: 1

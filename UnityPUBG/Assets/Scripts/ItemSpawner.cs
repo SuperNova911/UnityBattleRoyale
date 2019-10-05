@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.Entities;
-using Assets.Scripts.Items;
+﻿using UnityPUBG.Scripts.Entities;
+using UnityPUBG.Scripts.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace UnityPUBG.Scripts
 {
     public class ItemSpawner : Singleton<ItemSpawner>
     {

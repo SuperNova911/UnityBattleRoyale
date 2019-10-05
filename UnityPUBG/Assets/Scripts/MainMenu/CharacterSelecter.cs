@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Lobby
+namespace UnityPUBG.Scripts.MainMenu
 {
     public class CharacterSelecter : MonoBehaviour
     {

@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.Items;
-using Assets.Scripts.Utilities;
+﻿using UnityPUBG.Scripts.Items;
+using UnityPUBG.Scripts.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Assets.Scripts.Entities
+namespace UnityPUBG.Scripts.Entities
 {
     public class Player : Entity
     {

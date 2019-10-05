@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PT
+namespace UnityPUBG.Scripts.Lobby
 {
     public class PTManager : Photon.PunBehaviour
     {

@@ -35,4 +35,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-.vscode/
+.vscode/settings.json

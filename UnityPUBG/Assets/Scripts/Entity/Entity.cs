@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.Entities
+namespace UnityPUBG.Scripts.Entities
 {
     public abstract class Entity : MonoBehaviour
     {

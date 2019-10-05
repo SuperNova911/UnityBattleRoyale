@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Entities
+namespace UnityPUBG.Scripts.Items
 {
-    public enum VehicleStatus
+    public enum ItemRarity
     {
-        Idle, Riding
+        Common, Rare, Epic, Legendary
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Items
+namespace UnityPUBG.Scripts.Items
 {
     [CreateAssetMenu(menuName = "UnityPUBG Items/Backpack")]
     public class Backpack : Item

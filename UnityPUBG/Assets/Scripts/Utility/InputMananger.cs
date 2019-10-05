@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace Assets.Scripts.Utilities
+namespace UnityPUBG.Scripts.Utilities
 {
     public class InputManager : IInputActionCollection
     {

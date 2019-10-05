@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Entities
+namespace UnityPUBG.Scripts.Entities
 {
-    public class Vehicle : Entity
+    public enum VehicleStatus
     {
+        Idle, Riding
     }
 }

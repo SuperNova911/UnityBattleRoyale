@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Items
+namespace UnityPUBG.Scripts.Entities
 {
-    public enum ItemRarity
+    public class Vehicle : Entity
     {
-        Common, Rare, Epic, Legendary
     }
 }

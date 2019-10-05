@@ -61,6 +61,7 @@ namespace MainMenu
             isConnecting = true;
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
+            GameObject.Find("TitleImage").SetActive(false);
 
             if (PhotonNetwork.connected)
             {

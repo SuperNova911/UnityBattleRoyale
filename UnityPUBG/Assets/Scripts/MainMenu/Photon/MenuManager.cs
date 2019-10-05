@@ -40,7 +40,7 @@ namespace MainMenu
                 StopCoroutine(FlashText());
                 text.gameObject.SetActive(false);
                 LoginObjects.SetActive(true);
-                GameObject.Find("TitleImage").SetActive(false);
+                //GameObject.Find("TitleImage").SetActive(false);
                 isStarted = true;
             }
         }

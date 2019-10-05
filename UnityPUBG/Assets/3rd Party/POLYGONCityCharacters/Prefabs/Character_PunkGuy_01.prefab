@@ -462,6 +462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 477434}
   - component: {fileID: 9577792}
+  - component: {fileID: -2161221290501522681}
   m_Layer: 0
   m_Name: Character_PunkGuy_01
   m_TagString: Untagged
@@ -522,6 +523,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &-2161221290501522681
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111434}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &115660
 GameObject:
   m_ObjectHideFlags: 0

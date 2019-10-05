@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -226,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &633320132
 RectTransform:
   m_ObjectHideFlags: 0
@@ -282,6 +282,70 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633320131}
   m_CullTransparentMesh: 0
+--- !u!1 &871540032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 871540033}
+  - component: {fileID: 871540034}
+  m_Layer: 0
+  m_Name: CharacterPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &871540033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871540032}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &871540034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871540032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a830728364c5628459ad27b3abe62e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CharacterPrefabList:
+  - {fileID: 172216, guid: b4587275bd8858843b068385a1cb3677, type: 3}
+  - {fileID: 130974, guid: cf0f33d2a32f159499351bdc8d15d958, type: 3}
+  - {fileID: 100498, guid: 646ab7dcc23229341892eccffdd5a3f3, type: 3}
+  - {fileID: 191984, guid: ae8b16115c4dca4499645ab171e10144, type: 3}
+  - {fileID: 137922, guid: 0d71eaacb7dc9214a840923aeede17a1, type: 3}
+  - {fileID: 131946, guid: 1eb7038c3383b9d4182139ee87feaa72, type: 3}
+  - {fileID: 136578, guid: 5a8d5cf9d0e1c75478e5062cc96376c2, type: 3}
+  - {fileID: 178284, guid: fe631d66d91635d4db4b17b1c3da562a, type: 3}
+  - {fileID: 128870, guid: 526d6de2a1abc594180abbff3f624eed, type: 3}
+  - {fileID: 100760, guid: 260bc92b4025b7a4f98140a34d1af612, type: 3}
+  - {fileID: 107014, guid: fe02926d86299874a921d05a946cbd6c, type: 3}
+  - {fileID: 171554, guid: edc13eb972d2a704db06565103473e80, type: 3}
+  - {fileID: 167820, guid: bcae65457b2b7184a97db61675c85a98, type: 3}
+  - {fileID: 109846, guid: 2b7716262d769d24fb8643017c8cdc75, type: 3}
+  - {fileID: 111434, guid: a665d26bf3f0c8f4bb4797e811962f4b, type: 3}
+  - {fileID: 163880, guid: a94ecba3d91185e43a1cf1fdfad01c79, type: 3}
+  - {fileID: 118518, guid: 7b8784fae50118e4182c07fbf2d12bb9, type: 3}
+  - {fileID: 164716, guid: 1a8311760944bee4a800ce10f84eee90, type: 3}
+  - {fileID: 123474, guid: 4c0e3eca026348d45adec14e11046ab2, type: 3}
+  - {fileID: 6013908274627104922, guid: 84a377ada009b3e4cb547e55582c8826, type: 3}
 --- !u!1 &984060394
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,14 +426,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1758639501078851949, guid: 6a01c05a63e5cee439f475deb5c215d9,
         type: 3}
-      propertyPath: progressLabel
-      value: 
-      objectReference: {fileID: 3958067609146530350}
-    - target: {fileID: 1758639501078851949, guid: 6a01c05a63e5cee439f475deb5c215d9,
-        type: 3}
       propertyPath: controlPanel
       value: 
       objectReference: {fileID: 3958067609718456760}
+    - target: {fileID: 1758639501078851949, guid: 6a01c05a63e5cee439f475deb5c215d9,
+        type: 3}
+      propertyPath: progressLabel
+      value: 
+      objectReference: {fileID: 3958067609146530350}
     - target: {fileID: 1758639501078851949, guid: 6a01c05a63e5cee439f475deb5c215d9,
         type: 3}
       propertyPath: PlayerCount
@@ -568,7 +632,7 @@ Camera:
   m_GameObject: {fileID: 2043538119}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1758639501078851948}
   - component: {fileID: 1758639501078851949}
   - component: {fileID: 1758639501078851947}
+  - component: {fileID: 6748747718089329027}
   m_Layer: 0
   m_Name: Launcher
   m_TagString: Untagged
@@ -45,9 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Loglevel: 0
-  MaxPlayersPerRoom: 5
+  MaxPlayersPerRoom: 10
   controlPanel: {fileID: 0}
   progressLabel: {fileID: 0}
+  PlayerCount: {fileID: 0}
 --- !u!114 &1758639501078851947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,3 +64,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoginObjects: {fileID: 0}
   text: {fileID: 0}
+--- !u!114 &6748747718089329027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758639501078851950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7508b70b13eb57646b480473618901c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

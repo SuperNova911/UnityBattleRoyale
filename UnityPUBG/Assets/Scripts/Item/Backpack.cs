@@ -12,7 +12,7 @@ namespace UnityPUBG.Scripts.Items
     {
         [SerializeField] private int bonusCapacity;
 
-        public Backpack(int id, string name, ItemRarity rarity, int bonusCapacity) : base(id, name, rarity)
+        public Backpack(string name, ItemRarity rarity, int bonusCapacity) : base(name, rarity)
         {
             this.bonusCapacity = bonusCapacity;
         }

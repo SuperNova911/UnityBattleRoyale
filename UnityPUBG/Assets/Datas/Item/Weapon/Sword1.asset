@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85cb59af28e489c479191cd2efef01de, type: 3}
-  m_Name: Bandage
+  m_Script: {fileID: 11500000, guid: f14c2868ecf4af246bf77ec6eb4f03b7, type: 3}
+  m_Name: Sword1
   m_EditorClassIdentifier: 
-  id: 10
-  itemName: Bandage
+  id: 0
+  itemName: Test Sword Common
   rarity: 0
-  model: {fileID: 6168015285110525378, guid: f1257f5db464db34083def481f5cbb41, type: 3}
+  model: {fileID: 139746, guid: 294115a70762d224f889f85c52310ddc, type: 3}

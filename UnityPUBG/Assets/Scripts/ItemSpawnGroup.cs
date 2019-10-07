@@ -5,31 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts
 {
-    public sealed class ItemSpawnZone : MonoBehaviour
+    public sealed class ItemSpawnGroup : MonoBehaviour
     {
-        public ItemRarity zoneRarity = ItemRarity.Common;
-        public List<ItemSpawnPoint> spawnPoints = new List<ItemSpawnPoint>();
+        #region 필드
+        public ItemSpawnRate groupSpawnRate = new ItemSpawnRate();
+        [SerializeField] [ReadOnly] private List<ItemSpawnPoint> spawnPoints = new List<ItemSpawnPoint>();
+        #endregion
 
+        #region 유니티 메시지
         private void Awake()
         {
             spawnPoints.Clear();
 
             foreach (var spawnPoint in GetComponentsInChildren<ItemSpawnPoint>())
             {
-                spawnPoint.parentZone = this;
                 spawnPoints.Add(spawnPoint);
             }
         }
-
-        private void Start()
-        {
-            foreach (var spawnPoint in spawnPoints)
-            {
-                spawnPoint.SpawnItem();
-            }
-        }
+        #endregion
     }
 }

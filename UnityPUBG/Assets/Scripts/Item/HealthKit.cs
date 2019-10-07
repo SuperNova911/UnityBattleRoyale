@@ -10,7 +10,7 @@ namespace UnityPUBG.Scripts.Items
     [CreateAssetMenu(menuName = "UnityPUBG Items/HealthKit")]
     public class HealthKit : UsableItem
     {
-        public HealthKit(int id, string name, ItemRarity rarity, int maxStack) : base(id, name, rarity, maxStack)
+        public HealthKit(string name, ItemRarity rarity, int maxStack) : base(name, rarity, maxStack)
         {
         }
     }

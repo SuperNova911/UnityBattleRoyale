@@ -8,7 +8,7 @@ namespace UnityPUBG.Scripts.Items
 {
     public abstract class Weapon : Item
     {
-        public Weapon(int id, string name, ItemRarity rarity, float damage, float attackSpeed, float attackRange, float knockbackPower) : base(id, name, rarity)
+        public Weapon(string name, ItemRarity rarity, float damage, float attackSpeed, float attackRange, float knockbackPower) : base(name, rarity)
         {
             Damage = damage;
             AttackSpeed = attackSpeed;

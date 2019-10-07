@@ -10,7 +10,7 @@ namespace UnityPUBG.Scripts.Entities
 {
     public class ItemObject : MonoBehaviour
     {
-        public GameObject itemModel;
         public Item item;
+        public GameObject itemModel;
     }
 }

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a4037885b058b468757bb1b2edbf99, type: 3}
+  m_Name: Backpack3
+  m_EditorClassIdentifier: 
+  id: 2
+  itemName: Test Backpack Epic
+  rarity: 2
+  model: {fileID: 193576, guid: a1ec39ab677fc1c4e8a1a0cd6726b620, type: 3}
+  bonusCapacity: 6

@@ -10,7 +10,7 @@ namespace UnityPUBG.Scripts.Items
     [CreateAssetMenu(menuName = "UnityPUBG Items/Ammo")]
     public class Ammo : UsableItem
     {
-        public Ammo(int id, string name, ItemRarity rarity, int maxStack) : base(id, name, rarity, maxStack)
+        public Ammo(string name, ItemRarity rarity, int maxStack) : base(name, rarity, maxStack)
         {
         }
     }

@@ -8,7 +8,7 @@ namespace UnityPUBG.Scripts.Items
 {
     public abstract class UsableItem : Item
     {
-        public UsableItem(int id, string name, ItemRarity rarity, int maxStack) : base(id, name, rarity)
+        public UsableItem(string name, ItemRarity rarity, int maxStack) : base(name, rarity)
         {
             MaximumStack = maxStack;
             CurrentStack = 1;

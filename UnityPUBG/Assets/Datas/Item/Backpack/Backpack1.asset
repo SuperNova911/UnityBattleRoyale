@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14a4037885b058b468757bb1b2edbf99, type: 3}
-  m_Name: Backpack2
+  m_Name: Backpack1
   m_EditorClassIdentifier: 
-  id: 1
-  itemName: Backpack Level 2
-  rarity: 1
-  model: {fileID: 5463632751042078716, guid: 3bcdaf00eb7cf4540a176ae324c82569, type: 3}
-  bonusCapacity: 4
+  id: 0
+  itemName: Test Backpack Common
+  rarity: 0
+  model: {fileID: 187608, guid: 58f064d8e0e738544af5174c3d1f2ddb, type: 3}
+  bonusCapacity: 2

@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace UnityPUBG.Scripts.Items
 {
     public abstract class Weapon : Item
     {
-        public Weapon(string name, ItemRarity rarity, float damage, float attackSpeed, float attackRange, float knockbackPower) : base(name, rarity)
-        {
-            Damage = damage;
-            AttackSpeed = attackSpeed;
-            AttackRange = attackRange;
-            KnockbackPower = knockbackPower;
-        }
+        [SerializeField] private float damage = 10f;
+        [SerializeField] private float attackSpeed = 1f;
+        [SerializeField] private float attackRange = 1f;
+        [SerializeField] private float knockbackPower = 1f;
 
-        public float Damage { get; private set; }
-        public float AttackSpeed { get; private set; }
-        public float AttackRange { get; private set; }
-        public float KnockbackPower { get; private set; }
+        public float Damage => damage;
+        public float AttackSpeed => attackSpeed;
+        public float AttackRange => attackRange;
+        public float KnockbackPower => knockbackPower;
     }
 }

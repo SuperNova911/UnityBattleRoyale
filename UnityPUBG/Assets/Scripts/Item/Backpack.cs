@@ -10,12 +10,7 @@ namespace UnityPUBG.Scripts.Items
     [CreateAssetMenu(menuName = "UnityPUBG Items/Backpack")]
     public class Backpack : Item
     {
-        [SerializeField] private int bonusCapacity;
-
-        public Backpack(string name, ItemRarity rarity, int bonusCapacity) : base(name, rarity)
-        {
-            this.bonusCapacity = bonusCapacity;
-        }
+        [SerializeField] private int bonusCapacity = 2;
 
         public int BonusCapacity => bonusCapacity;
     }

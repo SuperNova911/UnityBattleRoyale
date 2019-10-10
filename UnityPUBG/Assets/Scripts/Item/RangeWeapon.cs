@@ -10,8 +10,6 @@ namespace UnityPUBG.Scripts.Items
     [CreateAssetMenu(menuName = "UnityPUBG Items/RangeWeapon")]
     public class RangeWeapon : Weapon
     {
-        public RangeWeapon(string name, ItemRarity rarity, float damage, float attackSpeed, float attackRange, float knockbackPower) : base(name, rarity, damage, attackSpeed, attackRange, knockbackPower)
-        {
-        }
+
     }
 }

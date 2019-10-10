@@ -10,11 +10,8 @@ namespace UnityPUBG.Scripts.Items
     [CreateAssetMenu(menuName = "UnityPUBG Items/Armor")]
     public class Armor : Item
     {
-        public Armor(string name, ItemRarity rarity, int shieldAmount) : base(name, rarity)
-        {
-            ShieldAmount = shieldAmount;
-        }
-        
-        public int ShieldAmount { get; private set; }
+        [SerializeField] private int shieldAmount = 50;
+
+        public int ShieldAmount => shieldAmount;
     }
 }

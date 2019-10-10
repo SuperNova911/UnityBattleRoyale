@@ -10,8 +10,6 @@ namespace UnityPUBG.Scripts.Items
     [CreateAssetMenu(menuName = "UnityPUBG Items/MeleeWeapon")]
     public class MeleeWeapon : Weapon
     {
-        public MeleeWeapon(string name, ItemRarity rarity, float damage, float attackSpeed, float attackRange, float knockbackPower) : base(name, rarity, damage, attackSpeed, attackRange, knockbackPower)
-        {
-        }
+
     }
 }

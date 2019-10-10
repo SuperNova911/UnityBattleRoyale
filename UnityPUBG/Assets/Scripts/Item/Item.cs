@@ -7,15 +7,9 @@ namespace UnityPUBG.Scripts.Items
 {
     public abstract class Item : ScriptableObject
     {
-        [SerializeField] private string itemName;
-        [SerializeField] private ItemRarity rarity;
-        [SerializeField] private GameObject model;
-
-        protected Item(string itemName, ItemRarity rarity)
-        {
-            this.itemName = itemName ?? throw new ArgumentNullException(nameof(itemName));
-            this.rarity = rarity;
-        }
+        [SerializeField] private string itemName = string.Empty;
+        [SerializeField] private ItemRarity rarity = ItemRarity.Common;
+        [SerializeField] private GameObject model = null;
 
         public string ItemName => itemName;
         public ItemRarity Rarity => rarity;

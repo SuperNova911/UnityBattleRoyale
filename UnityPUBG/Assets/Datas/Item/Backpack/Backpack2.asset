@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a4037885b058b468757bb1b2edbf99, type: 3}
   m_Name: Backpack2
   m_EditorClassIdentifier: 
-  id: 1
   itemName: Test Backpack Rare
   rarity: 1
+  sortingOrder: 200
   model: {fileID: 176836, guid: 5d2253f4f680b5a40b424eee60e02d44, type: 3}
+  maximumStack: 3
+  currentStack: 1
   bonusCapacity: 4

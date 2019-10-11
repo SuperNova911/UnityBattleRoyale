@@ -33,6 +33,12 @@ namespace UnityPUBG.Scripts
         #endregion
 
         #region 메서드
+        public void SpawnItemAt(Item item, Vector3 position)
+        {
+            var itemObject = InstantiateItemObject(item);
+            itemObject.transform.position = position;
+        }
+
         /// <summary>
         /// ItemSpawnPoint Tag와 Component가 있는 GameObject의 ItemSpawnPoint 리스트를 반환
         /// </summary>
@@ -60,7 +66,7 @@ namespace UnityPUBG.Scripts
                 if (itemCollection.ItemsByRarity.TryGetValue(randomRarity, out var items))
                 {
                     int randomIndex = UnityEngine.Random.Range(0, items.Count);
-                    return items[randomIndex];
+                    return Instantiate(items[randomIndex]);
                 }
                 else
                 {

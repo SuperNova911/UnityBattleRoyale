@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa045876db54df4bb97da4cbe00105e, type: 3}
   m_Name: Armor 3
   m_EditorClassIdentifier: 
-  id: 0
   itemName: Test Armor Epic
   rarity: 2
+  sortingOrder: 100
   model: {fileID: 137780, guid: a35c1003af6165546b4df6fa1d99a831, type: 3}
+  maximumStack: 7
+  currentStack: 2
+  shieldAmount: 0

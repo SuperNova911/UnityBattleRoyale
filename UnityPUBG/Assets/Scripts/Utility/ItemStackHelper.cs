@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine;
+using UnityPUBG.Scripts.Items;
 
-namespace UnityPUBG.Scripts.Items
+namespace UnityPUBG.Scripts.Utilities
 {
-    public abstract class UsableItem : Item
+    public class ItemStackHelper
     {
-
     }
 }

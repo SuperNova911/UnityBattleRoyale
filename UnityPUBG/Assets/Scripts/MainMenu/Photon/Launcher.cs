@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-namespace MainMenu
+namespace UnityPUBG.Scripts.MainMenu
 {
     public class Launcher : Photon.PunBehaviour
     {

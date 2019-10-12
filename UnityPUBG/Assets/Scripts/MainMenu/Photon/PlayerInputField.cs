@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MainMenu
+namespace UnityPUBG.Scripts.MainMenu
 {
     [RequireComponent(typeof(InputField))]
     public class PlayerInputField : MonoBehaviour

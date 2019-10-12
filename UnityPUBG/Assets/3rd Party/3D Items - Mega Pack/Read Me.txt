@@ -1,0 +1,56 @@
+3D Items - Mega Pack
+
+v1.4 Added 50 Items: Bows and Arrows with a shoot animation.
+v1.3 Added 90 Food Items: Veggies, Baked goods, Meats, Fruits, Bottles, Cheeses, Barrels and Crates.
+v1.2 Added 76 Brewing Items: Cauldrons, Plants, Seeds, Eyes, Mushrooms, Claws, Books, Burlap Sacks.
+v1.1 Added 50 Swords
+
+
+
+To make use of the items pivot points look to the right of the four main control buttons (pan, move, rotate, scale), and you'll see two other buttons.
+
+The first toggles between "Center" or "Pivot", and the second toggles between "Local" or "Global".
+
+Use "Pivot" for the first one and "Local" for the second one.
+
+
+
+Cartoon Asset Pack with a wide range of items for Battle, Mining, Lumbering, Cooking, Farming, Food, Fishing and Exploration.
+
+135 Daggers
+125 Shields
+215 Swords 1H/2H
+160 Axes 1H/2H
+50  Wands/Orbs
+240 Throwing Knifes/Stars/Axes.
+614 Crafting Items.
+90  Food Items
+50 Bows/Arrows
+
+Mining
+Pickaxes, Hammers, Shovels, Buckets, Tongs, Dynamite, Blowers, Ores, Gems, Metal Bars, Anvils, Lanterns.
+
+Farming
+Sheers, Hoes, Fishing Poles, Fishing Hooks, Buckets, Axes, Nails, Stick, Wooden Log, Saws, Threadspools, Needles, Scissors.
+
+Food Items 
+Veggies, Baked goods, Meats, Fruits, Bottles, Cheeses, Barrels, Crates.
+
+Exploration
+Compases, Rope, Potions, Scrolls, Paper, Quils, Ink, Bones, Keys, Books, Locks.
+
+Dinnerware
+Cups, Plates, Bowls, Forks, Spoons, Knifes.
+
+Brewing
+Cauldrons, Plants, Seeds, Eyes, Mushrooms, Claws, Books, Burlap Sacks.
+
+1 256x256Texture for all 1679 Assets.
+Includes example scene with all the items.
+
+Support Mail
+FrostForgedAssets@gmail.com
+
+Twitter
+@FrostForged
+

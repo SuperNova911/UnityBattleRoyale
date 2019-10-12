@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Lobby
+namespace UnityPUBG.Scripts.Lobby
 {
     public class ChatManager : Photon.MonoBehaviour
     {

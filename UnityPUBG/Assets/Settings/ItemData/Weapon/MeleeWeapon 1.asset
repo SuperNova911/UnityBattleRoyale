@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46650cfda48e0a0499fc58d7fa6e4d33, type: 3}
+  m_Name: MeleeWeapon 1
+  m_EditorClassIdentifier: Assembly-CSharp:UnityPUBG.Scripts.Items:MeleeWeapon
+  itemName: Test MeleeWeapon 1
+  rarity: 3
+  sortingOrder: 300
+  model: {fileID: 181512, guid: d0c32c86a96d27749bef9027cb9186fa, type: 3}
+  maximumStack: 5
+  defaultStack: 2
+  damage: 10
+  attackSpeed: 1
+  attackRange: 1
+  knockbackPower: 1

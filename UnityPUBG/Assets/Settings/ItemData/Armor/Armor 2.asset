@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14a4037885b058b468757bb1b2edbf99, type: 3}
-  m_Name: Backpack3
+  m_Script: {fileID: 11500000, guid: 5756151e1bea2d948bc544c0804a065f, type: 3}
+  m_Name: Armor 2
   m_EditorClassIdentifier: 
-  itemName: Test Backpack Epic
-  rarity: 2
-  sortingOrder: 200
-  model: {fileID: 193576, guid: a1ec39ab677fc1c4e8a1a0cd6726b620, type: 3}
-  maximumStack: 3
-  currentStack: 1
-  bonusCapacity: 6
+  itemName: Test Armor 2
+  rarity: 1
+  sortingOrder: 100
+  model: {fileID: 149888, guid: 36f9d629f4ddb0a4c8aad431bdbd3b46, type: 3}
+  maximumStack: 7
+  defaultStack: 2
+  shieldAmount: 0

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baa045876db54df4bb97da4cbe00105e, type: 3}
-  m_Name: Armor 4
+  m_Script: {fileID: 11500000, guid: 5756151e1bea2d948bc544c0804a065f, type: 3}
+  m_Name: Armor 1
   m_EditorClassIdentifier: 
-  itemName: Test Armor Legendary
-  rarity: 3
+  itemName: Test Armor 1
+  rarity: 0
   sortingOrder: 100
-  model: {fileID: 117042, guid: 1e4b3b8e718d5574bba0239727983fe6, type: 3}
+  model: {fileID: 193962, guid: f9429f18fc7c8474099abc1ed0ebb458, type: 3}
   maximumStack: 7
-  currentStack: 2
+  defaultStack: 2
   shieldAmount: 0

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baa045876db54df4bb97da4cbe00105e, type: 3}
-  m_Name: Armor 2
+  m_Script: {fileID: 11500000, guid: bfb0b9faba530d940ba0bf4eff0e9df4, type: 3}
+  m_Name: Backpack3
   m_EditorClassIdentifier: 
-  itemName: Test Armor Rare
+  itemName: Test Backpack 3
   rarity: 1
-  sortingOrder: 100
-  model: {fileID: 149888, guid: 36f9d629f4ddb0a4c8aad431bdbd3b46, type: 3}
-  maximumStack: 7
-  currentStack: 2
-  shieldAmount: 0
+  sortingOrder: 200
+  model: {fileID: 128008, guid: 2bccdac8b9a6c3246b0c88a9a5b90138, type: 3}
+  maximumStack: 3
+  defaultStack: 2
+  bonusCapacity: 6

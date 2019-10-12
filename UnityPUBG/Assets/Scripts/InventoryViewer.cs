@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityPUBG.Scripts.Items;
 
 namespace UnityPUBG.Scripts
 {
@@ -18,7 +19,7 @@ namespace UnityPUBG.Scripts
             stringBuilder.Clear();
             foreach (var item in inventory.container)
             {
-                stringBuilder.AppendLine($"{item.ItemName}: Stack[{item.CurrentStack}/{item.MaximumStack}], ID[{item.GetInstanceID()}]");
+                stringBuilder.AppendLine($"{item.Data.ItemName}: Stack[{item.CurrentStack}/{item.Data.MaximumStack}], ID[{item.GetHashCode()}]");
             }
             displayText.text = stringBuilder.ToString();
         }

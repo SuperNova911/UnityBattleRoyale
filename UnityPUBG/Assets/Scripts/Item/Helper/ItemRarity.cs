@@ -8,6 +8,6 @@ namespace UnityPUBG.Scripts.Items
 {
     public enum ItemRarity
     {
-        Common, Rare, Epic, Legendary
+        Legendary = 0, Epic = 1, Rare = 2, Common = 3
     }
 }

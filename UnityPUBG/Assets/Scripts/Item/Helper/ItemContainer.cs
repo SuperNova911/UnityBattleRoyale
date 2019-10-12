@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Utilities;
 
-namespace UnityPUBG.Scripts
+namespace UnityPUBG.Scripts.Items
 {
     [CreateAssetMenu(menuName = "UnityPUBG/Inventory")]
     public class ItemContainer : ScriptableObject
@@ -33,35 +33,41 @@ namespace UnityPUBG.Scripts
         #region 메서드
         /// <summary>
         /// 매개변수로 받은 아이템을 컨테이너에 넣을 수 있는 만큼 넣고 남은 아이템을 반환
-        /// <para>모든 아이템을 컨테이너에 넣었으면 null을 반환</para>
         /// </summary>
-        /// <param name="item">컨테이너에 넣을 아이템</param>
+        /// <param name="itemToAdd">컨테이너에 넣을 아이템</param>
         /// <returns>컨테이너에 넣고 남은 아이템</returns>
-        public Item AddItem(Item item)
+        public Item AddItem(Item itemToAdd)
         {
-            if (item == null)
+            if (itemToAdd == null)
             {
-                Debug.LogWarning("유효하지 않은 아이템 입력입니다");
-                return null;
+                Debug.LogError("null인 아이템은 컨테이너에 넣을 수 없습니다");
+                return itemToAdd;
             }
 
-            foreach (var targetItem in container.Where(e => e.ItemName == item.ItemName && e.IsStackFull == false))
+            if (itemToAdd.IsStackEmpty)
             {
-                item = targetItem.MergeItemStack(item);
-                if (item.CurrentStack <= 0)
+                Debug.LogWarning("비어있는 아이템은 컨테이너에 넣을 수 없습니다");
+                return itemToAdd;
+            }
+
+            foreach (var targetItem in container.Where(e => e.Data.ItemName == itemToAdd.Data.ItemName && e.IsStackFull == false))
+            {
+                itemToAdd = targetItem.MergeStack(itemToAdd);
+                if (itemToAdd.IsStackEmpty)
                 {
-                    return null;
+                    return itemToAdd;
                 }
             }
 
-            if (IsFull == false)
+            if (itemToAdd.IsStackEmpty == false && IsFull == false)
             {
-                container.Add(item);
+                container.Add(itemToAdd);
                 container.Sort();
-                return null;
+
+                return Item.EmptyItem;
             }
 
-            return item;
+            return itemToAdd;
         }
 
         public Item SubtrackItemAtSlot(int slot)
@@ -73,30 +79,30 @@ namespace UnityPUBG.Scripts
         {
             if (slot >= container.Count)
             {
-                return null;
+                return Item.EmptyItem;
             }
 
-            var slotItem = container[slot];
+            Item slotItem = container[slot];
+            stack = Mathf.Clamp(stack, 0, slotItem.CurrentStack);
 
-            if (slotItem.CurrentStack > stack)
-            {
-                return slotItem.SplitItem(stack);
-            }
-            else
+            Item splitedItem = slotItem.SplitStack(stack);
+
+            if (slotItem.IsStackEmpty)
             {
                 container.RemoveAt(slot);
-                return slotItem;
             }
+
+            return splitedItem;
         }
 
         public bool HasItem(string itemName)
         {
-            return container.Any(e => e.ItemName == itemName);
+            return container.Any(e => e.Data.ItemName == itemName);
         }
 
         public Item FindItem(string itemName)
         {
-            return container.FirstOrDefault(e => e.ItemName == itemName);
+            return container.FirstOrDefault(e => e.Data.ItemName == itemName);
         }
         #endregion
     }

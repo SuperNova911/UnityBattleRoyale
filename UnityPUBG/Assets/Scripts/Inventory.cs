@@ -21,7 +21,7 @@ namespace UnityPUBG.Scripts
 
         private void Update()
         {
-            Item item = null;
+            Item item = Item.EmptyItem;
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 item = container.SubtrackItemAtSlot(0);
@@ -47,7 +47,7 @@ namespace UnityPUBG.Scripts
                 item = container.SubtrackItemAtSlot(5);
             }
 
-            if (item != null)
+            if (item.IsStackEmpty == false)
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out var hit, 100f, LayerMask.GetMask("Terrain")))
@@ -62,8 +62,8 @@ namespace UnityPUBG.Scripts
             var itemObject = other.GetComponent<ItemObject>();
             if (itemObject != null)
             {
-                var leftItem = container.AddItem(itemObject.item);
-                if (leftItem == null)
+                var leftItem = container.AddItem(itemObject.Item);
+                if (leftItem.IsStackEmpty)
                 {
                     Destroy(other.gameObject);
                 }

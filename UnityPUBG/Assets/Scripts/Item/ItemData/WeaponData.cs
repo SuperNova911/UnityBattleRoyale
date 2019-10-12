@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace UnityPUBG.Scripts.Items
 {
-    public abstract class Weapon : Item
+    public abstract class WeaponData : ItemData
     {
-        [SerializeField] private float damage = 10f;
-        [SerializeField] private float attackSpeed = 1f;
-        [SerializeField] private float attackRange = 1f;
-        [SerializeField] private float knockbackPower = 1f;
+        [SerializeField, Range(0f, 200f)] private float damage = 10f;
+        [SerializeField, Range(0.1f, 5f)] private float attackSpeed = 1f;
+        [SerializeField, Range(0.1f, 5f)] private float attackRange = 1f;
+        [SerializeField, Range(0f, 10f)] private float knockbackPower = 1f;
 
         public float Damage => damage;
         public float AttackSpeed => attackSpeed;

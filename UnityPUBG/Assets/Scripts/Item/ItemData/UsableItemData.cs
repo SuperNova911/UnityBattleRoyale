@@ -7,9 +7,8 @@ using UnityEngine;
 
 namespace UnityPUBG.Scripts.Items
 {
-    [CreateAssetMenu(menuName = "UnityPUBG Items/HealthKit")]
-    public class HealthKit : UsableItem
+    public abstract class UsableItemData : ItemData
     {
-
+        
     }
 }

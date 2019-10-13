@@ -7,6 +7,13 @@ namespace UnityPUBG.Scripts.Lobby
 {
     public class PTManager : Photon.PunBehaviour
     {
+        public static PTManager Instance;
+
+        private void Start()
+        {
+            Instance = this;
+        }
+
         #region Photon Messages
 
         public override void OnLeftRoom()
@@ -24,7 +31,10 @@ namespace UnityPUBG.Scripts.Lobby
             {
                 Debug.Log("OnPhotonPlayerConnected is MasterClient " + PhotonNetwork.isMasterClient);
 
-                LoadGameRoom();
+                if (PhotonNetwork.playerList.Length == MainMenu.Launcher.Instance.MaxPlayersPerRoom)
+                    StartGame();
+                else
+                    Debug.Log("PlayerCount : " + PhotonNetwork.playerList.Length);
             }
         }
 
@@ -38,7 +48,7 @@ namespace UnityPUBG.Scripts.Lobby
             {
                 Debug.Log("OnPhotonPlayerConnected isMasterClient" + PhotonNetwork.isMasterClient);
 
-                LoadGameRoom();
+                //LoadGameRoom();
             }
         }
 
@@ -52,9 +62,12 @@ namespace UnityPUBG.Scripts.Lobby
             PhotonNetwork.LeaveRoom();
         }
 
+        /// <summary>
+        /// 게임 룸을 로딩하는 함수
+        /// </summary>
         public void StartGame()
         {
-            PhotonNetwork.LoadLevel("Game");
+            StartCoroutine(GameStart());
         }
 
         #endregion
@@ -66,10 +79,31 @@ namespace UnityPUBG.Scripts.Lobby
             if (!PhotonNetwork.isMasterClient)
             {
                 Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
+                return;
             }
 
             Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
-            //PhotonNetwork.LoadLevel("Game");
+            PhotonNetwork.LoadLevel("SandBox");
+        }
+
+        #endregion
+
+        #region 코루틴
+
+        private IEnumerator GameStart()
+        {
+            UnityEngine.UI.Text countDownText = GameObject.Find("StartCountDown").GetComponent<UnityEngine.UI.Text>();
+
+            for(int i = 0; i<10; i++)
+            {
+                countDownText.text = "게임 시작까지 : " + (10 - i).ToString() + "초";
+
+                yield return new WaitForSeconds(1f);
+            }
+
+            LoadGameRoom();
+
+            yield break;
         }
 
         #endregion

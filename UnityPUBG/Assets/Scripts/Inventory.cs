@@ -13,6 +13,7 @@ namespace UnityPUBG.Scripts
     {
         public SphereCollider collector;
         public ItemContainer container;
+        public LootAnimationSettings lootAnimationSettings;
 
         private void Awake()
         {
@@ -62,7 +63,14 @@ namespace UnityPUBG.Scripts
             var itemObject = other.GetComponent<ItemObject>();
             if (itemObject != null)
             {
+                int previousStack = itemObject.Item.CurrentStack;
                 var leftItem = container.AddItem(itemObject.Item);
+
+                if (leftItem.CurrentStack < previousStack)
+                {
+                    LootAnimator.InstantiateAnimation(transform, other.gameObject, lootAnimationSettings);
+                }
+
                 if (leftItem.IsStackEmpty)
                 {
                     Destroy(other.gameObject);

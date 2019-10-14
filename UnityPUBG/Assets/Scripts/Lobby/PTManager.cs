@@ -7,6 +7,17 @@ namespace UnityPUBG.Scripts.Lobby
 {
     public class PTManager : Photon.PunBehaviour
     {
+        #region public 변수, 유니티 에디터에서만 사용
+        public static PTManager Instance;
+        #endregion
+
+        #region 유니티 콜백, 유니티 에디터에서만 사용
+        private void Start()
+        {
+            Instance = this;
+        }
+        #endregion
+
         #region Photon Messages
 
         public override void OnLeftRoom()
@@ -24,7 +35,10 @@ namespace UnityPUBG.Scripts.Lobby
             {
                 Debug.Log("OnPhotonPlayerConnected is MasterClient " + PhotonNetwork.isMasterClient);
 
-                LoadGameRoom();
+                if (PhotonNetwork.playerList.Length == MainMenu.Launcher.Instance.MaxPlayersPerRoom)
+                    StartGame();
+                else
+                    Debug.Log("PlayerCount : " + PhotonNetwork.playerList.Length);
             }
         }
 
@@ -38,8 +52,24 @@ namespace UnityPUBG.Scripts.Lobby
             {
                 Debug.Log("OnPhotonPlayerConnected isMasterClient" + PhotonNetwork.isMasterClient);
 
-                LoadGameRoom();
+                //LoadGameRoom();
             }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void LoadGameRoom()
+        {
+            if (!PhotonNetwork.isMasterClient)
+            {
+                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
+                return;
+            }
+
+            Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
+            PhotonNetwork.LoadLevel("SandBox");
         }
 
         #endregion
@@ -52,24 +82,32 @@ namespace UnityPUBG.Scripts.Lobby
             PhotonNetwork.LeaveRoom();
         }
 
+        /// <summary>
+        /// 게임 룸을 로딩하는 함수
+        /// </summary>
         public void StartGame()
         {
-            PhotonNetwork.LoadLevel("Game");
+            StartCoroutine(GameStart());
         }
 
         #endregion
 
-        #region Private Methods
+        #region 코루틴
 
-        private void LoadGameRoom()
+        private IEnumerator GameStart()
         {
-            if (!PhotonNetwork.isMasterClient)
+            UnityEngine.UI.Text countDownText = GameObject.Find("StartCountDown").GetComponent<UnityEngine.UI.Text>();
+
+            for(int i = 0; i<10; i++)
             {
-                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
+                countDownText.text = "게임 시작까지 : " + (10 - i).ToString() + "초";
+
+                yield return new WaitForSeconds(1f);
             }
 
-            Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
-            //PhotonNetwork.LoadLevel("Game");
+            LoadGameRoom();
+
+            yield break;
         }
 
         #endregion

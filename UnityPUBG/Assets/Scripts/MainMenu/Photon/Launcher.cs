@@ -24,12 +24,26 @@ namespace UnityPUBG.Scripts.MainMenu
         [Tooltip("How Many Players In Room")]
         public UnityEngine.UI.Text PlayerCount;
 
+        public static Launcher Instance
+        {
+            private set
+            {
+                _instance = value;
+            }
+            get
+            {
+                return _instance;
+            }
+        }
+
         #endregion
 
         #region Private Variables
 
         string _gameVersion = "1";
         bool isConnecting;
+
+        private static Launcher _instance;
 
         #endregion
 
@@ -44,6 +58,8 @@ namespace UnityPUBG.Scripts.MainMenu
             PhotonNetwork.autoJoinLobby = false;
 
             PhotonNetwork.automaticallySyncScene = true;
+
+            Instance = this;
         }
 
         private void Start()
@@ -56,12 +72,16 @@ namespace UnityPUBG.Scripts.MainMenu
 
         #region Public Methods
 
+        /// <summary>
+        /// 서버와 연결.
+        /// 방에 들어간다.
+        /// </summary>
         public void Connect()
         {
             isConnecting = true;
             progressLabel.SetActive(true);
-            controlPanel.SetActive(false);
             GameObject.Find("TitleImage").SetActive(false);
+            controlPanel.SetActive(false);
 
             if (PhotonNetwork.connected)
             {
@@ -107,8 +127,16 @@ namespace UnityPUBG.Scripts.MainMenu
         {
             PlayerCount.text = "Players : " + PhotonNetwork.playerList.Length + "/" + MaxPlayersPerRoom;
             PlayerCount.gameObject.SetActive(true);
+            progressLabel.transform.parent.gameObject.SetActive(false);
 
             Debug.Log("Launcher : OnJoinedRoom() called by PUN, Now this client is in a room");
+
+#if UNITY_EDITOR
+            if (PhotonNetwork.playerList.Length == MainMenu.Launcher.Instance.MaxPlayersPerRoom)
+                Lobby.PTManager.Instance.StartGame();
+            else
+                Debug.Log("PlayerCount : " + PhotonNetwork.playerList.Length);
+#endif
         }
 
         #endregion

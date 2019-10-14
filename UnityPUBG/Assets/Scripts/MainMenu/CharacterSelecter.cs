@@ -6,12 +6,19 @@ namespace UnityPUBG.Scripts.MainMenu
 {
     public class CharacterSelecter : MonoBehaviour
     {
+        #region public values
         /// <summary>
         /// 캐릭터 3D 모델 프리팹 리스트들
         /// </summary>
         public List<GameObject> CharacterPrefabList = new List<GameObject>();
 
         public int RotateSpeed;
+
+        /// <summary>
+        /// 플레이어 캐릭터 프리팹
+        /// </summary>
+        public GameObject PlayerCharacter;
+        #endregion
 
         #region private values
 
@@ -39,11 +46,19 @@ namespace UnityPUBG.Scripts.MainMenu
         /// 최근 Selecter 회전율
         /// </summary>
         Vector3 lastrot;
+
+        /// <summary>
+        /// 선택된 캐릭터 이름
+        /// </summary>
+        string selectedCharacterName;
         #endregion
 
+        #region 유니티 메시지
         private void Start()
         {
             putCharacter();
+            setSelectedCharacter();
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Update()
@@ -59,11 +74,6 @@ namespace UnityPUBG.Scripts.MainMenu
                     lastrot = transform.rotation.eulerAngles;
                 }
 
-                if (Input.GetTouch(0).phase == TouchPhase.Ended)
-                {
-                    lastrot = transform.rotation.eulerAngles;
-                }
-
                 if (Input.GetTouch(0).phase == TouchPhase.Moved)
                 {
                     nowpos = Input.GetTouch(0).position;
@@ -72,6 +82,12 @@ namespace UnityPUBG.Scripts.MainMenu
 
                     transform.rotation = Quaternion.Euler
                             (Vector3.up * deg * x + lastrot);
+                }
+
+                if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    lastrot = transform.rotation.eulerAngles;
+                    setSelectedCharacter();
                 }
             }
 #else
@@ -88,7 +104,9 @@ namespace UnityPUBG.Scripts.MainMenu
             {
                 isDrag = false;
                 lastrot = transform.rotation.eulerAngles;
-                //Debug.Log(GetClickedObject());
+                setSelectedCharacter();
+
+                //Debug.Log(selectedCharacterName);
             }
 
             if (isDrag)
@@ -102,11 +120,25 @@ namespace UnityPUBG.Scripts.MainMenu
             }
 #endif
         }
+        #endregion
 
+        #region public 함수
+
+        /// <summary>
+        /// 캐릭터를 스폰함.
+        /// </summary>
+        public void SpawnMyCharacter(Transform spawnPos)
+        {
+            spawnMyCharacter(spawnPos);
+        }
+
+        #endregion
+
+        #region private 함수
         /// <summary>
         /// 리스트에 있는 캐릭터 들을 원형으로 배치
         /// </summary>
-        void putCharacter()
+        private void putCharacter()
         {
             float num = CharacterPrefabList.Count;
 
@@ -148,18 +180,66 @@ namespace UnityPUBG.Scripts.MainMenu
             Camera.main.transform.position = centerpos + Vector3.forward * 7f + Vector3.up;
         }
 
-        private GameObject GetClickedObject()//전면의 GameObject return
+        /// <summary>
+        /// 전면의 gameObject return
+        /// </summary>
+        /// <returns></returns>
+        private GameObject getFrontObject()
         {
             RaycastHit hit;
             GameObject target = null;
 
-            Ray ray = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(Vector3.zero));//마우스 포인터 근처 좌표 만듬
+            //화면 가운데 좌표에 레이캐스트
+            Ray ray = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(Vector3.zero));
 
-            if (true == (Physics.Raycast(ray.origin, ray.direction, out hit)))//마우스 근처에 오브젝트 있는지 확인
+            //게임 오브젝트가 존재한다면 return
+            if (true == (Physics.Raycast(ray.origin, ray.direction, out hit)))
                 target = hit.collider.gameObject;//있다면 오브젝트 저장
 
             return target;
         }
+
+        /// <summary>
+        /// 선택된 캐릭터 이름 저장
+        /// </summary>
+        private void setSelectedCharacter()
+        {
+            GameObject selectedCharacter;
+            selectedCharacter = getFrontObject();
+
+            string[] splitedName = selectedCharacter.name.Split('_');
+
+            selectedCharacterName = splitedName[0] + "_" + splitedName[1];
+        }
+
+        /// <summary>
+        /// 내가 선택한 캐릭터 스폰
+        /// </summary>
+        private void spawnMyCharacter(Transform spawnPos)
+        {
+            GameObject playerCharacter = Instantiate(PlayerCharacter, spawnPos.position, Quaternion.identity);
+
+            Cinemachine.CinemachineVirtualCamera virtualCam =
+                FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
+
+            virtualCam.Follow = playerCharacter.transform;
+
+            playerCharacter.transform.GetChild(0).gameObject.SetActive(false);
+
+            if (selectedCharacterName != "Character_Random")
+            {
+                playerCharacter.transform.Find(selectedCharacterName).gameObject.SetActive(true);
+            }
+            else
+            {
+                int randomNum = Random.Range(0, 100) % playerCharacter.transform.childCount;
+
+                playerCharacter.transform.GetChild(randomNum).gameObject.SetActive(true);
+            }
+
+            Destroy(gameObject);
+        }
+        #endregion
 
     }
 }

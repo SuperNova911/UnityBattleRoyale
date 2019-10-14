@@ -180,7 +180,11 @@ namespace UnityPUBG.Scripts.MainMenu
             Camera.main.transform.position = centerpos + Vector3.forward * 7f + Vector3.up;
         }
 
-        private GameObject getFrontObject()//전면의 GameObject return
+        /// <summary>
+        /// 전면의 gameObject return
+        /// </summary>
+        /// <returns></returns>
+        private GameObject getFrontObject()
         {
             RaycastHit hit;
             GameObject target = null;
@@ -195,6 +199,9 @@ namespace UnityPUBG.Scripts.MainMenu
             return target;
         }
 
+        /// <summary>
+        /// 선택된 캐릭터 이름 저장
+        /// </summary>
         private void setSelectedCharacter()
         {
             GameObject selectedCharacter;

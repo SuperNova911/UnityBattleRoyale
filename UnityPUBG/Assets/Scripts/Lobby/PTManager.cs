@@ -7,12 +7,16 @@ namespace UnityPUBG.Scripts.Lobby
 {
     public class PTManager : Photon.PunBehaviour
     {
+        #region public 변수, 유니티 에디터에서만 사용
         public static PTManager Instance;
+        #endregion
 
+        #region 유니티 콜백, 유니티 에디터에서만 사용
         private void Start()
         {
             Instance = this;
         }
+        #endregion
 
         #region Photon Messages
 
@@ -54,6 +58,22 @@ namespace UnityPUBG.Scripts.Lobby
 
         #endregion
 
+        #region Private Methods
+
+        private void LoadGameRoom()
+        {
+            if (!PhotonNetwork.isMasterClient)
+            {
+                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
+                return;
+            }
+
+            Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
+            PhotonNetwork.LoadLevel("SandBox");
+        }
+
+        #endregion
+
         #region Public Methods
 
         public void LeaveRoom()
@@ -68,22 +88,6 @@ namespace UnityPUBG.Scripts.Lobby
         public void StartGame()
         {
             StartCoroutine(GameStart());
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private void LoadGameRoom()
-        {
-            if (!PhotonNetwork.isMasterClient)
-            {
-                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
-                return;
-            }
-
-            Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
-            PhotonNetwork.LoadLevel("SandBox");
         }
 
         #endregion

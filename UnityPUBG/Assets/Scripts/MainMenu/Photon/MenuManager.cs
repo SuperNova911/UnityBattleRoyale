@@ -21,9 +21,12 @@ namespace UnityPUBG.Scripts.MainMenu
         /// <summary>
         /// 글자 점멸 속도
         /// </summary>
-        float flashSpeed = 0.05f;
+        private float flashSpeed = 0.05f;
 
-        bool isStarted = false;
+        /// <summary>
+        /// 게임이 시작 했는가?
+        /// </summary>
+        private bool isStarted = false;
         #endregion
 
         #region 유니티 메시지
@@ -49,7 +52,7 @@ namespace UnityPUBG.Scripts.MainMenu
         }
         #endregion
 
-        #region 함수
+        #region 코루틴
         /// <summary>
         /// 텍스트 점멸
         /// </summary>

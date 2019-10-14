@@ -72,6 +72,10 @@ namespace UnityPUBG.Scripts.MainMenu
 
         #region Public Methods
 
+        /// <summary>
+        /// 서버와 연결.
+        /// 방에 들어간다.
+        /// </summary>
         public void Connect()
         {
             isConnecting = true;

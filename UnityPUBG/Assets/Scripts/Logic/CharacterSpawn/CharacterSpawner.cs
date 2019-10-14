@@ -10,6 +10,9 @@ namespace UnityPUBG.Scripts.CharacterSpawn
 
         private MainMenu.CharacterSelecter characterSelecter;
 
+        /// <summary>
+        /// 내 캐릭터를 스폰했는가?
+        /// </summary>
         private bool isSpawned = false;
 
         #endregion

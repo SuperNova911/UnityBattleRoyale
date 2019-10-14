@@ -224,7 +224,13 @@ namespace UnityPUBG.Scripts.MainMenu
 
             virtualCam.Follow = playerCharacter.transform;
 
-            playerCharacter.transform.GetChild(0).gameObject.SetActive(false);
+            foreach (Transform child in playerCharacter.transform)
+            {
+                if (child.name.StartsWith("Character"))
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
 
             if (selectedCharacterName != "Character_Random")
             {

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1602ed0f0073534688c57a8690844f6, type: 3}
   m_Name: Loot Animation Settings
   m_EditorClassIdentifier: 
-  phase1Speed: 8
+  phase1Speed: 10
   floatingOffset: {x: 0, y: 2.5, z: 0.5}
   randomRange: {x: 1, y: 0, z: 0}
-  phase2Speed: 3
+  phase2Speed: 7
   phase3Speed: 10
   endOffset: {x: 0, y: 1.5, z: 0}
   endScale: {x: 0, y: 0, z: 0}

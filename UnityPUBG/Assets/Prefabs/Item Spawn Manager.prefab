@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseItemObject: {fileID: -6387929660299491319, guid: 4f11389b6db4c784280e21ac9592c0fb,
     type: 3}
-  itemCollection: {fileID: 11400000, guid: e36dbc90abc55c1499ef83862cb5a10a, type: 2}
+  itemDataCollection: {fileID: 11400000, guid: e36dbc90abc55c1499ef83862cb5a10a, type: 2}
   allSpawnPoints: []

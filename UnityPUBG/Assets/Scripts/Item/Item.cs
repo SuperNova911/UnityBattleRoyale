@@ -1,100 +1,128 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace UnityPUBG.Scripts.Items
 {
-    public abstract class Item : ScriptableObject, IComparable<Item>
+    public abstract class Item : IComparable<Item>, ICloneable
     {
         #region 필드
-        [SerializeField] private string itemName = string.Empty;
-        [SerializeField] private ItemRarity rarity = ItemRarity.Common;
-        [SerializeField] private ItemSortingOrder sortingOrder = ItemSortingOrder.Item;
-        [SerializeField] private GameObject model = null;
-        [SerializeField] [Range(1, 100)] private int maximumStack = 1;
-        [SerializeField] [Range(1, 100)] protected int currentStack = 1;
+        public static readonly EmptyItem EmptyItem = new EmptyItem();
+
+        private ItemData data;
+        private int currentStack;
+        #endregion
+
+        #region 생성자
+        public Item(ItemData data)
+        {
+            this.data = data;
+            currentStack = data.DefaultStack;
+        }
         #endregion
 
         #region 속성
-        public string ItemName => itemName;
-        public ItemRarity Rarity => rarity;
-        public ItemSortingOrder SortingOrder => sortingOrder;
-        public GameObject Model => model;
-        public int MaximumStack => maximumStack;
-        public int CurrentStack => currentStack;
+        public ItemData Data => data;
+        public int CurrentStack
+        {
+            get { return currentStack; }
+            protected set
+            {
+                if (value < 0 || data.MaximumStack < value)
+                {
+                    Debug.LogError($"허용된 스택의 범위를 벗어난 값입니다, value: {value}");
+                    currentStack = Mathf.Clamp(value, 0, data.MaximumStack);
+                }
 
-        public bool IsStackEmpty => currentStack == 0;
-        public bool IsStackFull=> currentStack == maximumStack;
-        public int RemainCapacity => maximumStack - currentStack;
+                currentStack = value;
+            }
+        }
+
+        public bool IsStackEmpty => CurrentStack == 0;
+        public bool IsStackFull => CurrentStack == data.MaximumStack;
+        public int RemainCapacity => data.MaximumStack - CurrentStack;
         #endregion
 
         #region IComparable 인터페이스
         public int CompareTo(Item other)
         {
-            if (sortingOrder != other.sortingOrder)
+            if (data.SortingOrder != other.data.SortingOrder)
             {
-                return sortingOrder - other.sortingOrder;
+                return data.SortingOrder.CompareTo(other.data.SortingOrder);
             }
-            else if (rarity != other.rarity)
+            else if (data.Rarity != other.data.Rarity)
             {
-                return other.rarity - rarity;
+                return data.Rarity.CompareTo(other.data.Rarity);
             }
-            else if (itemName != other.itemName)
+            else if (data.ItemName != other.data.ItemName)
             {
-                return itemName.CompareTo(other.itemName);
+                return data.ItemName.CompareTo(other.data.ItemName);
             }
             else
             {
-                return other.currentStack - currentStack;
+                return CurrentStack.CompareTo(other.CurrentStack);
             }
         }
         #endregion
 
+        #region ICloneable 인터페이스
+        public abstract object Clone();
+        #endregion
+
+        #region 메서드
         /// <summary>
-        /// 매개변수로 받은 아이템과 스택을 합치고 남은 아이템을 반환
+        /// 매개변수로 받은 아이템과 스택을 병합하고 남은 아이템을 반환
         /// </summary>
-        /// <param name="item">스택을 합칠 아이템</param>
-        /// <returns>스택에 합치고 남은 아이템</returns>
-        public Item MergeItemStack(Item item)
+        /// <param name="itemToMerge">스택을 병합 할 아이템</param>
+        /// <returns>스택을 병합하고 남은 아이템</returns>
+        public Item MergeStack(Item itemToMerge)
         {
-            // TODO: Equals 검사
-            if (itemName != item.itemName || item.Equals(this))
+            if (itemToMerge == null || itemToMerge is EmptyItem)
             {
-                return item;
+                Debug.LogWarning("유효하지 않은 아이템은 Merge 할 수 없습니다");
+                return itemToMerge;
             }
 
-            var remainCapacity = RemainCapacity;
-            if (remainCapacity >= item.currentStack)
+            if (itemToMerge.Equals(this))
             {
-                currentStack += item.currentStack;
-                item.currentStack = 0;
-            }
-            else
-            {
-                currentStack += remainCapacity;
-                item.currentStack -= remainCapacity;
+                Debug.LogWarning("자기 자신을 Merge 할 수는 없습니다");
+                return itemToMerge;
             }
 
-            return item;
+            int mergeSize = Mathf.Clamp(itemToMerge.CurrentStack, 0, RemainCapacity);
+            itemToMerge.CurrentStack -= mergeSize;
+            CurrentStack += mergeSize;
+
+            return itemToMerge;
         }
 
-        public Item SplitItem(int stack)
+        /// <summary>
+        /// 매개변수로 입력 받은 크기만큼 아이템의 스택을 분할하여 반환
+        /// </summary>
+        /// <param name="splitSize">분할할 스택의 크기</param>
+        /// <returns>스택이 분할된 아이템</returns>
+        public Item SplitStack(int splitSize)
         {
-            var splitedItem = Instantiate(this);
+            if (splitSize < 0)
+            {
+                Debug.LogWarning($"분할 하려는 스택의 크기가 너무 작습니다, splitSize: {splitSize}");
+            }
 
-            if (currentStack >= stack)
-            {
-                currentStack -= stack;
-                splitedItem.currentStack = stack;
-            }
-            else
-            {
-                splitedItem.currentStack = currentStack;
-                currentStack = 0;
-            }
+            splitSize = Mathf.Clamp(splitSize, 0, CurrentStack);
+            Item splitedItem = (Item)Clone();
+            splitedItem.CurrentStack = splitSize;
+            CurrentStack -= splitSize;
 
             return splitedItem;
         }
+
+        public void ClearStack()
+        {
+            CurrentStack = 0;
+        }
+        #endregion
     }
 }

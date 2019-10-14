@@ -14,15 +14,14 @@ namespace UnityPUBG.Scripts
     {
         #region 필드
         [SerializeField] private ItemObject baseItemObject;
-        [SerializeField] private ItemCollection itemCollection;
+        [SerializeField] private ItemDataCollection itemDataCollection;
 
-        [SerializeField] [ReadOnly] private List<ItemSpawnPoint> allSpawnPoints;
+        [SerializeField, ReadOnly] private List<ItemSpawnPoint> allSpawnPoints;
         #endregion
 
         #region 유니티 메시지
         private void Awake()
         {
-            itemCollection = Instantiate(itemCollection);
             allSpawnPoints = FindAllSpawnPoints();
         }
 
@@ -30,11 +29,24 @@ namespace UnityPUBG.Scripts
         {
             SpawnRandomItemAt(allSpawnPoints);
         }
+
+        private void OnValidate()
+        {
+            if (itemDataCollection == null)
+            {
+                Debug.LogError("ItemDataCollection은 null일 수 없습니다");
+            }
+        }
         #endregion
 
         #region 메서드
         public void SpawnItemAt(Item item, Vector3 position)
         {
+            if (item == null || item.IsStackEmpty)
+            {
+                return;
+            }
+
             var itemObject = InstantiateItemObject(item);
             itemObject.transform.position = position;
         }
@@ -53,24 +65,24 @@ namespace UnityPUBG.Scripts
         }
 
         /// <summary>
-        /// 매개변수로 받은 ItemSpawnChance 기반으로 무작위 아이템을 선택
+        /// 매개변수로 받은 ItemSpawnChance 기반으로 무작위 아이템 데이터를 선택
         /// </summary>
         /// <param name="spawnChance">스폰 확률 정보</param>
-        /// <returns>무작위로 선택된 아이템</returns>
-        private Item GetRandomItem(ItemSpawnChance spawnChance)
+        /// <returns>무작위로 선택된 아이템 데이터</returns>
+        private ItemData GetRandomItemData(ItemSpawnChance spawnChance)
         {
             if (UnityEngine.Random.value <= spawnChance.SpawnChance)
             {
                 ItemRarity randomRarity = spawnChance.GetRandomItemRarity();
 
-                if (itemCollection.ItemsByRarity.TryGetValue(randomRarity, out var items))
+                if (itemDataCollection.ItemDatasByRarity.TryGetValue(randomRarity, out var items))
                 {
                     int randomIndex = UnityEngine.Random.Range(0, items.Count);
                     return Instantiate(items[randomIndex]);
                 }
                 else
                 {
-                    Debug.LogWarning($"Rarity: {randomRarity}에 해당하는 아이템 컬렉션이 없습니다");
+                    Debug.LogWarning($"Rarity: {randomRarity}에 해당하는 아이템 데이터 컬렉션이 없습니다");
                     return null;
                 }
             }
@@ -88,7 +100,7 @@ namespace UnityPUBG.Scripts
         /// <returns>생성 된 ItemObject</returns>
         private ItemObject InstantiateItemObject(Item item)
         {
-            if (item == null || item.Model == null)
+            if (item == null)
             {
                 return null;
             }
@@ -100,9 +112,7 @@ namespace UnityPUBG.Scripts
             }
 
             var itemObject = Instantiate(baseItemObject);
-
-            itemObject.item = item;
-            Instantiate(item.Model, itemObject.transform);
+            itemObject.AssignItem(item);
 
             return itemObject;
         }
@@ -115,9 +125,13 @@ namespace UnityPUBG.Scripts
         {
             foreach (var spawnPoint in spawnPoints)
             {
-                Item randomItem = GetRandomItem(spawnPoint.SpawnChance);
-                ItemObject itemObject = InstantiateItemObject(randomItem);
+                ItemData randomItemData = GetRandomItemData(spawnPoint.SpawnChance);
+                if (randomItemData == null)
+                {
+                    continue;
+                }
 
+                ItemObject itemObject = InstantiateItemObject(randomItemData.BuildItem());
                 if (itemObject != null)
                 {
                     spawnPoint.SpawnedItem = itemObject;

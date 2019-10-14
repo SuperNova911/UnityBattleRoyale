@@ -17,9 +17,9 @@ namespace UnityPUBG.Scripts.Entities
         #endregion
 
         #region 속성
-        public Weapon EquipedWeapon { get; private set; }
-        public Armor EquipedArmor { get; private set; }
-        public Backpack EquipedBackpack { get; private set; }
+        public WeaponData EquipedWeapon { get; private set; }
+        public ArmorData EquipedArmor { get; private set; }
+        public BackpackData EquipedBackpack { get; private set; }
         public Vehicle RidingVehicle { get; private set; }
         #endregion
 

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5756151e1bea2d948bc544c0804a065f, type: 3}
+  m_Name: Armor 3
+  m_EditorClassIdentifier: 
+  itemName: Test Armor 3
+  rarity: 2
+  sortingOrder: 100
+  model: {fileID: 137780, guid: a35c1003af6165546b4df6fa1d99a831, type: 3}
+  maximumStack: 7
+  defaultStack: 2
+  shieldAmount: 0

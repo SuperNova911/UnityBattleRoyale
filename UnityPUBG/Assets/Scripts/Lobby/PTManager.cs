@@ -11,6 +11,16 @@ namespace UnityPUBG.Scripts.Lobby
         public static PTManager Instance;
         #endregion
 
+        #region private 변수
+
+        /// <summary>
+        /// 대기 시간
+        /// </summary>
+        [SerializeField]
+        private int delayTime = 10;
+
+        #endregion
+
         #region 유니티 콜백, 유니티 에디터에서만 사용
         private void Start()
         {
@@ -98,9 +108,9 @@ namespace UnityPUBG.Scripts.Lobby
         {
             UnityEngine.UI.Text countDownText = GameObject.Find("StartCountDown").GetComponent<UnityEngine.UI.Text>();
 
-            for(int i = 0; i<10; i++)
+            for(int i = 0; i<delayTime; i++)
             {
-                countDownText.text = "게임 시작까지 : " + (10 - i).ToString() + "초";
+                countDownText.text = "게임 시작까지 : " + (delayTime - i).ToString() + "초";
 
                 yield return new WaitForSeconds(1f);
             }

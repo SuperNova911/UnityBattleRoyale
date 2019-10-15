@@ -1962,6 +1962,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1843789432}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &545990979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 251370033490515048, guid: e0566180537794649b98b41c66b507bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 251370032934264895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &545990980
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545990979}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &545990981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545990979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419f0d0c7ee813d4998705449f650fb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collector: {fileID: 545990980}
+  container: {fileID: 11400000, guid: 982950383d411f84b89945a01f9ad718, type: 2}
+  lootAnimationSettings: {fileID: 11400000, guid: 6ff3ce4a31e53424895547caeb8ad314,
+    type: 2}
 --- !u!1001 &546895675
 PrefabInstance:
   m_ObjectHideFlags: 0

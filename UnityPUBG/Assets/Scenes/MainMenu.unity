@@ -594,11 +594,6 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 3958067610560225166}
-    - target: {fileID: 6748747718089329027, guid: 6a01c05a63e5cee439f475deb5c215d9,
-        type: 3}
-      propertyPath: delayTime
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a01c05a63e5cee439f475deb5c215d9, type: 3}
 --- !u!1 &1981362023

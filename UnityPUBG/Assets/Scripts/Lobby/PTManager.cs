@@ -18,6 +18,14 @@ namespace UnityPUBG.Scripts.Lobby
         }
         #endregion
 
+        #region private 변수
+        /// <summary>
+        /// 시작 대기 시간
+        /// </summary>
+        [SerializeField]
+        private int waitTime = 10;
+        #endregion
+
         #region Photon Messages
 
         public override void OnLeftRoom()
@@ -98,9 +106,9 @@ namespace UnityPUBG.Scripts.Lobby
         {
             UnityEngine.UI.Text countDownText = GameObject.Find("StartCountDown").GetComponent<UnityEngine.UI.Text>();
 
-            for(int i = 0; i<10; i++)
+            for (int i = 0; i < waitTime; i++)
             {
-                countDownText.text = "게임 시작까지 : " + (10 - i).ToString() + "초";
+                countDownText.text = "게임 시작까지 : " + (waitTime - i).ToString() + "초";
 
                 yield return new WaitForSeconds(1f);
             }

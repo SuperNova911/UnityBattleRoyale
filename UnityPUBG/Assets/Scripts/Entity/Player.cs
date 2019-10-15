@@ -13,7 +13,7 @@ namespace UnityPUBG.Scripts.Entities
     public class Player : Entity
     {
         #region 필드
-        private InputManager inputManager; 
+        private InputManager inputManager;
         #endregion
 
         #region 속성

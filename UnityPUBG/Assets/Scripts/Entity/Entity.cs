@@ -23,11 +23,15 @@ namespace UnityPUBG.Scripts.Entities
         private Rigidbody entityRigidbody;
         #endregion
 
+        public ItemContainer ItemContainer => itemContainer;
+
         #region 유니티 메시지
         protected virtual void Awake()
         {
             currentHealth = maximumHealth;
             entityRigidbody = GetComponent<Rigidbody>();
+
+            itemContainer = new ItemContainer(6);
         }
 
         protected virtual void Start()

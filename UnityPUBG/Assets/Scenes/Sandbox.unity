@@ -576,7 +576,9 @@ MonoBehaviour:
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
-  m_AfterStackBundles: []
+  m_AfterStackBundles:
+  - assemblyQualifiedName: Knife.PostProcessing.Outline, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!4 &87469152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 498724, guid: cd2a633be52caff4ebfdacf2f48cc9be,
@@ -1968,19 +1970,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 251370032934264895}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &545990980
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!114 &545990980 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 251370033469873360, guid: e0566180537794649b98b41c66b507bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 251370032934264895}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545990979}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61d2a00e1b9af54f9d18df7d67eebd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &545990981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,13 +1991,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 545990979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419f0d0c7ee813d4998705449f650fb2, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a951a0db1f4aa44fa6f34e1c2e1d924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collector: {fileID: 545990980}
-  container: {fileID: 11400000, guid: 982950383d411f84b89945a01f9ad718, type: 2}
-  lootAnimationSettings: {fileID: 11400000, guid: 6ff3ce4a31e53424895547caeb8ad314,
-    type: 2}
+  containerOwner: {fileID: 545990980}
+  debugText: {fileID: 1230559337}
 --- !u!1001 &546895675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4668,7 +4667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1143662337}
   m_Layer: 5
-  m_Name: Inventory
+  m_Name: ItemContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5091,7 +5090,6 @@ GameObject:
   - component: {fileID: 1230559335}
   - component: {fileID: 1230559338}
   - component: {fileID: 1230559337}
-  - component: {fileID: 1230559336}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -5118,20 +5116,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1230559336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1230559334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a951a0db1f4aa44fa6f34e1c2e1d924, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 982950383d411f84b89945a01f9ad718, type: 2}
-  displayText: {fileID: 1230559337}
 --- !u!114 &1230559337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5163,7 +5147,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Inventory Info
+  m_Text: Item Container Info
 --- !u!222 &1230559338
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8587,6 +8571,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 512848663067193519, guid: e0566180537794649b98b41c66b507bb,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 545990980}
     - target: {fileID: 251370033490515048, guid: e0566180537794649b98b41c66b507bb,
         type: 3}
       propertyPath: m_Name

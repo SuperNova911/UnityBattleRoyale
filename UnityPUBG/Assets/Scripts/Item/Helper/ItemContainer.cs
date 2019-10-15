@@ -9,25 +9,38 @@ using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Items
 {
-    [CreateAssetMenu(menuName = "UnityPUBG/Inventory")]
-    public class ItemContainer : ScriptableObject
+    public class ItemContainer
     {
         #region 필드
-        [SerializeField] private int capacity = 6;
-        public List<Item> container;
+        private readonly List<Item> container;
+        #endregion
+
+        #region 생성자
+        /// <summary>
+        /// 매개변수로 받은 값의 크기를 용량으로 가진 아이템 컨테이너를 생성
+        /// </summary>
+        /// <param name="capacity">컨테이너의 크기</param>
+        public ItemContainer(int capacity)
+        {
+            if (capacity < 0)
+            {
+                Debug.LogError($"컨테이너의 크기가 0보다 작을 수 없습니다, capacity: {capacity}");
+                capacity = 0;
+            }
+            container = new List<Item>(capacity);
+        }
+        #endregion
+
+        #region 이벤트
+        public event EventHandler OnUpdateContainer;
         #endregion
 
         #region 속성
+        public int Count => container.Count;
+        public int Capacity => container.Capacity;
+        public int RemainCapacity => container.Capacity - container.Count;
         public bool IsEmpty => container.Count == 0;
-        public bool IsFull => container.Count == capacity;
-        public int RemainCapacity => capacity - container.Count;
-        #endregion
-
-        #region 유니티 메시지
-        private void OnEnable()
-        {
-            container = new List<Item>(capacity);
-        }
+        public bool IsFull => container.Count == container.Capacity;
         #endregion
 
         #region 메서드
@@ -55,7 +68,7 @@ namespace UnityPUBG.Scripts.Items
                 itemToAdd = targetItem.MergeStack(itemToAdd);
                 if (itemToAdd.IsStackEmpty)
                 {
-                    return itemToAdd;
+                    break;
                 }
             }
 
@@ -64,19 +77,40 @@ namespace UnityPUBG.Scripts.Items
                 container.Add(itemToAdd);
                 container.Sort();
 
-                return Item.EmptyItem;
+                itemToAdd = Item.EmptyItem;
             }
 
+            if (OnUpdateContainer != null)
+            {
+                OnUpdateContainer(this, EventArgs.Empty);
+            }
             return itemToAdd;
         }
 
+        /// <summary>
+        /// 매개변수로 받은 슬롯에 해당하는 아이템 하나를 컨테이너에서 빼고 반환
+        /// </summary>
+        /// <param name="slot">컨테이너의 슬롯 인덱스</param>
+        /// <returns>컨테이너에서 뺀 아이템</returns>
         public Item SubtrackItemAtSlot(int slot)
         {
             return SubtrackItemsAtSlot(slot, 1);
         }
 
+        /// <summary>
+        /// 매개변수로 받은 슬롯과 스택 크기만큼 아이템을 컨테이너에서 빼고 반환
+        /// </summary>
+        /// <param name="slot">컨테이너의 슬롯 인덱스</param>
+        /// <param name="stack">아이템을 뺄 스택 크기</param>
+        /// <returns>컨테이너에서 뺀 아이템</returns>
         public Item SubtrackItemsAtSlot(int slot, int stack)
         {
+            if (slot < 0 || container.Capacity <= slot)
+            {
+                Debug.LogError($"컨테이너의 범위를 초과한 슬롯 인덱스 입니다, slot: {slot}");
+                return Item.EmptyItem;
+            }
+
             if (slot >= container.Count)
             {
                 return Item.EmptyItem;
@@ -92,6 +126,10 @@ namespace UnityPUBG.Scripts.Items
                 container.RemoveAt(slot);
             }
 
+            if (OnUpdateContainer != null)
+            {
+                OnUpdateContainer(this, EventArgs.Empty);
+            }
             return splitedItem;
         }
 
@@ -100,9 +138,20 @@ namespace UnityPUBG.Scripts.Items
             return container.Any(e => e.Data.ItemName == itemName);
         }
 
-        public Item FindItem(string itemName)
+        public Item FindItem(int slot)
         {
-            return container.FirstOrDefault(e => e.Data.ItemName == itemName);
+            if (slot < 0 || container.Capacity <= slot)
+            {
+                Debug.LogError($"컨테이너의 범위를 초과한 슬롯 인덱스 입니다, slot: {slot}");
+                return Item.EmptyItem;
+            }
+
+            if (slot >= container.Count)
+            {
+                return Item.EmptyItem;
+            }
+
+            return container[slot];
         }
         #endregion
     }

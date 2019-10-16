@@ -13,7 +13,7 @@ namespace UnityPUBG.Scripts
     {
         #region 필드
         [Header("Area Settings")]
-        [SerializeField] private Vector2 areaSize = new Vector2(5, 5);
+        [SerializeField] private Vector3 areaSize = new Vector3(5, 1, 5);
         [SerializeField] ItemSpawnChance spawnChance = new ItemSpawnChance();
 
         [Header("Gizmo Settings")]
@@ -26,6 +26,10 @@ namespace UnityPUBG.Scripts
         /// 스폰 그룹의 아이템 스폰 확률 정보
         /// </summary>
         public ItemSpawnChance SpawnChance => spawnChance;
+        /// <summary>
+        /// 스폰 그룹의 범위
+        /// </summary>
+        public Bounds GroupArea => new Bounds(transform.position, areaSize);
         /// <summary>
         /// 스폰 그룹 Gizmo 색상
         /// </summary>
@@ -44,7 +48,7 @@ namespace UnityPUBG.Scripts
             if (showGroupArea)
             {
                 Gizmos.color = areaColor;
-                Gizmos.DrawWireCube(transform.position, new Vector3(areaSize.x, 1, areaSize.y));
+                Gizmos.DrawWireCube(GroupArea.center, GroupArea.size);
             }
         }
         #endregion
@@ -56,11 +60,8 @@ namespace UnityPUBG.Scripts
         /// <returns>그룹 범위 안에 있는 ItemSpawnPoint 리스트</returns>
         private List<ItemSpawnPoint> FindSpawnPointsInGroupArea()
         {
-            Vector2 groupCenter = new Vector2(transform.position.x, transform.position.z);
-            Vector2Area groupArea = new Vector2Area(groupCenter - areaSize / 2, groupCenter + areaSize / 2);
-
             return GameObject.FindGameObjectsWithTag("ItemSpawnPoint")
-                .Where(e => groupArea.Contains(new Vector2(e.transform.position.x, e.transform.position.z)) && e.GetComponent<ItemSpawnPoint>() != null)
+                .Where(e => GroupArea.Contains(e.transform.position) && e.GetComponent<ItemSpawnPoint>() != null)
                 .Select(e => e.GetComponent<ItemSpawnPoint>())
                 .ToList();
         }

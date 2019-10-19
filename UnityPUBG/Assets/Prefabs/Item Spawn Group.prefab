@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8df17fd2dfb7374fb00dfacdd937de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaSize: {x: 5, y: 5}
+  areaSize: {x: 5, y: 1, z: 5}
   spawnChance:
     spawnChance: 0.75
     commonRatio: 0.5

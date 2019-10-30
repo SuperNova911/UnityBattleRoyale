@@ -36,6 +36,10 @@ namespace UnityPUBG.Scripts.Entities
             base.Update();
 
             ControlMovement();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+            }
         }
 
         protected override void FixedUpdate()
@@ -62,7 +66,50 @@ namespace UnityPUBG.Scripts.Entities
         {
             Vector2 direction = inputManager.Player.Movement.ReadValue<Vector2>();
             movementDirection = new Vector3(direction.x, 0, direction.y);
-        } 
+        }
+
+        private void MeleeAttackTest(float damage, DamageType damageType)
+        {
+            Vector3 attackOriginPosition = transform.position + new Vector3(0, 1, 0);
+            Vector3 attackDirection = transform.forward;
+
+            var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(mouseRay, out var mouseRayHit, 100f, LayerMask.GetMask("Terrain")))
+            {
+                attackDirection = (new Vector3(mouseRayHit.point.x, 0, mouseRayHit.point.z) - transform.position).normalized;
+            }
+
+            float attackRange = 2f;
+            float attackAngle = 90f;
+            int rayNumber = 10;
+
+            Vector3 leftRayDirection = Quaternion.Euler(0, -attackAngle / 2, 0) * attackDirection;
+            Vector3 rightRayDirection = Quaternion.Euler(0, attackAngle / 2, 0) * attackDirection;
+
+            HashSet<IDamageable> hitObjects = new HashSet<IDamageable>();
+
+            RaycastHit hit;
+            for (int i = 0; i < rayNumber; i++)
+            {
+                Vector3 rayDirection = Vector3.Lerp(leftRayDirection, rightRayDirection, i / (float)(rayNumber - 1)).normalized;
+                Physics.Raycast(attackOriginPosition, rayDirection, out hit, attackRange);
+                Debug.DrawRay(attackOriginPosition, rayDirection * attackRange, Color.yellow, 0.1f);
+
+                if (hit.transform != null)
+                {
+                    var damageableObject = hit.transform.GetComponent<IDamageable>();
+                    if (damageableObject != null)
+                    {
+                        hitObjects.Add(damageableObject);
+                    }
+                }
+            }
+
+            foreach (var hitObject in hitObjects)
+            {
+                hitObject.OnTakeDamage(damage, damageType);
+            }
+        }
         #endregion
     }
 }

@@ -112,7 +112,7 @@ namespace UnityPUBG.Scripts
             }
 
             var itemObject = Instantiate(baseItemObject);
-            itemObject.AssignItem(item);
+            itemObject.Item = item;
 
             return itemObject;
         }

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1381209182032475195}
   - component: {fileID: 1381209182032475192}
   - component: {fileID: -6387929660299491319}
-  m_Layer: 0
-  m_Name: BaseItemObject
+  m_Layer: 10
+  m_Name: Base Item Object
   m_TagString: ItemObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,3 +74,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4e13db3a3b91e647baedfbf8ed02342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0

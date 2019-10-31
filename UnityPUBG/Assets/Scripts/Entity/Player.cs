@@ -88,20 +88,22 @@ namespace UnityPUBG.Scripts.Entities
 
             HashSet<IDamageable> hitObjects = new HashSet<IDamageable>();
 
-            RaycastHit hit;
             for (int i = 0; i < rayNumber; i++)
             {
                 Vector3 rayDirection = Vector3.Lerp(leftRayDirection, rightRayDirection, i / (float)(rayNumber - 1)).normalized;
-                Physics.Raycast(attackOriginPosition, rayDirection, out hit, attackRange);
-                Debug.DrawRay(attackOriginPosition, rayDirection * attackRange, Color.yellow, 0.1f);
-
-                if (hit.transform != null)
+                if (Physics.Raycast(attackOriginPosition, rayDirection, out var hit, attackRange))
                 {
                     var damageableObject = hit.transform.GetComponent<IDamageable>();
                     if (damageableObject != null)
                     {
                         hitObjects.Add(damageableObject);
                     }
+
+                    Debug.DrawLine(attackOriginPosition, hit.point, Color.red, 0.1f);
+                }
+                else
+                {
+                    Debug.DrawRay(attackOriginPosition, rayDirection * attackRange, Color.yellow, 0.1f);
                 }
             }
 

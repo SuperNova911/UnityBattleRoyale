@@ -54,7 +54,7 @@ namespace unitu.Scripts
 
                     if (previousStack > remainItem.CurrentStack)
                     {
-                        LootAnimator.InstantiateAnimation(player.transform, itemObject.gameObject, lootAnimationSettings);
+                        LootAnimator.InstantiateAnimation(player.transform, itemObject.ModelObject, lootAnimationSettings);
                     }
 
                     if (remainItem.IsStackEmpty)

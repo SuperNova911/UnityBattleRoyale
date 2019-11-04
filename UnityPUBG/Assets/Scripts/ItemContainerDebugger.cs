@@ -69,7 +69,7 @@ namespace UnityPUBG.Scripts
                 }
                 else
                 {
-                    stringBuilder.AppendLine($"{item.Data.ItemName}: Stack[{item.CurrentStack}/{item.Data.MaximumStack}], ID[{item.GetHashCode()}]");
+                    stringBuilder.AppendLine($"{item.Data.ItemName}: Stack[{item.CurrentStack}/{item.Data.MaximumStack}], HashCode[{item.GetHashCode()}]");
                 }
             }
             debugText.text = stringBuilder.ToString();

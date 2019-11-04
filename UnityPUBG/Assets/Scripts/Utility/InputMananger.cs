@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/InputManager.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Settings/InputManager.inputactions'
 
 using System.Collections;
 using System.Collections.Generic;
@@ -85,6 +85,88 @@ namespace UnityPUBG.Scripts.Utilities
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""CharacterSpawner"",
+            ""id"": ""aa1cdb76-a3c6-4ce1-89be-96a6f39dbe20"",
+            ""actions"": [
+                {
+                    ""name"": ""Spawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1454e94-0ef3-45b0-9f8f-b37a85c5428d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""31586fd4-40c6-45d7-b038-840665d50a8f"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Spawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""305175ae-d7ee-47a2-99ed-23c816961bd9"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Spawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc5f77ed-5528-43aa-b792-02fcfbe6f3de"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Spawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""defac7f4-6274-46c2-baf5-686be548c256"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Spawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a381c8d-20ae-4143-b940-bc0a0e763440"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Spawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""936ea8e4-46ff-4b28-8e97-0fdee27bb9c1"",
+                    ""path"": ""<Touchscreen>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Spawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -120,6 +202,9 @@ namespace UnityPUBG.Scripts.Utilities
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+            // CharacterSpawner
+            m_CharacterSpawner = asset.FindActionMap("CharacterSpawner", throwIfNotFound: true);
+            m_CharacterSpawner_Spawn = m_CharacterSpawner.FindAction("Spawn", throwIfNotFound: true);
         }
 
         ~InputManager()
@@ -198,6 +283,39 @@ namespace UnityPUBG.Scripts.Utilities
             }
         }
         public PlayerActions @Player => new PlayerActions(this);
+
+        // CharacterSpawner
+        private readonly InputActionMap m_CharacterSpawner;
+        private ICharacterSpawnerActions m_CharacterSpawnerActionsCallbackInterface;
+        private readonly InputAction m_CharacterSpawner_Spawn;
+        public struct CharacterSpawnerActions
+        {
+            private InputManager m_Wrapper;
+            public CharacterSpawnerActions(InputManager wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Spawn => m_Wrapper.m_CharacterSpawner_Spawn;
+            public InputActionMap Get() { return m_Wrapper.m_CharacterSpawner; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(CharacterSpawnerActions set) { return set.Get(); }
+            public void SetCallbacks(ICharacterSpawnerActions instance)
+            {
+                if (m_Wrapper.m_CharacterSpawnerActionsCallbackInterface != null)
+                {
+                    Spawn.started -= m_Wrapper.m_CharacterSpawnerActionsCallbackInterface.OnSpawn;
+                    Spawn.performed -= m_Wrapper.m_CharacterSpawnerActionsCallbackInterface.OnSpawn;
+                    Spawn.canceled -= m_Wrapper.m_CharacterSpawnerActionsCallbackInterface.OnSpawn;
+                }
+                m_Wrapper.m_CharacterSpawnerActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    Spawn.started += instance.OnSpawn;
+                    Spawn.performed += instance.OnSpawn;
+                    Spawn.canceled += instance.OnSpawn;
+                }
+            }
+        }
+        public CharacterSpawnerActions @CharacterSpawner => new CharacterSpawnerActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -219,6 +337,10 @@ namespace UnityPUBG.Scripts.Utilities
         public interface IPlayerActions
         {
             void OnMovement(InputAction.CallbackContext context);
+        }
+        public interface ICharacterSpawnerActions
+        {
+            void OnSpawn(InputAction.CallbackContext context);
         }
     }
 }

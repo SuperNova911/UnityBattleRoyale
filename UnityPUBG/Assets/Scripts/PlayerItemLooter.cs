@@ -15,8 +15,8 @@ namespace unitu.Scripts
     public class PlayerItemLooter : MonoBehaviour
     {
         #region 필드
-        [SerializeField, ReadOnly] private Player player;
-        [SerializeField, ReadOnly] private SphereCollider lootCollider;
+        [SerializeField] private Player player;
+        [SerializeField] private SphereCollider lootCollider;
         [SerializeField, Range(0.5f, 5f)] private float lootRadius = 2f;
 
         [Header("Loot Animation")]

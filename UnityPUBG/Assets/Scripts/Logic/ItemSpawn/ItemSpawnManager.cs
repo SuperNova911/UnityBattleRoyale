@@ -16,7 +16,7 @@ namespace UnityPUBG.Scripts
         [SerializeField] private ItemObject baseItemObject;
         [SerializeField] private ItemDataCollection itemDataCollection;
 
-        [SerializeField, ReadOnly] private List<ItemSpawnPoint> allSpawnPoints;
+        [SerializeField] private List<ItemSpawnPoint> allSpawnPoints;
         #endregion
 
         #region 유니티 메시지

@@ -17,7 +17,7 @@ namespace UnityPUBG.Scripts
     {
         #region 필드
         [Header("Item")]
-        [SerializeField] [ReadOnly] private ItemObject spawnedItem = null;
+        [SerializeField] private ItemObject spawnedItem = null;
 
         [Header("Spawn Settings")]
         [SerializeField] private ItemSpawnChance spawnChance = new ItemSpawnChance();

@@ -30,27 +30,27 @@ namespace UnityPUBG.Scripts.CharacterSpawn
 
         private void Update()
         {
-            if (inputManager.CharacterSpawner.Spawn.ReadValue<bool>() && isSpawned == false)
+            //if (inputManager.CharacterSpawner.Spawn.ReadValue<bool>() && isSpawned == false)
+            //{
+            //    characterSelecter.SpawnMyCharacter(transform);
+            //    isSpawned = true;
+            //}
+
+#if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
+                        if (Input.touchCount > 0 && !isSpawned)
+                        {
+                            characterSelecter.SpawnMyCharacter(transform);
+
+                            isSpawned = true;
+                        }
+#else
+            if (Input.anyKey && !isSpawned)
             {
                 characterSelecter.SpawnMyCharacter(transform);
+
                 isSpawned = true;
             }
-
-//#if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
-//                        if (Input.touchCount > 0 && !isSpawned)
-//                        {
-//                            characterSelecter.SpawnMyCharacter(transform);
-
-//                            isSpawned = true;
-//                        }
-//#else
-//            if (Input.anyKey && !isSpawned)
-//            {
-//                characterSelecter.SpawnMyCharacter(transform);
-
-//                isSpawned = true;
-//            }
-//#endif
+#endif
         }
         #endregion
     }

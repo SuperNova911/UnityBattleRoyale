@@ -11,9 +11,9 @@ namespace UnityPUBG.Scripts.Items
     public class LootAnimator : MonoBehaviour
     {
         #region 필드
-        [SerializeField, ReadOnly] private Transform looter;
-        [SerializeField, ReadOnly] private GameObject lootItem;
-        [SerializeField, ReadOnly] private LootAnimationSettings settings;
+        [SerializeField] private Transform looter;
+        [SerializeField] private GameObject lootItem;
+        [SerializeField] private LootAnimationSettings settings;
 
         private float phase1Progress = 0f;
         private float phase2Progress = 0f;

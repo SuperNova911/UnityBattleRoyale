@@ -13,7 +13,7 @@ namespace UnityPUBG.Scripts.Items
     public class ItemObject : MonoBehaviour
     {
         #region 필드
-        [SerializeField, ReadOnly] private int id;
+        [SerializeField] private int id;
         private Item item = null;
         private GameObject modelObject = null;
         #endregion

@@ -35,11 +35,11 @@ namespace UnityPUBG.Scripts.Entities
         {
             base.Update();
 
-            ControlMovement();
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
-            }
+            //ControlMovement();
+            //if (Input.GetKeyDown(KeyCode.Mouse0))
+            //{
+            //   MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+            //}
         }
 
         protected override void FixedUpdate()
@@ -112,6 +112,30 @@ namespace UnityPUBG.Scripts.Entities
                 hitObject.OnTakeDamage(damage, damageType);
             }
         }
+        #endregion
+
+        #region public 함수
+
+        /// <summary>
+        /// PlayerMovementSyncronizer 스크립트에서
+        /// 이 함수를 이용해서 플레이어를 움직임
+        /// </summary>
+        public void ControlMyMovement()
+        {
+            ControlMovement();
+        }
+
+        /// <summary>
+        /// PlayerMovementSyncronizer 스크립트에서
+        /// 이 함수를 이용해서 플레이어가 공격하도록 함
+        /// </summary>
+        /// <param name="damage"></param>
+        /// <param name="damageType"></param>
+        public void MyMeleeAttack(float damage, DamageType damageType)
+        {
+            MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+        }
+
         #endregion
     }
 }

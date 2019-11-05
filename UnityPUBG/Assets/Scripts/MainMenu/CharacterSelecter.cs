@@ -58,6 +58,8 @@ namespace UnityPUBG.Scripts.MainMenu
         {
             putCharacter();
             setSelectedCharacter();
+
+            //나중에 주석 해제할 것
             DontDestroyOnLoad(gameObject);
         }
 
@@ -91,6 +93,9 @@ namespace UnityPUBG.Scripts.MainMenu
                 }
             }
 #else
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MainMenu")
+                return;
+
             // 마우스가 눌림
             if (Input.GetMouseButtonDown(0))
             {
@@ -217,12 +222,13 @@ namespace UnityPUBG.Scripts.MainMenu
         /// </summary>
         private void spawnMyCharacter(Transform spawnPos)
         {
-            GameObject playerCharacter = Instantiate(PlayerCharacter, spawnPos.position, Quaternion.identity);
+            GameObject playerCharacter = PhotonNetwork.Instantiate(PlayerCharacter.name, spawnPos.position, Quaternion.identity,0);
 
             Cinemachine.CinemachineVirtualCamera virtualCam =
                 FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
 
-            virtualCam.Follow = playerCharacter.transform;
+            if (playerCharacter.GetComponent<PhotonView>().isMine)
+                virtualCam.Follow = playerCharacter.transform;
 
             foreach (Transform child in playerCharacter.transform)
             {

@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Test MeleeWeapon 3
   rarity: 1
   sortingOrder: 300
-  model: {fileID: 170008, guid: b3b27be71f8a42748be2cfb0520579d4, type: 3}
+  model: {fileID: 161536, guid: c30e98dc2a8d71e41a8686f21f7851ab, type: 3}
   maximumStack: 5
   defaultStack: 2
   damage: 10

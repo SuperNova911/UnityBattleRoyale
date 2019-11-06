@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Test Backpack 3
   rarity: 1
   sortingOrder: 200
-  model: {fileID: 128008, guid: 2bccdac8b9a6c3246b0c88a9a5b90138, type: 3}
+  model: {fileID: 193576, guid: a1ec39ab677fc1c4e8a1a0cd6726b620, type: 3}
   maximumStack: 3
   defaultStack: 2
   bonusCapacity: 6

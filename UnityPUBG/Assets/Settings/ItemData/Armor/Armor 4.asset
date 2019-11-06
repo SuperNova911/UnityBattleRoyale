@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Armor 4
   m_EditorClassIdentifier: 
   itemName: Test Armor 4
-  rarity: 3
+  rarity: 0
   sortingOrder: 100
-  model: {fileID: 117042, guid: 1e4b3b8e718d5574bba0239727983fe6, type: 3}
+  model: {fileID: 129270, guid: ac6cd14505ed91642a974b6e18c353fe, type: 3}
   maximumStack: 7
   defaultStack: 2
   shieldAmount: 0

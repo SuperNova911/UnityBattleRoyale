@@ -7,27 +7,22 @@ namespace UnityPUBG.Scripts.Lobby
 {
     public class PTManager : Photon.PunBehaviour
     {
-        #region public 변수, 유니티 에디터에서만 사용
         public static PTManager Instance;
-        #endregion
 
-        #region 유니티 콜백, 유니티 에디터에서만 사용
+        /// <summary>
+        /// 시작 대기 시간
+        /// </summary>
+        [SerializeField]
+        private int waitTime = 10;
+
+        #region 유니티 메시지
         private void Start()
         {
             Instance = this;
         }
         #endregion
 
-        #region private 변수
-        /// <summary>
-        /// 시작 대기 시간
-        /// </summary>
-        [SerializeField]
-        private int waitTime = 10;
-        #endregion
-
         #region Photon Messages
-
         public override void OnLeftRoom()
         {
             SceneManager.LoadScene("MainMenu");
@@ -63,26 +58,7 @@ namespace UnityPUBG.Scripts.Lobby
                 //LoadGameRoom();
             }
         }
-
         #endregion
-
-        #region Private Methods
-
-        private void LoadGameRoom()
-        {
-            if (!PhotonNetwork.isMasterClient)
-            {
-                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
-                return;
-            }
-
-            Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
-            PhotonNetwork.LoadLevel("SandBox");
-        }
-
-        #endregion
-
-        #region Public Methods
 
         public void LeaveRoom()
         {
@@ -98,10 +74,19 @@ namespace UnityPUBG.Scripts.Lobby
             StartCoroutine(GameStart());
         }
 
-        #endregion
+        private void LoadGameRoom()
+        {
+            if (!PhotonNetwork.isMasterClient)
+            {
+                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
+                return;
+            }
+
+            Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
+            PhotonNetwork.LoadLevel("SandBox");
+        }
 
         #region 코루틴
-
         private IEnumerator GameStart()
         {
             UnityEngine.UI.Text countDownText = GameObject.Find("StartCountDown").GetComponent<UnityEngine.UI.Text>();
@@ -117,7 +102,6 @@ namespace UnityPUBG.Scripts.Lobby
 
             yield break;
         }
-
         #endregion
     }
 }

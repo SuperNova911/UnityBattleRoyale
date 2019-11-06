@@ -7,7 +7,6 @@ namespace UnityPUBG.Scripts.MainMenu
 {
     public class MenuManager : MonoBehaviour
     {
-        #region 필드
         /// <summary>
         /// 로그인 화면
         /// </summary>
@@ -27,7 +26,6 @@ namespace UnityPUBG.Scripts.MainMenu
         /// 게임이 시작 했는가?
         /// </summary>
         private bool isStarted = false;
-        #endregion
 
         #region 유니티 메시지
         private void Start()
@@ -52,7 +50,6 @@ namespace UnityPUBG.Scripts.MainMenu
         }
         #endregion
 
-        #region 코루틴
         /// <summary>
         /// 텍스트 점멸
         /// </summary>
@@ -82,6 +79,5 @@ namespace UnityPUBG.Scripts.MainMenu
                 yield return new WaitForSeconds(flashSpeed);
             }
         }
-        #endregion
     }
 }

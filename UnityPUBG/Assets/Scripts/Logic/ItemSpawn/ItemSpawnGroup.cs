@@ -11,7 +11,6 @@ namespace UnityPUBG.Scripts
 {
     public sealed class ItemSpawnGroup : MonoBehaviour
     {
-        #region 필드
         [Header("Area Settings")]
         [SerializeField] private Vector3 areaSize = new Vector3(5, 1, 5);
         [SerializeField] ItemSpawnChance spawnChance = new ItemSpawnChance();
@@ -19,9 +18,7 @@ namespace UnityPUBG.Scripts
         [Header("Gizmo Settings")]
         [SerializeField] private Color areaColor = Color.cyan;
         [SerializeField] private bool showGroupArea = true;
-        #endregion
 
-        #region 속성
         /// <summary>
         /// 스폰 그룹의 아이템 스폰 확률 정보
         /// </summary>
@@ -34,7 +31,6 @@ namespace UnityPUBG.Scripts
         /// 스폰 그룹 Gizmo 색상
         /// </summary>
         public Color AreaColor => areaColor;
-        #endregion
 
         #region 유니티 메시지
         private void Awake()
@@ -53,7 +49,6 @@ namespace UnityPUBG.Scripts
         }
         #endregion
 
-        #region 메서드
         /// <summary>
         /// 그룹 범위안에 있는 모든 ItemSpawnPoint의 리스트를 반환
         /// </summary>
@@ -65,6 +60,5 @@ namespace UnityPUBG.Scripts
                 .Select(e => e.GetComponent<ItemSpawnPoint>())
                 .ToList();
         }
-        #endregion
     }
 }

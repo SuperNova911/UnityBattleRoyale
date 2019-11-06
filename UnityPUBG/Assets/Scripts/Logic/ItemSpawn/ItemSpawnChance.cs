@@ -14,7 +14,6 @@ namespace UnityPUBG.Scripts
     [Serializable]
     public class ItemSpawnChance
     {
-        #region 필드
         [Header("Spawn chance")]
         [SerializeField] [Range(0f, 1f)] private float spawnChance = 0.75f;
 
@@ -23,9 +22,7 @@ namespace UnityPUBG.Scripts
         [SerializeField] [Range(0f, 1f)] private float rareRatio = 0.3f;
         [SerializeField] [Range(0f, 1f)] private float epicRatio = 0.1f;
         [SerializeField] [Range(0f, 1f)] private float legendaryRatio = 0.05f;
-        #endregion
 
-        #region 생성자
         /// <summary>
         /// 새로운 ItemSpawnChance 생성, 기본값 사용
         /// </summary>
@@ -50,9 +47,7 @@ namespace UnityPUBG.Scripts
             this.epicRatio = Mathf.Clamp01(epicRatio);
             this.legendaryRatio = Mathf.Clamp01(legendaryRatio);
         }
-        #endregion
 
-        #region 속성
         /// <summary>
         /// 아이템 스폰 확률
         /// </summary>
@@ -74,7 +69,6 @@ namespace UnityPUBG.Scripts
         /// Legendary 등급 아이템 비율
         /// </summary>
         public float LegendaryRatio => legendaryRatio;
-        #endregion
 
         /// <summary>
         /// 각 등급별 비율을 기반으로 무작위로 등급 하나를 선택

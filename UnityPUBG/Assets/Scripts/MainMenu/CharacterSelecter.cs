@@ -6,52 +6,40 @@ namespace UnityPUBG.Scripts.MainMenu
 {
     public class CharacterSelecter : MonoBehaviour
     {
-        #region public values
         /// <summary>
         /// 캐릭터 3D 모델 프리팹 리스트들
         /// </summary>
         public List<GameObject> CharacterPrefabList = new List<GameObject>();
-
         public int RotateSpeed;
-
         /// <summary>
         /// 플레이어 캐릭터 프리팹
         /// </summary>
         public GameObject PlayerCharacter;
-        #endregion
-
-        #region private values
 
         /// <summary>
         /// 캐릭터 리스트
         /// </summary>
-        List<GameObject> characterList = new List<GameObject>();
-
+        private List<GameObject> characterList = new List<GameObject>();
         /// <summary>
         /// 각도
         /// </summary>
-        float deg;
-
+        private float deg;
         /// <summary>
         /// 드래그 중인가
         /// </summary>
-        bool isDrag = false;
-
+        private bool isDrag = false;
         /// <summary>
         /// 마우스 최근 위치
         /// </summary>
-        Vector3 lastpos;
-
+        private Vector3 lastpos;
         /// <summary>
         /// 최근 Selecter 회전율
         /// </summary>
-        Vector3 lastrot;
-
+        private Vector3 lastrot;
         /// <summary>
         /// 선택된 캐릭터 이름
         /// </summary>
-        string selectedCharacterName;
-        #endregion
+        private string selectedCharacterName;
 
         #region 유니티 메시지
         private void Start()
@@ -127,8 +115,6 @@ namespace UnityPUBG.Scripts.MainMenu
         }
         #endregion
 
-        #region public 함수
-
         /// <summary>
         /// 캐릭터를 스폰함.
         /// </summary>
@@ -137,9 +123,6 @@ namespace UnityPUBG.Scripts.MainMenu
             spawnMyCharacter(spawnPos);
         }
 
-        #endregion
-
-        #region private 함수
         /// <summary>
         /// 리스트에 있는 캐릭터 들을 원형으로 배치
         /// </summary>
@@ -251,7 +234,5 @@ namespace UnityPUBG.Scripts.MainMenu
 
             Destroy(gameObject);
         }
-        #endregion
-
     }
 }

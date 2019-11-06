@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T instance;
-
     public static T Instance
     {
         get
@@ -23,4 +21,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             return instance;
         }
     }
+
+    private static T instance;
 }

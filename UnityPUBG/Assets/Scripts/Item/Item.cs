@@ -9,22 +9,17 @@ namespace UnityPUBG.Scripts.Items
 {
     public abstract class Item : IComparable<Item>, ICloneable
     {
-        #region 필드
         public static readonly EmptyItem EmptyItem = new EmptyItem();
 
         private ItemData data;
         private int currentStack;
-        #endregion
 
-        #region 생성자
         public Item(ItemData data)
         {
             this.data = data;
             currentStack = data.DefaultStack;
         }
-        #endregion
 
-        #region 속성
         public ItemData Data => data;
         public int CurrentStack
         {
@@ -44,7 +39,6 @@ namespace UnityPUBG.Scripts.Items
         public bool IsStackEmpty => CurrentStack == 0;
         public bool IsStackFull => CurrentStack == data.MaximumStack;
         public int RemainCapacity => data.MaximumStack - CurrentStack;
-        #endregion
 
         #region IComparable 인터페이스
         public int CompareTo(Item other)
@@ -72,7 +66,6 @@ namespace UnityPUBG.Scripts.Items
         public abstract object Clone();
         #endregion
 
-        #region 메서드
         /// <summary>
         /// 매개변수로 받은 아이템과 스택을 병합하고 남은 아이템을 반환
         /// </summary>
@@ -123,6 +116,5 @@ namespace UnityPUBG.Scripts.Items
         {
             CurrentStack = 0;
         }
-        #endregion
     }
 }

@@ -10,12 +10,9 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class ItemObjectManager : Singleton<ItemObjectManager>
     {
-        #region 필드
         private Dictionary<int, ItemObject> itemObjects = new Dictionary<int, ItemObject>();
         private int nextId = 0; 
-        #endregion
 
-        #region 메서드
         public void AddToManageCollection(ItemObject itemObjectToAdd)
         {
             // 이미 등록된 ItemObject인지 검사
@@ -90,6 +87,5 @@ namespace UnityPUBG.Scripts.Logic
         {
             // TODO: 다른 클라이언트들에게 알리기
         } 
-        #endregion
     }
 }

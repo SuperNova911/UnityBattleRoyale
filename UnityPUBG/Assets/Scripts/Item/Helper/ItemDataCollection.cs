@@ -11,9 +11,7 @@ namespace UnityPUBG.Scripts.Items
     [CreateAssetMenu(menuName = "UnityPUBG/ItemCollection")]
     public class ItemDataCollection : ScriptableObject
     {
-        #region 필드
         [SerializeField] private List<ItemData> itemDataCollection = new List<ItemData>();
-        #endregion
 
         #region 유니티 메시지
         private void OnEnable()
@@ -22,7 +20,6 @@ namespace UnityPUBG.Scripts.Items
         }
         #endregion
 
-        #region 속성
         /// <summary>
         /// 등록된 모든 아이템들이 있는 ReadOnlyCollection
         /// </summary>
@@ -40,9 +37,7 @@ namespace UnityPUBG.Scripts.Items
         /// 아이템들을 아이템 등급으로 접근 가능한 ReadOnlyDictionary
         /// </summary>
         public ReadOnlyDictionary<ItemRarity, ReadOnlyCollection<ItemData>> ItemDatasByRarity { get; private set; }
-        #endregion
 
-        #region 메서드
         /// <summary>
         /// itemCollection을 기반으로 접근 가능한 다양한 Collection들을 초기화
         /// </summary>
@@ -101,6 +96,5 @@ namespace UnityPUBG.Scripts.Items
             ItemDatasByRarity = new ReadOnlyDictionary<ItemRarity, ReadOnlyCollection<ItemData>>(itemDatasByRarity
                 .ToDictionary(k => k.Key, v => ((List<ItemData>)v.Value).AsReadOnly()));
         } 
-        #endregion
     }
 }

@@ -15,7 +15,6 @@ namespace UnityPUBG.Scripts
     /// </summary>
     public sealed class ItemSpawnPoint : MonoBehaviour
     {
-        #region 필드
         [Header("Item")]
         [SerializeField] private ItemObject spawnedItem = null;
 
@@ -27,9 +26,7 @@ namespace UnityPUBG.Scripts
         [Header("Gizmo Settings")]
         [SerializeField] private Color color = Color.white;
         [SerializeField] private bool showGizmo = true;
-        #endregion
 
-        #region 속성
         /// <summary>
         /// 스폰된 아이템 오브젝트
         /// </summary>
@@ -58,7 +55,6 @@ namespace UnityPUBG.Scripts
         {
             get { return useGroupSetting && spawnGroup != null ? spawnGroup.SpawnChance : spawnChance; }
         }
-        #endregion
 
         #region 유니티 메시지
         private void OnDrawGizmos()

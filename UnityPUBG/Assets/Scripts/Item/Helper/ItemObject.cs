@@ -12,13 +12,10 @@ namespace UnityPUBG.Scripts.Items
 {
     public class ItemObject : MonoBehaviour
     {
-        #region 필드
         [SerializeField] private int id;
         private Item item = null;
         private GameObject modelObject = null;
-        #endregion
 
-        #region 속성
         /// <summary>
         /// ItemObjectManager에 의해 관리되는 ItemObject는 0 이상의 Id를 가지고 있음
         /// </summary>
@@ -39,7 +36,6 @@ namespace UnityPUBG.Scripts.Items
             }
         }
         public GameObject ModelObject => modelObject;
-        #endregion
 
         #region 유니티 메시지
         private void OnDestroy()
@@ -49,9 +45,7 @@ namespace UnityPUBG.Scripts.Items
                 //ItemObjectManager.Instance.RemoveFromManageCollection(this);
             }
         }
-        #endregion
 
-        #region 메서드
         private void DestroyAllChild()
         {
             modelObject = null;
@@ -70,7 +64,6 @@ namespace UnityPUBG.Scripts.Items
 
             modelObject = Instantiate(item.Data.Model, transform);
         }
-
         #endregion
     }
 }

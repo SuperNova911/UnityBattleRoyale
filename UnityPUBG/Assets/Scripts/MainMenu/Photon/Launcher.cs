@@ -8,22 +8,6 @@ namespace UnityPUBG.Scripts.MainMenu
 {
     public class Launcher : Photon.PunBehaviour
     {
-        #region Public Variables
-
-        public PhotonLogLevel Loglevel = PhotonLogLevel.Full;
-
-        [Tooltip("The maximum number of players per room, When a room is full, it can't be joined by new players, and so new room will be created")]
-        public byte MaxPlayersPerRoom = 4;
-
-        [Tooltip("The UI Panel to let the user enter name, connect and play")]
-        public GameObject controlPanel;
-
-        [Tooltip("The UI Label to inform the user that the connection is in progress")]
-        public GameObject progressLabel;
-
-        [Tooltip("How Many Players In Room")]
-        public UnityEngine.UI.Text PlayerCount;
-
         public static Launcher Instance
         {
             private set
@@ -35,20 +19,22 @@ namespace UnityPUBG.Scripts.MainMenu
                 return _instance;
             }
         }
-
-        #endregion
-
-        #region Private Variables
-
-        string _gameVersion = "1";
-        bool isConnecting;
-
         private static Launcher _instance;
 
-        #endregion
+        public PhotonLogLevel Loglevel = PhotonLogLevel.Full;
+        [Tooltip("The maximum number of players per room, When a room is full, it can't be joined by new players, and so new room will be created")]
+        public byte MaxPlayersPerRoom = 4;
+        [Tooltip("The UI Panel to let the user enter name, connect and play")]
+        public GameObject controlPanel;
+        [Tooltip("The UI Label to inform the user that the connection is in progress")]
+        public GameObject progressLabel;
+        [Tooltip("How Many Players In Room")]
+        public UnityEngine.UI.Text PlayerCount;
+
+        private string _gameVersion = "1";
+        private bool isConnecting;
 
         #region MonoBehaviour CallBacks
-
         private void Awake()
         {
             //Screen.SetResolution(1980, 1080, true);
@@ -67,10 +53,7 @@ namespace UnityPUBG.Scripts.MainMenu
             progressLabel.SetActive(false);
             //controlPanel.SetActive(true);
         }
-
         #endregion
-
-        #region Public Methods
 
         /// <summary>
         /// 서버와 연결.
@@ -93,10 +76,7 @@ namespace UnityPUBG.Scripts.MainMenu
             }
         }
 
-        #endregion
-
         #region Photon.PunBehaviour CallBacks
-
         public override void OnConnectedToMaster()
         {
             //base.OnConnectedToMaster(); 
@@ -138,7 +118,6 @@ namespace UnityPUBG.Scripts.MainMenu
                 Debug.Log("PlayerCount : " + PhotonNetwork.playerList.Length);
 #endif
         }
-
         #endregion
     }
 }

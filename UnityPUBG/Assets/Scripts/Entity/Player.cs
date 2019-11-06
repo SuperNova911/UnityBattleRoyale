@@ -12,16 +12,12 @@ namespace UnityPUBG.Scripts.Entities
 {
     public class Player : Entity
     {
-        #region 필드
         private InputManager inputManager;
-        #endregion
 
-        #region 속성
         public WeaponData EquipedWeapon { get; private set; }
         public ArmorData EquipedArmor { get; private set; }
         public BackpackData EquipedBackpack { get; private set; }
         public Vehicle RidingVehicle { get; private set; }
-        #endregion
 
         #region 유니티 메시지
         protected override void Awake()
@@ -58,7 +54,26 @@ namespace UnityPUBG.Scripts.Entities
         }
         #endregion
 
-        #region 메서드
+        /// <summary>
+        /// PlayerMovementSyncronizer 스크립트에서
+        /// 이 함수를 이용해서 플레이어를 움직임
+        /// </summary>
+        public void ControlMyMovement()
+        {
+            ControlMovement();
+        }
+
+        /// <summary>
+        /// PlayerMovementSyncronizer 스크립트에서
+        /// 이 함수를 이용해서 플레이어가 공격하도록 함
+        /// </summary>
+        /// <param name="damage"></param>
+        /// <param name="damageType"></param>
+        public void MyMeleeAttack(float damage, DamageType damageType)
+        {
+            MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+        }
+
         /// <summary>
         /// InputSystem으로부터 입력받은 값을 기반으로 Player의 움직임을 컨트롤
         /// </summary>
@@ -112,30 +127,5 @@ namespace UnityPUBG.Scripts.Entities
                 hitObject.OnTakeDamage(damage, damageType);
             }
         }
-        #endregion
-
-        #region public 함수
-
-        /// <summary>
-        /// PlayerMovementSyncronizer 스크립트에서
-        /// 이 함수를 이용해서 플레이어를 움직임
-        /// </summary>
-        public void ControlMyMovement()
-        {
-            ControlMovement();
-        }
-
-        /// <summary>
-        /// PlayerMovementSyncronizer 스크립트에서
-        /// 이 함수를 이용해서 플레이어가 공격하도록 함
-        /// </summary>
-        /// <param name="damage"></param>
-        /// <param name="damageType"></param>
-        public void MyMeleeAttack(float damage, DamageType damageType)
-        {
-            MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
-        }
-
-        #endregion
     }
 }

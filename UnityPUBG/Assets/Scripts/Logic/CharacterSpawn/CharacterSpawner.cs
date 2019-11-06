@@ -8,13 +8,11 @@ namespace UnityPUBG.Scripts.CharacterSpawn
 {
     public class CharacterSpawner : MonoBehaviour
     {
-        #region 필드
         private InputManager inputManager;
         private CharacterSelecter characterSelecter;
 
         // 내 캐릭터를 스폰했는가?
         private bool isSpawned = false;
-        #endregion
 
         #region 유니티 메시지
         private void Awake()

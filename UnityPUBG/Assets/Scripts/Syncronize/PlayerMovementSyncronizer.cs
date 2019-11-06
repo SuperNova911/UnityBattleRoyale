@@ -6,17 +6,11 @@ namespace UnityPUBG.Scripts.Syncronize
 {
     public class PlayerMovementSyncronizer : Photon.MonoBehaviour
     {
-        #region private 변수
-
         /// <summary>
         /// player 프리팹을 움직이는 함수를 조작하기 위해서
         /// 갖고온 컴포넌트
         /// </summary>
         private Entities.Player player;
-
-        #endregion
-
-        #region 유니티 콜백
 
         private void Awake()
         {
@@ -35,7 +29,5 @@ namespace UnityPUBG.Scripts.Syncronize
                 }
             }
         }
-
-        #endregion
     }
 }

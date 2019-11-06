@@ -26,7 +26,6 @@ namespace UnityPUBG.Scripts.Lobby
         /// 현재 HelpImage에 표기된 HelpImageList의 인덱스
         /// </summary>
         int imageIndex = 0;
-
         bool isHelpPanelOn = false;
 
         private void Start()

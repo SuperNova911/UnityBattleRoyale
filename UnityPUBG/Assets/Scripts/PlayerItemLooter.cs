@@ -14,14 +14,12 @@ namespace unitu.Scripts
     [RequireComponent(typeof(SphereCollider))]
     public class PlayerItemLooter : MonoBehaviour
     {
-        #region 필드
         [SerializeField] private Player player;
         [SerializeField] private SphereCollider lootCollider;
         [SerializeField, Range(0.5f, 5f)] private float lootRadius = 2f;
 
         [Header("Loot Animation")]
         [SerializeField] private LootAnimationSettings lootAnimationSettings;
-        #endregion
 
         #region 유니티 메시지
         private void Awake()

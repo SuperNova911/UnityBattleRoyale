@@ -12,12 +12,10 @@ namespace UnityPUBG.Scripts
 {
     public class ItemSpawnManager : Singleton<ItemSpawnManager>
     {
-        #region 필드
         [SerializeField] private ItemObject baseItemObject;
         [SerializeField] private ItemDataCollection itemDataCollection;
 
         [SerializeField] private List<ItemSpawnPoint> allSpawnPoints;
-        #endregion
 
         #region 유니티 메시지
         private void Awake()
@@ -39,7 +37,6 @@ namespace UnityPUBG.Scripts
         }
         #endregion
 
-        #region 메서드
         public void SpawnItemAt(Item item, Vector3 position)
         {
             if (item == null || item.IsStackEmpty)
@@ -138,6 +135,5 @@ namespace UnityPUBG.Scripts
                 }
             }
         }
-        #endregion
     }
 }

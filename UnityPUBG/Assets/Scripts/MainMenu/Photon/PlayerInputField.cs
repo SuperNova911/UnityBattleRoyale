@@ -8,14 +8,9 @@ namespace UnityPUBG.Scripts.MainMenu
     [RequireComponent(typeof(InputField))]
     public class PlayerInputField : MonoBehaviour
     {
-        #region Private Variables
-
         static string playerNamePrefKey = "PlayerName";
 
-        #endregion
-
-        #region MonoBehavior CallBacks
-
+        #region 유니티 메시지
         private void Start()
         {
             string defaultName = string.Empty;
@@ -32,10 +27,7 @@ namespace UnityPUBG.Scripts.MainMenu
 
             PhotonNetwork.playerName = defaultName;
         }
-
         #endregion
-
-        #region Public Methods
 
         public void SetPlayerName(string value)
         {
@@ -46,7 +38,5 @@ namespace UnityPUBG.Scripts.MainMenu
 
             //Debug.Log("PlayerName : " + PlayerPrefs.GetString(playerNamePrefKey));
         }
-
-        #endregion
     }
 }

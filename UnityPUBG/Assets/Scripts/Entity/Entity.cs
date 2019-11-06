@@ -7,7 +7,6 @@ namespace UnityPUBG.Scripts.Entities
 {
     public abstract class Entity : MonoBehaviour
     {
-        #region 필드
         [Header("Health")]
         [SerializeField] protected int maximumHealth;
         [SerializeField] protected float currentHealth;
@@ -19,9 +18,7 @@ namespace UnityPUBG.Scripts.Entities
         protected Vector3 facingDirection;
 
         protected ItemContainer itemContainer;
-
         private Rigidbody entityRigidbody;
-        #endregion
 
         public ItemContainer ItemContainer => itemContainer;
 
@@ -51,7 +48,6 @@ namespace UnityPUBG.Scripts.Entities
         }
         #endregion
 
-        #region 메서드
         /// <summary>
         /// movementDirection 방향으로 Entity를 이동
         /// </summary>
@@ -81,6 +77,5 @@ namespace UnityPUBG.Scripts.Entities
             var targetRotation = Quaternion.LookRotation(facingDirection);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed);
         }
-        #endregion
     }
 }

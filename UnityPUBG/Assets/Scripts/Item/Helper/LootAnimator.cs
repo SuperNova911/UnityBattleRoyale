@@ -10,7 +10,6 @@ namespace UnityPUBG.Scripts.Items
 {
     public class LootAnimator : MonoBehaviour
     {
-        #region 필드
         [SerializeField] private Transform looter;
         [SerializeField] private GameObject lootItem;
         [SerializeField] private LootAnimationSettings settings;
@@ -24,7 +23,6 @@ namespace UnityPUBG.Scripts.Items
         private Vector3 randomFloatingOffset;
 
         private bool isReady = false;
-        #endregion
 
         #region 유니티 메시지
         private void LateUpdate()
@@ -36,7 +34,6 @@ namespace UnityPUBG.Scripts.Items
         }
         #endregion
 
-        #region 메서드
         public static LootAnimator InstantiateAnimation(Transform looter, GameObject lootItem, LootAnimationSettings settings)
         {
             if (looter == null)
@@ -108,6 +105,5 @@ namespace UnityPUBG.Scripts.Items
                 Destroy(gameObject);
             }
         }
-        #endregion
     }
 }

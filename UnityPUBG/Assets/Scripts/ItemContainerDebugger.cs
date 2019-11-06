@@ -11,14 +11,12 @@ namespace UnityPUBG.Scripts
     [RequireComponent(typeof(Entity))]
     public class ItemContainerDebugger : MonoBehaviour
     {
-        #region 필드
         [Header("Settigns")]
         [SerializeField] private Entity containerOwner;
 
         [Header("UI")]
         [SerializeField] private Text debugText;
         private StringBuilder stringBuilder = new StringBuilder();
-        #endregion
 
         #region 유니티 메시지
         private void Awake()
@@ -48,7 +46,6 @@ namespace UnityPUBG.Scripts
         }
         #endregion
 
-        #region 메서드
         private void ItemContainer_OnUpdateContainer(object sender, System.EventArgs e)
         {
             var container = sender as ItemContainer;
@@ -74,6 +71,5 @@ namespace UnityPUBG.Scripts
             }
             debugText.text = stringBuilder.ToString();
         }
-        #endregion
     }
 }

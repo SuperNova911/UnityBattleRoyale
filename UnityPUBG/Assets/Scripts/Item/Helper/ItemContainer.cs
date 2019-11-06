@@ -11,11 +11,8 @@ namespace UnityPUBG.Scripts.Items
 {
     public class ItemContainer
     {
-        #region 필드
         private readonly List<Item> container;
-        #endregion
 
-        #region 생성자
         /// <summary>
         /// 매개변수로 받은 값의 크기를 용량으로 가진 아이템 컨테이너를 생성
         /// </summary>
@@ -29,21 +26,15 @@ namespace UnityPUBG.Scripts.Items
             }
             container = new List<Item>(capacity);
         }
-        #endregion
 
-        #region 이벤트
         public event EventHandler OnUpdateContainer;
-        #endregion
 
-        #region 속성
         public int Count => container.Count;
         public int Capacity => container.Capacity;
         public int RemainCapacity => container.Capacity - container.Count;
         public bool IsEmpty => container.Count == 0;
         public bool IsFull => container.Count == container.Capacity;
-        #endregion
 
-        #region 메서드
         /// <summary>
         /// 매개변수로 받은 아이템을 컨테이너에 넣을 수 있는 만큼 넣고 남은 아이템을 반환
         /// </summary>
@@ -153,6 +144,5 @@ namespace UnityPUBG.Scripts.Items
 
             return container[slot];
         }
-        #endregion
     }
 }

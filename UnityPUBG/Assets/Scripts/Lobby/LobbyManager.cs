@@ -7,12 +7,10 @@ namespace UnityPUBG.Scripts.Lobby
 {
     public class ReadyPlayer
     {
-        public bool Ready { private set; get; }
         public string Name;
-        public GameObject obj { private set; get; }
-        Text playerName;
-        Text readyState;
-        Image backGround;
+        private Text playerName;
+        private Text readyState;
+        private Image backGround;
 
         public ReadyPlayer()
         {
@@ -20,6 +18,9 @@ namespace UnityPUBG.Scripts.Lobby
             Name = null;
             obj = null;
         }
+
+        public bool Ready { private set; get; }
+        public GameObject obj { private set; get; }
 
         public ReadyPlayer(string name, GameObject lobbyPlayer)
         {
@@ -55,6 +56,8 @@ namespace UnityPUBG.Scripts.Lobby
 
     public class LobbyManager : Photon.MonoBehaviour
     {
+        public static LobbyManager Instance;
+
         /// <summary>
         /// 준비 버튼의 텍스트
         /// </summary>
@@ -75,22 +78,22 @@ namespace UnityPUBG.Scripts.Lobby
         public GameObject LobbyPlayer;
         public Transform PlayerPanel;
 
-        public static LobbyManager Instance;
-
+        #region 유니티 메시지
         private void Start()
         {
             isReady = false;
             Instance = this;
             StartButton.SetActive(false);
-            if(PhotonNetwork.playerList.Length == 1)
+            if (PhotonNetwork.playerList.Length == 1)
             {
-                RPlayerList.Add(new ReadyPlayer(PhotonNetwork.playerName, Instantiate(LobbyPlayer,PlayerPanel)));
+                RPlayerList.Add(new ReadyPlayer(PhotonNetwork.playerName, Instantiate(LobbyPlayer, PlayerPanel)));
             }
             else
             {
                 SendE(PhotonTargets.Others, PhotonNetwork.playerName);
             }
-        }
+        } 
+        #endregion
 
         public void ReadyButton()
         {
@@ -156,7 +159,7 @@ namespace UnityPUBG.Scripts.Lobby
         /// <param name="playerName">준비버튼을 누른 플레이어</param>
         /// <param name="readyState">준비 상태</param>
         [PunRPC]
-        void SendReadyMessage(string playerName, bool readyState)
+        private void SendReadyMessage(string playerName, bool readyState)
         {
             string s;
 
@@ -190,7 +193,7 @@ namespace UnityPUBG.Scripts.Lobby
         /// 플레이어 리스트 갱신
         /// </summary>
         [PunRPC]
-        void SendEntry(string playerName)
+        private void SendEntry(string playerName)
         {
             RPlayerList.Add(new ReadyPlayer(playerName, Instantiate(LobbyPlayer,PlayerPanel)));
 
@@ -231,7 +234,7 @@ namespace UnityPUBG.Scripts.Lobby
         /// <param name="playerNames"></param>
         /// <param name="playerReadys"></param>
         [PunRPC]
-        void SendMakeList(string[] playerNames, bool[] playerReadys)
+        private void SendMakeList(string[] playerNames, bool[] playerReadys)
         {
             int len = playerNames.Length;
 
@@ -249,7 +252,7 @@ namespace UnityPUBG.Scripts.Lobby
         /// </summary>
         /// <param name="playerName">나간 플레이어 이름</param>
         [PunRPC]
-        void SendLeaveRoom(string playerName)
+        private void SendLeaveRoom(string playerName)
         {
             int len = RPlayerList.Count;
 

@@ -36,3 +36,5 @@ sysinfo.txt
 *.unitypackage
 
 .vscode/settings.json
+
+Assets/3rd Party/ignore resource/*

@@ -19,15 +19,15 @@ namespace UnityPUBG.Scripts.Syncronize
 
         private void Update()
         {
-            if (photonView.isMine)
-            {
-                player.ControlMyMovement();
+            //if (photonView.isMine)
+            //{
+            //    player.ControlMyMovement();
 
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    player.MyMeleeAttack(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
-                }
-            }
+            //    if (Input.GetKeyDown(KeyCode.Mouse0))
+            //    {
+            //        player.MyMeleeAttack(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+            //    }
+            //}
         }
     }
 }

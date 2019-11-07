@@ -1448,40 +1448,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 524117363}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &545990979 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 251370033490515048, guid: e0566180537794649b98b41c66b507bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 251370032934264895}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &545990980 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 251370033469873360, guid: e0566180537794649b98b41c66b507bb,
     type: 3}
   m_PrefabInstance: {fileID: 251370032934264895}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545990979}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b61d2a00e1b9af54f9d18df7d67eebd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &545990982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545990979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
 --- !u!1001 &564764594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5422,16 +5400,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 251370033490515048, guid: e0566180537794649b98b41c66b507bb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 251370033490515048, guid: e0566180537794649b98b41c66b507bb,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 251370033490730166, guid: e0566180537794649b98b41c66b507bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5489,11 +5457,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1330880535016543195, guid: e0566180537794649b98b41c66b507bb,
         type: 3}
-      propertyPath: ObservedComponents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330880535016543195, guid: e0566180537794649b98b41c66b507bb,
-        type: 3}
       propertyPath: viewIdField
       value: 1
       objectReference: {fileID: 0}
@@ -5502,11 +5465,6 @@ PrefabInstance:
       propertyPath: instantiationId
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1330880535016543195, guid: e0566180537794649b98b41c66b507bb,
-        type: 3}
-      propertyPath: ObservedComponents.Array.data[1]
-      value: 
-      objectReference: {fileID: 545990982}
     - target: {fileID: 512848663067193519, guid: e0566180537794649b98b41c66b507bb,
         type: 3}
       propertyPath: player

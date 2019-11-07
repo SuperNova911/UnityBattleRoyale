@@ -13,6 +13,7 @@ namespace UnityPUBG.Scripts.Entities
     public class Player : Entity
     {
         private InputManager inputManager;
+        private PhotonView photonView;
 
         public WeaponData EquipedWeapon { get; private set; }
         public ArmorData EquipedArmor { get; private set; }
@@ -25,17 +26,25 @@ namespace UnityPUBG.Scripts.Entities
             base.Awake();
 
             inputManager = new InputManager();
+            photonView = GetComponent<PhotonView>();
+            if (photonView == null)
+            {
+                Debug.LogError($"{nameof(photonView)}가 없습니다");
+            }
         }
 
         protected override void Update()
         {
             base.Update();
 
-            //ControlMovement();
-            //if (Input.GetKeyDown(KeyCode.Mouse0))
-            //{
-            //   MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
-            //}
+            if (photonView.isMine)
+            {
+                ControlMovement();
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+                }
+            }
         }
 
         protected override void FixedUpdate()
@@ -53,26 +62,6 @@ namespace UnityPUBG.Scripts.Entities
             inputManager.Disable();
         }
         #endregion
-
-        /// <summary>
-        /// PlayerMovementSyncronizer 스크립트에서
-        /// 이 함수를 이용해서 플레이어를 움직임
-        /// </summary>
-        public void ControlMyMovement()
-        {
-            ControlMovement();
-        }
-
-        /// <summary>
-        /// PlayerMovementSyncronizer 스크립트에서
-        /// 이 함수를 이용해서 플레이어가 공격하도록 함
-        /// </summary>
-        /// <param name="damage"></param>
-        /// <param name="damageType"></param>
-        public void MyMeleeAttack(float damage, DamageType damageType)
-        {
-            MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
-        }
 
         /// <summary>
         /// InputSystem으로부터 입력받은 값을 기반으로 Player의 움직임을 컨트롤

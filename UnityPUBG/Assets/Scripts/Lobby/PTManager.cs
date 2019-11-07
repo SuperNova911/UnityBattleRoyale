@@ -83,7 +83,7 @@ namespace UnityPUBG.Scripts.Lobby
             }
 
             Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
-            PhotonNetwork.LoadLevel("SandBox");
+            PhotonNetwork.LoadLevel("GameWorld");
         }
 
         #region 코루틴

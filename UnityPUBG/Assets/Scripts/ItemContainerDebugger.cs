@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityPUBG.Scripts.Entities;
 using UnityPUBG.Scripts.Items;
 
 namespace UnityPUBG.Scripts
 {
-    [RequireComponent(typeof(Entity))]
     public class ItemContainerDebugger : MonoBehaviour
     {
         [Header("Settigns")]
@@ -40,9 +40,32 @@ namespace UnityPUBG.Scripts
             }
         }
 
-        private void OnValidate()
+        private void Update()
         {
-            containerOwner = GetComponent<Entity>();
+            if (Keyboard.current.digit1Key.wasPressedThisFrame)
+            {
+                containerOwner.DropItemsAtSlot(0, 1);
+            }
+            else if (Keyboard.current.digit2Key.wasPressedThisFrame)
+            {
+                containerOwner.DropItemsAtSlot(1, 1);
+            }
+            else if (Keyboard.current.digit3Key.wasPressedThisFrame)
+            {
+                containerOwner.DropItemsAtSlot(2, 1);
+            }
+            else if (Keyboard.current.digit4Key.wasPressedThisFrame)
+            {
+                containerOwner.DropItemsAtSlot(3, 1);
+            }
+            else if (Keyboard.current.digit5Key.wasPressedThisFrame)
+            {
+                containerOwner.DropItemsAtSlot(4, 1);
+            }
+            else if (Keyboard.current.digit6Key.wasPressedThisFrame)
+            {
+                containerOwner.DropItemsAtSlot(5, 1);
+            }
         }
         #endregion
 

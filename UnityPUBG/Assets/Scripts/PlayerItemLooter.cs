@@ -47,6 +47,11 @@ namespace unitu.Scripts
                 var itemObject = other.GetComponent<ItemObject>();
                 if (itemObject != null && itemObject.Item != null)
                 {
+                    if (itemObject.allowAutoLoot == false)
+                    {
+                        return;
+                    }
+
                     int previousStack = itemObject.Item.CurrentStack;
                     var remainItem = player.ItemContainer.AddItem(itemObject.Item);
 

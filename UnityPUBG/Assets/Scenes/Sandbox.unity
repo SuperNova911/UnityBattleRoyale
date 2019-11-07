@@ -1466,20 +1466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61d2a00e1b9af54f9d18df7d67eebd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &545990981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545990979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a951a0db1f4aa44fa6f34e1c2e1d924, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  containerOwner: {fileID: 545990980}
-  debugText: {fileID: 1230559337}
 --- !u!114 &545990982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4290,8 +4276,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1769509351}
   - component: {fileID: 1769509350}
+  - component: {fileID: 1769509352}
   m_Layer: 0
-  m_Name: Sandbox Manager
+  m_Name: Sandbox Tools
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4306,7 +4293,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1769509349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90cfc68b2be64cb47ad483d338ce5718, type: 3}
+  m_Script: {fileID: 11500000, guid: ff66ed4e2e3d9cd40a3004d5e74d2f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1769509351
@@ -4323,6 +4310,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1769509352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769509349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a951a0db1f4aa44fa6f34e1c2e1d924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containerOwner: {fileID: 545990980}
+  debugText: {fileID: 1230559337}
 --- !u!1001 &1799292454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5425,6 +5426,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 251370033490515048, guid: e0566180537794649b98b41c66b507bb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 251370033490730166, guid: e0566180537794649b98b41c66b507bb,
         type: 3}

@@ -10,6 +10,7 @@ using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.Items
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class ItemObject : MonoBehaviour
     {
         [SerializeField] private int id;
@@ -36,6 +37,7 @@ namespace UnityPUBG.Scripts.Items
             }
         }
         public GameObject ModelObject => modelObject;
+        public bool allowAutoLoot { get; set; } = true;
 
         #region 유니티 메시지
         private void OnDestroy()

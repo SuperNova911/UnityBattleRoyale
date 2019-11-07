@@ -71,10 +71,8 @@ namespace UnityPUBG.Scripts.Items
                 itemToAdd = Item.EmptyItem;
             }
 
-            if (OnUpdateContainer != null)
-            {
-                OnUpdateContainer(this, EventArgs.Empty);
-            }
+            OnUpdateContainer?.Invoke(this, EventArgs.Empty);
+
             return itemToAdd;
         }
 
@@ -117,10 +115,8 @@ namespace UnityPUBG.Scripts.Items
                 container.RemoveAt(slot);
             }
 
-            if (OnUpdateContainer != null)
-            {
-                OnUpdateContainer(this, EventArgs.Empty);
-            }
+            OnUpdateContainer?.Invoke(this, EventArgs.Empty);
+
             return splitedItem;
         }
 

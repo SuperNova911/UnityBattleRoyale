@@ -37,15 +37,23 @@ namespace UnityPUBG.Scripts
         }
         #endregion
 
-        public void SpawnItemAt(Item item, Vector3 position)
+        /// <summary>
+        /// 매개변수로 받은 위치에 ItemObject를 생성
+        /// </summary>
+        /// <param name="item">생성할 아이템</param>
+        /// <param name="position">ItemObject를 생성할 위치</param>
+        /// <returns>생성된 ItemObject</returns>
+        public ItemObject SpawnItemAt(Item item, Vector3 position)
         {
             if (item == null || item.IsStackEmpty)
             {
-                return;
+                return null;
             }
 
             var itemObject = InstantiateItemObject(item);
             itemObject.transform.position = position;
+
+            return itemObject;
         }
 
         /// <summary>

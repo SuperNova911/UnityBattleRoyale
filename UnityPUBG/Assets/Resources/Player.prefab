@@ -1328,7 +1328,8 @@ GameObject:
   - component: {fileID: 1330880535016543195}
   - component: {fileID: 9058974531983816179}
   - component: {fileID: 6788572259382896181}
-  m_Layer: 0
+  - component: {fileID: 545990982}
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1457,6 +1458,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 9058974531983816179}
+  - {fileID: 545990982}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -1552,6 +1554,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799940796d9095a4da937df9316dcf45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &545990982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251370033490515048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
 --- !u!1 &251370033490516470
 GameObject:
   m_ObjectHideFlags: 0

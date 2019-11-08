@@ -5,11 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityPUBG.Scripts.Entities;
 using UnityPUBG.Scripts.Items;
-using UnityPUBG.Scripts.Utilities;
 
-namespace unitu.Scripts
+namespace UnityPUBG.Scripts.Entities
 {
     [RequireComponent(typeof(SphereCollider))]
     public class PlayerItemLooter : MonoBehaviour

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityPUBG.Scripts
+namespace UnityPUBG.Scripts.UI
 {
     [RequireComponent(typeof(Animator))]
     public class DamageText : MonoBehaviour

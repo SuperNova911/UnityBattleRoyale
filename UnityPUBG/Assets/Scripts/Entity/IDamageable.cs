@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnityPUBG.Scripts
+namespace UnityPUBG.Scripts.Entities
 {
     public enum DamageType
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace UnityPUBG.Scripts
+namespace UnityPUBG.Scripts.UI
 {
     public class FloatingTextDrawer : Singleton<FloatingTextDrawer>
     {

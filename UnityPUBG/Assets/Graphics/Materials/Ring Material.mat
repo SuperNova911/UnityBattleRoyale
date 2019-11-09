@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Ring Material
+  m_Shader: {fileID: -6465566751694194690, guid: 7d062520cea7d5946a11349831578f36,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_DEEFB1D6:
+        m_Texture: {fileID: 2800000, guid: 822b39b75dcbab9489aab18c721ca9b5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_3360216F: 20
+    - Vector1_3AF8BAE6: 0.5
+    - Vector1_3B50E3B: 5
+    - Vector1_426FF271: 15.86
+    - Vector1_5D323197: 0.064
+    - Vector1_75F477B8: 0.1
+    - Vector1_BD14060F: 0.2
+    m_Colors:
+    - Color_B9113480: {r: 0, g: 21.01648, b: 32, a: 0}

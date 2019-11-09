@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7256478754805725333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7256478754805725331}
+  - component: {fileID: 7256478754805725332}
+  m_Layer: 0
+  m_Name: Ring System
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7256478754805725331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256478754805725333}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7256478754805725332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256478754805725333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d719ad463138f4a8de9feff83292d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialRingCenter: {x: 500, y: 500}
+  initialRingRadius: 700
+  initialTickDamage: 1
+  roundSettings:
+    roundNumber: 5
+    waitPeriods:
+    - 60
+    - 50
+    - 40
+    - 30
+    - 10
+    timeToCloses:
+    - 30
+    - 25
+    - 20
+    - 15
+    - 5
+    diametersAfterClosing:
+    - 400
+    - 150
+    - 50
+    - 10
+    - 0
+    tickDamages:
+    - 2.5
+    - 5
+    - 10
+    - 15
+    - 20
+  ringMaterial: {fileID: 2100000, guid: 61c6eae37335b9f4182c83bc76b4f7a2, type: 2}
+  ringHeight: 20
+  resolutionX: 50
+  resolutionY: 3
+  showRingGizmos: 1

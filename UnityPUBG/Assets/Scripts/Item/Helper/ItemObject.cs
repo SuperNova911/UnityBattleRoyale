@@ -13,7 +13,7 @@ namespace UnityPUBG.Scripts.Items
     [RequireComponent(typeof(Rigidbody))]
     public class ItemObject : MonoBehaviour
     {
-        [SerializeField] private int id;
+        [SerializeField, ReadOnly] private int id;
         private Item item = null;
         private GameObject modelObject = null;
 

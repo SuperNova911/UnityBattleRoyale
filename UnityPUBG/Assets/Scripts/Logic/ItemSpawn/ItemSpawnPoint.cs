@@ -16,7 +16,7 @@ namespace UnityPUBG.Scripts
     public sealed class ItemSpawnPoint : MonoBehaviour
     {
         [Header("Item")]
-        [SerializeField] private ItemObject spawnedItem = null;
+        [SerializeField, ReadOnly] private ItemObject spawnedItem = null;
 
         [Header("Spawn Settings")]
         [SerializeField] private ItemSpawnChance spawnChance = new ItemSpawnChance();

@@ -200,24 +200,20 @@ namespace UnityPUBG.Scripts.Logic
             }
         }
 
-        // TODO: Player와 같은 Entity를 실시간으로 관리하는 매니저 클래스 만들어서 참조하기
-        private IEnumerator OnRingTick(float tickSpeed)
+        private IEnumerator OnRingTick(float tickPeriod)
         {
-            var damageables = FindObjectsOfType<Entity>()
-                .Where(e => e is IDamageable)
-                .ToList();
-
             while (true)
             {
-                foreach (var entity in damageables)
+                foreach (var damageable in EntityManager.Instance.Damageables)
                 {
+                    var entity = (Entity)damageable;
                     if (Vector2.Distance(new Vector2(entity.transform.position.x, entity.transform.position.z), CurrentRingCenter) > CurrentRingRadius)
                     {
-                        ((IDamageable)entity).OnTakeDamage(CurrentRingTickDamage, DamageType.Absolute);
+                        damageable.OnTakeDamage(CurrentRingTickDamage, DamageType.Absolute);
                     }
                 }
 
-                yield return new WaitForSeconds(tickSpeed);
+                yield return new WaitForSeconds(tickPeriod);
             }
         }
 

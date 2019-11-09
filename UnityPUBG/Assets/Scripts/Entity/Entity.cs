@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityPUBG.Scripts.Items;
+using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.Entities
 {
@@ -29,6 +30,8 @@ namespace UnityPUBG.Scripts.Entities
             entityRigidbody = GetComponent<Rigidbody>();
 
             itemContainer = new ItemContainer(6);
+
+            EntityManager.Instance.RegisterEntity(this);
         }
 
         protected virtual void Start()
@@ -45,6 +48,11 @@ namespace UnityPUBG.Scripts.Entities
         {
             MoveEntity();
             RotateEntity();
+        }
+
+        protected virtual void OnDestory()
+        {
+            EntityManager.Instance.UnRegisterEntity(this);
         }
         #endregion
 

@@ -6,14 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Items;
+using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Entities
 {
     [RequireComponent(typeof(SphereCollider))]
     public class PlayerItemLooter : MonoBehaviour
     {
-        [SerializeField] private Player player;
-        [SerializeField] private SphereCollider lootCollider;
+        [SerializeField, ReadOnly] private Player player;
+        [SerializeField, ReadOnly] private SphereCollider lootCollider;
         [SerializeField, Range(0.5f, 5f)] private float lootRadius = 2f;
 
         [Header("Loot Animation")]

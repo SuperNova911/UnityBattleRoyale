@@ -10,14 +10,11 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class EntityManager : Singleton<EntityManager>
     {
-        public List<Entity> Entities { get; private set; }
-        public List<IDamageable> Damageables { get; private set; }
+        private List<Entity> entities = new List<Entity>();
+        private List<IDamageable> damageables = new List<IDamageable>();
 
-        private void Awake()
-        {
-            Entities = new List<Entity>();
-            Damageables = new List<IDamageable>();
-        }
+        public List<Entity> Entities => entities;
+        public List<IDamageable> Damageables => damageables;
 
         public void RegisterEntity(Entity entity)
         {

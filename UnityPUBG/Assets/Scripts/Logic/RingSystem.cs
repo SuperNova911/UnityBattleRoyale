@@ -37,6 +37,10 @@ namespace UnityPUBG.Scripts.Logic
         private GameObject ringObject;
         private RingMeshGenerator ringMeshGenerator;
 
+        public event EventHandler<RoundData> OnRoundStart;
+        public event EventHandler<RoundData> OnRingCloseStart;
+
+
         public RoundData[] RoundDatas { get; private set; }
         public Vector2 CurrentRingCenter { get; private set; }
         public float CurrentRingTickDamage { get; private set; }
@@ -165,6 +169,8 @@ namespace UnityPUBG.Scripts.Logic
                 Debug.Log($"Round {i + 1}");
                 Debug.Log($"Time to close: {roundDatas[i].TimeToClose}sec");
 
+                OnRoundStart?.Invoke(this, roundDatas[i]);
+
                 // Ring Countdown
                 float startTime = Time.time;
                 float endTime = startTime + roundDatas[i].WaitPeriod;
@@ -178,6 +184,7 @@ namespace UnityPUBG.Scripts.Logic
                 Debug.Log($"Ring closing start");
 
                 // Ring Closing
+                OnRingCloseStart?.Invoke(this, roundDatas[i]);
                 CurrentRingTickDamage = roundDatas[i].TickDamage;
 
                 Vector2 startCenter = CurrentRingCenter;

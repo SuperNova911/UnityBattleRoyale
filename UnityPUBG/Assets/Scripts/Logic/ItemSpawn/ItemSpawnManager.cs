@@ -25,7 +25,9 @@ namespace UnityPUBG.Scripts
 
         private void Start()
         {
-            SpawnRandomItemAt(allSpawnPoints);
+            //마스터 클라이언트만 아이템 생성
+            if (PhotonNetwork.isMasterClient)
+                SpawnRandomItemAt(allSpawnPoints);
         }
 
         private void OnValidate()

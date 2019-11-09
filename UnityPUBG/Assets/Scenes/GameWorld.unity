@@ -758,7 +758,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1695648865}
-  - component: {fileID: 1695648866}
   m_Layer: 0
   m_Name: Logics
   m_TagString: Untagged
@@ -782,22 +781,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1695648866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1695648864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a830728364c5628459ad27b3abe62e21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterPrefabList: []
-  RotateSpeed: 0
-  PlayerCharacter: {fileID: 251370033490515048, guid: e0566180537794649b98b41c66b507bb,
-    type: 3}
 --- !u!1 &1805821530
 GameObject:
   m_ObjectHideFlags: 3

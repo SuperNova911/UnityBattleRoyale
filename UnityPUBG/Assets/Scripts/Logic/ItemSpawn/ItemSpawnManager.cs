@@ -120,6 +120,11 @@ namespace UnityPUBG.Scripts
 
             var itemObject = Instantiate(baseItemObject);
             itemObject.Item = item;
+            //새로 생성된 아이템이므로 아이디를 아직 부여하지 않음
+            itemObject.Id = -1;
+
+            //아이템 ID를 부여
+            Logic.ItemObjectManager.Instance.AddToManageCollection(itemObject);
 
             return itemObject;
         }
@@ -130,20 +135,65 @@ namespace UnityPUBG.Scripts
         /// <param name="spawnPoints">아이템을 스폰 할 스폰 지점들</param>
         private void SpawnRandomItemAt(List<ItemSpawnPoint> spawnPoints)
         {
-            foreach (var spawnPoint in spawnPoints)
+            if (PhotonNetwork.isMasterClient)
             {
-                ItemData randomItemData = GetRandomItemData(spawnPoint.SpawnChance);
-                if (randomItemData == null)
+                //실제로 아이템을 스폰한 스폰 포인트들
+                List<ItemSpawnPoint> itemSpawnPoints = new List<ItemSpawnPoint>();
+
+                foreach (var spawnPoint in spawnPoints)
                 {
-                    continue;
+                    ItemData randomItemData = GetRandomItemData(spawnPoint.SpawnChance);
+                    if (randomItemData == null)
+                    {
+                        continue;
+                    }
+
+                    ItemObject itemObject = InstantiateItemObject(randomItemData.BuildItem());
+                    if (itemObject != null)
+                    {
+                        spawnPoint.SpawnedItem = itemObject;
+                        itemSpawnPoints.Add(spawnPoint);
+                    }
                 }
 
-                ItemObject itemObject = InstantiateItemObject(randomItemData.BuildItem());
-                if (itemObject != null)
+                //마스터 클라이언트가 생성한 오브젝트를 다른 클라이언트에게 모두 알려줌
+                Logic.ItemObjectManager.Instance.SendMasterNotifyAddToOtherClient(itemSpawnPoints);
+            }
+        }
+
+        /// <summary>
+        /// 스폰 포인트 이름과
+        /// 아이템 오브젝트 이름을 받아서
+        /// 해당 스폰 포인트에 그 아이템 오브젝트 생성
+        /// </summary>
+        /// <param name="spawnPointName">스폰 포인트 이름</param>
+        /// <param name="itemObjectName">아이템 오브젝트 이름</param>
+        /// <returns></returns>
+        public ItemObject SpawnItem(string spawnPointName, string itemObjectName)
+        {
+            int count = allSpawnPoints.Count;
+
+            ItemSpawnPoint itemSpawnPoint = null;
+
+            //스폰 포인트 탐색
+            for(int i = 0; i<count; i++)
+            {
+                if(allSpawnPoints[i].name == spawnPointName)
                 {
-                    spawnPoint.SpawnedItem = itemObject;
+                    itemSpawnPoint = allSpawnPoints[i];
+                    break;
                 }
             }
+
+            //아이템 오브젝트 생성
+            ItemObject itemObject = Instantiate(baseItemObject);
+
+            itemObject.Item = itemDataCollection
+                .ItemDataByName[itemObjectName].BuildItem();
+
+            itemSpawnPoint.SpawnedItem = itemObject;
+            
+            return itemObject;
         }
     }
 }

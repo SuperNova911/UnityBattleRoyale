@@ -31,6 +31,7 @@ MonoBehaviour:
   - Chat
   - DestroyRpc
   - InstantiateRpc
+  - MasterNotifyAddToOtherClient
   - PickupItemInit
   - PunPickup
   - PunPickupSimple

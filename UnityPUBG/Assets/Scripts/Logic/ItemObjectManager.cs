@@ -33,7 +33,8 @@ namespace UnityPUBG.Scripts.Logic
             itemObjectToAdd.Id = nextId++;
             itemObjects.Add(itemObjectToAdd.Id, itemObjectToAdd);
 
-            NotifyAddToOtherClient(itemObjectToAdd.Id);
+            //if (PhotonNetwork.isMasterClient)
+            //    NotifyAddToOtherClient(itemObjectToAdd.Id);
         }
 
         public void RemoveFromManageCollection(ItemObject itemObjectToRemove)
@@ -78,6 +79,51 @@ namespace UnityPUBG.Scripts.Logic
             return itemObjects.ContainsKey(id);
         }
 
+        /// <summary>
+        /// 마스터 클라이언트가
+        /// 스폰 포인트에서
+        /// 생성한 게임 오브젝트를
+        /// 다른 클라이언트들에게 알려줌
+        /// </summary>
+        /// <param name="spawnPoints">아이템 오브젝트를 생성한 스폰 포인트</param>
+        public void SendMasterNotifyAddToOtherClient(List<ItemSpawnPoint> spawnPoints)
+        {
+            //마스터 클라이언트가 아닐 시 종료
+            if (!PhotonNetwork.isMasterClient)
+                return;
+
+            //스폰 포인트 이름들
+            List<string> spawnPointNames = new List<string>();
+
+            //아이템 오브젝트 이름들
+            List<string> itemObjectNames = new List<string>();
+
+            //아이템 오브젝트 ID들
+            List<int> itemObjectIDs = new List<int>();
+
+            int count = spawnPoints.Count;
+            ItemSpawnPoint spawnPoint = null;
+
+            for(int i = 0; i<count; i++)
+            {
+                spawnPoint = spawnPoints[i];
+
+                //스폰 포인트 이름 저장
+                spawnPointNames.Add(spawnPoint.name);
+                //아이템 오브젝트 이름 저장
+                itemObjectNames.Add(spawnPoint.SpawnedItem.Item.Data.ItemName);
+                //아이템 오브젝트 ID 저장
+                itemObjectIDs.Add
+                    (itemObjects.FirstOrDefault
+                    (x => x.Value == spawnPoint.SpawnedItem).Key);
+            }
+
+            //RPC 함수로 다른 클라이언트에게 생성한 아이템을 알려줌
+            GetComponent<PhotonView>().RPC
+                ("MasterNotifyAddToOtherClient", PhotonTargets.Others, 
+                spawnPointNames.ToArray(), itemObjectNames.ToArray(), itemObjectIDs.ToArray());
+        }
+
         private void NotifyAddToOtherClient(int id)
         {
             // TODO: 다른 클라이언트들에게 알리기
@@ -86,6 +132,35 @@ namespace UnityPUBG.Scripts.Logic
         private void NotifyRemoveToOtherClient(int id)
         {
             // TODO: 다른 클라이언트들에게 알리기
-        } 
+        }
+
+        #region RPC 함수
+        /// <summary>
+        /// 마스터 클라이언트가 알려준
+        /// <para>스폰 포인트 이름,</para>
+        /// <para>아이템 오브젝트 이름,</para>
+        /// <para>ID를 통해서</para>
+        /// <para>아이템 오브젝트를 스폰하고, ID를 부여</para>
+        /// </summary>
+        /// <param name="spawnPointNames">스폰 포인트 이름</param>
+        /// <param name="itemObjectNames">아이템 오브젝트 이름</param>
+        /// <param name="ItemObjectIDs">아이템 오브젝트 ID</param>
+        [PunRPC]
+        private void MasterNotifyAddToOtherClient
+            (string[] spawnPointNames, string[] itemObjectNames, int[] ItemObjectIDs)
+        {
+            int length = spawnPointNames.Length;
+            ItemObject itemObject = null;
+            for(int i = 0; i<length; i++)
+            {
+                //아이템 오브젝트 생성
+                itemObject = ItemSpawnManager.Instance.SpawnItem
+                    (spawnPointNames[i], itemObjectNames[i]);
+
+                //ID 부여
+                itemObjects.Add(ItemObjectIDs[i], itemObject);
+            }
+        }
+        #endregion
     }
 }

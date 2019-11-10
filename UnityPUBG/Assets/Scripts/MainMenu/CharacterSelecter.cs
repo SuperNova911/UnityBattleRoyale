@@ -205,7 +205,8 @@ namespace UnityPUBG.Scripts.MainMenu
         /// </summary>
         private void spawnMyCharacter(Transform spawnPos)
         {
-            GameObject playerCharacter = PhotonNetwork.Instantiate(PlayerCharacter.name, spawnPos.position, Quaternion.identity,0);
+            GameObject playerCharacter = PhotonNetwork.Instantiate
+                (PlayerCharacter.name, spawnPos.position, Quaternion.identity, 0);
 
             Cinemachine.CinemachineVirtualCamera virtualCam =
                 FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();

@@ -16,8 +16,11 @@ namespace UnityPUBG.Scripts.Items
 
         public Item(ItemData data)
         {
-            this.data = data;
-            currentStack = data.DefaultStack;
+            if (data != null)
+            {
+                this.data = data;
+                CurrentStack = data.DefaultStack;
+            }
         }
 
         public ItemData Data => data;
@@ -110,6 +113,12 @@ namespace UnityPUBG.Scripts.Items
             CurrentStack -= splitSize;
 
             return splitedItem;
+        }
+
+        // 직접 호출하면 안됨
+        public void SetStack(int newStack)
+        {
+            CurrentStack = newStack;
         }
 
         public void ClearStack()

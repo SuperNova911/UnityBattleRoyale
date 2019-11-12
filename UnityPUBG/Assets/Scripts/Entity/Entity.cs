@@ -75,13 +75,13 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            var itemObject = ItemSpawnManager.Instance.SpawnItemAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
+            var itemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
             if (itemObject == null)
             {
                 return;
             }
 
-            itemObject.allowAutoLoot = false;
+            itemObject.AllowAutoLoot = false;
 
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
             var itemObjectRigidbody = itemObject.GetComponent<Rigidbody>();

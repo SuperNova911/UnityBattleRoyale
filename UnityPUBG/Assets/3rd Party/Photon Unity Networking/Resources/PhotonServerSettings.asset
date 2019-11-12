@@ -43,4 +43,15 @@ MonoBehaviour:
   - SendMakeList
   - SendMsg
   - SendReadyMessage
+  - AssignId
+  - RequestNextId
+  - RequestAssignId
+  - RefillIds
+  - Request
+  - RequestRefillIds
+  - NotifyUpdateItem
+  - NotifyUpdateItemCurrentStack
+  - NotifyUpdateItemqwe
+  - UpdateItem
+  - UpdateCurrentStack
   DisableAutoOpenWizard: 1

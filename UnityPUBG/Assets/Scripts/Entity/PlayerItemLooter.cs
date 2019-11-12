@@ -46,13 +46,18 @@ namespace UnityPUBG.Scripts.Entities
                 var itemObject = other.GetComponent<ItemObject>();
                 if (itemObject != null && itemObject.Item != null)
                 {
-                    if (itemObject.allowAutoLoot == false)
+                    if (itemObject.AllowAutoLoot == false)
                     {
                         return;
                     }
 
                     int previousStack = itemObject.Item.CurrentStack;
                     var remainItem = player.ItemContainer.AddItem(itemObject.Item);
+
+                    if (previousStack != remainItem.CurrentStack && remainItem.IsStackEmpty == false)
+                    {
+                        itemObject.NotifyUpdateCurrentStack();
+                    }
 
                     if (previousStack > remainItem.CurrentStack)
                     {

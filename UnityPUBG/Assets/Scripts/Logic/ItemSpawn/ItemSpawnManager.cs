@@ -7,36 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Utilities;
+using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts
 {
     public class ItemSpawnManager : Singleton<ItemSpawnManager>
     {
-        [SerializeField] private ItemObject baseItemObject;
-        [SerializeField] private ItemDataCollection itemDataCollection;
-
-        [SerializeField, ReadOnly] private List<ItemSpawnPoint> allSpawnPoints;
+        [SerializeField] private ItemObject baseItemObjectPrefab;
 
         #region 유니티 메시지
-        private void Awake()
-        {
-            allSpawnPoints = FindAllSpawnPoints();
-        }
-
-        private void Start()
-        {
-            //마스터 클라이언트만 아이템 생성
-            if (PhotonNetwork.isMasterClient)
-                SpawnRandomItemAt(allSpawnPoints);
-        }
-
-        private void OnValidate()
-        {
-            if (itemDataCollection == null)
-            {
-                Debug.LogError("ItemDataCollection은 null일 수 없습니다");
-            }
-        }
         #endregion
 
         /// <summary>
@@ -45,17 +24,46 @@ namespace UnityPUBG.Scripts
         /// <param name="item">생성할 아이템</param>
         /// <param name="position">ItemObject를 생성할 위치</param>
         /// <returns>생성된 ItemObject</returns>
-        public ItemObject SpawnItemAt(Item item, Vector3 position)
+        public ItemObject SpawnItemObjectAt(Item item, Vector3 position)
         {
             if (item == null || item.IsStackEmpty)
             {
                 return null;
             }
 
-            var itemObject = InstantiateItemObject(item);
-            itemObject.transform.position = position;
+            if (baseItemObjectPrefab == null)
+            {
+                Debug.LogError($"{nameof(baseItemObjectPrefab)}는 null일 수 없습니다");
+                return null;
+            }
 
-            return itemObject;
+            var instantiatedObject = PhotonNetwork.Instantiate(baseItemObjectPrefab.name, position, Quaternion.identity, 0);
+            if (instantiatedObject == null)
+            {
+                Debug.LogError($"{nameof(PhotonNetwork)}를 통해 {nameof(baseItemObjectPrefab)}를 생성하지 못했습니다");
+                return null;
+            }
+
+            var baseItemObject = instantiatedObject.GetComponent<ItemObject>();
+            baseItemObject.Item = item;
+            baseItemObject.NotifyUpdateItem();
+
+            return baseItemObject;
+        }
+
+        public void SpawnRandomItemsAtSpawnPoints()
+        {
+            var targetSpawnPoints = FindAllSpawnPoints();
+            foreach (var spawnPoint in targetSpawnPoints)
+            {
+                var selectedItemData = ItemDataCollection.Instance.SelectRandomItemData(spawnPoint.SpawnChance);
+                if (selectedItemData == null)
+                {
+                    continue;
+                }
+
+                SpawnItemObjectAt(selectedItemData.BuildItem(), spawnPoint.transform.position);
+            }
         }
 
         /// <summary>
@@ -64,136 +72,13 @@ namespace UnityPUBG.Scripts
         /// <returns>ItemSpawnPoint의 리스트</returns>
         private List<ItemSpawnPoint> FindAllSpawnPoints()
         {
+            const string tagName = "ItemSpawnPoint";
+
             return GameObject
-                .FindGameObjectsWithTag("ItemSpawnPoint")
+                .FindGameObjectsWithTag(tagName)
                 .Where(e => e.GetComponent<ItemSpawnPoint>() != null)
                 .Select(e => e.GetComponent<ItemSpawnPoint>())
                 .ToList();
-        }
-
-        /// <summary>
-        /// 매개변수로 받은 ItemSpawnChance 기반으로 무작위 아이템 데이터를 선택
-        /// </summary>
-        /// <param name="spawnChance">스폰 확률 정보</param>
-        /// <returns>무작위로 선택된 아이템 데이터</returns>
-        private ItemData GetRandomItemData(ItemSpawnChance spawnChance)
-        {
-            if (UnityEngine.Random.value <= spawnChance.SpawnChance)
-            {
-                ItemRarity randomRarity = spawnChance.GetRandomItemRarity();
-
-                if (itemDataCollection.ItemDatasByRarity.TryGetValue(randomRarity, out var items))
-                {
-                    int randomIndex = UnityEngine.Random.Range(0, items.Count);
-                    return Instantiate(items[randomIndex]);
-                }
-                else
-                {
-                    Debug.LogWarning($"Rarity: {randomRarity}에 해당하는 아이템 데이터 컬렉션이 없습니다");
-                    return null;
-                }
-            }
-            else
-            {
-                // 아이템을 스폰하지 않음
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 매개변수로 아이템을 받아 ItemObject를 생성
-        /// </summary>
-        /// <param name="item">스폰 할 아이템</param>
-        /// <returns>생성 된 ItemObject</returns>
-        private ItemObject InstantiateItemObject(Item item)
-        {
-            if (item == null)
-            {
-                return null;
-            }
-
-            if (baseItemObject == null)
-            {
-                Debug.LogError("BaseItemObject가 유효하지 않습니다");
-                return null;
-            }
-
-            var itemObject = Instantiate(baseItemObject);
-            itemObject.Item = item;
-            //새로 생성된 아이템이므로 아이디를 아직 부여하지 않음
-            itemObject.Id = -1;
-
-            //아이템 ID를 부여
-            Logic.ItemObjectManager.Instance.AddToManageCollection(itemObject);
-
-            return itemObject;
-        }
-
-        /// <summary>
-        /// 매개변수로 받은 스폰 지점들에 무작위 아이템을 스폰
-        /// </summary>
-        /// <param name="spawnPoints">아이템을 스폰 할 스폰 지점들</param>
-        private void SpawnRandomItemAt(List<ItemSpawnPoint> spawnPoints)
-        {
-            if (PhotonNetwork.isMasterClient)
-            {
-                //실제로 아이템을 스폰한 스폰 포인트들
-                List<ItemSpawnPoint> itemSpawnPoints = new List<ItemSpawnPoint>();
-
-                foreach (var spawnPoint in spawnPoints)
-                {
-                    ItemData randomItemData = GetRandomItemData(spawnPoint.SpawnChance);
-                    if (randomItemData == null)
-                    {
-                        continue;
-                    }
-
-                    ItemObject itemObject = InstantiateItemObject(randomItemData.BuildItem());
-                    if (itemObject != null)
-                    {
-                        spawnPoint.SpawnedItem = itemObject;
-                        itemSpawnPoints.Add(spawnPoint);
-                    }
-                }
-
-                //마스터 클라이언트가 생성한 오브젝트를 다른 클라이언트에게 모두 알려줌
-                Logic.ItemObjectManager.Instance.SendMasterNotifyAddToOtherClient(itemSpawnPoints);
-            }
-        }
-
-        /// <summary>
-        /// 스폰 포인트 이름과
-        /// 아이템 오브젝트 이름을 받아서
-        /// 해당 스폰 포인트에 그 아이템 오브젝트 생성
-        /// </summary>
-        /// <param name="spawnPointName">스폰 포인트 이름</param>
-        /// <param name="itemObjectName">아이템 오브젝트 이름</param>
-        /// <returns></returns>
-        public ItemObject SpawnItem(string spawnPointName, string itemObjectName)
-        {
-            int count = allSpawnPoints.Count;
-
-            ItemSpawnPoint itemSpawnPoint = null;
-
-            //스폰 포인트 탐색
-            for(int i = 0; i<count; i++)
-            {
-                if(allSpawnPoints[i].name == spawnPointName)
-                {
-                    itemSpawnPoint = allSpawnPoints[i];
-                    break;
-                }
-            }
-
-            //아이템 오브젝트 생성
-            ItemObject itemObject = Instantiate(baseItemObject);
-
-            itemObject.Item = itemDataCollection
-                .ItemDataByName[itemObjectName].BuildItem();
-
-            itemSpawnPoint.SpawnedItem = itemObject;
-            
-            return itemObject;
         }
     }
 }

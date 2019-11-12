@@ -10,12 +10,15 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class SandboxManager : MonoBehaviour
     {
-        private void Start()
+        private void Awake()
         {
             PhotonNetwork.offlineMode = true;
+            PhotonNetwork.CreateRoom("Sandbox");
+        }
 
-            RingSystem.Instance.GenerateRoundDatas();
-            RingSystem.Instance.StartRingSystem();
+        private void Start()
+        {
+
         }
     }
 }

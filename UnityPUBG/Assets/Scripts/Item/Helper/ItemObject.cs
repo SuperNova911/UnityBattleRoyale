@@ -7,53 +7,63 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Utilities;
 using UnityPUBG.Scripts.Logic;
+using UnityEditor;
 
 namespace UnityPUBG.Scripts.Items
 {
-    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Rigidbody), typeof(PhotonView))]
     public class ItemObject : MonoBehaviour
     {
-        [SerializeField, ReadOnly] private int id;
+        [SerializeField, ReadOnly] private int id = -1;
         private Item item = null;
-        private GameObject modelObject = null;
 
-        /// <summary>
-        /// ItemObjectManager에 의해 관리되는 ItemObject는 0 이상의 Id를 가지고 있음
-        /// </summary>
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        private PhotonView photonView;
+
+        public TextMesh textMesh;
+
         public Item Item
         {
             get { return item; }
             set
             {
                 item = value;
-
                 DestroyAllChild();
                 SpawnItemModel(item);
             }
         }
-        public GameObject ModelObject => modelObject;
-        public bool allowAutoLoot { get; set; } = true;
+        public int PhotonViewId { get { return photonView.viewID; } }
+        public GameObject ModelObject { get; private set; }
+        public bool AllowAutoLoot { get; set; } = true;
 
         #region 유니티 메시지
-        private void OnDestroy()
+        private void Awake()
         {
-            if (Id >= 0)
-            {
-                //ItemObjectManager.Instance.RemoveFromManageCollection(this);
-            }
+            photonView = GetComponent<PhotonView>();
+        }
+
+        private void Update()
+        {
+            textMesh.text = Item.CurrentStack.ToString();
+        }
+        #endregion
+
+        public void NotifyUpdateItem()
+        {
+            photonView.RPC(nameof(UpdateItem), PhotonTargets.Others, Item.Data.ItemName);
+            photonView.RPC(nameof(UpdateCurrentStack), PhotonTargets.Others, Item.CurrentStack);
+        }
+
+        public void NotifyUpdateCurrentStack()
+        {
+            photonView.RPC(nameof(UpdateCurrentStack), PhotonTargets.Others, Item.CurrentStack);
         }
 
         private void DestroyAllChild()
         {
-            modelObject = null;
+            Destroy(ModelObject);
             foreach (Transform child in transform)
             {
-                Destroy(child);
+                Destroy(child.gameObject);
             }
         }
 
@@ -64,8 +74,35 @@ namespace UnityPUBG.Scripts.Items
                 return;
             }
 
-            modelObject = Instantiate(item.Data.Model, transform);
+            ModelObject = Instantiate(item.Data.Model, transform);
         }
-        #endregion
+
+        [PunRPC]
+        private void UpdateItem(string newItemDataName)
+        {
+            if (Item == null || Item.Data.ItemName != newItemDataName)
+            {
+                if (ItemDataCollection.Instance.ItemDataByName.TryGetValue(newItemDataName, out var newItemData))
+                {
+                    Item = newItemData.BuildItem();
+                }
+                else
+                {
+                    Debug.LogError($"{newItemData}와 일치하는 ItemName이 없습니다");
+                }
+            }
+        }
+
+        [PunRPC]
+        private void UpdateCurrentStack(int newStack)
+        {
+            if (Item == null)
+            {
+                Debug.LogError($"업데이트 하려는 {nameof(Item)}이 null 입니다");
+                return;
+            }
+
+            Item.SetStack(newStack);
+        }
     }
 }

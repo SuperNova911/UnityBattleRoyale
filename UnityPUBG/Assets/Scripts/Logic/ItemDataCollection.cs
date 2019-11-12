@@ -5,20 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityPUBG.Scripts.Items;
 
-namespace UnityPUBG.Scripts.Items
+namespace UnityPUBG.Scripts.Logic
 {
-    [CreateAssetMenu(menuName = "UnityPUBG/ItemCollection")]
-    public class ItemDataCollection : ScriptableObject
+    public class ItemDataCollection : Singleton<ItemDataCollection>
     {
         [SerializeField] private List<ItemData> itemDataCollection = new List<ItemData>();
-
-        #region 유니티 메시지
-        private void OnEnable()
-        {
-            InitializeCollection();
-        }
-        #endregion
 
         /// <summary>
         /// 등록된 모든 아이템들이 있는 ReadOnlyCollection
@@ -37,6 +30,41 @@ namespace UnityPUBG.Scripts.Items
         /// 아이템들을 아이템 등급으로 접근 가능한 ReadOnlyDictionary
         /// </summary>
         public ReadOnlyDictionary<ItemRarity, ReadOnlyCollection<ItemData>> ItemDatasByRarity { get; private set; }
+
+        #region 유니티 메시지
+        private void Awake()
+        {
+            InitializeCollection();
+        }
+        #endregion
+
+        /// <summary>
+        /// 매개변수로 받은 ItemSpawnChance 기반으로 무작위 아이템 데이터를 선택
+        /// </summary>
+        /// <param name="spawnChance">스폰 확률 정보</param>
+        /// <returns>무작위로 선택된 아이템 데이터</returns>
+        public ItemData SelectRandomItemData(ItemSpawnChance spawnChance)
+        {
+            if (UnityEngine.Random.value <= spawnChance.SpawnChance)
+            {
+                ItemRarity selectedRarity = spawnChance.GetRandomItemRarity();
+                if (ItemDatasByRarity.TryGetValue(selectedRarity, out var itemDatas))
+                {
+                    int randomIndex = UnityEngine.Random.Range(0, itemDatas.Count);
+                    return itemDatas[randomIndex];
+                }
+                else
+                {
+                    Debug.LogWarning($"{nameof(ItemRarity)}: {selectedRarity}에 해당하는 아이템 데이터 컬렉션이 없습니다");
+                    return null;
+                }
+            }
+            else
+            {
+                // 아이템을 스폰하지 않음
+                return null;
+            }
+        }
 
         /// <summary>
         /// itemCollection을 기반으로 접근 가능한 다양한 Collection들을 초기화

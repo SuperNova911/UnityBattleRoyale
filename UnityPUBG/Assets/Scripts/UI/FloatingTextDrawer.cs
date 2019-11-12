@@ -13,6 +13,14 @@ namespace UnityPUBG.Scripts.UI
 
         public DamageText damageTextObject;
 
+        private void Awake()
+        {
+            if (canvas == null)
+            {
+                canvas = FindObjectOfType<Canvas>();
+            }
+        }
+
         public void DrawDamageText(Transform damageReceiver, float damage)
         {
             var damageText = Instantiate(damageTextObject, canvas.transform);

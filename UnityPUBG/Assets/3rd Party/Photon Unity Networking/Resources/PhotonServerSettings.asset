@@ -54,4 +54,5 @@ MonoBehaviour:
   - NotifyUpdateItemqwe
   - UpdateItem
   - UpdateCurrentStack
+  - PlayLootAnimation
   DisableAutoOpenWizard: 1

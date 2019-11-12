@@ -1435,6 +1435,7 @@ MonoBehaviour:
   currentHealth: 100
   movementSpeed: 5
   rotationSpeed: 0.2
+  photonView: {fileID: 0}
 --- !u!114 &1330880535016543195
 MonoBehaviour:
   m_ObjectHideFlags: 0

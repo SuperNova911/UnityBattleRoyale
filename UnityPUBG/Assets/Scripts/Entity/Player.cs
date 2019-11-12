@@ -12,8 +12,8 @@ namespace UnityPUBG.Scripts.Entities
 {
     public class Player : Entity
     {
+        public PhotonView photonView;
         private InputManager inputManager;
-        private PhotonView photonView;
 
         public WeaponData EquipedWeapon { get; private set; }
         public ArmorData EquipedArmor { get; private set; }

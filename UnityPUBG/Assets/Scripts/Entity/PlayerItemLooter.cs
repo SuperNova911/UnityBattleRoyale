@@ -41,32 +41,14 @@ namespace UnityPUBG.Scripts.Entities
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.tag == "ItemObject")
+            if (player.photonView.isMine)
             {
-                var itemObject = other.GetComponent<ItemObject>();
-                if (itemObject != null && itemObject.Item != null)
+                if (other.tag == "ItemObject")
                 {
-                    if (itemObject.AllowAutoLoot == false)
+                    var targetItemObject = other.GetComponent<ItemObject>();
+                    if (targetItemObject != null)
                     {
-                        return;
-                    }
-
-                    int previousStack = itemObject.Item.CurrentStack;
-                    var remainItem = player.ItemContainer.AddItem(itemObject.Item);
-
-                    if (previousStack != remainItem.CurrentStack && remainItem.IsStackEmpty == false)
-                    {
-                        itemObject.NotifyUpdateCurrentStack();
-                    }
-
-                    if (previousStack > remainItem.CurrentStack)
-                    {
-                        LootAnimator.InstantiateAnimation(player.transform, itemObject.ModelObject, lootAnimationSettings);
-                    }
-
-                    if (remainItem.IsStackEmpty)
-                    {
-                        Destroy(itemObject.gameObject);
+                        AutoLootItem(targetItemObject);
                     }
                 }
             }
@@ -89,5 +71,46 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         #endregion
+
+        private void AutoLootItem(ItemObject targetItemObject)
+        {
+            if (targetItemObject.AllowAutoLoot == false)
+            {
+                return;
+            }
+
+            var targetItem = targetItemObject.Item;
+            if (targetItem == null)
+            {
+                return;
+            }
+
+            int previousStack = targetItem.CurrentStack;
+            player.ItemContainer.AddItem(targetItem);
+
+            if (previousStack != targetItem.CurrentStack)
+            {
+                player.photonView.RPC(nameof(PlayLootAnimation), PhotonTargets.Others, player.photonView.viewID, targetItemObject.PhotonViewId);
+                LootAnimator.InstantiateAnimation(player.transform, targetItemObject.ModelObject, lootAnimationSettings);
+
+                if (targetItem.IsStackEmpty)
+                {
+                    Destroy(targetItemObject.gameObject);
+                }
+                else
+                {
+                    targetItemObject.NotifyUpdateCurrentStack();
+                }
+            }
+        }
+
+        [PunRPC]
+        private void PlayLootAnimation(int playerViewId, int itemObjectViewId)
+        {
+            var targetPlayerTransform = PhotonView.Find(playerViewId).transform;
+            var targetModelObject = PhotonView.Find(itemObjectViewId).transform.GetComponent<ItemObject>().ModelObject;
+
+            LootAnimator.InstantiateAnimation(targetPlayerTransform, targetModelObject, lootAnimationSettings);
+        }
     }
 }

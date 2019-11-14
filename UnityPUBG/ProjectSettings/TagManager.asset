@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ItemSpawnPoint
   - ItemObject
+  - UI
   layers:
   - Default
   - TransparentFX

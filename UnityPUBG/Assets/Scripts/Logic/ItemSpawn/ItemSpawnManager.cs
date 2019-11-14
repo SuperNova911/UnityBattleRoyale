@@ -6,10 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityPUBG.Scripts.Utilities;
-using UnityPUBG.Scripts.Logic;
 
-namespace UnityPUBG.Scripts
+namespace UnityPUBG.Scripts.Logic
 {
     public class ItemSpawnManager : Singleton<ItemSpawnManager>
     {

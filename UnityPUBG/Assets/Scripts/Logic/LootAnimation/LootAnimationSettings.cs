@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace UnityPUBG.Scripts.Items
+namespace UnityPUBG.Scripts.Logic
 {
     [CreateAssetMenu(menuName = "UnityPUBG/LootAnimationSettings")]
     public class LootAnimationSettings : ScriptableObject

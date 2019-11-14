@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Utilities;
 
-namespace UnityPUBG.Scripts
+namespace UnityPUBG.Scripts.Logic
 {
     public sealed class ItemSpawnGroup : MonoBehaviour
     {

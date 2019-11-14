@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9173340600907604452}
   - component: {fileID: 9173340600907604453}
   - component: {fileID: 9173340600907604454}
+  - component: {fileID: 9196620116391044016}
   - component: {fileID: 9173340600907604455}
   m_Layer: 0
   m_Name: Game Controller
@@ -114,7 +115,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseItemObjectPrefab: {fileID: -6387929660299491319, guid: 4f11389b6db4c784280e21ac9592c0fb,
     type: 3}
-  itemDataCollection: {fileID: 0}
 --- !u!114 &9173340600907604453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +176,20 @@ MonoBehaviour:
   canvas: {fileID: 0}
   damageTextObject: {fileID: 7237751850981093448, guid: 43e73897f883f0943ab12023d252e370,
     type: 3}
+--- !u!114 &9196620116391044016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173340600907604450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb60b705b65075d469598b1bc0724d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootAnimationSettings: {fileID: 11400000, guid: 6ff3ce4a31e53424895547caeb8ad314,
+    type: 2}
 --- !u!114 &9173340600907604455
 MonoBehaviour:
   m_ObjectHideFlags: 0

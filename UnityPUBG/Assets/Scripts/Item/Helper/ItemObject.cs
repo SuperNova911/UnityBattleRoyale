@@ -26,9 +26,13 @@ namespace UnityPUBG.Scripts.Items
             get { return item; }
             set
             {
+                if (item == null || item.Data.ItemName.Equals(value.Data.ItemName) == false)
+                {
+                    DestroyAllChild();
+                    SpawnItemModel(value);
+                }
+
                 item = value;
-                DestroyAllChild();
-                SpawnItemModel(item);
             }
         }
         public int PhotonViewId { get { return photonView.viewID; } }
@@ -56,6 +60,25 @@ namespace UnityPUBG.Scripts.Items
         public void NotifyUpdateCurrentStack()
         {
             photonView.RPC(nameof(UpdateCurrentStack), PhotonTargets.Others, Item.CurrentStack);
+        }
+
+        public void RequestDestroy()
+        {
+            if (photonView.isMine)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
+            else
+            {
+                var ownerPlayer = PhotonPlayer.Find(photonView.ownerId);
+                if (ownerPlayer == null)
+                {
+                    return;
+                }
+
+                photonView.RPC(nameof(Destroy), ownerPlayer);
+                gameObject.SetActive(false);
+            }
         }
 
         private void DestroyAllChild()
@@ -103,6 +126,12 @@ namespace UnityPUBG.Scripts.Items
             }
 
             Item.SetStack(newStack);
+        }
+
+        [PunRPC]
+        private void Destroy()
+        {
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }

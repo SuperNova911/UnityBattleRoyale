@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Logic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Items;
+using UnityPUBG.Scripts.Logic;
 using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Entities
@@ -13,104 +15,82 @@ namespace UnityPUBG.Scripts.Entities
     [RequireComponent(typeof(SphereCollider))]
     public class PlayerItemLooter : MonoBehaviour
     {
-        [SerializeField, ReadOnly] private Player player;
-        [SerializeField, ReadOnly] private SphereCollider lootCollider;
-        [SerializeField, Range(0.5f, 5f)] private float lootRadius = 2f;
+        [Range(0.5f, 5f)]
+        public SphereCollider lootCollider;
+        public float lootRadius = 2f;
 
-        [Header("Loot Animation")]
-        [SerializeField] private LootAnimationSettings lootAnimationSettings;
+        private Player player;
 
         #region 유니티 메시지
         private void Awake()
         {
+            player = GetComponentInParent<Player>();
             if (player == null)
             {
-                player = GetComponentInParent<Player>();
-                if (player == null)
-                {
-                    Debug.LogError($"{nameof(PlayerItemLooter)}는 {nameof(Player)}가 포함된 부모 게임오브젝트가 필요합니다");
-                }
+                Debug.LogError($"{nameof(PlayerItemLooter)}는 부모 오브젝트의 {nameof(Player)} 컴포넌트가 필요합니다");
             }
+        }
 
-            if (lootAnimationSettings == null)
+        private void Start()
+        {
+            if (player == null || player.IsMine == false)
             {
-                Debug.LogWarning($"{nameof(lootAnimationSettings)}이 자동으로 기본값으로 설정되었습니다");
-                lootAnimationSettings = ScriptableObject.CreateInstance<LootAnimationSettings>();
+                Destroy(gameObject);
             }
         }
 
         private void OnTriggerStay(Collider other)
         {
-            if (player.photonView.isMine)
+            if (other.CompareTag("ItemObject"))
             {
-                if (other.tag == "ItemObject")
+                var targetItemObject = other.GetComponent<ItemObject>();
+                if (targetItemObject != null)
                 {
-                    var targetItemObject = other.GetComponent<ItemObject>();
-                    if (targetItemObject != null)
-                    {
-                        AutoLootItem(targetItemObject);
-                    }
+                    AutoLootItem(targetItemObject);
                 }
             }
         }
 
         private void OnValidate()
         {
-            player = GetComponentInParent<Player>();
-
             if (lootCollider == null)
             {
                 lootCollider = GetComponent<SphereCollider>();
             }
             lootCollider.isTrigger = true;
             lootCollider.radius = lootRadius;
-
-            if (lootAnimationSettings == null)
-            {
-                Debug.LogWarning($"{nameof(lootAnimationSettings)}의 값이 null 입니다");
-            }
         }
         #endregion
 
-        private void AutoLootItem(ItemObject targetItemObject)
+        private void AutoLootItem(ItemObject lootItemObject)
         {
-            if (targetItemObject.AllowAutoLoot == false)
+            if (lootItemObject.AllowAutoLoot == false)
             {
                 return;
             }
 
-            var targetItem = targetItemObject.Item;
-            if (targetItem == null)
+            if (lootItemObject.Item == null)
             {
                 return;
             }
 
-            int previousStack = targetItem.CurrentStack;
-            player.ItemContainer.AddItem(targetItem);
+            int previousStack = lootItemObject.Item.CurrentStack;
+            var remainItem = player.ItemContainer.AddItem(lootItemObject.Item);
 
-            if (previousStack != targetItem.CurrentStack)
+            if (previousStack != remainItem.CurrentStack)
             {
-                player.photonView.RPC(nameof(PlayLootAnimation), PhotonTargets.Others, player.photonView.viewID, targetItemObject.PhotonViewId);
-                LootAnimator.InstantiateAnimation(player.transform, targetItemObject.ModelObject, lootAnimationSettings);
+                LootAnimator.Instance.CreateNewLootAnimation(player, lootItemObject);
+                lootItemObject.Item = remainItem;
 
-                if (targetItem.IsStackEmpty)
+                if (lootItemObject.Item.IsStackEmpty)
                 {
-                    Destroy(targetItemObject.gameObject);
+                    lootItemObject.RequestDestroy();
                 }
                 else
                 {
-                    targetItemObject.NotifyUpdateCurrentStack();
+                    lootItemObject.NotifyUpdateCurrentStack();
                 }
             }
-        }
-
-        [PunRPC]
-        private void PlayLootAnimation(int playerViewId, int itemObjectViewId)
-        {
-            var targetPlayerTransform = PhotonView.Find(playerViewId).transform;
-            var targetModelObject = PhotonView.Find(itemObjectViewId).transform.GetComponent<ItemObject>().ModelObject;
-
-            LootAnimator.InstantiateAnimation(targetPlayerTransform, targetModelObject, lootAnimationSettings);
         }
     }
 }

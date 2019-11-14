@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Items;
 
-namespace UnityPUBG.Scripts
+namespace UnityPUBG.Scripts.Logic
 {
     /// <summary>
     /// 아이템 스폰 확률 정보를 관리하는 클래스

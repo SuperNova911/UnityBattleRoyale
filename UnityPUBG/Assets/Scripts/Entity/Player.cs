@@ -10,15 +10,19 @@ using UnityEngine.InputSystem;
 
 namespace UnityPUBG.Scripts.Entities
 {
+    [RequireComponent(typeof(PhotonView))]
     public class Player : Entity
     {
-        public PhotonView photonView;
+        private PhotonView photonView;
         private InputManager inputManager;
 
         public WeaponData EquipedWeapon { get; private set; }
         public ArmorData EquipedArmor { get; private set; }
         public BackpackData EquipedBackpack { get; private set; }
         public Vehicle RidingVehicle { get; private set; }
+
+        public int PhotonViewId => photonView.viewID;
+        public bool IsMine => photonView.isMine;
 
         #region 유니티 메시지
         protected override void Awake()

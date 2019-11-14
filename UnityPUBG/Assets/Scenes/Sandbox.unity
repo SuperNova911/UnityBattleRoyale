@@ -36922,6 +36922,12 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 545990980}
+    - target: {fileID: 8049019019678275790, guid: e0566180537794649b98b41c66b507bb,
+        type: 3}
+      propertyPath: lootAnimationSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ff3ce4a31e53424895547caeb8ad314,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0566180537794649b98b41c66b507bb, type: 3}
 --- !u!1001 &4488108448410065755

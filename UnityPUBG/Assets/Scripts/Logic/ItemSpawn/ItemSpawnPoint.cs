@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Utilities;
 
-namespace UnityPUBG.Scripts
+namespace UnityPUBG.Scripts.Logic
 {
     /// <summary>
     /// 아이템 스폰 지점

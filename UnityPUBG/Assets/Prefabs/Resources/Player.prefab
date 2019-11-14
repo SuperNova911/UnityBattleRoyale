@@ -1346,7 +1346,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1704918721125695078}
+  - {fileID: 2612202617621133574}
   - {fileID: 251370033490789032}
   - {fileID: 251370033490743300}
   - {fileID: 251370033490744314}
@@ -1435,7 +1435,6 @@ MonoBehaviour:
   currentHealth: 100
   movementSpeed: 5
   rotationSpeed: 0.2
-  photonView: {fileID: 0}
 --- !u!114 &1330880535016543195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4234,7 +4233,7 @@ Transform:
   m_Father: {fileID: 251370033490776632}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7863526198018754241
+--- !u!1 &5686530042220700473
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4242,9 +4241,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1704918721125695078}
-  - component: {fileID: 6632756015754140154}
-  - component: {fileID: 512848663067193519}
+  - component: {fileID: 2612202617621133574}
+  - component: {fileID: 6675952765299120366}
+  - component: {fileID: 8049019019678275790}
   m_Layer: 0
   m_Name: Player Item Looter
   m_TagString: Untagged
@@ -4252,13 +4251,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1704918721125695078
+--- !u!4 &2612202617621133574
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7863526198018754241}
+  m_GameObject: {fileID: 5686530042220700473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -4266,33 +4265,30 @@ Transform:
   m_Father: {fileID: 251370033490730166}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &6632756015754140154
+--- !u!135 &6675952765299120366
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7863526198018754241}
+  m_GameObject: {fileID: 5686530042220700473}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &512848663067193519
+--- !u!114 &8049019019678275790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7863526198018754241}
+  m_GameObject: {fileID: 5686530042220700473}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31805b88b40b95c458562cb4b22a7312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  lootCollider: {fileID: 6632756015754140154}
+  lootCollider: {fileID: 6675952765299120366}
   lootRadius: 2
-  lootAnimationSettings: {fileID: 11400000, guid: 6ff3ce4a31e53424895547caeb8ad314,
-    type: 2}

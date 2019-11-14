@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityPUBG.Scripts.Entities;
 using UnityPUBG.Scripts.Utilities;
 
-namespace UnityPUBG.Scripts.Items
+namespace UnityPUBG.Scripts.Logic
 {
-    public class LootAnimator : MonoBehaviour
+    public class LootAnimation : MonoBehaviour
     {
         [SerializeField, ReadOnly] private Transform looter;
         [SerializeField, ReadOnly] private GameObject lootItem;
@@ -22,19 +23,14 @@ namespace UnityPUBG.Scripts.Items
         private Vector3 startScale;
         private Vector3 randomFloatingOffset;
 
-        private bool isReady = false;
-
         #region 유니티 메시지
         private void LateUpdate()
         {
-            if (isReady)
-            {
-                PlayAnimation();
-            }
+            PlayAnimation();
         }
         #endregion
 
-        public static LootAnimator InstantiateAnimation(Transform looter, GameObject lootItem, LootAnimationSettings settings)
+        public static LootAnimation InstantiateAnimation(Transform looter, GameObject lootItemModel, Vector3 lootItemPosition, LootAnimationSettings settings)
         {
             if (looter == null)
             {
@@ -42,9 +38,9 @@ namespace UnityPUBG.Scripts.Items
                 return null;
             }
 
-            if (lootItem == null)
+            if (lootItemModel == null)
             {
-                Debug.LogError($"{nameof(lootItem)}의 값이 null일 수는 없습니다");
+                Debug.LogError($"{nameof(lootItemModel)}의 값이 null일 수는 없습니다");
                 return null;
             }
 
@@ -54,31 +50,27 @@ namespace UnityPUBG.Scripts.Items
                 return null;
             }
 
-            GameObject emptyObject = new GameObject($"{nameof(LootAnimator)} {lootItem.name}");
-            LootAnimator lootAnimator = emptyObject.AddComponent<LootAnimator>();
+            GameObject emptyObject = new GameObject($"{nameof(LootAnimation)} {lootItemModel.name}");
+            LootAnimation lootAnimation = emptyObject.AddComponent<LootAnimation>();
 
-            var cloneLootItem = Instantiate(lootItem);
-            cloneLootItem.transform.parent = emptyObject.transform;
-
+            var cloneLootItem = Instantiate(lootItemModel, lootItemPosition, Quaternion.identity, emptyObject.transform);
             var colider = cloneLootItem.GetComponent<SphereCollider>();
             if (colider != null)
             {
                 colider.enabled = false;
             }
 
-            lootAnimator.looter = looter;
-            lootAnimator.lootItem = cloneLootItem;
-            lootAnimator.settings = settings;
+            lootAnimation.looter = looter;
+            lootAnimation.lootItem = cloneLootItem;
+            lootAnimation.settings = settings;
 
-            lootAnimator.phase1Progress = lootAnimator.phase2Progress = lootAnimator.phase3Progress = 0f;
+            lootAnimation.phase1Progress = lootAnimation.phase2Progress = lootAnimation.phase3Progress = 0f;
 
-            lootAnimator.startPosition = lootItem.transform.position;
-            lootAnimator.startScale = lootItem.transform.localScale;
-            lootAnimator.randomFloatingOffset = new Vector3(UnityEngine.Random.Range(-settings.RandomRange.x, settings.RandomRange.x), UnityEngine.Random.Range(-settings.RandomRange.y, settings.RandomRange.y), UnityEngine.Random.Range(-settings.RandomRange.z, -settings.RandomRange.z));
+            lootAnimation.startPosition = lootItemPosition;
+            lootAnimation.startScale = lootItemModel.transform.localScale;
+            lootAnimation.randomFloatingOffset = new Vector3(UnityEngine.Random.Range(-settings.RandomRange.x, settings.RandomRange.x), UnityEngine.Random.Range(-settings.RandomRange.y, settings.RandomRange.y), UnityEngine.Random.Range(-settings.RandomRange.z, -settings.RandomRange.z));
 
-            lootAnimator.isReady = true;
-
-            return lootAnimator;
+            return lootAnimation;
         }
 
         private void PlayAnimation()
@@ -101,7 +93,6 @@ namespace UnityPUBG.Scripts.Items
             }
             else
             {
-                Destroy(lootItem.gameObject);
                 Destroy(gameObject);
             }
         }

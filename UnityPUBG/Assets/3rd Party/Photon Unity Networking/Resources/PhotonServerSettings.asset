@@ -55,4 +55,6 @@ MonoBehaviour:
   - UpdateItem
   - UpdateCurrentStack
   - PlayLootAnimation
+  - Kappa
+  - Destroy
   DisableAutoOpenWizard: 1

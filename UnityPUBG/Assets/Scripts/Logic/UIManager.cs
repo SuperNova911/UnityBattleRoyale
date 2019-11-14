@@ -1,29 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityPUBG.Scripts.Entities;
 
 namespace UnityPUBG.Scripts.Logic
 {
     public class UIManager : Singleton<UIManager>
     {
-        /// <summary>
-        /// 이 클라이언트의 플레이어
-        /// </summary>
-        private Entities.Player myplayer;
-
-        public Entities.Player myPlayer
-        {
-            get
-            {
-                return myplayer;
-            }
-            set
-            {
-                if (myplayer == null)
-                    myplayer = value;
-            }
-        }
-
         /// <summary>
         /// 창 닫기
         /// </summary>

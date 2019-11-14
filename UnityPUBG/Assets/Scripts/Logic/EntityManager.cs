@@ -13,6 +13,7 @@ namespace UnityPUBG.Scripts.Logic
         private List<Entity> entities = new List<Entity>();
         private List<IDamageable> damageables = new List<IDamageable>();
 
+        public Player MyPlayer { get; set; }
         public List<Entity> Entities => entities;
         public List<IDamageable> Damageables => damageables;
 

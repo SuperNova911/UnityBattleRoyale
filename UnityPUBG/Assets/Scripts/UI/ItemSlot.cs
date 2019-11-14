@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.UI
 {
@@ -32,7 +33,7 @@ namespace UnityPUBG.Scripts.UI
         public void OnBeginDrag(PointerEventData eventData)
         {
             siblingIndex = transform.GetSiblingIndex();
-            if (Logic.UIManager.Instance.myPlayer.ItemContainer.Count < siblingIndex + 1)
+            if (EntityManager.Instance.MyPlayer.ItemContainer.Count < siblingIndex + 1)
             {
                 isDrag = false;
                 return;
@@ -47,7 +48,9 @@ namespace UnityPUBG.Scripts.UI
         public void OnDrag(PointerEventData eventData)
         {
             if (isDrag)
+            {
                 transform.position = eventData.position;
+            }
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -65,15 +68,16 @@ namespace UnityPUBG.Scripts.UI
                 isDrag = false;
                 
                 if (results.Count <= 0)
+                {
                     return;
+                }
                 //쓰레기통에 놓은 경우
                 else
                 {
                     if (results[0].gameObject.name == "TrashCanBackGround")
                     {
-                        Logic.UIManager.Instance.myPlayer.DropItemsAtSlot
-                            (siblingIndex, Logic.UIManager.Instance.myPlayer.
-                            ItemContainer.FindItem(siblingIndex).CurrentStack);
+                        var dropItem = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
+                        EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, dropItem.CurrentStack);
                     }
                 }
             }

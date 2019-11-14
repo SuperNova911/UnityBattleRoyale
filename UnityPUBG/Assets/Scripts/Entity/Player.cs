@@ -130,7 +130,7 @@ namespace UnityPUBG.Scripts.Entities
             }
             else
             {
-                shieldText = uiObjects.FirstOrDefault(e => e.name == "ShieldText").GetComponent<Text>();
+                shieldText = shieldBar.transform.Find("ShieldText").GetComponent<Text>();
                 if (shieldText == null)
                 {
                     Debug.LogError($"{nameof(shieldText)}가 없습니다");

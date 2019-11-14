@@ -11,7 +11,7 @@ namespace UnityPUBG.Scripts
 {
     public class ItemContainerDebugger : MonoBehaviour
     {
-        [Header("Settigns")]
+        [Header("Settings")]
         [SerializeField] private Entity containerOwner;
 
         [Header("UI")]

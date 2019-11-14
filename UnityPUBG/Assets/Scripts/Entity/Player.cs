@@ -45,6 +45,8 @@ namespace UnityPUBG.Scripts.Entities
 
             if (photonView.isMine)
             {
+                Logic.UIManager.Instance.myPlayer = this;
+
                 //조이스틱 매핑
                 joyStick = GameObject.Find("Joystick").GetComponent<FixedJoystick>();
                 if (joyStick == null)

@@ -112,7 +112,7 @@ namespace UnityPUBG.Scripts.MainMenu
             Debug.Log("Launcher : OnJoinedRoom() called by PUN, Now this client is in a room");
 
 #if UNITY_EDITOR
-            if (PhotonNetwork.playerList.Length == MainMenu.Launcher.Instance.MaxPlayersPerRoom)
+            if (PhotonNetwork.playerList.Length == MaxPlayersPerRoom)
                 Lobby.PTManager.Instance.StartGame();
             else
                 Debug.Log("PlayerCount : " + PhotonNetwork.playerList.Length);

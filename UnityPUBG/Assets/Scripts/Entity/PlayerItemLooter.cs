@@ -1,5 +1,4 @@
-﻿//using Assets.Scripts.Logic;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
-using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Entities
 {
@@ -33,7 +31,7 @@ namespace UnityPUBG.Scripts.Entities
 
         private void Start()
         {
-            if (player == null || player.IsMine == false)
+            if (player == null || player.IsMyPlayer == false)
             {
                 Destroy(gameObject);
             }

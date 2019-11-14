@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 9117321306352145063}
   m_Layer: 5
   m_Name: ShieldBar
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 9117321307195532488}
   m_Layer: 5
   m_Name: HPBar
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

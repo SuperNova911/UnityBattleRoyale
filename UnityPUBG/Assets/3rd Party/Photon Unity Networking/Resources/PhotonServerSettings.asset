@@ -29,10 +29,13 @@ MonoBehaviour:
   RunInBackground: 1
   RpcList:
   - Chat
+  - DecreaseOnBoardPlayerCount
+  - Destroy
   - DestroyRpc
+  - IncreaseOnBoardPlayerCount
   - InstantiateRpc
-  - MasterNotifyAddToOtherClient
   - PickupItemInit
+  - PlayLootAnimation
   - PunPickup
   - PunPickupSimple
   - PunRespawn
@@ -43,18 +46,6 @@ MonoBehaviour:
   - SendMakeList
   - SendMsg
   - SendReadyMessage
-  - AssignId
-  - RequestNextId
-  - RequestAssignId
-  - RefillIds
-  - Request
-  - RequestRefillIds
-  - NotifyUpdateItem
-  - NotifyUpdateItemCurrentStack
-  - NotifyUpdateItemqwe
-  - UpdateItem
   - UpdateCurrentStack
-  - PlayLootAnimation
-  - Kappa
-  - Destroy
+  - UpdateItem
   DisableAutoOpenWizard: 1

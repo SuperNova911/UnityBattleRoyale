@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.MainMenu
 {
@@ -205,14 +206,11 @@ namespace UnityPUBG.Scripts.MainMenu
         /// </summary>
         private void spawnMyCharacter(Transform spawnPos)
         {
-            GameObject playerCharacter = PhotonNetwork.Instantiate
-                (PlayerCharacter.name, spawnPos.position, Quaternion.identity, 0);
-
-            Cinemachine.CinemachineVirtualCamera virtualCam =
-                FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
-
+            GameObject playerCharacter = PhotonNetwork.Instantiate(PlayerCharacter.name, spawnPos.position, Quaternion.identity, 0);
             if (playerCharacter.GetComponent<PhotonView>().isMine)
-                virtualCam.Follow = playerCharacter.transform;
+            {
+                CameraManager.Instance.PlayerCamera.Follow = playerCharacter.transform;
+            }
 
             foreach (Transform child in playerCharacter.transform)
             {

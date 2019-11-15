@@ -60,7 +60,7 @@ namespace UnityPUBG.Scripts.Logic
                     continue;
                 }
 
-                SpawnItemObjectAt(selectedItemData.BuildItem(), spawnPoint.transform.position);
+                SpawnItemObjectAt(new Item(selectedItemData), spawnPoint.transform.position);
             }
         }
 

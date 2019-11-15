@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace UnityPUBG.Scripts.Items
 {
-    public abstract class Item : IComparable<Item>, ICloneable
+    public class Item : IComparable<Item>, ICloneable
     {
         public static readonly EmptyItem EmptyItem = new EmptyItem();
 
@@ -66,7 +66,11 @@ namespace UnityPUBG.Scripts.Items
         #endregion
 
         #region ICloneable 인터페이스
-        public abstract object Clone();
+        public object Clone()
+        {
+            var cloneItem = new Item(Data) { CurrentStack = CurrentStack };
+            return cloneItem;
+        }
         #endregion
 
         /// <summary>

@@ -10,9 +10,6 @@ namespace UnityPUBG.Scripts.Items
     [CreateAssetMenu(menuName = "UnityPUBG/ItemData/MeleeWeapon")]
     public class MeleeWeaponData : WeaponData
     {
-        public override Item BuildItem()
-        {
-            return new ItemMeleeWeapon(this);
-        }
+
     }
 }

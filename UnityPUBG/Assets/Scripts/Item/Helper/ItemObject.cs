@@ -14,12 +14,11 @@ namespace UnityPUBG.Scripts.Items
     [RequireComponent(typeof(Rigidbody), typeof(PhotonView))]
     public class ItemObject : MonoBehaviour
     {
-        [SerializeField, ReadOnly] private int id = -1;
-        private Item item = null;
-
-        private PhotonView photonView;
-
+        // 스택 개수 테스트용
         public TextMesh textMesh;
+
+        private Item item = null;
+        private PhotonView photonView;
 
         public Item Item
         {
@@ -107,7 +106,7 @@ namespace UnityPUBG.Scripts.Items
             {
                 if (ItemDataCollection.Instance.ItemDataByName.TryGetValue(newItemDataName, out var newItemData))
                 {
-                    Item = newItemData.BuildItem();
+                    Item = new Item(newItemData);
                 }
                 else
                 {

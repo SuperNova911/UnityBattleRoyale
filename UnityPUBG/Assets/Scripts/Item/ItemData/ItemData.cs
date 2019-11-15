@@ -30,7 +30,5 @@ namespace UnityPUBG.Scripts.Items
             }
         }
         #endregion
-
-        public abstract Item BuildItem();
     }
 }

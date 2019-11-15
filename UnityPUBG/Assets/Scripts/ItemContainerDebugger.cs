@@ -16,7 +16,7 @@ namespace UnityPUBG.Scripts
 
         [Header("UI")]
         [SerializeField] private Text debugText;
-        private StringBuilder stringBuilder = new StringBuilder();
+        private readonly StringBuilder stringBuilder = new StringBuilder();
 
         #region 유니티 메시지
         private void Awake()
@@ -71,8 +71,7 @@ namespace UnityPUBG.Scripts
 
         private void ItemContainer_OnUpdateContainer(object sender, System.EventArgs e)
         {
-            var container = sender as ItemContainer;
-            if (container == null)
+            if (!(sender is ItemContainer container))
             {
                 return;
             }

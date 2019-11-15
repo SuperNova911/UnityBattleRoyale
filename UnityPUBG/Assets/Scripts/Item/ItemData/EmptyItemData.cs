@@ -10,10 +10,5 @@ namespace UnityPUBG.Scripts.Items
     {
         public override int MaximumStack => 0;
         public override int DefaultStack => 0;
-
-        public override Item BuildItem()
-        {
-            return Item.EmptyItem;
-        }
     }
 }

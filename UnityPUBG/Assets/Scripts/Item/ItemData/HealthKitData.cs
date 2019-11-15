@@ -10,9 +10,6 @@ namespace UnityPUBG.Scripts.Items
     [CreateAssetMenu(menuName = "UnityPUBG/ItemData/HealthKit")]
     public class HealthKitData : UsableItemData
     {
-        public override Item BuildItem()
-        {
-            return new ItemHealthKit(this);
-        }
+
     }
 }

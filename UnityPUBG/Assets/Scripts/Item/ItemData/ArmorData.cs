@@ -13,10 +13,5 @@ namespace UnityPUBG.Scripts.Items
         [SerializeField, Range(0, 100)] private int shieldAmount = 50;
 
         public int ShieldAmount => shieldAmount;
-
-        public override Item BuildItem()
-        {
-            return new ItemArmor(this);
-        }
     }
 }

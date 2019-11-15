@@ -13,10 +13,5 @@ namespace UnityPUBG.Scripts.Items
         [SerializeField, Range(0, 6)] private int bonusCapacity = 2;
 
         public int BonusCapacity => bonusCapacity;
-
-        public override Item BuildItem()
-        {
-            return new ItemBackpack(this);
-        }
     }
 }

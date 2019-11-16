@@ -54,6 +54,8 @@ namespace UnityPUBG.Scripts.Logic
             {
                 playerCamera, dropShipCamera
             });
+
+            CurrentCamera = PlayerCamera;
         }
     }
 }

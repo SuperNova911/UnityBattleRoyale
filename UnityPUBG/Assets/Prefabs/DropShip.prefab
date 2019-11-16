@@ -138,6 +138,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   altitude: 50
   speed: 15
-  startPosition: {x: 0, y: 0}
+  mapCenter: {x: 0, y: 0}
+  centerRadius: 100
+  allowDropRadius: 300
+  preparationTime: 8
+  finishingTime: 8
+  launchPosition: {x: 0, y: 0}
   destinationPosition: {x: 0, y: 0}
-  showPath: 0
+  startDropPosition: {x: 0, y: 0}
+  endDropPosition: {x: 0, y: 0}
+  showDebugGizmos: 1

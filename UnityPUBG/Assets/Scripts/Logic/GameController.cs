@@ -10,13 +10,6 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class GameController : Singleton<GameController>
     {
-        //[Header("Logics")]
-        //public EntityManager entityManager;
-        //public ItemObjectManager itemObjectManager;
-        //public ItemSpawnManager itemSpawnManager;
-        //public RingSystem ringSystem;
-        //public FloatingTextDrawer floatingTextDrawer;
-
         [Header("Photon Networks")]
         public PhotonView photonView;
 

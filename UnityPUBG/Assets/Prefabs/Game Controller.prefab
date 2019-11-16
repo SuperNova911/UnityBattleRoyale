@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9812baba6e6f29d4ba9095367487bcf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropShipPrefab: {fileID: 99213045809030773, guid: 7001594cf5e1c8948bc1b21f6b11130a,
+    type: 3}
   photonView: {fileID: 9173340600907604455}
 --- !u!114 &9173340600907604458
 MonoBehaviour:

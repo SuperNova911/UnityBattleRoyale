@@ -48,4 +48,8 @@ MonoBehaviour:
   - SendReadyMessage
   - UpdateCurrentStack
   - UpdateItem
+  - LaunchDropShip
+  - SetupPathData
+  - NotifyLaunchDropShip
+  - NotifyPathData
   DisableAutoOpenWizard: 1

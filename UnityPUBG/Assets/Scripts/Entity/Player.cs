@@ -16,7 +16,7 @@ namespace UnityPUBG.Scripts.Entities
     public class Player : Entity
     {
         private PhotonView photonView;
-        private FixedJoystick joyStick;
+        private FloatingJoystick movementJoystick;
         private InputManager inputManager;
 
         private Slider hpBar;
@@ -93,10 +93,10 @@ namespace UnityPUBG.Scripts.Entities
             var uiObjects = GameObject.FindGameObjectsWithTag("UI");
 
             //조이스틱 매핑
-            var joyStick = uiObjects.FirstOrDefault(e => e.name == "Joystick").GetComponent<FixedJoystick>();
-            if (joyStick == null)
+            movementJoystick = uiObjects.FirstOrDefault(e => e.name == "Movement Joystick").GetComponent<FloatingJoystick>();
+            if (movementJoystick == null)
             {
-                Debug.LogError($"{nameof(FixedJoystick)}이 없습니다");
+                Debug.LogError($"{nameof(movementJoystick)}이 없습니다");
             }
 
 #if !UNITY_ANDRIOD
@@ -145,11 +145,11 @@ namespace UnityPUBG.Scripts.Entities
         private void ControlMovement()
         {
             Vector2 direction;
-#if !UNITY_ANDROID
             direction = inputManager.Player.Movement.ReadValue<Vector2>();
-#else
-            direction = joyStick.Direction;
-#endif
+            if (direction == Vector2.zero)
+            {
+                direction = movementJoystick.Direction;
+            }
             movementDirection = new Vector3(direction.x, 0, direction.y);
         }
 

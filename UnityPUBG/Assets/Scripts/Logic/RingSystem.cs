@@ -169,6 +169,9 @@ namespace UnityPUBG.Scripts.Logic
                 Debug.Log($"Round {i + 1}");
                 Debug.Log($"Time to close: {roundDatas[i].TimeToClose}sec");
 
+                UIManager.Instance.NoticeTextUpdate($"Round {i + 1}" + "\n" +
+                    $"{roundDatas[i].TimeToClose}초 후에 자기장이 줄어듭니다.");
+
                 OnRoundStart?.Invoke(this, roundDatas[i]);
 
                 // Ring Countdown
@@ -182,6 +185,8 @@ namespace UnityPUBG.Scripts.Logic
                 }
 
                 Debug.Log($"Ring closing start");
+
+                UIManager.Instance.NoticeTextUpdate("이제 자기장이 줄어듭니다.");
 
                 // Ring Closing
                 OnRingCloseStart?.Invoke(this, roundDatas[i]);

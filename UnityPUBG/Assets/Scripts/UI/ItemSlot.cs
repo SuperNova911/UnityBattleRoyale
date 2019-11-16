@@ -23,12 +23,51 @@ namespace UnityPUBG.Scripts.UI
 
         private GraphicRaycaster graphicRaycaster;
 
+        /// <summary>
+        /// 빈 슬롯 이미지
+        /// </summary>
+        [SerializeField]
+        private Sprite emptySlotImage;
+        private GameObject slotObject = null;
+
+
         #region Unity 콜백
-        void Start()
+        private void Start()
         {
             graphicRaycaster = transform.root.GetComponent<GraphicRaycaster>();
+            siblingIndex = transform.GetSiblingIndex();
+        }
+
+        private void OnEnable()
+        {
+            UpdateSlotObject();
         }
         #endregion
+
+        /// <summary>
+        /// 슬롯의 오브젝트 갱신
+        /// </summary>
+        private void UpdateSlotObject()
+        {
+            siblingIndex = transform.GetSiblingIndex();
+
+            Items.Item item = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
+
+            if (slotObject != null)
+                Destroy(slotObject);
+
+            if (item == Items.Item.EmptyItem)
+            {
+                    return;
+            }
+            else
+            {
+                GameObject model = Instantiate(item.Data.Model, Camera.main.ScreenToWorldPoint(transform.position),
+                    item.Data.Model.transform.rotation);
+                model.transform.localScale = Vector3.one * 0.2f;
+                //TODO: 모델을 UI 위에 보이도록 해야함
+            }
+        }
 
         public void OnBeginDrag(PointerEventData eventData)
         {

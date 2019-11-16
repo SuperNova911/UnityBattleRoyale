@@ -13,10 +13,11 @@ using UnityPUBG.Scripts.Logic;
 namespace UnityPUBG.Scripts.Entities
 {
     [RequireComponent(typeof(PhotonView))]
-    public class Player : Entity
+    public class Player : Entity, IPunObservable
     {
         private PhotonView photonView;
         private FloatingJoystick movementJoystick;
+        private FloatingJoystick attackJoystick;
         private InputManager inputManager;
 
         private Slider hpBar;
@@ -60,6 +61,20 @@ namespace UnityPUBG.Scripts.Entities
 
             if (photonView.isMine)
             {
+                if (isDied)
+                    return;
+
+                hpBar.value = currentHealth;
+                hpText.text = maximumHealth.ToString() + "/" + hpBar.value.ToString();
+
+
+                //사망했다면 더이상 이동 불가
+                if (currentHealth == 0 && !isDied)
+                {
+                    isDied = true;
+                    return;
+                }
+
                 ControlMovement();
 #if !UNITY_ANDRIOD
                 if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -67,8 +82,6 @@ namespace UnityPUBG.Scripts.Entities
                     MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
                 }
 #endif
-                hpBar.value = currentHealth;
-                hpText.text = maximumHealth.ToString() + "/" + hpBar.value.ToString();
             }
         }
 
@@ -92,13 +105,21 @@ namespace UnityPUBG.Scripts.Entities
         {
             var uiObjects = GameObject.FindGameObjectsWithTag("UI");
 
-            //조이스틱 매핑
+            //이동 조이스틱 매핑
             movementJoystick = uiObjects.FirstOrDefault(e => e.name == "Movement Joystick").GetComponent<FloatingJoystick>();
             if (movementJoystick == null)
             {
                 Debug.LogError($"{nameof(movementJoystick)}이 없습니다");
             }
 
+            //공격 조이스틱 매핑
+            attackJoystick = uiObjects.FirstOrDefault(e => e.name == "Attack Joystick").GetComponent<FloatingJoystick>();
+            if (attackJoystick == null)
+            {
+                Debug.LogError($"{nameof(attackJoystick)}이 없습니다");
+            }
+
+            /*
 #if !UNITY_ANDRIOD
             //공격 버튼 매핑
             Button attackButton = uiObjects.FirstOrDefault(e => e.name == "AttackButton").GetComponent<Button>();
@@ -109,6 +130,7 @@ namespace UnityPUBG.Scripts.Entities
 
             attackButton.onClick.AddListener(() => MeleeAttackTest(DamageType.Normal));
 #endif
+*/
 
             hpBar = uiObjects.FirstOrDefault(e => e.name == "HPBar").GetComponent<Slider>();
             if (hpBar == null)
@@ -201,6 +223,19 @@ namespace UnityPUBG.Scripts.Entities
             foreach (var hitObject in hitObjects)
             {
                 hitObject.OnTakeDamage(damage, damageType);
+            }
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if(stream.isWriting)
+            {
+                //체력 동기화
+                stream.SendNext(currentHealth);
+            }
+            else
+            {
+                currentHealth = (float)stream.ReceiveNext();
             }
         }
     }

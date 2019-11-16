@@ -21,6 +21,8 @@ namespace UnityPUBG.Scripts.Entities
         protected ItemContainer itemContainer;
         private Rigidbody entityRigidbody;
 
+        protected bool isDied = false;
+
         public ItemContainer ItemContainer => itemContainer;
 
         #region 유니티 메시지

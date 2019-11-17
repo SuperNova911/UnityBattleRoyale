@@ -52,7 +52,11 @@ namespace UnityPUBG.Scripts.UI
                 DoDrag();
             else if (isDrag && Input.GetMouseButtonUp(0))
                 EndDrag();
-                
+        }
+
+        private void LateUpdate()
+        {
+            UpdateSlotObjectPosition();
         }
 
         private void OnEnable()
@@ -70,7 +74,7 @@ namespace UnityPUBG.Scripts.UI
         /// <summary>
         /// 슬롯의 오브젝트 갱신
         /// </summary>
-        private void UpdateSlotObject()
+        public void UpdateSlotObject()
         {
             siblingIndex = transform.GetSiblingIndex();
 
@@ -160,7 +164,7 @@ namespace UnityPUBG.Scripts.UI
                 screenPoint = new Vector3(Input.touches[0].position.x, Input.touches[0].position.y, planeDistance);
 #endif
                 transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
-                UpdateSlotObjectPosition();
+               // UpdateSlotObjectPosition();
             }
         }
 
@@ -196,6 +200,7 @@ namespace UnityPUBG.Scripts.UI
                         var dropItem = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
                         EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, dropItem.CurrentStack);
                         Destroy(slotObject);
+                        UIManager.Instance.UpdateInventorySlots();
                     }
                 }
             }

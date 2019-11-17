@@ -89,6 +89,8 @@ namespace UnityPUBG.Scripts.Entities
                     lootItemObject.NotifyUpdateCurrentStack();
                 }
             }
+
+            UIManager.Instance.UpdateInventorySlots();
         }
     }
 }

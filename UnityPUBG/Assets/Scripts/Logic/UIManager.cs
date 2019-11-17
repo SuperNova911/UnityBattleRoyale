@@ -16,6 +16,12 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text playerShieldText;
 
         /// <summary>
+        /// 인벤토리 창
+        /// </summary>
+        [SerializeField]
+        private GameObject inventoryWindow;
+
+        /// <summary>
         /// 링이 줄어드는 등의
         /// 공지사항을 표기하는 텍스트
         /// </summary>
@@ -62,6 +68,19 @@ namespace UnityPUBG.Scripts.Logic
         public void NoticeTextUpdate(string notice)
         {
             StartCoroutine(NoticeTextUpdater(notice));
+        }
+
+        //인벤토리 슬롯을 업데이트 함
+        public void UpdateInventorySlots()
+        {
+            UI.ItemSlot[] itemSlots = inventoryWindow.transform.GetComponentsInChildren<UI.ItemSlot>();
+
+            int length = itemSlots.Length;
+
+            for(int i = 0; i<length; i++)
+            {
+                itemSlots[i].UpdateSlotObject();
+            }
         }
 
         /// <summary>

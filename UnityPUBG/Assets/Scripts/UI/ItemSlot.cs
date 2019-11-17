@@ -7,12 +7,16 @@ using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.UI
 {
-    public class ItemSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+    public class ItemSlot : MonoBehaviour
     {
         /// <summary>
         /// 내 시블링 인덱스
         /// </summary>
         private int siblingIndex;
+        /// <summary>
+        /// 캔버스의 plane distance
+        /// </summary>
+        private float planeDistance;
 
         /// <summary>
         /// 아이템 슬롯 위치
@@ -32,10 +36,21 @@ namespace UnityPUBG.Scripts.UI
 
 
         #region Unity 콜백
-        private void Start()
+        private void Awake()
         {
             graphicRaycaster = transform.root.GetComponent<GraphicRaycaster>();
             siblingIndex = transform.GetSiblingIndex();
+            planeDistance = transform.root.GetComponent<Canvas>().planeDistance;
+        }
+
+        private void Update()
+        {
+            if (!isDrag && Input.GetMouseButtonDown(0))
+                BeginDrag();
+            else if (isDrag && Input.GetMouseButton(0))
+                DoDrag();
+            else if (isDrag && Input.GetMouseButtonUp(0))
+                EndDrag();
         }
 
         private void OnEnable()
@@ -69,7 +84,7 @@ namespace UnityPUBG.Scripts.UI
             }
         }
 
-        public void OnBeginDrag(PointerEventData eventData)
+        public void BeginDrag()
         {
             siblingIndex = transform.GetSiblingIndex();
             if (EntityManager.Instance.MyPlayer.ItemContainer.Count < siblingIndex + 1)
@@ -84,15 +99,21 @@ namespace UnityPUBG.Scripts.UI
             isDrag = true;
         }
 
-        public void OnDrag(PointerEventData eventData)
+        public void DoDrag()
         {
             if (isDrag)
             {
-                transform.position = eventData.position;
+                Vector3 screenPoint;
+#if !UNITY_ANDRIOD
+                screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, planeDistance);
+#else
+                screenPoint = new Vector3(Input.touches[0].position.x, Input.touches[0].position.y, planeDistance);
+#endif
+                transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
             }
         }
 
-        public void OnEndDrag(PointerEventData eventData)
+        public void EndDrag()
         {
             if (isDrag)
             {
@@ -102,7 +123,13 @@ namespace UnityPUBG.Scripts.UI
 
                 List<RaycastResult> results = new List<RaycastResult>();
 
-                graphicRaycaster.Raycast(eventData, results);
+                PointerEventData pointerEventData = new PointerEventData(GetComponent<EventSystem>());
+#if !UNITY_ANDRIOD
+                pointerEventData.position = Input.mousePosition;
+#else
+                pointerEventData.position = Input.touches[0].position;
+#endif
+                graphicRaycaster.Raycast(pointerEventData, results);
 
                 isDrag = false;
                 

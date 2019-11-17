@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityPUBG.Scripts.Entities;
 
 namespace UnityPUBG.Scripts.Logic
 {
     public class UIManager : Singleton<UIManager>
     {
+        public Slider playerHealthSlider;
+        public Slider playerShieldSlider;
+        public TMP_Text playerHealthText;
+        public TMP_Text playerShieldText;
+
         /// <summary>
         /// 링이 줄어드는 등의
         /// 공지사항을 표기하는 텍스트
@@ -17,6 +24,7 @@ namespace UnityPUBG.Scripts.Logic
 
         private void Awake()
         {
+            EntityManager.Instance.OnMyPlayerSpawn += InitializePlayerUIElements;
             RingSystem.Instance.OnRoundStart += DisplayRoundStartMessage;
             RingSystem.Instance.OnRingCloseStart += DisplayRingCloseStartMessage;
         }
@@ -80,6 +88,34 @@ namespace UnityPUBG.Scripts.Logic
             }
 
             gameObject.SetActive(true);
+        }
+
+        private void InitializePlayerUIElements(object sender, Player myPlayer)
+        {
+            // UI 초기값 설정
+            playerHealthSlider.maxValue = myPlayer.MaximumHealth;
+            playerHealthSlider.value = myPlayer.CurrentHealth;
+            playerHealthText.text = Mathf.RoundToInt(myPlayer.CurrentHealth).ToString();
+
+            playerShieldSlider.maxValue = myPlayer.MaximumShield;
+            playerShieldSlider.value = myPlayer.CurrentShield;
+            playerShieldText.text = Mathf.RoundToInt(myPlayer.CurrentShield).ToString();
+
+            // 이벤트 구독
+            myPlayer.OnCurrentHealthUpdate += UpdatePlayerHealthSlider;
+            myPlayer.OnCurrentShieldUpdate += UpdatePlayerShieldSlider;
+        }
+
+        private void UpdatePlayerHealthSlider(object sender, float value)
+        {
+            playerHealthSlider.value = value;
+            playerHealthText.text = Mathf.RoundToInt(value).ToString();
+        }
+
+        private void UpdatePlayerShieldSlider(object sender, float value)
+        {
+            playerShieldSlider.value = value;
+            playerShieldText.text = Mathf.RoundToInt(value).ToString();
         }
 
         private void DisplayRoundStartMessage(object sender, RingSystem.RoundData roundData)

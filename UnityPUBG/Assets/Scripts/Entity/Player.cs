@@ -1,6 +1,4 @@
-﻿using UnityPUBG.Scripts.Items;
-using UnityPUBG.Scripts.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,24 +6,41 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
+using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Entities
 {
     [RequireComponent(typeof(PhotonView))]
     public class Player : Entity, IPunObservable
     {
+        [SerializeField] private int maximumShield = 100;
+        [SerializeField] private float currentShield = 0f;
+
         private PhotonView photonView;
         private FloatingJoystick movementJoystick;
         private FloatingJoystick attackJoystick;
         private InputManager inputManager;
 
-        private Slider hpBar;
-        private Slider shieldBar;
+        public EventHandler<float> OnCurrentShieldUpdate;
 
-        private Text hpText;
-        private Text shieldText;
+        public int MaximumShield
+        {
+            get { return maximumShield; }
+            set { maximumShield = value; }
+        }
+        public float CurrentShield
+        {
+            get { return currentShield; }
+            set
+            {
+                currentShield = value;
+                currentShield = Mathf.Clamp(currentShield, 0f, MaximumShield);
 
+                OnCurrentShieldUpdate?.Invoke(this, currentShield);
+            }
+        }
         public WeaponData EquipedWeapon { get; private set; }
         public ArmorData EquipedArmor { get; private set; }
         public BackpackData EquipedBackpack { get; private set; }
@@ -46,6 +61,9 @@ namespace UnityPUBG.Scripts.Entities
                 Debug.LogError($"{nameof(photonView)}가 없습니다");
             }
 
+            // Test value
+            CurrentShield = MaximumShield / 2f;
+
             if (IsMyPlayer)
             {
                 EntityManager.Instance.MyPlayer = this;
@@ -58,7 +76,14 @@ namespace UnityPUBG.Scripts.Entities
         protected override void Update()
         {
             base.Update();
-
+            if (Keyboard.current.digit9Key.wasPressedThisFrame)
+            {
+                CurrentHealth -= Mathf.PI;
+            }
+            else if (Keyboard.current.digit8Key.wasPressedThisFrame)
+            {
+                CurrentShield -= Mathf.PI;
+            }
             if (IsDead)
             {
                 return;
@@ -66,9 +91,6 @@ namespace UnityPUBG.Scripts.Entities
 
             if (photonView.isMine)
             {
-                hpBar.value = CurrentHealth;
-                hpText.text = MaximumHealth.ToString() + "/" + hpBar.value.ToString();
-
                 ControlMovement();
 #if !UNITY_ANDRIOD
                 if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -140,34 +162,6 @@ namespace UnityPUBG.Scripts.Entities
             attackButton.onClick.AddListener(() => MeleeAttackTest(DamageType.Normal));
 #endif
 */
-
-            hpBar = uiObjects.FirstOrDefault(e => e.name == "HPBar").GetComponent<Slider>();
-            if (hpBar == null)
-            {
-                Debug.LogError($"{nameof(hpBar)}가 없습니다");
-            }
-            else
-            {
-                hpText = hpBar.transform.Find("HPText").GetComponent<Text>();
-                if (hpText == null)
-                {
-                    Debug.LogError($"{nameof(hpText)}가 없습니다");
-                }
-            }
-
-            shieldBar = uiObjects.FirstOrDefault(e => e.name == "ShieldBar").GetComponent<Slider>();
-            if (shieldBar == null)
-            {
-                Debug.LogError($"{nameof(shieldBar)}가 없습니다");
-            }
-            else
-            {
-                shieldText = shieldBar.transform.Find("ShieldText").GetComponent<Text>();
-                if (shieldText == null)
-                {
-                    Debug.LogError($"{nameof(shieldText)}가 없습니다");
-                }
-            }
         }
 
         /// <summary>

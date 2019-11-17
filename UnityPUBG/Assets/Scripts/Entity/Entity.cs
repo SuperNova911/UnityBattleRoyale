@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityPUBG.Scripts.Items;
@@ -21,6 +22,8 @@ namespace UnityPUBG.Scripts.Entities
         protected ItemContainer itemContainer;
         private Rigidbody entityRigidbody;
 
+        public EventHandler<float> OnCurrentHealthUpdate;
+
         public int MaximumHealth
         {
             get { return maximumHealth; }
@@ -35,6 +38,7 @@ namespace UnityPUBG.Scripts.Entities
                 currentHealth = Mathf.Clamp(currentHealth, 0f, MaximumHealth);
 
                 IsDead = currentHealth <= 0;
+                OnCurrentHealthUpdate?.Invoke(this, currentHealth);
             }
         }
         public bool IsDead { get; private set; }
@@ -103,7 +107,7 @@ namespace UnityPUBG.Scripts.Entities
 
             itemObject.AllowAutoLoot = false;
 
-            Vector2 randomDirection = Random.insideUnitCircle.normalized;
+            Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
             var itemObjectRigidbody = itemObject.GetComponent<Rigidbody>();
             if (itemObjectRigidbody != null)
             {

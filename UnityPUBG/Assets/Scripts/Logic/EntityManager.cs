@@ -10,10 +10,21 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class EntityManager : Singleton<EntityManager>
     {
+        private Player myPlayer = null;
         private List<Entity> entities = new List<Entity>();
         private List<IDamageable> damageables = new List<IDamageable>();
 
-        public Player MyPlayer { get; set; }
+        public EventHandler<Player> OnMyPlayerSpawn;
+
+        public Player MyPlayer
+        {
+            get { return myPlayer; }
+            set
+            {
+                myPlayer = value;
+                OnMyPlayerSpawn?.Invoke(this, myPlayer);
+            }
+        }
         public List<Entity> Entities => entities;
         public List<IDamageable> Damageables => damageables;
 

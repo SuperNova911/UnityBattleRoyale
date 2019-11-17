@@ -15,23 +15,37 @@ namespace UnityPUBG.Scripts.Logic
         private UnityEngine.UI.Text noticeText;
 
         /// <summary>
-        /// 창 닫기
+        /// 플레이어 상태 바
         /// </summary>
-        /// <param name="window">닫을 창</param>
-        public void CloseWindow(GameObject window)
-        {
-            DisableChild(window);
-            window.SetActive(false);
-        }
+        [SerializeField]
+        private GameObject playerStateBar;
 
         /// <summary>
-        /// 창 열기
+        /// 미니맵과 조이스틱 들
         /// </summary>
-        /// <param name="window">열 창</param>
-        public void OpenWindow(GameObject window)
+        [SerializeField]
+        private GameObject nomalUIElements;
+
+        /// <summary>
+        /// 창 열고 닫기
+        /// </summary>
+        /// <param name="window">열고 닫을 창</param>
+        public void ControlWindow(GameObject window)
         {
-            EnableChild(window);
-            window.SetActive(true);
+            if(window.activeSelf)
+            {
+                DisableChild(window);
+                playerStateBar.SetActive(true);
+                nomalUIElements.SetActive(true);
+                window.SetActive(false);
+            }
+            else
+            {
+                EnableChild(window);
+                playerStateBar.SetActive(false);
+                nomalUIElements.SetActive(false);
+                window.SetActive(true);
+            }
         }
 
         /// <summary>

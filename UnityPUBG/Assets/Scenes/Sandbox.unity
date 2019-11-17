@@ -34419,6 +34419,7 @@ MonoBehaviour:
   roundMessage: {fileID: 487705906}
   roundSubMessage: {fileID: 1724523502}
   killMessage: {fileID: 2085522671}
+  inventoryWindow: {fileID: 888954990}
   noticeText: {fileID: 919164705}
   normalUIElements: {fileID: 1393182460}
 --- !u!4 &1842927013 stripped

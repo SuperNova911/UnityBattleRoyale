@@ -40,7 +40,6 @@ namespace UnityPUBG.Scripts.Logic
         public event EventHandler<RoundData> OnRoundStart;
         public event EventHandler<RoundData> OnRingCloseStart;
 
-
         public RoundData[] RoundDatas { get; private set; }
         public Vector2 CurrentRingCenter { get; private set; }
         public float CurrentRingTickDamage { get; private set; }
@@ -76,6 +75,7 @@ namespace UnityPUBG.Scripts.Logic
 
             // 마지막 라운드
             RoundDatas[roundSettings.roundNumber - 1] = new RoundData(
+                roundSettings.roundNumber,
                 SelectFinalPosition(),
                 roundSettings.diametersAfterClosing[roundSettings.roundNumber - 1],
                 roundSettings.waitPeriods[roundSettings.roundNumber - 1],
@@ -89,6 +89,7 @@ namespace UnityPUBG.Scripts.Logic
                 randomValue *= roundSettings.diametersAfterClosing[round] / 2f - roundSettings.diametersAfterClosing[round + 1] / 2f;
 
                 RoundDatas[round] = new RoundData(
+                    round + 1,
                     RoundDatas[round + 1].Center + randomValue,
                     roundSettings.diametersAfterClosing[round],
                     roundSettings.waitPeriods[round],
@@ -111,6 +112,12 @@ namespace UnityPUBG.Scripts.Logic
             StartCoroutine(OnRingTick(tickPeriod));
         }
 
+        // TODO: Player가 이동할 수 있는 무작위 좌표를 선정
+        private Vector2 SelectFinalPosition()
+        {
+            return new Vector2(500, 500);
+        }
+
         private void CreateRingObject()
         {
             ringObject = new GameObject("Ring Object");
@@ -125,12 +132,6 @@ namespace UnityPUBG.Scripts.Logic
             meshFilter.sharedMesh = new Mesh();
 
             ringMeshGenerator = new RingMeshGenerator(meshFilter.sharedMesh, resolutionX, resolutionY, initialRingRadius, ringHeight);
-        }
-
-        // TODO: Player가 이동할 수 있는 무작위 좌표를 선정
-        private Vector2 SelectFinalPosition()
-        {
-            return new Vector2(500, 500);
         }
 
         private void UpdateRingObject()
@@ -169,9 +170,6 @@ namespace UnityPUBG.Scripts.Logic
                 Debug.Log($"Round {i + 1}");
                 Debug.Log($"Time to close: {roundDatas[i].TimeToClose}sec");
 
-                UIManager.Instance.NoticeTextUpdate($"Round {i + 1}" + "\n" +
-                    $"{roundDatas[i].TimeToClose}초 후에 자기장이 줄어듭니다.");
-
                 OnRoundStart?.Invoke(this, roundDatas[i]);
 
                 // Ring Countdown
@@ -185,8 +183,6 @@ namespace UnityPUBG.Scripts.Logic
                 }
 
                 Debug.Log($"Ring closing start");
-
-                UIManager.Instance.NoticeTextUpdate("이제 자기장이 줄어듭니다.");
 
                 // Ring Closing
                 OnRingCloseStart?.Invoke(this, roundDatas[i]);
@@ -284,8 +280,9 @@ namespace UnityPUBG.Scripts.Logic
 
         public class RoundData
         {
-            public RoundData(Vector2 center, float diameterAfterClosing, float waitPeriod, float timeToClose, float tickDamage)
+            public RoundData(int roundNumber, Vector2 center, float diameterAfterClosing, float waitPeriod, float timeToClose, float tickDamage)
             {
+                RoundNumber = roundNumber;
                 Center = center;
                 WaitPeriod = waitPeriod;
                 TimeToClose = timeToClose;
@@ -293,6 +290,7 @@ namespace UnityPUBG.Scripts.Logic
                 TickDamage = tickDamage;
             }
 
+            public int RoundNumber { get; }
             public Vector2 Center { get; }
             public float DiameterAfterClosing { get; }
             public float WaitPeriod { get; }

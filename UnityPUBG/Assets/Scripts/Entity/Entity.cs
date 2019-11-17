@@ -9,8 +9,8 @@ namespace UnityPUBG.Scripts.Entities
     public abstract class Entity : MonoBehaviour
     {
         [Header("Health")]
-        [SerializeField] protected int maximumHealth;
-        [SerializeField] protected float currentHealth;
+        [SerializeField] private int maximumHealth;
+        [SerializeField] private float currentHealth;
 
         [Header("Movement")]
         [SerializeField] [Range(0f, 20f)] protected float movementSpeed = 5f;
@@ -21,17 +21,32 @@ namespace UnityPUBG.Scripts.Entities
         protected ItemContainer itemContainer;
         private Rigidbody entityRigidbody;
 
-        protected bool isDied = false;
+        public int MaximumHealth
+        {
+            get { return maximumHealth; }
+            protected set { maximumHealth = value; }
+        }
+        public float CurrentHealth
+        {
+            get { return currentHealth; }
+            protected set
+            {
+                currentHealth = value;
+                currentHealth = Mathf.Clamp(currentHealth, 0f, MaximumHealth);
 
+                IsDead = currentHealth <= 0;
+            }
+        }
+        public bool IsDead { get; private set; }
         public ItemContainer ItemContainer => itemContainer;
 
         #region 유니티 메시지
         protected virtual void Awake()
         {
-            currentHealth = maximumHealth;
+            itemContainer = new ItemContainer(6);
             entityRigidbody = GetComponent<Rigidbody>();
 
-            itemContainer = new ItemContainer(6);
+            CurrentHealth = MaximumHealth;
 
             EntityManager.Instance.RegisterEntity(this);
         }
@@ -48,8 +63,11 @@ namespace UnityPUBG.Scripts.Entities
 
         protected virtual void FixedUpdate()
         {
-            MoveEntity();
-            RotateEntity();
+            if (IsDead == false)
+            {
+                MoveEntity();
+                RotateEntity();
+            }
         }
 
         protected virtual void OnDestory()

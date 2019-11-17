@@ -15,6 +15,10 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text playerHealthText;
         public TMP_Text playerShieldText;
 
+        public TMP_Text roundMessage;
+        public TMP_Text roundSubMessage;
+        public TMP_Text killMessage;
+
         /// <summary>
         /// 링이 줄어드는 등의
         /// 공지사항을 표기하는 텍스트
@@ -127,11 +131,12 @@ namespace UnityPUBG.Scripts.Logic
         private void DisplayRoundStartMessage(object sender, RingSystem.RoundData roundData)
         {
             TimeSpan waitPeriod = TimeSpan.FromSeconds(roundData.WaitPeriod);
-            string timeString = waitPeriod.Minutes > 0 ? $"{waitPeriod.Minutes}분 " : string.Empty;
-            timeString += waitPeriod.Seconds > 0 ? $"{waitPeriod.Seconds}초" : string.Empty;
+            string timeString = waitPeriod.Minutes > 0 ? $"{waitPeriod.Minutes}분" : string.Empty;
+            timeString += waitPeriod.Seconds > 0 ? $" {waitPeriod.Seconds}초" : string.Empty;
 
-            string noticeMessage = $"라운드 {roundData.RoundNumber}\n{timeString} 후에 링이 줄어듭니다";
-            NoticeTextUpdate(noticeMessage);
+            string message = $"라운드 {roundData.RoundNumber}";
+            string subMessage = $"<color=yellow>{timeString}</color> 후에 링이 줄어듭니다";
+            StartCoroutine(DisplayRoundMessage(message, subMessage, 3f));
         }
 
         private void DisplayRingCloseStartMessage(object sender, RingSystem.RoundData roundData)
@@ -139,8 +144,37 @@ namespace UnityPUBG.Scripts.Logic
             TimeSpan timeToClose = TimeSpan.FromSeconds(roundData.TimeToClose);
             string timeString = timeToClose.Minutes > 0 ? $"{timeToClose.Minutes}분 {timeToClose.Seconds}초" : $"{timeToClose.Seconds}초";
             
-            string noticeMessage = $"링 축소중\n{timeString} 안에 링이 줄어듭니다";
-            NoticeTextUpdate(noticeMessage);
+            string message = $"링 축소중!";
+            string subMessage = $"<color=yellow>{timeString}</color> 안에 링이 줄어듭니다";
+            StartCoroutine(DisplayRoundMessage(message, subMessage, 3f));
+        }
+
+        private IEnumerator DisplayRoundMessage(string message, string subMessage, float visibleDuration)
+        {
+            roundMessage.text = message;
+            roundSubMessage.text = subMessage;
+            yield return new WaitForSeconds(visibleDuration);
+
+            Color previousColor = roundMessage.color;
+            float startTime = Time.time;
+            float endTime = startTime + 0.5f;
+            float progress = 1f;
+            while (progress > 0)
+            {
+                Color newColor = roundMessage.color;
+                newColor.a = progress;
+                roundMessage.color = newColor;
+                roundSubMessage.color = newColor;
+
+                progress = Mathf.InverseLerp(endTime, startTime, Time.time);
+                yield return null;
+            }
+
+            roundMessage.color = previousColor;
+            roundSubMessage.color = previousColor;
+            roundMessage.text = string.Empty;
+            roundSubMessage.text = string.Empty;
+            yield return null;
         }
 
         /// <summary>

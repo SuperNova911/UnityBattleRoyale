@@ -60,7 +60,11 @@ namespace UnityPUBG.Scripts.Logic
                     continue;
                 }
 
-                SpawnItemObjectAt(new Item(selectedItemData), spawnPoint.transform.position);
+                var spawnedItemObject = SpawnItemObjectAt(new Item(selectedItemData), spawnPoint.transform.position);
+                if (spawnedItemObject != null)
+                {
+                    spawnedItemObject.transform.parent = transform;
+                }
             }
         }
 

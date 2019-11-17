@@ -88,7 +88,7 @@ namespace UnityPUBG.Scripts
                 }
                 else
                 {
-                    stringBuilder.AppendLine($"{item.Data.ItemName}: Stack[{item.CurrentStack}/{item.Data.MaximumStack}], HashCode[{item.GetHashCode()}]");
+                    stringBuilder.AppendLine($"{item.Data.ItemName} [{item.CurrentStack}/{item.Data.MaximumStack}]");
                 }
             }
             debugText.text = stringBuilder.ToString();

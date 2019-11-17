@@ -67,8 +67,6 @@ namespace UnityPUBG.Scripts.Entities
             if (IsMyPlayer)
             {
                 EntityManager.Instance.MyPlayer = this;
-                CameraManager.Instance.PlayerCamera.Follow = transform;
-
                 InitializeUIObjects();
             }
         }

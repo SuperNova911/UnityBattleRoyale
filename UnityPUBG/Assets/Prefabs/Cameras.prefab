@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 2309644399111757688}
   - component: {fileID: 5264005543024489650}
   - component: {fileID: 5883381151597467312}
+  - component: {fileID: 7717279313781942536}
   m_Layer: 0
   m_Name: Minimap Camera
   m_TagString: Untagged
@@ -457,7 +458,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 20
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -501,6 +502,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &7717279313781942536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4029292040844943182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0f48490f2ce644bb3d28a8bbc12439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  follow: {fileID: 0}
+  followOffset: {x: 0, y: 20, z: 0}
 --- !u!1 &8540689852397998951
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,5 +674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 324033114654909644}
+  minimapCamera: {fileID: 2309644399111757688}
   playerCamera: {fileID: 324033115428789755}
   dropShipCamera: {fileID: 2684990634162893789}

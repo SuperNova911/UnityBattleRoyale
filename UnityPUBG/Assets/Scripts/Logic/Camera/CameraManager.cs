@@ -6,14 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityPUBG.Scripts.Entities;
 
 namespace UnityPUBG.Scripts.Logic
 {
     public class CameraManager : Singleton<CameraManager>
     {
         [SerializeField] private Camera mainCamera;
+        [SerializeField] private Camera minimapCamera;
         [SerializeField] private CinemachineVirtualCamera playerCamera;
         [SerializeField] private CinemachineVirtualCamera dropShipCamera;
+
         private CinemachineVirtualCamera currentCamera;
         private ReadOnlyCollection<CinemachineVirtualCamera> virtualCameras;
 
@@ -54,6 +57,17 @@ namespace UnityPUBG.Scripts.Logic
             {
                 playerCamera, dropShipCamera
             });
+
+            CurrentCamera = PlayerCamera;
+            EntityManager.Instance.OnMyPlayerSpawn += SetupPlayerCameras;
+        }
+
+        private void SetupPlayerCameras(object sender, Player myPlayer)
+        {
+            PlayerCamera.Follow = myPlayer.transform;
+
+            var followCamera = minimapCamera.GetComponent<FollowCamera>();
+            followCamera.follow = myPlayer.transform;
 
             CurrentCamera = PlayerCamera;
         }

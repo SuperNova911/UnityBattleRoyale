@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityPUBG.Scripts.Entities;
+using UnityEngine.UI;
 
 namespace UnityPUBG.Scripts.Logic
 {
@@ -12,7 +13,13 @@ namespace UnityPUBG.Scripts.Logic
         /// 공지사항을 표기하는 텍스트
         /// </summary>
         [SerializeField]
-        private UnityEngine.UI.Text noticeText;
+        private Text noticeText;
+
+        private void Awake()
+        {
+            RingSystem.Instance.OnRoundStart += DisplayRoundStartMessage;
+            RingSystem.Instance.OnRingCloseStart += DisplayRingCloseStartMessage;
+        }
 
         /// <summary>
         /// 창 닫기
@@ -32,6 +39,15 @@ namespace UnityPUBG.Scripts.Logic
         {
             EnableChild(window);
             window.SetActive(true);
+        }
+
+        /// <summary>
+        /// 공지사항을 표기함
+        /// </summary>
+        /// <param name="notice">표기할 공지사항</param>
+        public void NoticeTextUpdate(string notice)
+        {
+            StartCoroutine(NoticeTextUpdater(notice));
         }
 
         /// <summary>
@@ -66,13 +82,23 @@ namespace UnityPUBG.Scripts.Logic
             gameObject.SetActive(true);
         }
 
-        /// <summary>
-        /// 공지사항을 표기함
-        /// </summary>
-        /// <param name="notice">표기할 공지사항</param>
-        public void NoticeTextUpdate(string notice)
+        private void DisplayRoundStartMessage(object sender, RingSystem.RoundData roundData)
         {
-            StartCoroutine(NoticeTextUpdater(notice));
+            TimeSpan waitPeriod = TimeSpan.FromSeconds(roundData.WaitPeriod);
+            string timeString = waitPeriod.Minutes > 0 ? $"{waitPeriod.Minutes}분 " : string.Empty;
+            timeString += waitPeriod.Seconds > 0 ? $"{waitPeriod.Seconds}초" : string.Empty;
+
+            string noticeMessage = $"라운드 {roundData.RoundNumber}\n{timeString} 후에 링이 줄어듭니다";
+            NoticeTextUpdate(noticeMessage);
+        }
+
+        private void DisplayRingCloseStartMessage(object sender, RingSystem.RoundData roundData)
+        {
+            TimeSpan timeToClose = TimeSpan.FromSeconds(roundData.TimeToClose);
+            string timeString = timeToClose.Minutes > 0 ? $"{timeToClose.Minutes}분 {timeToClose.Seconds}초" : $"{timeToClose.Seconds}초";
+            
+            string noticeMessage = $"링 축소중\n{timeString} 안에 링이 줄어듭니다";
+            NoticeTextUpdate(noticeMessage);
         }
 
         /// <summary>

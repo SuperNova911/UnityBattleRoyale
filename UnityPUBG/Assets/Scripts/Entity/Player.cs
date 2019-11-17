@@ -59,21 +59,15 @@ namespace UnityPUBG.Scripts.Entities
         {
             base.Update();
 
+            if (IsDead)
+            {
+                return;
+            }
+
             if (photonView.isMine)
             {
-                if (isDied)
-                    return;
-
-                hpBar.value = currentHealth;
-                hpText.text = maximumHealth.ToString() + "/" + hpBar.value.ToString();
-
-
-                //사망했다면 더이상 이동 불가
-                if (currentHealth == 0 && !isDied)
-                {
-                    isDied = true;
-                    return;
-                }
+                hpBar.value = CurrentHealth;
+                hpText.text = MaximumHealth.ToString() + "/" + hpBar.value.ToString();
 
                 ControlMovement();
 #if !UNITY_ANDRIOD
@@ -98,6 +92,21 @@ namespace UnityPUBG.Scripts.Entities
         private void OnDisable()
         {
             inputManager.Disable();
+        }
+        #endregion
+
+        #region IPunObservable 인터페이스
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.isWriting)
+            {
+                //체력 동기화
+                stream.SendNext(CurrentHealth);
+            }
+            else
+            {
+                CurrentHealth = (float)stream.ReceiveNext();
+            }
         }
         #endregion
 
@@ -223,19 +232,6 @@ namespace UnityPUBG.Scripts.Entities
             foreach (var hitObject in hitObjects)
             {
                 hitObject.OnTakeDamage(damage, damageType);
-            }
-        }
-
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            if(stream.isWriting)
-            {
-                //체력 동기화
-                stream.SendNext(currentHealth);
-            }
-            else
-            {
-                currentHealth = (float)stream.ReceiveNext();
             }
         }
     }

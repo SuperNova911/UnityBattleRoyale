@@ -30,16 +30,10 @@ namespace UnityPUBG.Scripts.Logic
         }
 
         /// <summary>
-        /// 플레이어 상태 바
-        /// </summary>
-        [SerializeField]
-        private GameObject playerStateBar;
-
-        /// <summary>
         /// 미니맵과 조이스틱 들
         /// </summary>
         [SerializeField]
-        private GameObject nomalUIElements;
+        private GameObject normalUIElements;
 
         /// <summary>
         /// 창 열고 닫기
@@ -50,15 +44,13 @@ namespace UnityPUBG.Scripts.Logic
             if(window.activeSelf)
             {
                 DisableChild(window);
-                playerStateBar.SetActive(true);
-                nomalUIElements.SetActive(true);
+                normalUIElements.SetActive(true);
                 window.SetActive(false);
             }
             else
             {
                 EnableChild(window);
-                playerStateBar.SetActive(false);
-                nomalUIElements.SetActive(false);
+                normalUIElements.SetActive(false);
                 window.SetActive(true);
             }
         }

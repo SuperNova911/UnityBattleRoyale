@@ -11,12 +11,14 @@ namespace UnityPUBG.Scripts.Items
         [SerializeField] private ItemRarity rarity = ItemRarity.Common;
         [SerializeField] private ItemSortingOrder sortingOrder = ItemSortingOrder.Item;
         [SerializeField] private GameObject model = null;
+        [SerializeField] private Sprite icon = null;
         [SerializeField, Range(1, 100)] private int maximumStack = 1;
         [SerializeField, Range(1, 100)] private int defaultStack = 1;
 
         public string ItemName => itemName;
         public ItemRarity Rarity => rarity;
         public GameObject Model => model;
+        public Sprite Icon => icon;
         public virtual ItemSortingOrder SortingOrder => sortingOrder;
         public virtual int MaximumStack => maximumStack;
         public virtual int DefaultStack => defaultStack;

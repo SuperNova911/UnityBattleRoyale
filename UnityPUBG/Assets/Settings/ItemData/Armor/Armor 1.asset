@@ -16,6 +16,7 @@ MonoBehaviour:
   rarity: 3
   sortingOrder: 100
   model: {fileID: 156760, guid: 59ab0411abb2e8543a7e6c7cbbbaa06c, type: 3}
+  icon: {fileID: -3261248842603347068, guid: 53230b6caeb12504d85d87db7259be3a, type: 3}
   maximumStack: 7
   defaultStack: 2
   shieldAmount: 0

@@ -7,7 +7,7 @@ using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.UI
 {
-    public class ItemSlot : MonoBehaviour
+    public class ItemSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
         /// <summary>
         /// 내 시블링 인덱스
@@ -32,7 +32,12 @@ namespace UnityPUBG.Scripts.UI
         /// </summary>
         [SerializeField]
         private Sprite emptySlotImage;
-        private GameObject slotObject = null;
+        //private GameObject slotObject = null;
+
+        /// <summary>
+        /// 현재 슬롯 이미지
+        /// </summary>
+        private Image slotImage = null;
 
 
         #region Unity 콜백
@@ -41,22 +46,15 @@ namespace UnityPUBG.Scripts.UI
             graphicRaycaster = transform.root.GetComponent<GraphicRaycaster>();
             siblingIndex = transform.GetSiblingIndex();
             planeDistance = transform.root.GetComponent<Canvas>().planeDistance;
+
+            slotImage = transform.GetChild(0).GetComponent<Image>();
+
+            Debug.Log(slotImage.gameObject);
         }
 
-        private void Update()
+        private void Start()
         {
-            
-            if (!isDrag && Input.GetMouseButtonDown(0))
-                BeginDrag();
-            else if (isDrag && Input.GetMouseButton(0))
-                DoDrag();
-            else if (isDrag && Input.GetMouseButtonUp(0))
-                EndDrag();
-        }
-
-        private void LateUpdate()
-        {
-            UpdateSlotObjectPosition();
+            slotImage.sprite = emptySlotImage;
         }
 
         private void OnEnable()
@@ -66,8 +64,8 @@ namespace UnityPUBG.Scripts.UI
 
         private void OnDisable()
         {
-            if (slotObject != null)
-                Destroy(slotObject);
+            if (slotImage.sprite != emptySlotImage)
+                slotImage.sprite = emptySlotImage;
         }
         #endregion
 
@@ -80,8 +78,8 @@ namespace UnityPUBG.Scripts.UI
 
             Items.Item item = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
 
-            if (slotObject != null)
-                Destroy(slotObject);
+            if (slotImage.sprite != emptySlotImage)
+                slotImage.sprite = emptySlotImage;
 
             if (item == Items.Item.EmptyItem)
             {
@@ -89,63 +87,18 @@ namespace UnityPUBG.Scripts.UI
             }
             else
             {
-                slotObject = Instantiate(item.Data.Model, transform.position,
-                    Quaternion.identity);
-                slotObject.transform.localScale = Vector3.one * 1f;
-
-                UpdateSlotObjectPosition();
+                slotImage.sprite = item.Data.Icon;
             }
         }
 
-        /// <summary>
-        /// 슬롯 오브젝트의 위치 갱신
-        /// </summary>
-        private void UpdateSlotObjectPosition()
-        {
-            if(slotObject!=null)
-            {
-                slotObject.transform.position = transform.position;
-
-                //카메라가 보는 방향
-                Vector3 cameraDirection = Camera.main.transform.localRotation * Vector3.forward;
-
-                slotObject.transform.position -= cameraDirection.normalized * 0.1f;
-            }
-        }
-
-        public void BeginDrag()
+        public void OnBeginDrag(PointerEventData eventData)
         {
             siblingIndex = transform.GetSiblingIndex();
             if (EntityManager.Instance.MyPlayer.ItemContainer.Count < siblingIndex + 1)
             {
                 isDrag = false;
                 return;
-            }
-            
-            List<RaycastResult> results = new List<RaycastResult>();
-            PointerEventData pointerEventData = new PointerEventData(GetComponent<EventSystem>());
-#if !UNITY_ANDRIOD
-            pointerEventData.position = Input.mousePosition;
-#else
-                pointerEventData.position = Input.touches[0].position;
-#endif
-            graphicRaycaster.Raycast(pointerEventData, results);
-
-            if (results.Count <= 0)
-            {
-                return;
-            }
-            else
-            {
-                //터치 혹은 마우스 포인터가 올라갔는가
-                bool isPointerOver = results[0].gameObject.name == gameObject.name
-                    || results[0].gameObject.transform.parent.name == gameObject.name;
-
-                if (!isPointerOver)
-                {
-                    return;
-                }
-            }
+            }           
 
             originPosition = transform.position;
             
@@ -153,22 +106,15 @@ namespace UnityPUBG.Scripts.UI
             isDrag = true;
         }
 
-        public void DoDrag()
+        public void OnDrag(PointerEventData eventData)
         {
             if (isDrag)
             {
-                Vector3 screenPoint;
-#if !UNITY_ANDRIOD
-                screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, planeDistance);
-#else
-                screenPoint = new Vector3(Input.touches[0].position.x, Input.touches[0].position.y, planeDistance);
-#endif
-                transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
-               // UpdateSlotObjectPosition();
+                transform.position = eventData.position;
             }
         }
 
-        public void EndDrag()
+        public void OnEndDrag(PointerEventData eventData)
         {
             if (isDrag)
             {
@@ -199,7 +145,7 @@ namespace UnityPUBG.Scripts.UI
                     {
                         var dropItem = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
                         EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, dropItem.CurrentStack);
-                        Destroy(slotObject);
+
                         UIManager.Instance.UpdateInventorySlots();
                     }
                 }

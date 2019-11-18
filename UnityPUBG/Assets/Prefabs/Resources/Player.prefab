@@ -1438,6 +1438,9 @@ MonoBehaviour:
   rotationSpeed: 0.2
   maximumShield: 100
   currentShield: 0
+  defaultContainerCapacity: 6
+  speedMultiplyWhenUseItem: 0.5
+  quickBarCapacity: 4
 --- !u!114 &1330880535016543195
 MonoBehaviour:
   m_ObjectHideFlags: 0

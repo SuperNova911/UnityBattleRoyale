@@ -77,6 +77,9 @@ namespace UnityPUBG.Scripts.Logic
         //인벤토리 슬롯을 업데이트 함
         public void UpdateInventorySlots()
         {
+            if (!inventoryWindow.activeSelf)
+                return;
+
             UI.ItemSlot[] itemSlots = inventoryWindow.transform.GetComponentsInChildren<UI.ItemSlot>();
 
             int length = itemSlots.Length;

@@ -12,21 +12,13 @@ namespace UnityPUBG.Scripts
     public class ItemContainerDebugger : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private Entity containerOwner;
+        [SerializeField] private Player containerOwner;
 
         [Header("UI")]
         [SerializeField] private Text debugText;
         private readonly StringBuilder stringBuilder = new StringBuilder();
 
         #region 유니티 메시지
-        private void Awake()
-        {
-            if (containerOwner == null)
-            {
-                containerOwner = GetComponent<Entity>();
-            }
-        }
-
         private void Start()
         {
             if (containerOwner != null && containerOwner.ItemContainer != null)

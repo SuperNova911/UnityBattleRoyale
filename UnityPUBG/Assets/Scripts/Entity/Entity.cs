@@ -19,7 +19,6 @@ namespace UnityPUBG.Scripts.Entities
         protected Vector3 movementDirection;
         protected Vector3 facingDirection;
 
-        protected ItemContainer itemContainer;
         private Rigidbody entityRigidbody;
 
         public EventHandler<float> OnCurrentHealthUpdate;
@@ -42,12 +41,10 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         public bool IsDead { get; private set; }
-        public ItemContainer ItemContainer => itemContainer;
 
         #region 유니티 메시지
         protected virtual void Awake()
         {
-            itemContainer = new ItemContainer(6);
             entityRigidbody = GetComponent<Rigidbody>();
 
             CurrentHealth = MaximumHealth;
@@ -79,42 +76,6 @@ namespace UnityPUBG.Scripts.Entities
             EntityManager.Instance.UnRegisterEntity(this);
         }
         #endregion
-
-        /// <summary>
-        /// 특정 슬롯에 있는 아이템을 입력으로 받은 스택만큼 ItemObject를 드랍
-        /// </summary>
-        /// <param name="slot"></param>
-        /// <param name="dropStack"></param>
-        public void DropItemsAtSlot(int slot, int dropStack)
-        {
-            if (itemContainer.Capacity <= slot)
-            {
-                Debug.LogWarning($"{nameof(itemContainer)}의 {nameof(itemContainer.Capacity)} 범위를 벗어나는 {nameof(slot)}입니다");
-                return;
-            }
-
-            var dropItem = itemContainer.SubtrackItemsAtSlot(slot, dropStack);
-            if (dropItem.IsStackEmpty)
-            {
-                return;
-            }
-
-            var itemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
-            if (itemObject == null)
-            {
-                return;
-            }
-
-            itemObject.AllowAutoLoot = false;
-
-            Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
-            var itemObjectRigidbody = itemObject.GetComponent<Rigidbody>();
-            if (itemObjectRigidbody != null)
-            {
-                float force = 6f;
-                itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
-            }
-        }
 
         /// <summary>
         /// movementDirection 방향으로 Entity를 이동

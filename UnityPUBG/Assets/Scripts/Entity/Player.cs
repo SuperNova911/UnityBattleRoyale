@@ -15,8 +15,15 @@ namespace UnityPUBG.Scripts.Entities
     [RequireComponent(typeof(PhotonView))]
     public class Player : Entity, IPunObservable
     {
-        [SerializeField] private int maximumShield = 100;
-        [SerializeField] private float currentShield = 0f;
+        [SerializeField, Range(0, 100)] private int maximumShield = 100;
+        [SerializeField, Range(0f, 100f)] private float currentShield = 0f;
+
+        [Header("ItemContainer")]
+        [SerializeField, Range(2, 8)] private int defaultContainerCapacity = 6;
+
+        [Header("QuickSlot")]
+        [SerializeField, Range(0.1f, 1f)] private float speedMultiplyWhenUseItem = 0.5f;
+        [SerializeField, Range(1, 6)] private int quickBarCapacity = 4;
 
         private PhotonView photonView;
         private FloatingJoystick movementJoystick;
@@ -41,6 +48,8 @@ namespace UnityPUBG.Scripts.Entities
                 OnCurrentShieldUpdate?.Invoke(this, currentShield);
             }
         }
+        public ItemContainer ItemContainer { get; private set; }
+        public List<Item> ItemQuickBar { get; private set; }
         public WeaponData EquipedWeapon { get; private set; }
         public ArmorData EquipedArmor { get; private set; }
         public BackpackData EquipedBackpack { get; private set; }
@@ -61,8 +70,9 @@ namespace UnityPUBG.Scripts.Entities
                 Debug.LogError($"{nameof(photonView)}가 없습니다");
             }
 
-            // Test value
-            CurrentShield = MaximumShield / 2f;
+            CurrentShield = MaximumShield / 2f;     // Test value
+            ItemContainer = new ItemContainer(defaultContainerCapacity);
+            ItemQuickBar = new List<Item>(quickBarCapacity);
 
             if (IsMyPlayer)
             {
@@ -120,7 +130,7 @@ namespace UnityPUBG.Scripts.Entities
         {
             if (stream.isWriting)
             {
-                //체력 동기화
+                // 체력 동기화
                 stream.SendNext(CurrentHealth);
             }
             else
@@ -129,6 +139,69 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         #endregion
+
+        /// <summary>
+        /// 특정 슬롯에 있는 아이템을 입력으로 받은 스택만큼 ItemObject를 드랍
+        /// </summary>
+        /// <param name="slot"></param>
+        /// <param name="dropStack"></param>
+        public void DropItemsAtSlot(int slot, int dropStack)
+        {
+            if (ItemContainer.Capacity <= slot)
+            {
+                Debug.LogWarning($"{nameof(ItemContainer)}의 {nameof(ItemContainer.Capacity)} 범위를 벗어나는 {nameof(slot)}입니다");
+                return;
+            }
+
+            var dropItem = ItemContainer.SubtrackItemsAtSlot(slot, dropStack);
+            if (dropItem.IsStackEmpty)
+            {
+                return;
+            }
+
+            var itemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
+            if (itemObject == null)
+            {
+                return;
+            }
+
+            itemObject.AllowAutoLoot = false;
+
+            Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
+            var itemObjectRigidbody = itemObject.GetComponent<Rigidbody>();
+            if (itemObjectRigidbody != null)
+            {
+                float force = 6f;
+                itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
+            }
+        }
+
+        public void AssignItemToQuickBar(int slot, Item item)
+        {
+            if (item == null || item.IsStackEmpty)
+            {
+                Debug.LogError($"null이거나 비어있는 {nameof(Item)}은 등록할 수 없습니다");
+                return;
+            }
+            
+            if (slot < 0 || slot >= quickBarCapacity)
+            {
+                Debug.LogWarning($", {nameof(slot)}: {slot}");
+                slot = Mathf.Clamp(slot, 0, quickBarCapacity);
+            }
+
+            ItemQuickBar[slot] = item;
+        }
+
+        public void UseItemAtQuickBar(int slot)
+        {
+
+        }
+
+        public void UseItemAtItemContainer(int slot)
+        {
+
+        }
 
         private void InitializeUIObjects()
         {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,6 +40,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     private Camera cam;
 
     private Vector2 input = Vector2.zero;
+
+    public event EventHandler<Vector2> OnJoystickUp;
 
     protected virtual void Start()
     {
@@ -131,6 +134,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
+        OnJoystickUp?.Invoke(this, input);
+
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
     }

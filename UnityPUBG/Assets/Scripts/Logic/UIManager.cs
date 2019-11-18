@@ -10,33 +10,48 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class UIManager : Singleton<UIManager>
     {
+        public FloatingJoystick playerMovementJoystick;
+        public FloatingJoystick playerAttackJoystick;
+        [Space]
         public Slider playerHealthSlider;
         public Slider playerShieldSlider;
         public TMP_Text playerHealthText;
         public TMP_Text playerShieldText;
-
+        [Space]
         public TMP_Text roundMessage;
         public TMP_Text roundSubMessage;
         public TMP_Text killMessage;
-
+        [Space]
         /// <summary>
         /// 인벤토리 창
         /// </summary>
         [SerializeField]
         private GameObject inventoryWindow;
 
-        /// <summary>
-        /// 링이 줄어드는 등의
-        /// 공지사항을 표기하는 텍스트
-        /// </summary>
-        [SerializeField]
-        private Text noticeText;
-
         private void Awake()
         {
+            playerAttackJoystick.OnJoystickUp += PlayerAttackJoystick_OnJoystickUp;
+
             EntityManager.Instance.OnMyPlayerSpawn += InitializePlayerUIElements;
             RingSystem.Instance.OnRoundStart += DisplayRoundStartMessage;
             RingSystem.Instance.OnRingCloseStart += DisplayRingCloseStartMessage;
+        }
+
+        private void PlayerAttackJoystick_OnJoystickUp(object sender, Vector2 direction)
+        {
+            EntityManager.Instance.MyPlayer.AttackTo(direction);
+        }
+
+        private void FixedUpdate()
+        {
+            EntityManager.Instance.MyPlayer.MoveTo(playerMovementJoystick.Direction);
+
+            // 디버깅을 편하게 하기 위해 키보드 컨트롤
+            var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (direction != Vector2.zero)
+            {
+                EntityManager.Instance.MyPlayer.MoveTo(direction.normalized);
+            }
         }
 
         /// <summary>
@@ -63,15 +78,6 @@ namespace UnityPUBG.Scripts.Logic
                 normalUIElements.SetActive(false);
                 window.SetActive(true);
             }
-        }
-
-        /// <summary>
-        /// 공지사항을 표기함
-        /// </summary>
-        /// <param name="notice">표기할 공지사항</param>
-        public void NoticeTextUpdate(string notice)
-        {
-            StartCoroutine(NoticeTextUpdater(notice));
         }
 
         //인벤토리 슬롯을 업데이트 함
@@ -197,22 +203,6 @@ namespace UnityPUBG.Scripts.Logic
             roundMessage.text = string.Empty;
             roundSubMessage.text = string.Empty;
             yield return null;
-        }
-
-        /// <summary>
-        /// 3초동안 공지사항을 표기하고 끔
-        /// </summary>
-        /// <param name="notice">표기할 공지사항</param>
-        /// <returns></returns>
-        private IEnumerator NoticeTextUpdater(string notice)
-        {
-            noticeText.text = notice;
-
-            yield return new WaitForSeconds(3f);
-
-            noticeText.text = string.Empty;
-
-            yield break;
         }
     }
 }

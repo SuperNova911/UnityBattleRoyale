@@ -10,18 +10,16 @@ namespace UnityPUBG.Scripts.Entities
     public abstract class Entity : MonoBehaviour
     {
         [Header("Health")]
-        [SerializeField] private int maximumHealth;
-        [SerializeField] private float currentHealth;
+        [SerializeField, Range(10, 100)] private int maximumHealth = 100;
+        [SerializeField, Range(0f, 100f)] private float currentHealth;
 
         [Header("Movement")]
-        [SerializeField] [Range(0f, 20f)] protected float movementSpeed = 5f;
-        [SerializeField] [Range(0f, 1f)] protected float rotationSpeed = 0.2f;
-        protected Vector3 movementDirection;
-        protected Vector3 facingDirection;
+        [SerializeField] [Range(0f, 20f)] private float movementSpeed = 5f;
+        [SerializeField] [Range(0f, 1f)] private float rotationSpeed = 0.2f;
 
         private Rigidbody entityRigidbody;
 
-        public EventHandler<float> OnCurrentHealthUpdate;
+        public event EventHandler<float> OnCurrentHealthUpdate;
 
         public int MaximumHealth
         {
@@ -41,6 +39,8 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         public bool IsDead { get; private set; }
+        public Vector2 MovementDirection { get; protected set; }
+        public Vector3 FacingDirection { get; private set; }
 
         #region 유니티 메시지
         protected virtual void Awake()
@@ -82,12 +82,12 @@ namespace UnityPUBG.Scripts.Entities
         /// </summary>
         private void MoveEntity()
         {
-            if (movementDirection == Vector3.zero)
+            if (MovementDirection == Vector2.zero)
             {
                 return;
             }
 
-            Vector3 direction = movementDirection * movementSpeed * Time.fixedDeltaTime;
+            Vector3 direction = new Vector3(MovementDirection.x, 0, MovementDirection.y) * movementSpeed * Time.fixedDeltaTime;
             entityRigidbody.MovePosition(transform.position + direction);
         }
 
@@ -96,14 +96,14 @@ namespace UnityPUBG.Scripts.Entities
         /// </summary>
         private void RotateEntity()
         {
-            if (movementDirection == Vector3.zero)
+            if (MovementDirection == Vector2.zero)
             {
                 return;
             }
 
-            facingDirection = movementDirection;
+            FacingDirection = new Vector3(MovementDirection.x, 0, MovementDirection.y);
 
-            var targetRotation = Quaternion.LookRotation(facingDirection);
+            var targetRotation = Quaternion.LookRotation(FacingDirection);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed);
         }
     }

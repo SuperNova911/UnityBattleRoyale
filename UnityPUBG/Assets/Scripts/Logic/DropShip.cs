@@ -34,8 +34,8 @@ namespace UnityPUBG.Scripts.Logic
         private Rigidbody dropShipRigidbody;
         private PhotonView photonView;
 
-        public EventHandler OnStartDrop;
-        public EventHandler OnEndDrop;
+        public event EventHandler OnStartDrop;
+        public event EventHandler OnEndDrop;
 
         public enum DropShipStatus
         {

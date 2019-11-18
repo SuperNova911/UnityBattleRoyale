@@ -26,11 +26,9 @@ namespace UnityPUBG.Scripts.Entities
         [SerializeField, Range(1, 6)] private int quickBarCapacity = 4;
 
         private PhotonView photonView;
-        private FloatingJoystick movementJoystick;
-        private FloatingJoystick attackJoystick;
         private InputManager inputManager;
 
-        public EventHandler<float> OnCurrentShieldUpdate;
+        public event EventHandler<float> OnCurrentShieldUpdate;
 
         public int MaximumShield
         {
@@ -49,7 +47,7 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         public ItemContainer ItemContainer { get; private set; }
-        public List<Item> ItemQuickBar { get; private set; }
+        public Item[] ItemQuickBar { get; private set; }
         public WeaponData EquipedWeapon { get; private set; }
         public ArmorData EquipedArmor { get; private set; }
         public BackpackData EquipedBackpack { get; private set; }
@@ -72,18 +70,24 @@ namespace UnityPUBG.Scripts.Entities
 
             CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
-            ItemQuickBar = new List<Item>(quickBarCapacity);
+            ItemQuickBar = Enumerable.Range(0, quickBarCapacity).Select(e => Item.EmptyItem).ToArray();
 
             if (IsMyPlayer)
             {
                 EntityManager.Instance.MyPlayer = this;
-                InitializeUIObjects();
             }
         }
 
         protected override void Update()
         {
             base.Update();
+
+            if (IsDead)
+            {
+                return;
+            }
+
+            // Slider test
             if (Keyboard.current.digit9Key.wasPressedThisFrame)
             {
                 CurrentHealth -= Mathf.PI;
@@ -92,19 +96,14 @@ namespace UnityPUBG.Scripts.Entities
             {
                 CurrentShield -= Mathf.PI;
             }
-            if (IsDead)
-            {
-                return;
-            }
 
             if (photonView.isMine)
             {
-                ControlMovement();
 #if !UNITY_ANDRIOD
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
-                }
+                //if (Input.GetKeyDown(KeyCode.Mouse0))
+                //{
+                //    MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+                //}
 #endif
             }
         }
@@ -139,6 +138,26 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         #endregion
+
+        public void MoveTo(Vector2 direction)
+        {
+            MovementDirection = direction;
+        }
+
+        public void AttackTo(Vector2 direction)
+        {
+            Vector3 attackDirection;
+            if (direction == Vector2.zero)
+            {
+                attackDirection = transform.forward;
+            }
+            else
+            {
+                attackDirection = new Vector3(direction.x, 0, direction.y);
+            }
+
+            MeleeAttackTest(attackDirection.normalized, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+        }
 
         /// <summary>
         /// 특정 슬롯에 있는 아이템을 입력으로 받은 스택만큼 ItemObject를 드랍
@@ -203,52 +222,6 @@ namespace UnityPUBG.Scripts.Entities
 
         }
 
-        private void InitializeUIObjects()
-        {
-            var uiObjects = GameObject.FindGameObjectsWithTag("UI");
-
-            //이동 조이스틱 매핑
-            movementJoystick = uiObjects.FirstOrDefault(e => e.name == "Movement Joystick").GetComponent<FloatingJoystick>();
-            if (movementJoystick == null)
-            {
-                Debug.LogError($"{nameof(movementJoystick)}이 없습니다");
-            }
-
-            //공격 조이스틱 매핑
-            attackJoystick = uiObjects.FirstOrDefault(e => e.name == "Attack Joystick").GetComponent<FloatingJoystick>();
-            if (attackJoystick == null)
-            {
-                Debug.LogError($"{nameof(attackJoystick)}이 없습니다");
-            }
-
-            /*
-#if !UNITY_ANDRIOD
-            //공격 버튼 매핑
-            Button attackButton = uiObjects.FirstOrDefault(e => e.name == "AttackButton").GetComponent<Button>();
-            if (attackButton == null)
-            {
-                Debug.LogError($"{nameof(attackButton)}이 없습니다");
-            }
-
-            attackButton.onClick.AddListener(() => MeleeAttackTest(DamageType.Normal));
-#endif
-*/
-        }
-
-        /// <summary>
-        /// InputSystem으로부터 입력받은 값을 기반으로 Player의 움직임을 컨트롤
-        /// </summary>
-        private void ControlMovement()
-        {
-            Vector2 direction;
-            direction = inputManager.Player.Movement.ReadValue<Vector2>();
-            if (direction == Vector2.zero)
-            {
-                direction = movementJoystick.Direction;
-            }
-            movementDirection = new Vector3(direction.x, 0, direction.y);
-        }
-
         // 테스트 전용
         private void MeleeAttackTest(DamageType damageType)
         {
@@ -257,7 +230,6 @@ namespace UnityPUBG.Scripts.Entities
 
         private void MeleeAttackTest(float damage, DamageType damageType)
         {
-            Vector3 attackOriginPosition = transform.position + new Vector3(0, 1, 0);
             Vector3 attackDirection = transform.forward;
 
             var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -265,11 +237,16 @@ namespace UnityPUBG.Scripts.Entities
             {
                 attackDirection = (new Vector3(mouseRayHit.point.x, 0, mouseRayHit.point.z) - transform.position).normalized;
             }
+            MeleeAttackTest(attackDirection, damage, damageType);
+        }
 
+        private void MeleeAttackTest(Vector3 attackDirection, float damage, DamageType damageType)
+        {
             float attackRange = 2f;
             float attackAngle = 90f;
             int rayNumber = 10;
 
+            Vector3 attackOriginPosition = transform.position + new Vector3(0, 1, 0);
             Vector3 leftRayDirection = Quaternion.Euler(0, -attackAngle / 2, 0) * attackDirection;
             Vector3 rightRayDirection = Quaternion.Euler(0, attackAngle / 2, 0) * attackDirection;
 

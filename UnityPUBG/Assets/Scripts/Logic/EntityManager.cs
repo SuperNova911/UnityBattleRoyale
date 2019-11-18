@@ -14,7 +14,7 @@ namespace UnityPUBG.Scripts.Logic
         private List<Entity> entities = new List<Entity>();
         private List<IDamageable> damageables = new List<IDamageable>();
 
-        public EventHandler<Player> OnMyPlayerSpawn;
+        public event EventHandler<Player> OnMyPlayerSpawn;
 
         public Player MyPlayer
         {

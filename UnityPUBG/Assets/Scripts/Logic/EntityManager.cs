@@ -14,7 +14,8 @@ namespace UnityPUBG.Scripts.Logic
         private List<Entity> entities = new List<Entity>();
         private List<IDamageable> damageables = new List<IDamageable>();
 
-        public event EventHandler<Player> OnMyPlayerSpawn;
+        public event EventHandler OnMyPlayerSpawn;
+        public event EventHandler OnMyPlayerDestory;
 
         public Player MyPlayer
         {
@@ -22,7 +23,14 @@ namespace UnityPUBG.Scripts.Logic
             set
             {
                 myPlayer = value;
-                OnMyPlayerSpawn?.Invoke(this, myPlayer);
+                if (myPlayer != null)
+                {
+                    OnMyPlayerSpawn?.Invoke(this, EventArgs.Empty);
+                }
+                else
+                {
+                    OnMyPlayerDestory?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
         public List<Entity> Entities => entities;

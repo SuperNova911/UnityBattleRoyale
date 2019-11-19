@@ -113,6 +113,16 @@ namespace UnityPUBG.Scripts.Entities
             base.FixedUpdate();
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            if (IsMyPlayer)
+            {
+                EntityManager.Instance.MyPlayer = null;
+            }
+        }
+
         private void OnEnable()
         {
             inputManager.Enable();

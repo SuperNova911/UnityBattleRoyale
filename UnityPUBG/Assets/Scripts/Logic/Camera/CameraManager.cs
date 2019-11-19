@@ -62,12 +62,13 @@ namespace UnityPUBG.Scripts.Logic
             EntityManager.Instance.OnMyPlayerSpawn += SetupPlayerCameras;
         }
 
-        private void SetupPlayerCameras(object sender, Player myPlayer)
+        private void SetupPlayerCameras(object sender, EventArgs e)
         {
-            PlayerCamera.Follow = myPlayer.transform;
+            var targetPlayer = EntityManager.Instance.MyPlayer;
+            PlayerCamera.Follow = targetPlayer.transform;
 
             var followCamera = minimapCamera.GetComponent<FollowCamera>();
-            followCamera.follow = myPlayer.transform;
+            followCamera.follow = targetPlayer.transform;
 
             CurrentCamera = PlayerCamera;
         }

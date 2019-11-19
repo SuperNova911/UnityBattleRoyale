@@ -36,6 +36,10 @@ namespace UnityPUBG.Scripts.Entities
 
                 IsDead = currentHealth <= 0;
                 OnCurrentHealthUpdate?.Invoke(this, currentHealth);
+                if (IsDead)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
         public bool IsDead { get; private set; }
@@ -71,9 +75,9 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        protected virtual void OnDestory()
+        protected virtual void OnDestroy()
         {
-            EntityManager.Instance.UnRegisterEntity(this);
+            EntityManager.Instance?.UnRegisterEntity(this);
         }
         #endregion
 

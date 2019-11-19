@@ -30,28 +30,21 @@ namespace UnityPUBG.Scripts.Logic
 
         private void Awake()
         {
-            playerAttackJoystick.OnJoystickUp += PlayerAttackJoystick_OnJoystickUp;
-
             EntityManager.Instance.OnMyPlayerSpawn += InitializePlayerUIElements;
+            EntityManager.Instance.OnMyPlayerDestory += DisablePlayerUIElements;
+
             RingSystem.Instance.OnRoundStart += DisplayRoundStartMessage;
             RingSystem.Instance.OnRingCloseStart += DisplayRingCloseStartMessage;
         }
 
-        private void PlayerAttackJoystick_OnJoystickUp(object sender, Vector2 direction)
-        {
-            EntityManager.Instance.MyPlayer.AttackTo(direction);
-        }
-
         private void FixedUpdate()
         {
-            EntityManager.Instance.MyPlayer.MoveTo(playerMovementJoystick.Direction);
-
-            // 디버깅을 편하게 하기 위해 키보드 컨트롤
-            var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            if (direction != Vector2.zero)
-            {
-                EntityManager.Instance.MyPlayer.MoveTo(direction.normalized);
-            }
+            //// 디버깅을 편하게 하기 위해 키보드 컨트롤
+            //var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            //if (direction != Vector2.zero)
+            //{
+            //    EntityManager.Instance.MyPlayer.MoveTo(direction.normalized);
+            //}
         }
 
         /// <summary>
@@ -128,20 +121,48 @@ namespace UnityPUBG.Scripts.Logic
             gameObject.SetActive(true);
         }
 
-        private void InitializePlayerUIElements(object sender, Player myPlayer)
+        private void InitializePlayerUIElements(object sender, EventArgs e)
         {
-            // UI 초기값 설정
-            playerHealthSlider.maxValue = myPlayer.MaximumHealth;
-            playerHealthSlider.value = myPlayer.CurrentHealth;
-            playerHealthText.text = Mathf.RoundToInt(myPlayer.CurrentHealth).ToString();
+            var targetPlayer = EntityManager.Instance.MyPlayer;
 
-            playerShieldSlider.maxValue = myPlayer.MaximumShield;
-            playerShieldSlider.value = myPlayer.CurrentShield;
-            playerShieldText.text = Mathf.RoundToInt(myPlayer.CurrentShield).ToString();
+            playerMovementJoystick.OnJoystickDrag += PlayerMovementJoystick_OnJoystickDrag;
+            playerMovementJoystick.OnJoystickRelease += PlayerMovementJoystick_OnJoystickRelease;
+            playerAttackJoystick.OnJoystickRelease += PlayerAttackJoystick_OnJoystickRelease;
+
+            // UI 초기값 설정
+            playerHealthSlider.maxValue = targetPlayer.MaximumHealth;
+            playerHealthSlider.value = targetPlayer.CurrentHealth;
+            playerHealthText.text = Mathf.RoundToInt(targetPlayer.CurrentHealth).ToString();
+
+            playerShieldSlider.maxValue = targetPlayer.MaximumShield;
+            playerShieldSlider.value = targetPlayer.CurrentShield;
+            playerShieldText.text = Mathf.RoundToInt(targetPlayer.CurrentShield).ToString();
 
             // 이벤트 구독
-            myPlayer.OnCurrentHealthUpdate += UpdatePlayerHealthSlider;
-            myPlayer.OnCurrentShieldUpdate += UpdatePlayerShieldSlider;
+            targetPlayer.OnCurrentHealthUpdate += UpdatePlayerHealthSlider;
+            targetPlayer.OnCurrentShieldUpdate += UpdatePlayerShieldSlider;
+        }
+
+        private void DisablePlayerUIElements(object sender, EventArgs e)
+        {
+            playerMovementJoystick.OnJoystickDrag -= PlayerMovementJoystick_OnJoystickDrag;
+            playerMovementJoystick.OnJoystickRelease -= PlayerMovementJoystick_OnJoystickRelease;
+            playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickRelease;
+        }
+
+        private void PlayerMovementJoystick_OnJoystickDrag(object sender, Vector2 direction)
+        {
+            EntityManager.Instance.MyPlayer.MoveTo(direction);
+        }
+
+        private void PlayerMovementJoystick_OnJoystickRelease(object sender, Vector2 e)
+        {
+            EntityManager.Instance.MyPlayer.MoveTo(Vector2.zero);
+        }
+
+        private void PlayerAttackJoystick_OnJoystickRelease(object sender, Vector2 direction)
+        {
+            EntityManager.Instance.MyPlayer.AttackTo(direction);
         }
 
         private void UpdatePlayerHealthSlider(object sender, float value)

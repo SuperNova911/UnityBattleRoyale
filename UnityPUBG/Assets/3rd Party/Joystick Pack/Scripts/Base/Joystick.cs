@@ -41,7 +41,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     private Vector2 input = Vector2.zero;
 
-    public event EventHandler<Vector2> OnJoystickUp;
+    public event EventHandler<Vector2> OnJoystickDrag;
+    public event EventHandler<Vector2> OnJoystickRelease;
 
     protected virtual void Start()
     {
@@ -77,6 +78,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         FormatInput();
         HandleInput(input.magnitude, input.normalized, radius, cam);
         handle.anchoredPosition = input * radius * handleRange;
+
+        OnJoystickDrag?.Invoke(this, input);
     }
 
     protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
@@ -134,7 +137,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
-        OnJoystickUp?.Invoke(this, input);
+        OnJoystickRelease?.Invoke(this, input);
 
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;

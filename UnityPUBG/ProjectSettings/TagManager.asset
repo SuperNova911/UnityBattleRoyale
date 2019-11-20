@@ -8,6 +8,7 @@ TagManager:
   - ItemObject
   - UI
   - Camera
+  - Projectile
   layers:
   - Default
   - TransparentFX

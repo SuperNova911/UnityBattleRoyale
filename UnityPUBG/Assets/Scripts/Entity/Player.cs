@@ -15,6 +15,9 @@ namespace UnityPUBG.Scripts.Entities
     [RequireComponent(typeof(PhotonView))]
     public class Player : Entity, IPunObservable
     {
+        public ProjectileBase projectileBasePrefab;
+        public AmmoData testAmmoData;
+
         [SerializeField, Range(0, 100)] private int maximumShield = 100;
         [SerializeField, Range(0f, 100f)] private float currentShield = 0f;
 
@@ -99,6 +102,11 @@ namespace UnityPUBG.Scripts.Entities
 
             if (photonView.isMine)
             {
+                if (Keyboard.current.fKey.wasPressedThisFrame)
+                {
+                    ProjectileTest();
+                }
+
 #if !UNITY_ANDRIOD
                 //if (Input.GetKeyDown(KeyCode.Mouse0))
                 //{
@@ -285,6 +293,15 @@ namespace UnityPUBG.Scripts.Entities
             {
                 hitObject.OnTakeDamage(damage, damageType);
             }
+        }
+
+        private void ProjectileTest()
+        {
+            var projectileObject = Instantiate(projectileBasePrefab);
+            projectileObject.transform.position = transform.position;
+
+            projectileObject.InitializeProjectile(testAmmoData.ItemName);
+            projectileObject.Fire(transform.forward);
         }
     }
 }

@@ -52,4 +52,5 @@ MonoBehaviour:
   - SetupPathData
   - NotifyLaunchDropShip
   - NotifyPathData
+  - FireProjectile
   DisableAutoOpenWizard: 1

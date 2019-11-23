@@ -73,11 +73,25 @@ namespace UnityPUBG.Scripts.Entities
 
             CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
-            ItemQuickBar = Enumerable.Range(0, quickBarCapacity).Select(e => Item.EmptyItem).ToArray();
+            //ItemQuickBar = Enumerable.Range(0, quickBarCapacity).Select(e => Item.EmptyItem).ToArray();
+            
 
             if (IsMyPlayer)
             {
                 EntityManager.Instance.MyPlayer = this;
+                ItemQuickBar = new Item[quickBarCapacity];
+            }
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+
+            int length = ItemQuickBar.Length;
+
+            for(int i = 0; i<length; i++)
+            {
+                ItemQuickBar[i] = Item.EmptyItem;
             }
         }
 
@@ -196,6 +210,13 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
+            for (int i = 0; i < quickBarCapacity; i++)
+                if (dropItem == ItemQuickBar[i])
+                {
+                    ItemQuickBar[i] = Item.EmptyItem;
+                    break;
+                }
+                    
             var itemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
             if (itemObject == null)
             {
@@ -227,7 +248,17 @@ namespace UnityPUBG.Scripts.Entities
                 slot = Mathf.Clamp(slot, 0, quickBarCapacity);
             }
 
+            for (int i = 0; i < quickBarCapacity; i++)
+                if (ItemQuickBar[i] == item)
+                {
+                    ItemQuickBar[i] = Item.EmptyItem;
+                    break;
+                }
+
             ItemQuickBar[slot] = item;
+
+            UIManager.Instance.UpdateInventorySlots();
+            UIManager.Instance.UpdateQuickSlots();
         }
 
         public void UseItemAtQuickBar(int slot)

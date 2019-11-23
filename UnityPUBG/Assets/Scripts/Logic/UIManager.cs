@@ -27,6 +27,11 @@ namespace UnityPUBG.Scripts.Logic
         /// </summary>
         [SerializeField]
         private GameObject inventoryWindow;
+        /// <summary>
+        /// 퀵슬롯
+        /// </summary>
+        [SerializeField]
+        private GameObject quickSlot;
 
         private void Awake()
         {
@@ -86,6 +91,21 @@ namespace UnityPUBG.Scripts.Logic
             for(int i = 0; i<length; i++)
             {
                 itemSlots[i].UpdateSlotObject();
+            }
+        }
+
+        /// <summary>
+        /// 퀵슬롯을 업데이트 함
+        /// </summary>
+        public void UpdateQuickSlots()
+        {
+            UI.QuickItemSlot[] quickItemSlots = quickSlot.transform.GetComponentsInChildren<UI.QuickItemSlot>();
+
+            int length = quickItemSlots.Length;
+
+            for(int i = 0; i<length; i++)
+            {
+                quickItemSlots[i].UpdateQuickItemSlot();
             }
         }
 

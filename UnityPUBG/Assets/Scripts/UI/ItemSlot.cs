@@ -32,7 +32,6 @@ namespace UnityPUBG.Scripts.UI
         /// </summary>
         [SerializeField]
         private Sprite emptySlotImage;
-        //private GameObject slotObject = null;
 
         /// <summary>
         /// 현재 슬롯 이미지
@@ -49,12 +48,14 @@ namespace UnityPUBG.Scripts.UI
 
             slotImage = transform.GetChild(0).GetComponent<Image>();
 
-            Debug.Log(slotImage.gameObject);
+            //Debug.Log(slotImage.gameObject);
         }
 
         private void Start()
         {
             slotImage.sprite = emptySlotImage;
+
+            UpdateSlotObject();
         }
 
         private void OnEnable()
@@ -138,15 +139,23 @@ namespace UnityPUBG.Scripts.UI
                 {
                     return;
                 }
-                //쓰레기통에 놓은 경우
+                //다른 곳에 놓은 경우
                 else
                 {
+                    var item = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
+                    //쓰레기 통에 넣은 경우
                     if (results[0].gameObject.name == "TrashCanBackGround")
-                    {
-                        var dropItem = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
-                        EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, dropItem.CurrentStack);
+                    {                        
+                        EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, item.CurrentStack);
 
                         UIManager.Instance.UpdateInventorySlots();
+                        UIManager.Instance.UpdateQuickSlots();
+                    }
+                    //퀵슬롯에 넣은 경우
+                    else if(results[0].gameObject.name == "QuickItemSlot")
+                    {
+                        int assignedItemSlotIndex = results[0].gameObject.transform.GetSiblingIndex();
+                        EntityManager.Instance.MyPlayer.AssignItemToQuickBar(assignedItemSlotIndex, item);
                     }
                 }
             }

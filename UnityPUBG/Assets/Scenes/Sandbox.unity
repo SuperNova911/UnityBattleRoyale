@@ -7718,6 +7718,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptySlotImage: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2, type: 3}
+  quickBackGroundImage: {fileID: 21300000, guid: 9f05a238a2a6849ed9804a7b84ce1093,
+    type: 3}
 --- !u!4 &419756378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3908805739431913725, guid: dc9a70325f5396446aab164ea6854ceb,
@@ -12437,6 +12439,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptySlotImage: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2, type: 3}
+  quickBackGroundImage: {fileID: 21300000, guid: 9f05a238a2a6849ed9804a7b84ce1093,
+    type: 3}
 --- !u!1001 &652288033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14886,6 +14890,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptySlotImage: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2, type: 3}
+  quickBackGroundImage: {fileID: 21300000, guid: 9f05a238a2a6849ed9804a7b84ce1093,
+    type: 3}
 --- !u!1001 &787007488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23891,6 +23897,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptySlotImage: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2, type: 3}
+  quickBackGroundImage: {fileID: 21300000, guid: 9f05a238a2a6849ed9804a7b84ce1093,
+    type: 3}
 --- !u!4 &1278032802 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3908805739431913725, guid: dc9a70325f5396446aab164ea6854ceb,
@@ -31756,6 +31764,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptySlotImage: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2, type: 3}
+  quickBackGroundImage: {fileID: 21300000, guid: 9f05a238a2a6849ed9804a7b84ce1093,
+    type: 3}
 --- !u!4 &1694807003 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3908805739431913725, guid: dc9a70325f5396446aab164ea6854ceb,
@@ -31942,6 +31952,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptySlotImage: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2, type: 3}
+  quickBackGroundImage: {fileID: 21300000, guid: 9f05a238a2a6849ed9804a7b84ce1093,
+    type: 3}
 --- !u!1001 &1704120402
 PrefabInstance:
   m_ObjectHideFlags: 0

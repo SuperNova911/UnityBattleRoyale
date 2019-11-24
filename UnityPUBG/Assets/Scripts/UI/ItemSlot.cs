@@ -38,6 +38,22 @@ namespace UnityPUBG.Scripts.UI
         /// </summary>
         private Image slotImage = null;
 
+        /// <summary>
+        /// 현재 백그라운드 이미지
+        /// </summary>
+        private Image backGroundImage = null;
+
+        /// <summary>
+        /// 기본 백그라운드 이미지
+        /// </summary>
+        private Sprite defaultBackGroundImage = null;
+        
+        /// <summary>
+        /// 퀵슬롯 백그라운드 이미지
+        /// </summary>
+        [SerializeField]
+        private Sprite quickBackGroundImage = null;
+
 
         #region Unity 콜백
         private void Awake()
@@ -47,6 +63,9 @@ namespace UnityPUBG.Scripts.UI
             planeDistance = transform.root.GetComponent<Canvas>().planeDistance;
 
             slotImage = transform.GetChild(0).GetComponent<Image>();
+
+            backGroundImage = GetComponent<Image>();
+            defaultBackGroundImage = backGroundImage.sprite;
 
             //Debug.Log(slotImage.gameObject);
         }
@@ -89,6 +108,19 @@ namespace UnityPUBG.Scripts.UI
             else
             {
                 slotImage.sprite = item.Data.Icon;
+
+                
+                int length = EntityManager.Instance.MyPlayer.ItemQuickBar.Length;
+                for (int i = 0; i<length; i++)
+                {
+                    if(EntityManager.Instance.MyPlayer.ItemQuickBar[i] == item)
+                    {
+                        backGroundImage.sprite = quickBackGroundImage;
+                        return;
+                    }
+                }
+
+                backGroundImage.sprite = defaultBackGroundImage;
             }
         }
 

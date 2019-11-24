@@ -15,6 +15,9 @@ namespace UnityPUBG.Scripts.Entities
     [RequireComponent(typeof(PhotonView))]
     public class Player : Entity, IPunObservable
     {
+        public ProjectileBase projectileBasePrefab;
+        public AmmoData testAmmoData;
+
         [SerializeField, Range(0, 100)] private int maximumShield = 100;
         [SerializeField, Range(0f, 100f)] private float currentShield = 0f;
 
@@ -70,11 +73,25 @@ namespace UnityPUBG.Scripts.Entities
 
             CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
-            ItemQuickBar = Enumerable.Range(0, quickBarCapacity).Select(e => Item.EmptyItem).ToArray();
+            //ItemQuickBar = Enumerable.Range(0, quickBarCapacity).Select(e => Item.EmptyItem).ToArray();
+            
 
             if (IsMyPlayer)
             {
                 EntityManager.Instance.MyPlayer = this;
+                ItemQuickBar = new Item[quickBarCapacity];
+            }
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+
+            int length = ItemQuickBar.Length;
+
+            for(int i = 0; i<length; i++)
+            {
+                ItemQuickBar[i] = Item.EmptyItem;
             }
         }
 
@@ -99,6 +116,11 @@ namespace UnityPUBG.Scripts.Entities
 
             if (photonView.isMine)
             {
+                if (Keyboard.current.fKey.wasPressedThisFrame)
+                {
+                    ProjectileTest();
+                }
+
 #if !UNITY_ANDRIOD
                 //if (Input.GetKeyDown(KeyCode.Mouse0))
                 //{
@@ -188,6 +210,13 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
+            for (int i = 0; i < quickBarCapacity; i++)
+                if (dropItem == ItemQuickBar[i])
+                {
+                    ItemQuickBar[i] = Item.EmptyItem;
+                    break;
+                }
+                    
             var itemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
             if (itemObject == null)
             {
@@ -219,7 +248,17 @@ namespace UnityPUBG.Scripts.Entities
                 slot = Mathf.Clamp(slot, 0, quickBarCapacity);
             }
 
+            for (int i = 0; i < quickBarCapacity; i++)
+                if (ItemQuickBar[i] == item)
+                {
+                    ItemQuickBar[i] = Item.EmptyItem;
+                    break;
+                }
+
             ItemQuickBar[slot] = item;
+
+            UIManager.Instance.UpdateInventorySlots();
+            UIManager.Instance.UpdateQuickSlots();
         }
 
         public void UseItemAtQuickBar(int slot)
@@ -285,6 +324,15 @@ namespace UnityPUBG.Scripts.Entities
             {
                 hitObject.OnTakeDamage(damage, damageType);
             }
+        }
+
+        private void ProjectileTest()
+        {
+            var projectileObject = Instantiate(projectileBasePrefab);
+            projectileObject.transform.position = transform.position;
+
+            projectileObject.InitializeProjectile(testAmmoData.ItemName);
+            projectileObject.Fire(transform.forward);
         }
     }
 }

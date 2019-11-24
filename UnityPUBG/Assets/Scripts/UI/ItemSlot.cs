@@ -32,12 +32,27 @@ namespace UnityPUBG.Scripts.UI
         /// </summary>
         [SerializeField]
         private Sprite emptySlotImage;
-        //private GameObject slotObject = null;
 
         /// <summary>
         /// 현재 슬롯 이미지
         /// </summary>
         private Image slotImage = null;
+
+        /// <summary>
+        /// 현재 백그라운드 이미지
+        /// </summary>
+        private Image backGroundImage = null;
+
+        /// <summary>
+        /// 기본 백그라운드 이미지
+        /// </summary>
+        private Sprite defaultBackGroundImage = null;
+        
+        /// <summary>
+        /// 퀵슬롯 백그라운드 이미지
+        /// </summary>
+        [SerializeField]
+        private Sprite quickBackGroundImage = null;
 
 
         #region Unity 콜백
@@ -49,12 +64,17 @@ namespace UnityPUBG.Scripts.UI
 
             slotImage = transform.GetChild(0).GetComponent<Image>();
 
-            Debug.Log(slotImage.gameObject);
+            backGroundImage = GetComponent<Image>();
+            defaultBackGroundImage = backGroundImage.sprite;
+
+            //Debug.Log(slotImage.gameObject);
         }
 
         private void Start()
         {
             slotImage.sprite = emptySlotImage;
+
+            UpdateSlotObject();
         }
 
         private void OnEnable()
@@ -88,6 +108,19 @@ namespace UnityPUBG.Scripts.UI
             else
             {
                 slotImage.sprite = item.Data.Icon;
+
+                
+                int length = EntityManager.Instance.MyPlayer.ItemQuickBar.Length;
+                for (int i = 0; i<length; i++)
+                {
+                    if(EntityManager.Instance.MyPlayer.ItemQuickBar[i] == item)
+                    {
+                        backGroundImage.sprite = quickBackGroundImage;
+                        return;
+                    }
+                }
+
+                backGroundImage.sprite = defaultBackGroundImage;
             }
         }
 
@@ -138,15 +171,23 @@ namespace UnityPUBG.Scripts.UI
                 {
                     return;
                 }
-                //쓰레기통에 놓은 경우
+                //다른 곳에 놓은 경우
                 else
                 {
+                    var item = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
+                    //쓰레기 통에 넣은 경우
                     if (results[0].gameObject.name == "TrashCanBackGround")
-                    {
-                        var dropItem = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
-                        EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, dropItem.CurrentStack);
+                    {                        
+                        EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, item.CurrentStack);
 
                         UIManager.Instance.UpdateInventorySlots();
+                        UIManager.Instance.UpdateQuickSlots();
+                    }
+                    //퀵슬롯에 넣은 경우
+                    else if(results[0].gameObject.name == "QuickItemSlot")
+                    {
+                        int assignedItemSlotIndex = results[0].gameObject.transform.GetSiblingIndex();
+                        EntityManager.Instance.MyPlayer.AssignItemToQuickBar(assignedItemSlotIndex, item);
                     }
                 }
             }

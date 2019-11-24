@@ -39704,7 +39704,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: db851b323b82ef642b1d391b5c75eca7, type: 2}
+      objectReference: {fileID: 9100000, guid: 9d7139a0cf364c141bf459028be94c44, type: 2}
+    - target: {fileID: 251370033499978358, guid: e0566180537794649b98b41c66b507bb,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 251370033499978358, guid: e0566180537794649b98b41c66b507bb,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1330880535016543195, guid: e0566180537794649b98b41c66b507bb,
         type: 3}
       propertyPath: viewIdField

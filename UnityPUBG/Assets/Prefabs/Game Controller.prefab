@@ -51,8 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9812baba6e6f29d4ba9095367487bcf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropShipPrefab: {fileID: 99213045809030773, guid: 7001594cf5e1c8948bc1b21f6b11130a,
-    type: 3}
   photonView: {fileID: 9173340600907604455}
 --- !u!114 &9173340600907604458
 MonoBehaviour:
@@ -91,6 +89,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7233b206b81c9aa4e995a9320a9de417, type: 2}
   - {fileID: 11400000, guid: edb563fd74979984d819dda670004e5c, type: 2}
   - {fileID: 11400000, guid: 1a70022cdfa807c469b9e3cf3edef376, type: 2}
+  - {fileID: 11400000, guid: 7ea09c8f9a91a7d4f8a7a18a27d62fc9, type: 2}
+  - {fileID: 11400000, guid: 14b8f84e37377144ea2814e48519f201, type: 2}
+  - {fileID: 11400000, guid: 3b07f10c47b9f4e4c9ff8921b86a46f3, type: 2}
+  - {fileID: 11400000, guid: 0ad32e5135ff34a46b18f64db5564c54, type: 2}
+  - {fileID: 11400000, guid: fb6cd7c9be7a21c4fb33f93a258b7a9e, type: 2}
+  - {fileID: 11400000, guid: a665369fda98507439ffcc2701c69a3c, type: 2}
 --- !u!114 &9173340600907604459
 MonoBehaviour:
   m_ObjectHideFlags: 0

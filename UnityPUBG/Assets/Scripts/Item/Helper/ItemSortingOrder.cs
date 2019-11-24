@@ -13,7 +13,7 @@ namespace UnityPUBG.Scripts.Items
         Backpack = 200,
         MeleeWeapon = 300,
         RangeWeapon = 400,
-        HealthKit = 500,
+        HealingKit = 500, PhoenixKit = 510, ShieldKit = 520, HealthKit = 530,
         Ammo = 600,
     }
 }

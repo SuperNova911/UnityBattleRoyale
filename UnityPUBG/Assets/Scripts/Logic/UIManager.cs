@@ -36,19 +36,9 @@ namespace UnityPUBG.Scripts.Logic
             RingSystem.Instance.OnRoundStart += DisplayRoundStartMessage;
             RingSystem.Instance.OnRingCloseStart += DisplayRingCloseStartMessage;
         }
-
-        private void FixedUpdate()
-        {
-            //// 디버깅을 편하게 하기 위해 키보드 컨트롤
-            //var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            //if (direction != Vector2.zero)
-            //{
-            //    EntityManager.Instance.MyPlayer.MoveTo(direction.normalized);
-            //}
-        }
-
+        
         /// <summary>
-        /// 미니맵과 조이스틱 들
+        /// 일반 게임플레이시 보이는 UI 요소
         /// </summary>
         [SerializeField]
         private GameObject normalUIElements;

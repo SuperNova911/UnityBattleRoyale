@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,26 +74,22 @@ namespace UnityPUBG.Scripts.Entities
 
             CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
+            ItemQuickBar = new Item[quickBarCapacity];
+            for (int slot = 0; slot < ItemQuickBar.Length; slot++)
+            {
+                ItemQuickBar[slot] = Item.EmptyItem;
+            }
             //ItemQuickBar = Enumerable.Range(0, quickBarCapacity).Select(e => Item.EmptyItem).ToArray();
             
-
             if (IsMyPlayer)
             {
                 EntityManager.Instance.MyPlayer = this;
-                ItemQuickBar = new Item[quickBarCapacity];
             }
         }
 
         protected override void Start()
         {
             base.Start();
-
-            int length = ItemQuickBar.Length;
-
-            for(int i = 0; i<length; i++)
-            {
-                ItemQuickBar[i] = Item.EmptyItem;
-            }
         }
 
         protected override void Update()
@@ -210,23 +207,16 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            for (int i = 0; i < quickBarCapacity; i++)
-                if (dropItem == ItemQuickBar[i])
-                {
-                    ItemQuickBar[i] = Item.EmptyItem;
-                    break;
-                }
-                    
-            var itemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
-            if (itemObject == null)
+            var dropItemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
+            if (dropItemObject == null)
             {
                 return;
             }
+            dropItemObject.AllowAutoLoot = false;
 
-            itemObject.AllowAutoLoot = false;
-
+            // 무작위 방향으로 던짐
             Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
-            var itemObjectRigidbody = itemObject.GetComponent<Rigidbody>();
+            var itemObjectRigidbody = dropItemObject.GetComponent<Rigidbody>();
             if (itemObjectRigidbody != null)
             {
                 float force = 6f;
@@ -244,16 +234,9 @@ namespace UnityPUBG.Scripts.Entities
             
             if (slot < 0 || slot >= quickBarCapacity)
             {
-                Debug.LogWarning($", {nameof(slot)}: {slot}");
-                slot = Mathf.Clamp(slot, 0, quickBarCapacity);
+                Debug.LogWarning($"퀵바의 범위를 벗어나는 슬롯 인덱스, {nameof(slot)}: {slot}");
+                slot = Mathf.Clamp(slot, 0, quickBarCapacity - 1);
             }
-
-            for (int i = 0; i < quickBarCapacity; i++)
-                if (ItemQuickBar[i] == item)
-                {
-                    ItemQuickBar[i] = Item.EmptyItem;
-                    break;
-                }
 
             ItemQuickBar[slot] = item;
 
@@ -263,12 +246,103 @@ namespace UnityPUBG.Scripts.Entities
 
         public void UseItemAtQuickBar(int slot)
         {
+            if (slot < 0 || slot >= quickBarCapacity)
+            {
+                Debug.LogWarning($"퀵바의 범위를 벗어나는 슬롯 인덱스, {nameof(slot)}: {slot}");
+                slot = Mathf.Clamp(slot, 0, quickBarCapacity - 1);
+            }
 
+            var selectedItem = ItemQuickBar[slot];
+            if (selectedItem.IsStackEmpty)
+            {
+                return;
+            }
+
+            switch (selectedItem.Data)
+            {
+                case ConsumableItemData consumable:
+                    StartCoroutine(TryConsumeItem(selectedItem));
+                    break;
+
+                case WeaponData weapon:
+                    // switch weapon
+                    break;
+            }
         }
 
         public void UseItemAtItemContainer(int slot)
         {
 
+        }
+
+        // TODO: 아이템 사용 시전 중단 기능
+        private IEnumerator TryConsumeItem(Item consumableItem)
+        {
+            if (consumableItem.IsStackEmpty)
+            {
+                Debug.LogWarning($"빈 아이템을 사용하려고 하고 있습니다");
+                yield return null;
+            }
+
+            if ((consumableItem.Data is ConsumableItemData) == false)
+            {
+                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableItemData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
+                yield return null;
+            }
+            var consumableItemData = consumableItem.Data as ConsumableItemData;
+
+            // 아이템 사용 시전
+            float startTime = Time.time;
+            float endTime = startTime + consumableItemData.TimeToUse;
+            float progress = 0f;
+            while (Time.time <= endTime)
+            {
+                // TODO: 플레이어 이동속도 느려지게, UI와 동기화
+                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
+                Debug.Log($"RemainTime: {endTime - Time.time}, Progress: {progress}");
+                yield return null;
+            }
+
+            // 아이템 사용
+            ConsumeItem(consumableItem);
+        }
+
+        private void ConsumeItem(Item consumableItem)
+        {
+            if (consumableItem.IsStackEmpty)
+            {
+                Debug.LogWarning($"사용하려고 하는 아이템이 비어 있습니다");
+                return;
+            }
+
+            var consumableItemData = consumableItem.Data as ConsumableItemData;
+            switch (consumableItemData)
+            {
+                case HealingKitData healingKit:
+                    CurrentHealth += healingKit.HealthRestoreAmount;
+                    CurrentShield += healingKit.ShieldRestoreAmount;
+                    break;
+
+                default:
+                    Debug.LogWarning($"관리되지 않고 있는 {nameof(ItemData)}입니다, {consumableItem.Data.GetType().Name}");
+                    return;
+            }
+
+            // TODO ItemContainer에서 스택 개수 줄이기
+            if (ItemContainer.HasItem(consumableItemData.ItemName) == false)
+            {
+                Debug.LogWarning($"사용하려고 하는 아이템이 {nameof(ItemContainer)}에 없습니다, {nameof(consumableItemData.ItemName)}: {consumableItemData.ItemName}");
+                return;
+            }
+
+            for (int slot = 0; slot < ItemContainer.Count; slot++)
+            {
+                var targetItem = ItemContainer.FindItem(slot);
+                if (targetItem == consumableItem)
+                {
+                    ItemContainer.SubtrackItemAtSlot(slot);
+                }
+            }
         }
 
         // 테스트 전용

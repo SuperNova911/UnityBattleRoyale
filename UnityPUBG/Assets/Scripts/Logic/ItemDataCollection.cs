@@ -11,8 +11,10 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class ItemDataCollection : Singleton<ItemDataCollection>
     {
+        [SerializeField] private EmptyItemData emptyItemData;
         [SerializeField] private List<ItemData> itemDataCollection = new List<ItemData>();
 
+        public EmptyItemData EmptyItemData => emptyItemData;
         /// <summary>
         /// 등록된 모든 아이템들이 있는 ReadOnlyCollection
         /// </summary>

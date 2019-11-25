@@ -211,22 +211,45 @@ namespace UnityPUBG.Scripts.Logic
 
         private IEnumerator DisplayRoundMessage(string message, string subMessage, float visibleDuration)
         {
+            // 투명하게 시작
+            Color previousColor = roundMessage.color;
+            Color transparentColor = roundMessage.color;
+            transparentColor.a = 0f;
+            roundMessage.color = transparentColor;
+            roundSubMessage.color = transparentColor;
+
             roundMessage.text = message;
             roundSubMessage.text = subMessage;
-            yield return new WaitForSeconds(visibleDuration);
 
-            Color previousColor = roundMessage.color;
+            // 천천히 보이기
             float startTime = Time.time;
             float endTime = startTime + 0.5f;
-            float progress = 1f;
-            while (progress > 0)
+            float progress = 0f;
+            while (progress < 1f)
             {
                 Color newColor = roundMessage.color;
                 newColor.a = progress;
                 roundMessage.color = newColor;
                 roundSubMessage.color = newColor;
 
-                progress = Mathf.InverseLerp(endTime, startTime, Time.time);
+                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(visibleDuration);
+
+            // 천천히 사라지기
+            startTime = Time.time;
+            endTime = startTime + 0.5f;
+            progress = 0f;
+            while (progress < 1f)
+            {
+                Color newColor = roundMessage.color;
+                newColor.a = 1f - progress;
+                roundMessage.color = newColor;
+                roundSubMessage.color = newColor;
+
+                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
                 yield return null;
             }
 

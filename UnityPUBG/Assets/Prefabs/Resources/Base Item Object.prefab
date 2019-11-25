@@ -77,8 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4e13db3a3b91e647baedfbf8ed02342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  textMesh: {fileID: 4494229198756766075}
+  currentStackDebugText: {fileID: 4494229198756766075}
 --- !u!114 &-8900044062355274941
 MonoBehaviour:
   m_ObjectHideFlags: 0

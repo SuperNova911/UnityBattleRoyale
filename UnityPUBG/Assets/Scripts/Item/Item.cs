@@ -4,12 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.Items
 {
     public class Item : IComparable<Item>, ICloneable
     {
-        public static readonly EmptyItem EmptyItem = new EmptyItem();
+        private static EmptyItem emptyItem = null;
+        public static EmptyItem EmptyItem
+        {
+            get
+            {
+                if (emptyItem == null)
+                {
+                    emptyItem = new EmptyItem(ItemDataCollection.Instance.EmptyItemData);
+                }
+
+                return emptyItem;
+            }
+        }
 
         private ItemData data;
         private int currentStack;
@@ -29,13 +42,12 @@ namespace UnityPUBG.Scripts.Items
             get { return currentStack; }
             protected set
             {
-                if (value < 0 || data.MaximumStack < value)
+                currentStack = value;
+                if (currentStack < 0 || data.MaximumStack < currentStack)
                 {
                     Debug.LogError($"허용된 스택의 범위를 벗어난 값입니다, value: {value}");
-                    currentStack = Mathf.Clamp(value, 0, data.MaximumStack);
+                    currentStack = Mathf.Clamp(currentStack, 0, data.MaximumStack);
                 }
-
-                currentStack = value;
             }
         }
 

@@ -15,7 +15,7 @@ namespace UnityPUBG.Scripts.Items
     public class ItemObject : MonoBehaviour
     {
         // 스택 개수 테스트용
-        public TextMesh textMesh;
+        public TextMesh currentStackDebugText;
 
         private Item item = null;
         private PhotonView photonView;
@@ -25,15 +25,22 @@ namespace UnityPUBG.Scripts.Items
             get { return item; }
             set
             {
-                if (item == null || item.Data.ItemName.Equals(value.Data.ItemName) == false)
+                if (value == null)
                 {
-                    DestroyAllChild();
-                    SpawnItemModel(value);
+                    Debug.LogError($"{nameof(Item)}에는 null값을 할당할 수 없습니다, {nameof(PhotonViewId)}: {PhotonViewId}");
+                    return;
                 }
 
+                var previoudItem = item;
                 item = value;
+                if (previoudItem == null || item.Data.ItemName.Equals(previoudItem.Data.ItemName) == false)
+                {
+                    DestroyAllChild();
+                    SpawnItemModel(item);
+                }
             }
         }
+
         public int PhotonViewId { get { return photonView.viewID; } }
         public GameObject ModelObject { get; private set; }
         public bool AllowAutoLoot { get; set; } = true;
@@ -42,11 +49,6 @@ namespace UnityPUBG.Scripts.Items
         private void Awake()
         {
             photonView = GetComponent<PhotonView>();
-        }
-
-        private void Update()
-        {
-            textMesh.text = Item.CurrentStack.ToString();
         }
         #endregion
 
@@ -97,6 +99,12 @@ namespace UnityPUBG.Scripts.Items
             }
 
             ModelObject = Instantiate(item.Data.Model, transform);
+        }
+
+        // 디버깅용 메서드
+        private void UpdateCurrentStackDebugText()
+        {
+            currentStackDebugText.text = item.CurrentStack.ToString();
         }
 
         [PunRPC]

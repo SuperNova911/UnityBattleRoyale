@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a14fa94297bf14580bca8237e26c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emptyItemData: {fileID: 11400000, guid: e6d069eb9f5fcf44791167ca93035d39, type: 2}
   itemDataCollection:
   - {fileID: 11400000, guid: 6e45ac8e92bf3cf49a6476a56fa37ae0, type: 2}
   - {fileID: 11400000, guid: 026b844bd23719a4b9425aad604a0f15, type: 2}

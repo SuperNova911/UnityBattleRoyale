@@ -33074,7 +33074,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a951a0db1f4aa44fa6f34e1c2e1d924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerOwner: {fileID: 0}
   debugText: {fileID: 1230559337}
 --- !u!1001 &1771701252
 PrefabInstance:
@@ -39835,6 +39834,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RenderShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 324033114654909635, guid: e2c21cd6693f2be47b0a9ee00f41675e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2c21cd6693f2be47b0a9ee00f41675e, type: 3}

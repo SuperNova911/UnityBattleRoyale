@@ -79,8 +79,7 @@ namespace UnityPUBG.Scripts.Entities
             {
                 ItemQuickBar[slot] = Item.EmptyItem;
             }
-            //ItemQuickBar = Enumerable.Range(0, quickBarCapacity).Select(e => Item.EmptyItem).ToArray();
-            
+
             if (IsMyPlayer)
             {
                 EntityManager.Instance.MyPlayer = this;

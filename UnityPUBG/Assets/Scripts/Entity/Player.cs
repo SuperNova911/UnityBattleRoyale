@@ -222,6 +222,10 @@ namespace UnityPUBG.Scripts.Entities
                 float force = 6f;
                 itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
             }
+
+
+            UIManager.Instance.UpdateInventorySlots();
+            UIManager.Instance.UpdateQuickSlots();
         }
 
         public void AssignItemToQuickBar(int slot, Item item)
@@ -236,6 +240,16 @@ namespace UnityPUBG.Scripts.Entities
             {
                 Debug.LogWarning($"퀵바의 범위를 벗어나는 슬롯 인덱스, {nameof(slot)}: {slot}");
                 slot = Mathf.Clamp(slot, 0, quickBarCapacity - 1);
+            }
+
+            //퀵슬롯에 동일한 아이템이 들어가있지 않도록 함
+            for (int i = 0; i < quickBarCapacity; i++)
+            {
+                if (ItemQuickBar[i] == item)
+                {
+                    ItemQuickBar[i] = Item.EmptyItem;
+                    break;
+                }
             }
 
             ItemQuickBar[slot] = item;

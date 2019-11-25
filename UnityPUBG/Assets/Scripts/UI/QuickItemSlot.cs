@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityPUBG.Scripts.Items;
+using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.UI
 {
@@ -10,8 +13,8 @@ namespace UnityPUBG.Scripts.UI
         /// 퀵슬롯 인덱스
         /// 시블링 인덱스와 같다.
         /// </summary>
-        private int quickslotIndex;
-        private UnityEngine.UI.Image iconImage;
+        private int quickSlotIndex;
+        private Image iconImage;
 
         /// <summary>
         /// 빈 슬롯 이미지
@@ -20,17 +23,15 @@ namespace UnityPUBG.Scripts.UI
         private Sprite emptySlotImage;
 
         #region Unity 콜백
-
         private void Awake()
         {
-            iconImage = transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
+            iconImage = transform.GetChild(0).GetComponent<Image>();
         }
 
         private void Start()
         {
-            quickslotIndex = transform.GetSiblingIndex();
+            quickSlotIndex = transform.GetSiblingIndex();
         }
-
         #endregion
 
         /// <summary>
@@ -38,17 +39,17 @@ namespace UnityPUBG.Scripts.UI
         /// </summary>
         public void UpdateQuickItemSlot()
         {
-            quickslotIndex = transform.GetSiblingIndex();
-            Items.Item item = Logic.EntityManager.Instance.MyPlayer.ItemQuickBar[quickslotIndex];
+            quickSlotIndex = transform.GetSiblingIndex();
+            Item quickSlotItem = EntityManager.Instance.MyPlayer.ItemQuickBar[quickSlotIndex];
             //Sprite icon = Logic.EntityManager.Instance.MyPlayer.ItemQuickBar[quickslotIndex].Data.Icon;
 
-            if (item.Data.Icon != null && item.CurrentStack != 0)
-                iconImage.sprite = item.Data.Icon;
-            else
+            if (quickSlotItem.Data.Icon == null)
             {
-                item = Items.Item.EmptyItem;
+                Debug.LogWarning($"{quickSlotItem.Data.ItemName}의 {nameof(quickSlotItem.Data.Icon)}이 null 입니다");
                 iconImage.sprite = emptySlotImage;
             }
+
+            iconImage.sprite = quickSlotItem.IsStackEmpty == false ? quickSlotItem.Data.Icon : emptySlotImage;
         }
     }
 }

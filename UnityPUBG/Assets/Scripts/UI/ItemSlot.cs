@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.UI
@@ -47,13 +48,12 @@ namespace UnityPUBG.Scripts.UI
         /// 기본 백그라운드 이미지
         /// </summary>
         private Sprite defaultBackGroundImage = null;
-        
+
         /// <summary>
         /// 퀵슬롯 백그라운드 이미지
         /// </summary>
         [SerializeField]
         private Sprite quickBackGroundImage = null;
-
 
         #region Unity 콜백
         private void Awake()
@@ -85,7 +85,9 @@ namespace UnityPUBG.Scripts.UI
         private void OnDisable()
         {
             if (slotImage.sprite != emptySlotImage)
+            {
                 slotImage.sprite = emptySlotImage;
+            }
         }
         #endregion
 
@@ -96,24 +98,26 @@ namespace UnityPUBG.Scripts.UI
         {
             siblingIndex = transform.GetSiblingIndex();
 
-            Items.Item item = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
+            var targetPlayer = EntityManager.Instance.MyPlayer;
+            Item inventoryItem = targetPlayer.ItemContainer.FindItem(siblingIndex);
 
             if (slotImage.sprite != emptySlotImage)
-                slotImage.sprite = emptySlotImage;
-
-            if (item == Items.Item.EmptyItem)
             {
-                    return;
+                slotImage.sprite = emptySlotImage;
+            }
+
+            if (inventoryItem == Item.EmptyItem)
+            {
+                return;
             }
             else
             {
-                slotImage.sprite = item.Data.Icon;
+                slotImage.sprite = inventoryItem.Data.Icon;
 
-                
-                int length = EntityManager.Instance.MyPlayer.ItemQuickBar.Length;
-                for (int i = 0; i<length; i++)
+                int quickBarLength = targetPlayer.ItemQuickBar.Length;
+                for (int quickBarSlot = 0; quickBarSlot < quickBarLength; quickBarSlot++)
                 {
-                    if(EntityManager.Instance.MyPlayer.ItemQuickBar[i] == item)
+                    if (targetPlayer.ItemQuickBar[quickBarSlot] == inventoryItem)
                     {
                         backGroundImage.sprite = quickBackGroundImage;
                         return;
@@ -131,10 +135,10 @@ namespace UnityPUBG.Scripts.UI
             {
                 isDrag = false;
                 return;
-            }           
+            }
 
             originPosition = transform.position;
-            
+
             transform.parent.GetComponent<GridLayoutGroup>().enabled = false;
             isDrag = true;
         }
@@ -166,7 +170,7 @@ namespace UnityPUBG.Scripts.UI
                 graphicRaycaster.Raycast(pointerEventData, results);
 
                 isDrag = false;
-                
+
                 if (results.Count <= 0)
                 {
                     return;
@@ -177,14 +181,14 @@ namespace UnityPUBG.Scripts.UI
                     var item = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
                     //쓰레기 통에 넣은 경우
                     if (results[0].gameObject.name == "TrashCanBackGround")
-                    {                        
+                    {
                         EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, item.CurrentStack);
 
                         UIManager.Instance.UpdateInventorySlots();
                         UIManager.Instance.UpdateQuickSlots();
                     }
                     //퀵슬롯에 넣은 경우
-                    else if(results[0].gameObject.name == "QuickItemSlot")
+                    else if (results[0].gameObject.name == "QuickItemSlot")
                     {
                         int assignedItemSlotIndex = results[0].gameObject.transform.GetSiblingIndex();
                         EntityManager.Instance.MyPlayer.AssignItemToQuickBar(assignedItemSlotIndex, item);

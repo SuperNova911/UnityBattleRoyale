@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityPUBG.Scripts.Entities;
+using UnityPUBG.Scripts.UI;
 
 namespace UnityPUBG.Scripts.Logic
 {
@@ -72,12 +73,13 @@ namespace UnityPUBG.Scripts.Logic
         public void UpdateInventorySlots()
         {
             if (!inventoryWindow.activeSelf)
+            {
                 return;
+            }
 
-            UI.ItemSlot[] itemSlots = inventoryWindow.transform.GetComponentsInChildren<UI.ItemSlot>();
+            ItemSlot[] itemSlots = inventoryWindow.transform.GetComponentsInChildren<ItemSlot>();
 
             int length = itemSlots.Length;
-
             for(int i = 0; i<length; i++)
             {
                 itemSlots[i].UpdateSlotObject();
@@ -89,10 +91,9 @@ namespace UnityPUBG.Scripts.Logic
         /// </summary>
         public void UpdateQuickSlots()
         {
-            UI.QuickItemSlot[] quickItemSlots = quickSlot.transform.GetComponentsInChildren<UI.QuickItemSlot>();
+            QuickItemSlot[] quickItemSlots = quickSlot.transform.GetComponentsInChildren<QuickItemSlot>();
 
             int length = quickItemSlots.Length;
-
             for(int i = 0; i<length; i++)
             {
                 quickItemSlots[i].UpdateQuickItemSlot();

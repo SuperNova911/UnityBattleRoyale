@@ -103,13 +103,16 @@ namespace UnityPUBG.Scripts.UI
 
             if (slotImage.sprite != emptySlotImage)
             {
+                //Debug.Log(siblingIndex);
                 slotImage.sprite = emptySlotImage;
             }
 
             if (inventoryItem == Item.EmptyItem)
             {
+                backGroundImage.sprite = defaultBackGroundImage;
                 return;
             }
+
             else
             {
                 slotImage.sprite = inventoryItem.Data.Icon;
@@ -117,7 +120,8 @@ namespace UnityPUBG.Scripts.UI
                 int quickBarLength = targetPlayer.ItemQuickBar.Length;
                 for (int quickBarSlot = 0; quickBarSlot < quickBarLength; quickBarSlot++)
                 {
-                    if (targetPlayer.ItemQuickBar[quickBarSlot] == inventoryItem)
+                    if (!inventoryItem.IsStackEmpty &&
+                        targetPlayer.ItemQuickBar[quickBarSlot] == inventoryItem)
                     {
                         backGroundImage.sprite = quickBackGroundImage;
                         return;
@@ -183,9 +187,6 @@ namespace UnityPUBG.Scripts.UI
                     if (results[0].gameObject.name == "TrashCanBackGround")
                     {
                         EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, item.CurrentStack);
-
-                        UIManager.Instance.UpdateInventorySlots();
-                        UIManager.Instance.UpdateQuickSlots();
                     }
                     //퀵슬롯에 넣은 경우
                     else if (results[0].gameObject.name == "QuickItemSlot")

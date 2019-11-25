@@ -43,13 +43,7 @@ namespace UnityPUBG.Scripts.UI
             Item quickSlotItem = EntityManager.Instance.MyPlayer.ItemQuickBar[quickSlotIndex];
             //Sprite icon = Logic.EntityManager.Instance.MyPlayer.ItemQuickBar[quickslotIndex].Data.Icon;
 
-            if (quickSlotItem.Data.Icon == null)
-            {
-                Debug.LogWarning($"{quickSlotItem.Data.ItemName}의 {nameof(quickSlotItem.Data.Icon)}이 null 입니다");
-                iconImage.sprite = emptySlotImage;
-            }
-
-            iconImage.sprite = quickSlotItem.IsStackEmpty == false ? quickSlotItem.Data.Icon : emptySlotImage;
+            iconImage.sprite = (quickSlotItem.IsStackEmpty == false) ? quickSlotItem.Data.Icon : emptySlotImage;
         }
     }
 }

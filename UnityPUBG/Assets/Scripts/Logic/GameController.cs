@@ -16,6 +16,8 @@ namespace UnityPUBG.Scripts.Logic
 
         private void Awake()
         {
+            SetGraphicOptions();
+
             if (photonView == null)
             {
                 photonView.GetComponent<PhotonView>();
@@ -24,9 +26,6 @@ namespace UnityPUBG.Scripts.Logic
 
         private void Start()
         {
-            QualitySettings.vSyncCount = 0; // 수직동기화 OFF
-            Application.targetFrameRate = 60; // 60프레임
-
             if (PhotonNetwork.isMasterClient)
             {
                 ItemSpawnManager.Instance.SpawnRandomItemsAtSpawnPoints();
@@ -34,6 +33,12 @@ namespace UnityPUBG.Scripts.Logic
                 RingSystem.Instance.GenerateRoundDatas();
                 RingSystem.Instance.StartRingSystem();
             }
+        }
+
+        private void SetGraphicOptions()
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 60;
         }
     }
 }

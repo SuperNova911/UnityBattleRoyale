@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: -6387929660299491319}
   - component: {fileID: -8900044062355274941}
   - component: {fileID: 1842494355794381353}
-  - component: {fileID: 4494229198756766075}
   m_Layer: 10
   m_Name: Base Item Object
   m_TagString: ItemObject
@@ -77,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4e13db3a3b91e647baedfbf8ed02342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStackDebugText: {fileID: 4494229198756766075}
+  readyToLootDelay: 1.5
 --- !u!114 &-8900044062355274941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,25 +142,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!102 &4494229198756766075
-TextMesh:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381209182032475193}
-  m_Text: 1
-  m_OffsetZ: 0
-  m_CharacterSize: 0.1
-  m_LineSpacing: 1
-  m_Anchor: 0
-  m_Alignment: 1
-  m_TabSize: 4
-  m_FontSize: 40
-  m_FontStyle: 0
-  m_RichText: 1
-  m_Font: {fileID: 12800000, guid: cf805a8bc75c695419a238376dd901cc, type: 3}
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295

@@ -76,6 +76,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a14fa94297bf14580bca8237e26c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commonColorData: {fileID: 11400000, guid: 311b8dfc1e2c9ec4fa0702bc8a94517f, type: 2}
+  rareColorData: {fileID: 11400000, guid: 9de94b31baa661b4981b86b70c9b6517, type: 2}
+  epicColorData: {fileID: 11400000, guid: b9c748f6197bc6f4386218b17f3000ec, type: 2}
+  legendaryColorData: {fileID: 11400000, guid: cb4c068eb475d434190595f29ddbddd0, type: 2}
   emptyItemData: {fileID: 11400000, guid: e6d069eb9f5fcf44791167ca93035d39, type: 2}
   itemDataCollection:
   - {fileID: 11400000, guid: 6e45ac8e92bf3cf49a6476a56fa37ae0, type: 2}

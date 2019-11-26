@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityPUBG.Scripts.Utilities;
 using UnityPUBG.Scripts.Logic;
 using UnityEditor;
+using Knife.PostProcessing;
 
 namespace UnityPUBG.Scripts.Items
 {
@@ -15,7 +16,7 @@ namespace UnityPUBG.Scripts.Items
     public class ItemObject : MonoBehaviour
     {
         [Range(1f, 3f)]
-        public float readyToLootDelay = 1.5f;
+        public float readyToLootDelay = 1f;
 
         private Item item = null;
         private PhotonView photonView;
@@ -40,7 +41,7 @@ namespace UnityPUBG.Scripts.Items
                 }
             }
         }
-        public GameObject ModelObject { get; private set; }
+        public GameObject ModelPrefab { get; private set; }
         public bool AllowLoot { get; private set; }
         public int PhotonViewId { get { return photonView.viewID; } }
 
@@ -90,7 +91,7 @@ namespace UnityPUBG.Scripts.Items
 
         private void DestroyAllChild()
         {
-            Destroy(ModelObject);
+            Destroy(ModelPrefab);
             foreach (Transform child in transform)
             {
                 Destroy(child.gameObject);
@@ -104,7 +105,11 @@ namespace UnityPUBG.Scripts.Items
                 return;
             }
 
-            ModelObject = Instantiate(item.Data.Model, transform);
+            ModelPrefab = Instantiate(item.Data.Model, transform);
+
+            var outline = ModelPrefab.AddComponent<OutlineRegister>();
+            var rarityColor = ItemDataCollection.Instance.ItemColorsByRarity[item.Data.Rarity].Color;
+            outline.SetTintColor(rarityColor);
         }
 
         private void ReadyToLoot()

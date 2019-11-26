@@ -16,6 +16,7 @@ MonoBehaviour:
   - {fileID: 114375464177707528}
   - {fileID: 114252324386167986}
   - {fileID: 114519825960210478}
+  - {fileID: 5490442369716245850}
 --- !u!114 &114252324386167986
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1418,3 +1419,61 @@ MonoBehaviour:
   opacity:
     overrideState: 0
     value: 1
+--- !u!114 &5490442369716245850
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a77bcf9cd61fb4785e24ebc083a000, type: 3}
+  m_Name: Outline
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  OutlineGlobalIntensity:
+    overrideState: 1
+    value: 0.5
+  OutlineThickness:
+    overrideState: 1
+    value: 2
+  OutlineFillAmount:
+    overrideState: 1
+    value: 0.2
+  DepthOverlap:
+    overrideState: 1
+    value: 1
+  DepthCulling:
+    overrideState: 1
+    value: 1
+  InvertDepthCulling:
+    overrideState: 1
+    value: 0
+  DepthOutlineBreak:
+    overrideState: 1
+    value: 1
+  CornerOutlines:
+    overrideState: 1
+    value: 1
+  BlurOutline:
+    overrideState: 1
+    value: 0
+  BlurScale:
+    overrideState: 1
+    value: {x: 3, y: 3}
+  Iterations:
+    overrideState: 1
+    value: 3
+  DownsampleSize:
+    overrideState: 1
+    value: 790
+  OverGlow:
+    overrideState: 1
+    value: 2.83
+  Hardness:
+    overrideState: 1
+    value: 0

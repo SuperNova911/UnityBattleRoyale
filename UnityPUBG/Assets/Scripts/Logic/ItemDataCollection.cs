@@ -11,10 +11,22 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class ItemDataCollection : Singleton<ItemDataCollection>
     {
+        [Header("Color")]
+        [SerializeField] private ItemRarityColorData commonColorData;
+        [SerializeField] private ItemRarityColorData rareColorData;
+        [SerializeField] private ItemRarityColorData epicColorData;
+        [SerializeField] private ItemRarityColorData legendaryColorData;
+
+        [Header("Etc")]
         [SerializeField] private EmptyItemData emptyItemData;
+
+        [Header("ItemData")]
         [SerializeField] private List<ItemData> itemDataCollection = new List<ItemData>();
 
         public EmptyItemData EmptyItemData => emptyItemData;
+
+        public ReadOnlyDictionary<ItemRarity, ItemRarityColorData> ItemColorsByRarity { get; private set; }
+
         /// <summary>
         /// 등록된 모든 아이템들이 있는 ReadOnlyCollection
         /// </summary>
@@ -73,6 +85,14 @@ namespace UnityPUBG.Scripts.Logic
         /// </summary>
         private void InitializeCollection()
         {
+            ItemColorsByRarity = new ReadOnlyDictionary<ItemRarity, ItemRarityColorData>(new Dictionary<ItemRarity, ItemRarityColorData>()
+            {
+                { ItemRarity.Common, commonColorData },
+                { ItemRarity.Rare, rareColorData },
+                { ItemRarity.Epic, epicColorData },
+                { ItemRarity.Legendary, legendaryColorData },
+            });
+
             var itemDatas = new List<ItemData>();
             var itemDataByName = new Dictionary<string, ItemData>();
             var itemDatasByType = new Dictionary<Type, IList<ItemData>>();

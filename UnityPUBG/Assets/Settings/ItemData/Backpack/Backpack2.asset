@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Backpack2
   m_EditorClassIdentifier: 
   itemName: Test Backpack 2
-  rarity: 2
+  rarity: 1
   sortingOrder: 200
   model: {fileID: 191356, guid: 7711576e3e684cd46a1e448594218edb, type: 3}
   icon: {fileID: 6061325413636719081, guid: 320895aa46159a24eadfb2a467468fb0, type: 3}
-  maximumStack: 3
-  defaultStack: 2
+  maximumStack: 1
+  defaultStack: 1
   bonusCapacity: 4

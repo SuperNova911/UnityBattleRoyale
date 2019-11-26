@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Armor 4
   m_EditorClassIdentifier: 
   itemName: Test Armor 4
-  rarity: 0
+  rarity: 3
   sortingOrder: 100
   model: {fileID: 129270, guid: ac6cd14505ed91642a974b6e18c353fe, type: 3}
   icon: {fileID: 236646946643517938, guid: cee29bac849de9b40b34022dcd40eafe, type: 3}
-  maximumStack: 7
-  defaultStack: 2
-  shieldAmount: 0
+  maximumStack: 1
+  defaultStack: 1
+  shieldAmount: 100

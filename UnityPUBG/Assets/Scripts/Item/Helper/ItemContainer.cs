@@ -12,20 +12,20 @@ namespace UnityPUBG.Scripts.Items
 {
     public class ItemContainer
     {
-        private readonly List<Item> container;
+        private List<Item> container;
 
         /// <summary>
         /// 매개변수로 받은 값의 크기를 용량으로 가진 아이템 컨테이너를 생성
         /// </summary>
-        /// <param name="capacity">컨테이너의 크기</param>
-        public ItemContainer(int capacity)
+        /// <param name="initialCapacity">컨테이너의 크기</param>
+        public ItemContainer(int initialCapacity)
         {
-            if (capacity < 0)
+            if (initialCapacity < 0)
             {
-                Debug.LogError($"컨테이너의 크기가 0보다 작을 수 없습니다, capacity: {capacity}");
-                capacity = 0;
+                Debug.LogError($"{nameof(ItemContainer)}의 크기가 0보다 작을 수 없습니다, {nameof(initialCapacity)}: {initialCapacity}");
+                initialCapacity = 0;
             }
-            container = new List<Item>(capacity);
+            container = new List<Item>(initialCapacity);
         }
 
         public event EventHandler OnUpdateContainer;
@@ -51,7 +51,7 @@ namespace UnityPUBG.Scripts.Items
 
             if (itemToAdd.IsStackEmpty)
             {
-                Debug.LogWarning("비어있는 아이템은 컨테이너에 넣을 수 없습니다");
+                Debug.LogWarning($"비어있는 아이템은 컨테이너에 넣을 수 없습니다, {nameof(itemToAdd.Data.ItemName)}: {itemToAdd.Data.ItemName}");
                 return itemToAdd;
             }
 
@@ -126,7 +126,7 @@ namespace UnityPUBG.Scripts.Items
             return container.Any(e => e.Data.ItemName == itemName);
         }
 
-        public Item FindItem(int slot)
+        public Item GetItemAt(int slot)
         {
             if (slot < 0 || container.Capacity <= slot)
             {
@@ -140,6 +140,50 @@ namespace UnityPUBG.Scripts.Items
             }
 
             return container[slot];
+        }
+
+        /// <summary>
+        /// 아이템 데이터 이름과 일치하는 아이템을 뒤에서부터 찾아서 반환, 일치하는 아이템이 없으면 EmptyItem 반환 
+        /// </summary>
+        /// <param name="itemName">검색 할 아이템 데이터의 아이템 이름</param>
+        /// <returns>일치하는 아이템 또는 EmptyItem</returns>
+        public Item TryGetItem(string itemName)
+        {
+            var matchItem = container.LastOrDefault(e => e.Data.ItemName.Equals(itemName));
+            return matchItem != null ? matchItem : Item.EmptyItem;
+        }
+
+        /// <summary>
+        /// 컨테이너의 크기를 늘이거나 줄이고 넘친 아이템들은 반환
+        /// </summary>
+        /// <param name="newCapacity">새로운 컨테이너의 크기</param>
+        /// <returns>컨테이너 크기를 변경한 후 넘친 아이템</returns>
+        public List<Item> ResizeCapacity(int newCapacity)
+        {
+            var overflowItems = new List<Item>();
+
+            if (newCapacity < 0)
+            {
+                Debug.LogError($"{nameof(ItemContainer)}의 크기가 0보다 작을 수 없습니다, {nameof(newCapacity)}: {newCapacity}");
+                newCapacity = Mathf.Clamp(newCapacity, 0, int.MaxValue);
+            }
+
+            var newContainer = new List<Item>(newCapacity);
+            for (int index = 0; index < Count && index < Capacity; index++)
+            {
+                if (index < newCapacity)
+                {
+                    newContainer.Add(container[index]);
+                }
+                else
+                {
+                    overflowItems.Add(container[index]);
+                }
+            }
+
+            container = newContainer;
+            OnUpdateContainer?.Invoke(this, EventArgs.Empty);
+            return overflowItems;
         }
     }
 }

@@ -1380,7 +1380,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251370033490515048}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 4a5a8c8ff5d6d2e48ab8d2b27100cf57, type: 3}
   m_Controller: {fileID: 9100000, guid: 9d7139a0cf364c141bf459028be94c44, type: 2}
   m_CullingMode: 1
@@ -1441,7 +1441,7 @@ MonoBehaviour:
   testAmmoData: {fileID: 0}
   maximumShield: 100
   currentShield: 0
-  defaultContainerCapacity: 6
+  defaultContainerCapacity: 4
   speedMultiplyWhenUseItem: 0.5
   quickBarCapacity: 4
 --- !u!114 &1330880535016543195
@@ -4397,7 +4397,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2612202617621133574}
-  - component: {fileID: 6675952765299120366}
   - component: {fileID: 8049019019678275790}
   m_Layer: 0
   m_Name: Player Item Looter
@@ -4420,19 +4419,6 @@ Transform:
   m_Father: {fileID: 251370033490730166}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &6675952765299120366
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5686530042220700473}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8049019019678275790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4445,5 +4431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31805b88b40b95c458562cb4b22a7312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootCollider: {fileID: 6675952765299120366}
+  searchForLootPeriod: 0.2
   lootRadius: 2
+  autoLootRadius: 1
+  lootMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  showLootRadius: 0

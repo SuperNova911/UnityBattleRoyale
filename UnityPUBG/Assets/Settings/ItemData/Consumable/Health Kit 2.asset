@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Health Kit 2
   m_EditorClassIdentifier: 
   itemName: Health Kit 2
-  rarity: 2
+  rarity: 1
   sortingOrder: 500
   model: {fileID: 117842, guid: e8c70921caa540845982d9b5e9f01754, type: 3}
   icon: {fileID: 21300000, guid: 500b3b2d3cddc4efa9cd6423acba7b1c, type: 3}

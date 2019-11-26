@@ -77,7 +77,7 @@ namespace UnityPUBG.Scripts
             stringBuilder.AppendLine($"ItemConainer: Count[{container.Count}/{container.Capacity}]");
             for (int slot = 0; slot < container.Count; slot++)
             {
-                var item = container.FindItem(slot);
+                var item = container.GetItemAt(slot);
                 stringBuilder.Append($"Slot{slot}: ");
                 if (item.IsStackEmpty)
                 {

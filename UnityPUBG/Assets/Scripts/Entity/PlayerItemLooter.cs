@@ -10,87 +10,113 @@ using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.Entities
 {
-    [RequireComponent(typeof(SphereCollider))]
     public class PlayerItemLooter : MonoBehaviour
     {
-        [Range(0.5f, 5f)]
-        public SphereCollider lootCollider;
+        [Range(0.1f, 1f)]
+        public float searchForLootPeriod = 0.2f;
+        [Range(1f, 5f)]
         public float lootRadius = 2f;
+        [Range(1f, 2f)]
+        public float autoLootRadius = 1f;
+        public LayerMask lootMask;
+
+        [Header("Debug")]
+        public bool showLootRadius = false;
 
         private Player player;
+        public List<ItemObject> LootableItemObjects { get; private set; }
 
         #region 유니티 메시지
         private void Awake()
         {
             player = GetComponentInParent<Player>();
-            if (player == null)
-            {
-                Debug.LogError($"{nameof(PlayerItemLooter)}는 부모 오브젝트의 {nameof(Player)} 컴포넌트가 필요합니다");
-            }
-        }
-
-        private void Start()
-        {
             if (player == null || player.IsMyPlayer == false)
             {
                 Destroy(gameObject);
             }
+
+            LootableItemObjects = new List<ItemObject>();
         }
 
-        private void OnTriggerStay(Collider other)
+        private void Start()
         {
-            if (other.CompareTag("ItemObject"))
-            {
-                var targetItemObject = other.GetComponent<ItemObject>();
-                if (targetItemObject != null)
-                {
-                    AutoLootItem(targetItemObject);
-                }
-            }
+            StartCoroutine(SearchLootableItem());
         }
 
-        private void OnValidate()
+        private void OnDrawGizmos()
         {
-            if (lootCollider == null)
+            if (showLootRadius)
             {
-                lootCollider = GetComponent<SphereCollider>();
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(transform.position, lootRadius);
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(transform.position, autoLootRadius);
             }
-            lootCollider.isTrigger = true;
-            lootCollider.radius = lootRadius;
         }
         #endregion
 
-        private void AutoLootItem(ItemObject lootItemObject)
+        private bool IsAutoLootTarget(Item lootItem)
         {
-            if (lootItemObject.AllowAutoLoot == false)
+            if (lootItem.IsStackEmpty)
             {
-                return;
+                return false;
             }
 
-            if (lootItemObject.Item == null)
+            // TODO: 실드 내구도가 더 많이 남아있는 경우도 true
+            if (lootItem.Data is ArmorData)
             {
-                return;
-            }
-
-            int previousStack = lootItemObject.Item.CurrentStack;
-            var remainItem = player.ItemContainer.AddItem(lootItemObject.Item);
-
-            if (previousStack != remainItem.CurrentStack)
-            {
-                LootAnimator.Instance.CreateNewLootAnimation(player, lootItemObject);
-                lootItemObject.Item = remainItem;
-
-                if (lootItemObject.Item.IsStackEmpty)
+                if (player.EquipedArmor == null || player.EquipedArmor.Data.Rarity < lootItem.Data.Rarity)
                 {
-                    lootItemObject.RequestDestroy();
-                }
-                else
-                {
-                    lootItemObject.NotifyUpdateCurrentStack();
+                    return true;
                 }
             }
+            else if (lootItem.Data is BackpackData)
+            {
+                if (player.EquipedBackpack == null || player.EquipedBackpack.Data.Rarity < lootItem.Data.Rarity)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                var sameItemAtContainer = player.ItemContainer.TryGetItem(lootItem.Data.ItemName);
+                if (sameItemAtContainer.IsStackEmpty == false && sameItemAtContainer.IsStackFull == false)
+                {
+                    return true;
+                }
+            }
 
-            UIManager.Instance.UpdateInventorySlots();
+            return false;
+        }
+
+        private IEnumerator SearchLootableItem()
+        {
+            float autoLootSquaredRadius = autoLootRadius * autoLootRadius;
+
+            while (true)
+            {
+                LootableItemObjects.Clear();
+
+                foreach (Collider collider in Physics.OverlapSphere(transform.position, lootRadius, lootMask))
+                {
+                    var collideItemObject = collider.gameObject.GetComponent<ItemObject>();
+                    if (collideItemObject == null || collideItemObject.AllowLoot == false || collideItemObject.Item.IsStackEmpty)
+                    {
+                        continue;
+                    }
+
+                    if ((collideItemObject.transform.position - transform.position).sqrMagnitude <= autoLootSquaredRadius && IsAutoLootTarget(collideItemObject.Item))
+                    {
+                        player.LootItem(collideItemObject);
+                    }
+                    else
+                    {
+                        LootableItemObjects.Add(collideItemObject);
+                    }
+                }
+
+                yield return new WaitForSeconds(searchForLootPeriod);
+            }
         }
     }
 }

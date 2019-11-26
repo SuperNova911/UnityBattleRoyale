@@ -99,7 +99,7 @@ namespace UnityPUBG.Scripts.UI
             siblingIndex = transform.GetSiblingIndex();
 
             var targetPlayer = EntityManager.Instance.MyPlayer;
-            Item inventoryItem = targetPlayer.ItemContainer.FindItem(siblingIndex);
+            Item inventoryItem = targetPlayer.ItemContainer.GetItemAt(siblingIndex);
 
             if (slotImage.sprite != emptySlotImage)
             {
@@ -182,7 +182,7 @@ namespace UnityPUBG.Scripts.UI
                 //다른 곳에 놓은 경우
                 else
                 {
-                    var item = EntityManager.Instance.MyPlayer.ItemContainer.FindItem(siblingIndex);
+                    var item = EntityManager.Instance.MyPlayer.ItemContainer.GetItemAt(siblingIndex);
                     //쓰레기 통에 넣은 경우
                     if (results[0].gameObject.name == "TrashCanBackGround")
                     {

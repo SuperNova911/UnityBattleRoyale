@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shield Kit 2
   m_EditorClassIdentifier: 
   itemName: Shield Kit 2
-  rarity: 2
+  rarity: 1
   sortingOrder: 520
   model: {fileID: 183636, guid: 61a837d5885710b46851772139055ccf, type: 3}
   icon: {fileID: 21300000, guid: a44fd6eb609fd499fb43507f0b08bfb1, type: 3}

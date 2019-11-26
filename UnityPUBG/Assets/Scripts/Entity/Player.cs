@@ -31,6 +31,7 @@ namespace UnityPUBG.Scripts.Entities
 
         private PhotonView photonView;
         private InputManager inputManager;
+        private PlayerItemLooter myItemLooter;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
 
@@ -52,9 +53,9 @@ namespace UnityPUBG.Scripts.Entities
         }
         public ItemContainer ItemContainer { get; private set; }
         public Item[] ItemQuickBar { get; private set; }
-        public WeaponData EquipedWeapon { get; private set; }
-        public ArmorData EquipedArmor { get; private set; }
-        public BackpackData EquipedBackpack { get; private set; }
+        public Item EquipedWeapon { get; private set; }   // TODO: 장착은 메서드로 바꾸기
+        public Item EquipedArmor { get; private set; }
+        public Item EquipedBackpack { get; private set; }
         public Vehicle RidingVehicle { get; private set; }
 
         public int PhotonViewId => photonView.viewID;
@@ -83,6 +84,7 @@ namespace UnityPUBG.Scripts.Entities
             if (IsMyPlayer)
             {
                 EntityManager.Instance.MyPlayer = this;
+                myItemLooter = GetComponentInChildren<PlayerItemLooter>();
             }
         }
 
@@ -100,19 +102,43 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            // Slider test
+            if (Keyboard.current.fKey.wasPressedThisFrame)
+            {
+                if (myItemLooter.LootableItemObjects.Count > 0)
+                {
+                    LootItem(myItemLooter.LootableItemObjects[0]);
+                    myItemLooter.LootableItemObjects.RemoveAt(0);
+                }
+            }
+
             if (Keyboard.current.digit9Key.wasPressedThisFrame)
             {
-                CurrentHealth -= Mathf.PI;
+                var overflows = ItemContainer.ResizeCapacity(ItemContainer.Capacity - 2);
+                foreach (var item in overflows)
+                {
+                    DropItem(item);
+                }
             }
             else if (Keyboard.current.digit8Key.wasPressedThisFrame)
             {
-                CurrentShield -= Mathf.PI;
+                var overflows = ItemContainer.ResizeCapacity(ItemContainer.Capacity + 2);
+                foreach (var item in overflows)
+                {
+                    DropItem(item);
+                }
+            }
+            else if (Keyboard.current.digit7Key.wasPressedThisFrame)
+            {
+                DropBackpack();
+            }
+            else if (Keyboard.current.digit6Key.wasPressedThisFrame)
+            {
+                DropArmor();
             }
 
             if (photonView.isMine)
             {
-                if (Keyboard.current.fKey.wasPressedThisFrame)
+                if (Keyboard.current.spaceKey.wasPressedThisFrame)
                 {
                     ProjectileTest();
                 }
@@ -184,7 +210,139 @@ namespace UnityPUBG.Scripts.Entities
                 attackDirection = new Vector3(direction.x, 0, direction.y);
             }
 
-            MeleeAttackTest(attackDirection.normalized, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+            if (EquipedWeapon is MeleeWeaponData)
+            {
+                // 근접 무기 공격
+            }
+            else if (EquipedWeapon is RangeWeaponData)
+            {
+                // 원거리 무기 공격
+            }
+            else
+            {
+                // 맨손 공격
+                MeleeAttackTest(attackDirection.normalized, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+            }
+        }
+
+        // TODO: 쉴드
+        public void EquipArmor(Item armorItem)
+        {
+            if ((armorItem.Data is ArmorData) == false)
+            {
+                Debug.LogWarning($"착용하려는 아이템이 {nameof(ArmorData)}가 아닙니다, {nameof(ItemData)}: {armorItem.Data.GetType().Name}");
+                return;
+            }
+
+            if (EquipedArmor != null)
+            {
+                DropItem(EquipedArmor);
+            }
+            EquipedArmor = armorItem;
+        }
+
+        public void EquipBackpack(Item backpackItem)
+        {
+            if ((backpackItem.Data is BackpackData) == false)
+            {
+                Debug.LogWarning($"착용하려는 아이템이 {nameof(BackpackData)}가 아닙니다, {nameof(ItemData)}: {backpackItem.Data.GetType().Name}");
+                return;
+            }
+
+            var backpackData = backpackItem.Data as BackpackData;
+            if (ItemContainer.Capacity != defaultContainerCapacity + backpackData.BonusCapacity)
+            {
+                var overflowItems = ItemContainer.ResizeCapacity(defaultContainerCapacity + backpackData.BonusCapacity);
+                foreach (var item in overflowItems)
+                {
+                    DropItem(item);
+                }
+            }
+
+            if (EquipedBackpack != null)
+            {
+                DropItem(EquipedBackpack);
+            }
+            EquipedBackpack = backpackItem;
+        }
+
+        public void EquipWeapon(Item weaponItem)
+        {
+            if ((weaponItem.Data is WeaponData) == false)
+            {
+                Debug.LogWarning($"착용하려는 아이템이 {nameof(WeaponData)}가 아닙니다, {nameof(ItemData)}: {weaponItem.Data.GetType().Name}");
+                return;
+            }
+
+            EquipedWeapon = weaponItem;
+        }
+
+        // TODO: 쉴드 제거
+        public void DropArmor()
+        {
+            if (EquipedArmor != null)
+            {
+                DropItem(EquipedArmor);
+                EquipedArmor = null;
+            }
+        }
+
+        public void DropBackpack()
+        {
+            if (EquipedBackpack != null)
+            {
+                var overflowItems = ItemContainer.ResizeCapacity(defaultContainerCapacity);
+                foreach (var item in overflowItems)
+                {
+                    DropItem(item);
+                    EquipedArmor = null;
+                }
+
+                DropItem(EquipedBackpack);
+            }
+        }
+
+        public void LootItem(ItemObject lootItemObject)
+        {
+            if (lootItemObject.Item == null)
+            {
+                return;
+            }
+
+            if (lootItemObject.Item.Data is ArmorData)
+            {
+                EquipArmor(lootItemObject.Item);
+                LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
+                lootItemObject.RequestDestroy();
+            }
+            else if (lootItemObject.Item.Data is BackpackData)
+            {
+                EquipBackpack(lootItemObject.Item);
+                LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
+                lootItemObject.RequestDestroy();
+            }
+            else
+            {
+                int previousStack = lootItemObject.Item.CurrentStack;
+                var remainItem = ItemContainer.AddItem(lootItemObject.Item);
+
+                if (previousStack != remainItem.CurrentStack)
+                {
+                    LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
+                    lootItemObject.Item = remainItem;
+
+                    if (lootItemObject.Item.IsStackEmpty)
+                    {
+                        lootItemObject.RequestDestroy();
+                    }
+                    else
+                    {
+                        lootItemObject.NotifyUpdateCurrentStack();
+                    }
+                }
+
+                UIManager.Instance.UpdateInventorySlots();
+            }
         }
 
         /// <summary>
@@ -206,25 +364,7 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            var dropItemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
-            if (dropItemObject == null)
-            {
-                return;
-            }
-            dropItemObject.AllowAutoLoot = false;
-
-            // 무작위 방향으로 던짐
-            Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
-            var itemObjectRigidbody = dropItemObject.GetComponent<Rigidbody>();
-            if (itemObjectRigidbody != null)
-            {
-                float force = 6f;
-                itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
-            }
-
-
-            UIManager.Instance.UpdateInventorySlots();
-            UIManager.Instance.UpdateQuickSlots();
+            DropItem(dropItem);
         }
 
         public void AssignItemToQuickBar(int slot, Item item)
@@ -286,76 +426,6 @@ namespace UnityPUBG.Scripts.Entities
         public void UseItemAtItemContainer(int slot)
         {
 
-        }
-
-        // TODO: 아이템 사용 시전 중단 기능
-        private IEnumerator TryConsumeItem(Item consumableItem)
-        {
-            if (consumableItem.IsStackEmpty)
-            {
-                Debug.LogWarning($"빈 아이템을 사용하려고 하고 있습니다");
-                yield return null;
-            }
-
-            if ((consumableItem.Data is ConsumableItemData) == false)
-            {
-                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableItemData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
-                yield return null;
-            }
-            var consumableItemData = consumableItem.Data as ConsumableItemData;
-
-            // 아이템 사용 시전
-            float startTime = Time.time;
-            float endTime = startTime + consumableItemData.TimeToUse;
-            float progress = 0f;
-            while (Time.time <= endTime)
-            {
-                // TODO: 플레이어 이동속도 느려지게, UI와 동기화
-                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
-                Debug.Log($"RemainTime: {endTime - Time.time}, Progress: {progress}");
-                yield return null;
-            }
-
-            // 아이템 사용
-            ConsumeItem(consumableItem);
-        }
-
-        private void ConsumeItem(Item consumableItem)
-        {
-            if (consumableItem.IsStackEmpty)
-            {
-                Debug.LogWarning($"사용하려고 하는 아이템이 비어 있습니다");
-                return;
-            }
-
-            var consumableItemData = consumableItem.Data as ConsumableItemData;
-            switch (consumableItemData)
-            {
-                case HealingKitData healingKit:
-                    CurrentHealth += healingKit.HealthRestoreAmount;
-                    CurrentShield += healingKit.ShieldRestoreAmount;
-                    break;
-
-                default:
-                    Debug.LogWarning($"관리되지 않고 있는 {nameof(ItemData)}입니다, {consumableItem.Data.GetType().Name}");
-                    return;
-            }
-
-            // TODO ItemContainer에서 스택 개수 줄이기
-            if (ItemContainer.HasItem(consumableItemData.ItemName) == false)
-            {
-                Debug.LogWarning($"사용하려고 하는 아이템이 {nameof(ItemContainer)}에 없습니다, {nameof(consumableItemData.ItemName)}: {consumableItemData.ItemName}");
-                return;
-            }
-
-            for (int slot = 0; slot < ItemContainer.Count; slot++)
-            {
-                var targetItem = ItemContainer.FindItem(slot);
-                if (targetItem == consumableItem)
-                {
-                    ItemContainer.SubtrackItemAtSlot(slot);
-                }
-            }
         }
 
         // 테스트 전용
@@ -420,6 +490,97 @@ namespace UnityPUBG.Scripts.Entities
 
             projectileObject.InitializeProjectile(testAmmoData.ItemName);
             projectileObject.Fire(transform.forward);
+        }
+
+        private void DropItem(Item dropItem)
+        {
+            var dropItemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
+            if (dropItemObject == null)
+            {
+                return;
+            }
+
+            // 무작위 방향으로 던짐
+            Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
+            var itemObjectRigidbody = dropItemObject.GetComponent<Rigidbody>();
+            if (itemObjectRigidbody != null)
+            {
+                float force = 6f;
+                itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
+            }
+
+            UIManager.Instance.UpdateInventorySlots();
+            UIManager.Instance.UpdateQuickSlots();
+        }
+
+        private void ConsumeItem(Item consumableItem)
+        {
+            if (consumableItem.IsStackEmpty)
+            {
+                Debug.LogWarning($"사용하려고 하는 아이템이 비어 있습니다");
+                return;
+            }
+
+            var consumableItemData = consumableItem.Data as ConsumableItemData;
+            switch (consumableItemData)
+            {
+                case HealingKitData healingKit:
+                    CurrentHealth += healingKit.HealthRestoreAmount;
+                    CurrentShield += healingKit.ShieldRestoreAmount;
+                    break;
+
+                default:
+                    Debug.LogWarning($"관리되지 않고 있는 {nameof(ItemData)}입니다, {consumableItem.Data.GetType().Name}");
+                    return;
+            }
+
+            // TODO ItemContainer에서 스택 개수 줄이기
+            if (ItemContainer.HasItem(consumableItemData.ItemName) == false)
+            {
+                Debug.LogWarning($"사용하려고 하는 아이템이 {nameof(ItemContainer)}에 없습니다, {nameof(consumableItemData.ItemName)}: {consumableItemData.ItemName}");
+                return;
+            }
+
+            for (int slot = 0; slot < ItemContainer.Count; slot++)
+            {
+                var targetItem = ItemContainer.GetItemAt(slot);
+                if (targetItem == consumableItem)
+                {
+                    ItemContainer.SubtrackItemAtSlot(slot);
+                }
+            }
+        }
+
+        // TODO: 아이템 사용 시전 중단 기능
+        private IEnumerator TryConsumeItem(Item consumableItem)
+        {
+            if (consumableItem.IsStackEmpty)
+            {
+                Debug.LogWarning($"빈 아이템을 사용하려고 하고 있습니다");
+                yield return null;
+            }
+
+            if ((consumableItem.Data is ConsumableItemData) == false)
+            {
+                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableItemData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
+                yield return null;
+            }
+            var consumableItemData = consumableItem.Data as ConsumableItemData;
+
+            // 아이템 사용 시전
+            float startTime = Time.time;
+            float endTime = startTime + consumableItemData.TimeToUse;
+            float progress = 0f;
+            while (Time.time <= endTime)
+            {
+                // TODO: 플레이어 이동속도 느려지게, UI와 동기화
+                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
+                Debug.Log($"RemainTime: {endTime - Time.time}, Progress: {progress}");
+                yield return null;
+            }
+
+            // 아이템 사용
+            ConsumeItem(consumableItem);
         }
     }
 }

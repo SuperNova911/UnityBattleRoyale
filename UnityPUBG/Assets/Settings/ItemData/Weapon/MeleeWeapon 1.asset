@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MeleeWeapon 1
   m_EditorClassIdentifier: Assembly-CSharp:UnityPUBG.Scripts.Items:MeleeWeapon
   itemName: Test MeleeWeapon 1
-  rarity: 3
+  rarity: 0
   sortingOrder: 300
   model: {fileID: 139746, guid: 294115a70762d224f889f85c52310ddc, type: 3}
   icon: {fileID: 65308587496296009, guid: 2ca20e9c5beb6fd40912efbcc9d19815, type: 3}

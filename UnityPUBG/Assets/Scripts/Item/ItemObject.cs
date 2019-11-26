@@ -14,8 +14,8 @@ namespace UnityPUBG.Scripts.Items
     [RequireComponent(typeof(Rigidbody), typeof(PhotonView))]
     public class ItemObject : MonoBehaviour
     {
-        // 스택 개수 테스트용
-        public TextMesh currentStackDebugText;
+        [Range(1f, 3f)]
+        public float readyToLootDelay = 1.5f;
 
         private Item item = null;
         private PhotonView photonView;
@@ -40,15 +40,21 @@ namespace UnityPUBG.Scripts.Items
                 }
             }
         }
-
-        public int PhotonViewId { get { return photonView.viewID; } }
         public GameObject ModelObject { get; private set; }
-        public bool AllowAutoLoot { get; set; } = true;
+        public bool AllowLoot { get; private set; }
+        public int PhotonViewId { get { return photonView.viewID; } }
 
         #region 유니티 메시지
         private void Awake()
         {
             photonView = GetComponent<PhotonView>();
+
+            AllowLoot = false;
+        }
+
+        private void Start()
+        {
+            Invoke(nameof(ReadyToLoot), readyToLootDelay);
         }
         #endregion
 
@@ -101,10 +107,9 @@ namespace UnityPUBG.Scripts.Items
             ModelObject = Instantiate(item.Data.Model, transform);
         }
 
-        // 디버깅용 메서드
-        private void UpdateCurrentStackDebugText()
+        private void ReadyToLoot()
         {
-            currentStackDebugText.text = item.CurrentStack.ToString();
+            AllowLoot = true;
         }
 
         [PunRPC]

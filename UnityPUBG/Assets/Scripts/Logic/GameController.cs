@@ -23,6 +23,9 @@ namespace UnityPUBG.Scripts.Logic
 
         private void Start()
         {
+            QualitySettings.vSyncCount = 0; // 수직동기화 OFF
+            Application.targetFrameRate = 60; // 60프레임
+
             if (PhotonNetwork.isMasterClient)
             {
                 ItemSpawnManager.Instance.SpawnRandomItemsAtSpawnPoints();

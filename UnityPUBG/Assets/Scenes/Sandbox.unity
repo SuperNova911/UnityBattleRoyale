@@ -17340,7 +17340,7 @@ Terrain:
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 1
   m_DrawHeightmap: 1
-  m_DrawInstanced: 0
+  m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
@@ -30519,7 +30519,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.7
@@ -30552,7 +30552,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -39853,6 +39853,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 324033114654909635, guid: e2c21cd6693f2be47b0a9ee00f41675e,
+        type: 3}
+      propertyPath: antialiasingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2c21cd6693f2be47b0a9ee00f41675e, type: 3}
 --- !u!1001 &4488108448410065755
@@ -40510,5 +40515,10 @@ PrefabInstance:
       propertyPath: roundSettings.timeToCloses.Array.data[3]
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: ringMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 61c6eae37335b9f4182c83bc76b4f7a2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26d1174b5a3302d47bef3799fed1c30b, type: 3}

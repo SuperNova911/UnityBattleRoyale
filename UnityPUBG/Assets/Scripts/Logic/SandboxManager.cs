@@ -13,6 +13,7 @@ namespace UnityPUBG.Scripts.Logic
     {
         public Player testPlayerPrefab;
         public Vector3 testPlayerSpawnPosition;
+        public GameObject fpsCounter;
 
         private void Awake()
         {
@@ -26,6 +27,11 @@ namespace UnityPUBG.Scripts.Logic
             {
                 PhotonNetwork.Instantiate(testPlayerPrefab.name, testPlayerSpawnPosition, Quaternion.identity, 0);
             }
+        }
+
+        public void ShowFPS()
+        {
+            fpsCounter.SetActive(!fpsCounter.activeSelf);
         }
     }
 }

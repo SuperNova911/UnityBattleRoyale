@@ -17,7 +17,6 @@ namespace UnityPUBG.Scripts.UI
         public TMP_Text text;
 
         [Header("Animation")]
-        public Animator textAnimator;
         [Range(1f, 2f)] public float animationDuration = 1f;
         public Vector3 floatingOffset = new Vector3(0, 2.2f, 0);
 
@@ -30,10 +29,6 @@ namespace UnityPUBG.Scripts.UI
         #region 유니티 메시지
         private void Awake()
         {
-            if (textAnimator == null)
-            {
-                textAnimator = GetComponent<Animator>();
-            }
             if (text == null)
             {
                 text = GetComponentInChildren<TMP_Text>();
@@ -54,7 +49,6 @@ namespace UnityPUBG.Scripts.UI
         #region PoolObject
         public override void OnObjectReuse()
         {
-            textAnimator.Play("DamageTextAnimation");
             Invoke(nameof(SaveToPool), animationDuration);
         }
 

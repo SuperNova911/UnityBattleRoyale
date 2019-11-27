@@ -39,20 +39,19 @@ namespace UnityPUBG.Scripts.Logic
         /// </summary>
         [SerializeField]
         private GameObject quickSlot;
-
         [SerializeField]
         private SpriteAtlas iconAtlas;
+        [Space]
+        /// <summary>
+        /// 일반 게임플레이시 보이는 UI 요소
+        /// </summary>
+        [SerializeField]
+        private GameObject normalUIElements;
 
         /// <summary>
         /// 아이콘 스프라이트 아틀라스
         /// </summary>
-        public SpriteAtlas IconAtlas
-        {
-            get
-            {
-                return iconAtlas;
-            }
-        }
+        public SpriteAtlas IconAtlas => iconAtlas;
 
         private void Awake()
         {
@@ -62,12 +61,6 @@ namespace UnityPUBG.Scripts.Logic
             RingSystem.Instance.OnRoundStart += RingSystem_OnRoundStart;
             RingSystem.Instance.OnRingCloseStart += RingSystem_OnRingCloseStart;
         }
-
-        /// <summary>
-        /// 일반 게임플레이시 보이는 UI 요소
-        /// </summary>
-        [SerializeField]
-        private GameObject normalUIElements;
 
         /// <summary>
         /// 창 열고 닫기

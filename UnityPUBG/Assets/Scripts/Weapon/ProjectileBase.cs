@@ -23,7 +23,6 @@ namespace UnityPUBG.Scripts
 
         private void Awake()
         {
-            Debug.Log("aw");
             projectileSphereCollider = GetComponent<SphereCollider>();
             projectileRigidbody = GetComponent<Rigidbody>();
         }
@@ -38,7 +37,6 @@ namespace UnityPUBG.Scripts
 
         private void OnDestroy()
         {
-            Debug.Log("DEs");
         }
 
         public void InitializeProjectile(string ammoDataName)

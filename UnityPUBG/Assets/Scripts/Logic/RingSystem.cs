@@ -167,9 +167,6 @@ namespace UnityPUBG.Scripts.Logic
             // Each Round
             for (int i = 0; i < roundDatas.Length; i++)
             {
-                Debug.Log($"Round {i + 1}");
-                Debug.Log($"Time to close: {roundDatas[i].TimeToClose}sec");
-
                 OnRoundStart?.Invoke(this, roundDatas[i]);
 
                 // Ring Countdown
@@ -181,8 +178,6 @@ namespace UnityPUBG.Scripts.Logic
 
                     yield return new WaitForSeconds(1f);
                 }
-
-                Debug.Log($"Ring closing start");
 
                 // Ring Closing
                 OnRingCloseStart?.Invoke(this, roundDatas[i]);

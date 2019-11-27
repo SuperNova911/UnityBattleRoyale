@@ -29,10 +29,10 @@ namespace UnityPUBG.Scripts.Logic
         {
             if (PhotonNetwork.isMasterClient)
             {
-                ItemSpawnManager.Instance.SpawnRandomItemsAtSpawnPoints();
+                //ItemSpawnManager.Instance.SpawnRandomItemsAtSpawnPoints();
 
-                RingSystem.Instance.GenerateRoundDatas();
-                RingSystem.Instance.StartRingSystem();
+                //RingSystem.Instance.GenerateRoundDatas();
+                //RingSystem.Instance.StartRingSystem();
             }
         }
 

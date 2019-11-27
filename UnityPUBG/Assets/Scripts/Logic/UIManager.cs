@@ -70,13 +70,13 @@ namespace UnityPUBG.Scripts.Logic
         {
             if (window.activeSelf)
             {
-                DisableChild(window);
+                //DisableChild(window);
                 normalUIElements.SetActive(true);
                 window.SetActive(false);
             }
             else
             {
-                EnableChild(window);
+                //EnableChild(window);
                 normalUIElements.SetActive(false);
                 window.SetActive(true);
             }
@@ -113,6 +113,7 @@ namespace UnityPUBG.Scripts.Logic
             }
         }
 
+        /*
         /// <summary>
         /// 인자로 받은 게임 오브젝트의 자식 오브젝트를 disable함
         /// </summary>
@@ -144,6 +145,7 @@ namespace UnityPUBG.Scripts.Logic
 
             gameObject.SetActive(true);
         }
+        */
 
         private void InitializePlayerUIElements(object sender, EventArgs e)
         {

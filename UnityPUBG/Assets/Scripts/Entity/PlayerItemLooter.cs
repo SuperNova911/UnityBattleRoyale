@@ -65,14 +65,14 @@ namespace UnityPUBG.Scripts.Entities
             // TODO: 실드 내구도가 더 많이 남아있는 경우도 true
             if (lootItem.Data is ArmorData)
             {
-                if (player.EquipedArmor == null || player.EquipedArmor.Data.Rarity < lootItem.Data.Rarity)
+                if (player.EquipedArmor.IsStackEmpty || player.EquipedArmor.Data.Rarity < lootItem.Data.Rarity)
                 {
                     return true;
                 }
             }
             else if (lootItem.Data is BackpackData)
             {
-                if (player.EquipedBackpack == null || player.EquipedBackpack.Data.Rarity < lootItem.Data.Rarity)
+                if (player.EquipedBackpack == Item.EmptyItem || player.EquipedBackpack.Data.Rarity < lootItem.Data.Rarity)
                 {
                     return true;
                 }

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityPUBG.Scripts.Entities;
 using UnityPUBG.Scripts.UI;
 using UnityEngine.U2D;
+using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Logic
 {

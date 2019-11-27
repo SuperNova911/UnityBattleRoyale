@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityPUBG.Scripts.Logic;
 using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.UI
@@ -12,7 +13,7 @@ namespace UnityPUBG.Scripts.UI
     {
         public Canvas canvas;
 
-        public DamageText damageTextObject;
+        public DamageText damageTextPrefab;
 
         private void Awake()
         {
@@ -20,13 +21,20 @@ namespace UnityPUBG.Scripts.UI
             {
                 canvas = FindObjectOfType<Canvas>();
             }
+
+            ObjectPoolManager.Instance.InitializeUIObjectPool(damageTextPrefab.gameObject, canvas, 10);
         }
 
         public void DrawDamageText(Transform damageReceiver, float damage)
         {
-            var damageText = Instantiate(damageTextObject, canvas.transform);
-            damageText.damageReceiver = damageReceiver;
+            var damageTextPoolObject = ObjectPoolManager.Instance.ReuseUIObject(damageTextPrefab.gameObject);
+            if (damageTextPoolObject == null)
+            {
+                return;
+            }
 
+            var damageText = damageTextPoolObject.GetComponent<DamageText>();
+            damageText.DamageReceiver = damageReceiver;
             damageText.text.text = Mathf.RoundToInt(damage).ToString();
         }
     }

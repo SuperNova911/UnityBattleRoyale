@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
-  damageTextObject: {fileID: 7237751850981093448, guid: 43e73897f883f0943ab12023d252e370,
+  damageTextPrefab: {fileID: 7237751850981093448, guid: 43e73897f883f0943ab12023d252e370,
     type: 3}
 --- !u!114 &9196620116391044016
 MonoBehaviour:
@@ -248,6 +248,7 @@ MonoBehaviour:
   playerHealthText: {fileID: 0}
   playerShieldText: {fileID: 0}
   roundProgressSlider: {fileID: 0}
+  roundTextArea: {fileID: 0}
   roundStatusText: {fileID: 0}
   roundTimerText: {fileID: 0}
   roundMessage: {fileID: 0}
@@ -255,4 +256,5 @@ MonoBehaviour:
   killMessage: {fileID: 0}
   inventoryWindow: {fileID: 0}
   quickSlot: {fileID: 0}
+  iconAtlas: {fileID: 0}
   normalUIElements: {fileID: 0}

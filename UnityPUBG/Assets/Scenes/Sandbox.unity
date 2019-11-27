@@ -3908,6 +3908,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc9a70325f5396446aab164ea6854ceb, type: 3}
+--- !u!1 &219988830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9173340600907604450, guid: 26d1174b5a3302d47bef3799fed1c30b,
+    type: 3}
+  m_PrefabInstance: {fileID: 9173340602515692451}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &219988842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219988830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4df05bca65f3549a75ecffe1c3cdfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &221574606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3908805739431913725, guid: dc9a70325f5396446aab164ea6854ceb,
@@ -41179,6 +41197,12 @@ PrefabInstance:
       propertyPath: roundTextArea
       value: 
       objectReference: {fileID: 781312492}
+    - target: {fileID: 9101536519121333136, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: iconAtlas
+      value: 
+      objectReference: {fileID: 4343727234628468602, guid: 0e60683246990d943b6ac1105f3b0abb,
+        type: 2}
     - target: {fileID: 9173340600907604450, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: m_Name
@@ -41257,48 +41281,58 @@ PrefabInstance:
     - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: roundSettings.waitPeriods.Array.data[0]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: roundSettings.waitPeriods.Array.data[1]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: roundSettings.waitPeriods.Array.data[2]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: roundSettings.waitPeriods.Array.data[3]
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: roundSettings.timeToCloses.Array.data[0]
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: roundSettings.timeToCloses.Array.data[1]
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: roundSettings.timeToCloses.Array.data[2]
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: roundSettings.timeToCloses.Array.data[3]
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: ringMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 61c6eae37335b9f4182c83bc76b4f7a2, type: 2}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.waitPeriods.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.timeToCloses.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26d1174b5a3302d47bef3799fed1c30b, type: 3}
 --- !u!114 &9176586241220422915 stripped

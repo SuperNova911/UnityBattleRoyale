@@ -3,36 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.UI
 {
     [RequireComponent(typeof(Animator))]
-    public class DamageText : MonoBehaviour
+    public class DamageText : PoolObject
     {
-        public Animator animator;
-        public Text text;
-        public Vector3 floatingOffset = new Vector3(0, 2.2f, 0);
-        public float duration = 1f;
+        [Header("UI")]
+        public TMP_Text text;
 
-        [HideInInspector]
-        public Transform damageReceiver;
+        [Header("Animation")]
+        public Animator textAnimator;
+        [Range(1f, 2f)] public float animationDuration = 1f;
+        public Vector3 floatingOffset = new Vector3(0, 2.2f, 0);
 
         private Canvas canvas;
         private RectTransform rectTransform;
         private RectTransform canvasRectTransform;
 
+        public Transform DamageReceiver { private get; set; }
+
+        #region 유니티 메시지
         private void Awake()
         {
-            if (animator == null)
+            if (textAnimator == null)
             {
-                animator = GetComponent<Animator>();
+                textAnimator = GetComponent<Animator>();
             }
-
             if (text == null)
             {
-                text = GetComponentInChildren<Text>();
+                text = GetComponentInChildren<TMP_Text>();
             }
 
             canvas = GetComponentInParent<Canvas>();
@@ -40,15 +44,29 @@ namespace UnityPUBG.Scripts.UI
             canvasRectTransform = canvas.GetComponent<RectTransform>();
         }
 
-        private void Start()
-        {
-            Destroy(gameObject, duration);
-        }
-
         private void LateUpdate()
         {
-            var screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, damageReceiver.position + floatingOffset);
+            var screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, DamageReceiver.position + floatingOffset);
             rectTransform.anchoredPosition = screenPoint - canvasRectTransform.sizeDelta / 2f;
+        } 
+        #endregion
+
+        #region PoolObject
+        public override void OnObjectReuse()
+        {
+            textAnimator.Play("DamageTextAnimation");
+            Invoke(nameof(SaveToPool), animationDuration);
+        }
+
+        public override void OnObjectSaveToPool()
+        {
+
+        }
+        #endregion
+
+        private void SaveToPool()
+        {
+            ObjectPoolManager.Instance.SaveUIObjectToPool(this);
         }
     }
 }

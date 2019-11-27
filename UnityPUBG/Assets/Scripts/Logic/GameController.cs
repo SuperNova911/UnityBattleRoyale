@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityPUBG.Scripts.UI;
+using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Logic
 {

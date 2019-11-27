@@ -72,7 +72,7 @@ namespace UnityPUBG.Scripts.Entities
             }
             else if (lootItem.Data is BackpackData)
             {
-                if (player.EquipedBackpack == Item.EmptyItem || player.EquipedBackpack.Data.Rarity < lootItem.Data.Rarity)
+                if (player.EquipedBackpack.IsStackEmpty || player.EquipedBackpack.Data.Rarity < lootItem.Data.Rarity)
                 {
                     return true;
                 }

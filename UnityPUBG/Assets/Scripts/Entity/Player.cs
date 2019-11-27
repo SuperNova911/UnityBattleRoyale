@@ -104,6 +104,11 @@ namespace UnityPUBG.Scripts.Entities
         protected override void Start()
         {
             base.Start();
+
+            if(IsMyPlayer)
+            {
+                UIManager.Instance.DynamicItemSlots();
+            }
         }
 
         protected override void Update()
@@ -345,6 +350,7 @@ namespace UnityPUBG.Scripts.Entities
                 EquipBackpack(lootItemObject.Item);
                 LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
                 lootItemObject.RequestDestroy();
+                UIManager.Instance.DynamicItemSlots();
             }
             // 디버깅용 구문
             else if (lootItemObject.Item.Data is WeaponData)

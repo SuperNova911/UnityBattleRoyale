@@ -121,11 +121,21 @@ namespace UnityPUBG.Scripts.Items
             return splitedItem;
         }
 
+        /// <summary>
+        /// ItemData의 ItemName으로 해당 아이템 존재 유무 검사
+        /// </summary>
+        /// <param name="itemName">찾아 볼 ItemName</param>
+        /// <returns>해당 아이템이 있으면 true</returns>
         public bool HasItem(string itemName)
         {
             return container.Any(e => e.Data.ItemName == itemName);
         }
 
+        /// <summary>
+        /// 매개변수로 받은 슬롯의 아이템을 반환, 슬롯이 비어있으면 EmptyItem 반환
+        /// </summary>
+        /// <param name="slot">아이템의 슬롯 번호</param>
+        /// <returns>입력으로 받은 슬롯의 아이템</returns>
         public Item GetItemAt(int slot)
         {
             if (slot < 0 || container.Capacity <= slot)
@@ -140,6 +150,24 @@ namespace UnityPUBG.Scripts.Items
             }
 
             return container[slot];
+        }
+
+        /// <summary>
+        /// 입력으로 받은 ItemName과 일치하는 컨테이너 아이템의 슬롯 번호를 반환, 뒤에서부터 검색
+        /// </summary>
+        /// <param name="itemName">검색할 ItemName</param>
+        /// <returns>일치하는 아이템의 슬롯 번호</returns>
+        public int FindMatchItemSlot(string itemName)
+        {
+            for (int slot = Count - 1; slot >= 0; slot--)
+            {
+                if (container[slot].Data.ItemName.Equals(itemName))
+                {
+                    return slot;
+                }
+            }
+
+            return -1;
         }
 
         /// <summary>

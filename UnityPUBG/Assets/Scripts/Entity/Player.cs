@@ -35,6 +35,9 @@ namespace UnityPUBG.Scripts.Entities
         private InputManager inputManager;
         private PlayerItemLooter myItemLooter;
 
+        // Weapon
+        private float lastAttackTime = 0f;
+
         public event EventHandler<float> OnCurrentShieldUpdate;
 
         public int MaximumShield
@@ -67,6 +70,8 @@ namespace UnityPUBG.Scripts.Entities
         protected override void Awake()
         {
             base.Awake();
+
+            ObjectPoolManager.Instance.InitializeObjectPool(projectileBasePrefab.gameObject, 20);
 
             photonView = GetComponent<PhotonView>();
             inputManager = new InputManager();
@@ -148,7 +153,7 @@ namespace UnityPUBG.Scripts.Entities
             {
                 if (Keyboard.current.spaceKey.wasPressedThisFrame)
                 {
-                    ProjectileTest();
+                    RangeAttack(transform.forward);
                 }
 
 #if !UNITY_ANDRIOD
@@ -290,6 +295,10 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
+            if (EquipedWeapon.IsStackEmpty == false)
+            {
+                DropItem(EquipedWeapon);
+            }
             EquipedWeapon = weaponItem;
         }
 
@@ -334,6 +343,13 @@ namespace UnityPUBG.Scripts.Entities
             else if (lootItemObject.Item.Data is BackpackData)
             {
                 EquipBackpack(lootItemObject.Item);
+                LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
+                lootItemObject.RequestDestroy();
+            }
+            // 디버깅용 구문
+            else if (lootItemObject.Item.Data is WeaponData)
+            {
+                EquipWeapon(lootItemObject.Item);
                 LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
                 lootItemObject.RequestDestroy();
             }
@@ -499,32 +515,38 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
+        // TODO: Cast Delay 구현
         private void RangeAttack(Vector3 attackDirection)
         {
             var rangeWeaponData = EquipedWeapon.Data as RangeWeaponData;
-            if (rangeWeaponData.RequireAmmo != null)
+            var requireAmmoData = rangeWeaponData.RequireAmmo;
+            if (requireAmmoData == null)
             {
-                var compatibleAmmo = ItemContainer.TryGetItem(rangeWeaponData.RequireAmmo.ItemName);
-                if (compatibleAmmo.IsStackEmpty)
-                {
-                    return;
-                }
-
+                Debug.LogWarning($"탄약이 필요하지 않는 무기는 구현하지 않음, {rangeWeaponData.ItemName}");
+                return;
             }
 
+            // 쿨다운 검사
+            if (lastAttackTime + rangeWeaponData.AttackCooldown > Time.time)
+            {
+                return;
+            }
 
+            // 필요한 탄약이 있는지 검사
+            int ammoSlot = ItemContainer.FindMatchItemSlot(rangeWeaponData.RequireAmmo.ItemName);
+            if (ammoSlot < 0)
+            {
+                return;
+            }
+            ItemContainer.SubtrackItemAtSlot(ammoSlot);
+
+            // Projectile 설정
             var projectileBase = ObjectPoolManager.Instance.ReuseObject(projectileBasePrefab.gameObject).GetComponent<ProjectileBase>();
+            var projectileInfo = new ProjectileBase.ProjectileInfo(attackDirection, requireAmmoData.ProjectileSpeed, rangeWeaponData.AttackRange / requireAmmoData.ProjectileSpeed,
+                requireAmmoData.ColliderRadius, rangeWeaponData.Damage, rangeWeaponData.DamageType, rangeWeaponData.KnockbackPower);
+            projectileBase.InitializeProjectile(projectileInfo, projectileFirePosition.position);
 
-            
-        }
-
-        private void ProjectileTest()
-        {
-            var projectileObject = Instantiate(projectileBasePrefab);
-            projectileObject.transform.position = projectileFirePosition.position;
-
-            //projectileObject.InitializeProjectile(testAmmoData.ItemName);
-            projectileObject.Fire(transform.forward);
+            projectileBase.Fire();
         }
 
         private void DropItem(Item dropItem)

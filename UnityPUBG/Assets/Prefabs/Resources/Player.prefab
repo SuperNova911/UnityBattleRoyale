@@ -1437,15 +1437,14 @@ MonoBehaviour:
   currentHealth: 100
   movementSpeed: 5
   rotationSpeed: 0.2
-  projectileBasePrefab: {fileID: 2364344030809358519, guid: 3ff01fddd5ff0f6468bb67588f02dfe3,
-    type: 3}
-  testAmmoData: {fileID: 11400000, guid: fb6cd7c9be7a21c4fb33f93a258b7a9e, type: 2}
-  firePos: {fileID: 4133543043523785284}
   maximumShield: 100
   currentShield: 0
   defaultContainerCapacity: 4
   speedMultiplyWhenUseItem: 0.5
   quickBarCapacity: 4
+  projectileBasePrefab: {fileID: 2364344030809358519, guid: 3ff01fddd5ff0f6468bb67588f02dfe3,
+    type: 3}
+  projectileFirePosition: {fileID: 4133543043523785284}
 --- !u!114 &1330880535016543195
 MonoBehaviour:
   m_ObjectHideFlags: 0

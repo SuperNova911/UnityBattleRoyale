@@ -23,7 +23,7 @@ MonoBehaviour:
   damageType: 0
   castDelay: 0.1
   attackCooldown: 1
-  attackRange: 10
+  attackRange: 15.6
   knockbackPower: 1
   requireAmmo: {fileID: 11400000, guid: fb6cd7c9be7a21c4fb33f93a258b7a9e, type: 2}
   movementSpeedMultiplier: 0.5

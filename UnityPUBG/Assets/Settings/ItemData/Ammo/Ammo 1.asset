@@ -19,6 +19,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 1bf1f42ab0d3f46928ed0ab9b3b93c9a, type: 3}
   maximumStack: 30
   defaultStack: 5
-  projectileSpeed: 5
-  range: 10
+  projectileSpeed: 20
   colliderRadius: 0.1

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityPUBG.Scripts.Entities;
 using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
 using UnityPUBG.Scripts.Utilities;
@@ -13,41 +14,44 @@ namespace UnityPUBG.Scripts
     [RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
     public class ProjectileBase : PoolObject
     {
-        public float speed;
-        public float lifeTime;
-        public float damage;
-        public DamageType damageType;
-
-        private Vector3 fireDirection;
-        private bool isFired = false;
-
+        private ProjectileInfo projectileInfo;
         private SphereCollider projectileSphereCollider;
         private Rigidbody projectileRigidbody;
+
+        public bool isFired { get; private set; }
 
         #region 유니티 메시지
         private void Awake()
         {
             projectileSphereCollider = GetComponent<SphereCollider>();
+            projectileSphereCollider.isTrigger = true;
             projectileRigidbody = GetComponent<Rigidbody>();
+            projectileRigidbody.useGravity = false;
         }
 
         private void FixedUpdate()
         {
             if (isFired)
             {
-                projectileRigidbody.MovePosition(transform.position + fireDirection * speed * Time.fixedDeltaTime);
+                projectileRigidbody.MovePosition(transform.position + projectileInfo.fireDirection * projectileInfo.speed * Time.fixedDeltaTime);
             }
         }
 
-        private void OnDestroy()
+        private void OnTriggerEnter(Collider other)
         {
+            var damageableEntity = other.gameObject.GetComponent<IDamageable>();
+            if (damageableEntity != null)
+            {
+                damageableEntity.OnTakeDamage(projectileInfo.damage, projectileInfo.damageType);
+                SaveToPool();
+            }
         }
         #endregion
 
         #region PoolObject
         public override void OnObjectReuse()
         {
-
+            isFired = false;
         }
 
         public override void OnObjectSaveToPool()
@@ -56,32 +60,46 @@ namespace UnityPUBG.Scripts
         }
         #endregion
 
-        public void InitializeProjectile(string ammoDataName)
+        public void InitializeProjectile(ProjectileInfo projectileInfo, Vector3 startPosition)
         {
-            if (ItemDataCollection.Instance.ItemDataByName.TryGetValue(ammoDataName, out var itemData))
-            {
-                if (itemData is AmmoData == false)
-                {
-                    Debug.LogWarning($"");
-                    return;
-                }
-
-                var ammoData = itemData as AmmoData;
-                speed = ammoData.ProjectileSpeed;
-                //lifeTime = ammoData.Range / speed;
-                projectileSphereCollider.radius = ammoData.ColliderRadius;
-            }
-            else
-            {
-                Debug.LogWarning($"");
-            }
+            this.projectileInfo = projectileInfo;
+            transform.position = startPosition;
+            projectileSphereCollider.radius = projectileInfo.colliderRadius;
         }
 
-        public void Fire(Vector3 direction)
+        public void Fire()
         {
-            fireDirection = direction;
             isFired = true;
-            Destroy(gameObject, lifeTime);
+            Invoke(nameof(SaveToPool), projectileInfo.lifeTime);
         }
+
+        private void SaveToPool()
+        {
+            ObjectPoolManager.Instance.SaveObjectToPool(this);
+        }
+
+        public struct ProjectileInfo
+        {
+            public readonly Vector3 fireDirection;
+            public readonly float speed;
+            public readonly float lifeTime;
+            public readonly float colliderRadius;
+
+            public readonly float damage;
+            public readonly DamageType damageType;
+            public readonly float knockbackPower;
+
+            public ProjectileInfo(Vector3 fireDirection, float speed, float lifeTime, float colliderRadius, float damage, DamageType damageType, float knockbackPower)
+            {
+                this.fireDirection = fireDirection;
+                this.speed = speed;
+                this.lifeTime = lifeTime;
+                this.colliderRadius = colliderRadius;
+                this.damage = damage;
+                this.damageType = damageType;
+                this.knockbackPower = knockbackPower;
+            }
+        }
+
     }
 }

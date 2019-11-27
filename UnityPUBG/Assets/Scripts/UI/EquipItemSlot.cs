@@ -41,19 +41,19 @@ namespace UnityPUBG.Scripts.UI
             switch (itemType)
             {
                 case "BackPack":
-                    if (myPlayer.EquipedBackpack != Items.Item.EmptyItem)
+                    if (!myPlayer.EquipedBackpack.IsStackEmpty)
                     {
                         itemIcon.sprite = myPlayer.EquipedBackpack.Data.Icon;
                     }
                     break;
                 case "Weapon":
-                    if (myPlayer.EquipedWeapon != Items.Item.EmptyItem)
+                    if (!myPlayer.EquipedWeapon.IsStackEmpty)
                     {
                         itemIcon.sprite = myPlayer.EquipedWeapon.Data.Icon;
                     }
                     break;
                 case "Armor":
-                    if (myPlayer.EquipedArmor != Items.Item.EmptyItem)
+                    if (!myPlayer.EquipedArmor.IsStackEmpty)
                     {
                         itemIcon.sprite = myPlayer.EquipedArmor.Data.Icon;
                     }

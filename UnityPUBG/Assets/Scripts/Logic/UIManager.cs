@@ -29,18 +29,18 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text roundSubMessage;
         public TMP_Text killMessage;
         [Space]
-        /// <summary>
-        /// 인벤토리 창
-        /// </summary>
+
         [SerializeField]
-        private GameObject inventoryWindow;
-        /// <summary>
-        /// 퀵슬롯
-        /// </summary>
+        private GameObject inventory;
+        //itemSlot들이 들어있는 창
+        [SerializeField]
+        private Transform inventoryWindow;
+
         [SerializeField]
         private GameObject quickSlot;
         [SerializeField]
         private SpriteAtlas iconAtlas;
+
         [Space]
         /// <summary>
         /// 일반 게임플레이시 보이는 UI 요소
@@ -48,9 +48,9 @@ namespace UnityPUBG.Scripts.Logic
         [SerializeField]
         private GameObject normalUIElements;
 
-        /// <summary>
-        /// 아이콘 스프라이트 아틀라스
-        /// </summary>
+        [SerializeField]
+        private GameObject itemSlot;
+
         public SpriteAtlas IconAtlas => iconAtlas;
 
         private void Awake()
@@ -85,12 +85,12 @@ namespace UnityPUBG.Scripts.Logic
         //인벤토리 슬롯을 업데이트 함
         public void UpdateInventorySlots()
         {
-            if (!inventoryWindow.activeSelf)
+            if (!inventory.activeSelf)
             {
                 return;
             }
 
-            ItemSlot[] itemSlots = inventoryWindow.transform.GetComponentsInChildren<ItemSlot>();
+            ItemSlot[] itemSlots = inventory.transform.GetComponentsInChildren<ItemSlot>();
 
             int length = itemSlots.Length;
             for (int i = 0; i < length; i++)
@@ -111,6 +111,60 @@ namespace UnityPUBG.Scripts.Logic
             {
                 quickItemSlots[i].UpdateQuickItemSlot();
             }
+        }
+
+        public void UpdateEquipItemSlots()
+        {
+            EquipItemSlot[] equipItemSlots = inventory.transform.GetComponentsInChildren<EquipItemSlot>();
+
+            int length = equipItemSlots.Length;
+
+            for(int i = 0; i<length; i++)
+            {
+                equipItemSlots[i].UpdateEquipItemSlot();
+            }
+        }
+
+        /// <summary>
+        /// 동적으로 아이템 슬롯 갯수를 조정함
+        /// </summary>
+        public void DynamicItemSlots()
+        {
+            if(itemSlot == null)
+            {
+                Debug.LogError("아이템 슬롯이 없습니다.");
+                return;
+            }
+
+            if(inventoryWindow == null)
+            {
+                Debug.LogError("인벤토리 창이 없습니다.");
+                return;
+            }
+
+            int instanceCount = EntityManager.Instance.MyPlayer.ItemContainer.Capacity - inventoryWindow.childCount;
+
+            if(instanceCount == 0)
+            {
+                return;
+            }
+            else if (instanceCount > 0)
+            {
+                for (int i = 0; i < instanceCount; i++)
+                {
+                    Instantiate(itemSlot, inventoryWindow);
+                }
+            }
+            else
+            {
+                instanceCount = -instanceCount;
+
+                for(int i = 0; i<instanceCount; i++)
+                {
+                    Destroy(inventoryWindow.GetChild(inventoryWindow.childCount - 1).gameObject);
+                }
+            }
+                   
         }
 
         /*

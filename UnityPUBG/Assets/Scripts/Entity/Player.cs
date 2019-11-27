@@ -78,9 +78,12 @@ namespace UnityPUBG.Scripts.Entities
             CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
             ItemQuickBar = new Item[quickBarCapacity];
+
+            //장착하지 않았으므로 emptyItem으로 초기화
             EquipedWeapon = Item.EmptyItem;
             EquipedArmor = Item.EmptyItem;
             EquipedBackpack = Item.EmptyItem;
+
             for (int slot = 0; slot < ItemQuickBar.Length; slot++)
             {
                 ItemQuickBar[slot] = Item.EmptyItem;

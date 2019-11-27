@@ -19,6 +19,11 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text playerHealthText;
         public TMP_Text playerShieldText;
         [Space]
+        public Slider roundProgressSlider;
+        public RectTransform roundTextArea;
+        public TMP_Text roundStatusText;
+        public TMP_Text roundTimerText;
+        [Space]
         public TMP_Text roundMessage;
         public TMP_Text roundSubMessage;
         public TMP_Text killMessage;
@@ -39,10 +44,10 @@ namespace UnityPUBG.Scripts.Logic
             EntityManager.Instance.OnMyPlayerSpawn += InitializePlayerUIElements;
             EntityManager.Instance.OnMyPlayerDestory += DisablePlayerUIElements;
 
-            RingSystem.Instance.OnRoundStart += DisplayRoundStartMessage;
-            RingSystem.Instance.OnRingCloseStart += DisplayRingCloseStartMessage;
+            RingSystem.Instance.OnRoundStart += RingSystem_OnRoundStart;
+            RingSystem.Instance.OnRingCloseStart += RingSystem_OnRingCloseStart;
         }
-        
+
         /// <summary>
         /// 일반 게임플레이시 보이는 UI 요소
         /// </summary>
@@ -55,7 +60,7 @@ namespace UnityPUBG.Scripts.Logic
         /// <param name="window">열고 닫을 창</param>
         public void ControlWindow(GameObject window)
         {
-            if(window.activeSelf)
+            if (window.activeSelf)
             {
                 DisableChild(window);
                 normalUIElements.SetActive(true);
@@ -80,7 +85,7 @@ namespace UnityPUBG.Scripts.Logic
             ItemSlot[] itemSlots = inventoryWindow.transform.GetComponentsInChildren<ItemSlot>();
 
             int length = itemSlots.Length;
-            for(int i = 0; i<length; i++)
+            for (int i = 0; i < length; i++)
             {
                 itemSlots[i].UpdateSlotObject();
             }
@@ -94,7 +99,7 @@ namespace UnityPUBG.Scripts.Logic
             QuickItemSlot[] quickItemSlots = quickSlot.transform.GetComponentsInChildren<QuickItemSlot>();
 
             int length = quickItemSlots.Length;
-            for(int i = 0; i<length; i++)
+            for (int i = 0; i < length; i++)
             {
                 quickItemSlots[i].UpdateQuickItemSlot();
             }
@@ -108,7 +113,7 @@ namespace UnityPUBG.Scripts.Logic
         {
             int childCount = gameObject.transform.childCount;
 
-            for(int i = 0; i<childCount; i++)
+            for (int i = 0; i < childCount; i++)
             {
                 DisableChild(gameObject.transform.GetChild(i).gameObject);
             }
@@ -188,75 +193,130 @@ namespace UnityPUBG.Scripts.Logic
             playerShieldText.text = Mathf.RoundToInt(value).ToString();
         }
 
-        private void DisplayRoundStartMessage(object sender, RingSystem.RoundData roundData)
+        private void RingSystem_OnRoundStart(object sender, RingSystem.RoundData roundData)
         {
             TimeSpan waitPeriod = TimeSpan.FromSeconds(roundData.WaitPeriod);
+
+            // Round Status Text
+            roundStatusText.text = $"라운드 {roundData.RoundNumber} - 남은 시간";
+            StartCoroutine(PlayRoundTimer(roundData.WaitPeriod, false));
+
+            // Round Start Message
             string timeString = waitPeriod.Minutes > 0 ? $"{waitPeriod.Minutes}분" : string.Empty;
             timeString += waitPeriod.Seconds > 0 ? $" {waitPeriod.Seconds}초" : string.Empty;
 
             string message = $"라운드 {roundData.RoundNumber}";
             string subMessage = $"<color=yellow>{timeString}</color> 후에 링이 줄어듭니다";
-            StartCoroutine(DisplayRoundMessage(message, subMessage, 3f));
+            StartCoroutine(PlayRoundMessage(message, subMessage, 3f));
         }
 
-        private void DisplayRingCloseStartMessage(object sender, RingSystem.RoundData roundData)
+        private void RingSystem_OnRingCloseStart(object sender, RingSystem.RoundData roundData)
         {
             TimeSpan timeToClose = TimeSpan.FromSeconds(roundData.TimeToClose);
+
+            // Round Status Text
+            roundStatusText.text = $"라운드 {roundData.RoundNumber} - 마감중";
+            StartCoroutine(PlayRoundTimer(roundData.TimeToClose, true));
+
+            // Ring Close Message;
             string timeString = timeToClose.Minutes > 0 ? $"{timeToClose.Minutes}분 {timeToClose.Seconds}초" : $"{timeToClose.Seconds}초";
-            
+
             string message = $"링 축소중!";
             string subMessage = $"<color=yellow>{timeString}</color> 안에 링이 줄어듭니다";
-            StartCoroutine(DisplayRoundMessage(message, subMessage, 3f));
+            StartCoroutine(PlayRoundMessage(message, subMessage, 3f));
         }
 
-        private IEnumerator DisplayRoundMessage(string message, string subMessage, float visibleDuration)
+        private IEnumerator PlayRoundTimer(float period, bool showProgressSlider)
         {
-            // 투명하게 시작
-            Color previousColor = roundMessage.color;
-            Color transparentColor = roundMessage.color;
-            transparentColor.a = 0f;
-            roundMessage.color = transparentColor;
-            roundSubMessage.color = transparentColor;
+            roundProgressSlider.gameObject.SetActive(showProgressSlider);
 
-            roundMessage.text = message;
-            roundSubMessage.text = subMessage;
+            // 슬라이더의 유무에 따라 텍스트 위치를 옮김
+            var sliderRectTransform = roundProgressSlider.GetComponent<RectTransform>();
+            float textAreaAnchorHeight = roundTextArea.anchorMax.y - roundTextArea.anchorMin.y;
+            if (showProgressSlider)
+            {
+                roundTextArea.anchorMin = new Vector2(roundTextArea.anchorMin.x, sliderRectTransform.anchorMin.y - textAreaAnchorHeight);
+                roundTextArea.anchorMax = new Vector2(roundTextArea.anchorMax.x, sliderRectTransform.anchorMin.y);
+            }
+            else
+            {
+                roundTextArea.anchorMin = new Vector2(roundTextArea.anchorMin.x, sliderRectTransform.anchorMax.y - textAreaAnchorHeight);
+                roundTextArea.anchorMax = new Vector2(roundTextArea.anchorMax.x, sliderRectTransform.anchorMax.y);
+            }
 
-            // 천천히 보이기
+            // UI 업데이트
+            float updatePeriod = showProgressSlider ? 0.05f : 0.2f;
             float startTime = Time.time;
-            float endTime = startTime + 0.5f;
+            float endTime = startTime + period - 0.5f;  // margin
             float progress = 0f;
             while (progress < 1f)
             {
-                Color newColor = roundMessage.color;
-                newColor.a = progress;
-                roundMessage.color = newColor;
-                roundSubMessage.color = newColor;
-
                 progress = Mathf.InverseLerp(startTime, endTime, Time.time);
-                yield return null;
+                if (showProgressSlider)
+                {
+                    roundProgressSlider.value = progress;
+                }
+
+                var remainTime = TimeSpan.FromSeconds(endTime - Time.time);
+                roundTimerText.text = string.Format("{0:m\\:ss}", remainTime);
+
+                yield return new WaitForSeconds(updatePeriod);
             }
+
+        }
+
+        private IEnumerator PlayRoundMessage(string message, string subMessage, float visibleDuration)
+        {
+            // NOTE: 모바일 성능 문제로 천천히 드러내는 효과는 비활성화함
+
+            // 투명하게 시작
+            //Color previousColor = roundMessage.color;
+            //Color transparentColor = roundMessage.color;
+            //transparentColor.a = 0f;
+            //roundMessage.color = transparentColor;
+            //roundSubMessage.color = transparentColor;
+
+            roundMessage.text = message;
+            roundSubMessage.text = subMessage;
+            roundMessage.gameObject.SetActive(true);
+            roundSubMessage.gameObject.SetActive(true);
+
+            // 천천히 보이기
+            //float startTime = Time.time;
+            //float endTime = startTime + 0.5f;
+            //float progress = 0f;
+            //while (progress < 1f)
+            //{
+            //    Color newColor = roundMessage.color;
+            //    newColor.a = progress;
+            //    roundMessage.color = newColor;
+            //    roundSubMessage.color = newColor;
+
+            //    progress = Mathf.InverseLerp(startTime, endTime, Time.time);
+            //    yield return new WaitForSeconds(0.02f);
+            //}
 
             yield return new WaitForSeconds(visibleDuration);
 
             // 천천히 사라지기
-            startTime = Time.time;
-            endTime = startTime + 0.5f;
-            progress = 0f;
-            while (progress < 1f)
-            {
-                Color newColor = roundMessage.color;
-                newColor.a = 1f - progress;
-                roundMessage.color = newColor;
-                roundSubMessage.color = newColor;
+            //startTime = Time.time;
+            //endTime = startTime + 0.5f;
+            //progress = 0f;
+            //while (progress < 1f)
+            //{
+            //    Color newColor = roundMessage.color;
+            //    newColor.a = 1f - progress;
+            //    roundMessage.color = newColor;
+            //    roundSubMessage.color = newColor;
 
-                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
-                yield return null;
-            }
+            //    progress = Mathf.InverseLerp(startTime, endTime, Time.time);
+            //    yield return new WaitForSeconds(0.02f);
+            //}
 
-            roundMessage.color = previousColor;
-            roundSubMessage.color = previousColor;
-            roundMessage.text = string.Empty;
-            roundSubMessage.text = string.Empty;
+            //roundMessage.color = previousColor;
+            //roundSubMessage.color = previousColor;
+            roundMessage.gameObject.SetActive(false);
+            roundSubMessage.gameObject.SetActive(false);
             yield return null;
         }
     }

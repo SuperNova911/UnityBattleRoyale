@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf2edee5c58d82540a51f03df9d42094, type: 3}
-  m_Name: LWRP-HighQuality
+  m_Name: LWRP-CustomQuality
   m_EditorClassIdentifier: 
   k_AssetVersion: 4
   m_RendererType: 1
@@ -23,15 +23,15 @@ MonoBehaviour:
   m_RenderScale: 1
   m_MainLightRenderingMode: 1
   m_MainLightShadowsSupported: 1
-  m_MainLightShadowmapResolution: 1024
+  m_MainLightShadowmapResolution: 512
   m_AdditionalLightsRenderingMode: 1
-  m_AdditionalLightsPerObjectLimit: 4
-  m_AdditionalLightShadowsSupported: 1
+  m_AdditionalLightsPerObjectLimit: 2
+  m_AdditionalLightShadowsSupported: 0
   m_AdditionalLightsShadowmapResolution: 2048
-  m_ShadowDistance: 65
-  m_ShadowCascades: 2
-  m_Cascade2Split: 0.1
-  m_Cascade4Split: {x: 0.067, y: 0.2, z: 0.467}
+  m_ShadowDistance: 20
+  m_ShadowCascades: 0
+  m_Cascade2Split: 0.6989159
+  m_Cascade4Split: {x: 0.19576725, y: 0.34246588, z: 0.65056205}
   m_ShadowDepthBias: 2
   m_ShadowNormalBias: 0
   m_SoftShadowsSupported: 1

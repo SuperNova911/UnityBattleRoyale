@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 9173340600907604454}
   - component: {fileID: 9196620116391044016}
   - component: {fileID: 9173340600907604455}
+  - component: {fileID: 9101536519121333136}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: GameController
@@ -228,3 +229,30 @@ MonoBehaviour:
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
+--- !u!114 &9101536519121333136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173340600907604450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd38da35ebcdd6043ac4cb53c6de54c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovementJoystick: {fileID: 0}
+  playerAttackJoystick: {fileID: 0}
+  playerHealthSlider: {fileID: 0}
+  playerShieldSlider: {fileID: 0}
+  playerHealthText: {fileID: 0}
+  playerShieldText: {fileID: 0}
+  roundProgressSlider: {fileID: 0}
+  roundStatusText: {fileID: 0}
+  roundTimerText: {fileID: 0}
+  roundMessage: {fileID: 0}
+  roundSubMessage: {fileID: 0}
+  killMessage: {fileID: 0}
+  inventoryWindow: {fileID: 0}
+  quickSlot: {fileID: 0}
+  normalUIElements: {fileID: 0}

@@ -215,7 +215,7 @@ namespace UnityPUBG.Scripts.Logic
                 foreach (var damageable in EntityManager.Instance.Damageables)
                 {
                     var entity = (Entity)damageable;
-                    if (Vector2.Distance(new Vector2(entity.transform.position.x, entity.transform.position.z), CurrentRingCenter) > CurrentRingRadius)
+                    if ((new Vector2(entity.transform.position.x, entity.transform.position.z) - CurrentRingCenter).sqrMagnitude > CurrentRingRadius * CurrentRingRadius)
                     {
                         damageable.OnTakeDamage(CurrentRingTickDamage, DamageType.Absolute);
                     }

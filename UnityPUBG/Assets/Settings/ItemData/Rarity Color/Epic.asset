@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29f0e495c9aaad48a4884818fda7ecd, type: 3}
   m_Name: Epic
   m_EditorClassIdentifier: 
-  color: {r: 0.83123666, g: 0.22014059, b: 0.9150943, a: 1}
+  color: {r: 1, g: 0.5019608, b: 1, a: 1}

@@ -1464,16 +1464,16 @@ MonoBehaviour:
     value: 0
   BlurScale:
     overrideState: 1
-    value: {x: 3, y: 3}
+    value: {x: 1, y: 1}
   Iterations:
     overrideState: 1
-    value: 3
+    value: 4
   DownsampleSize:
     overrideState: 1
-    value: 790
+    value: 650
   OverGlow:
     overrideState: 1
-    value: 2.83
+    value: 1
   Hardness:
     overrideState: 1
     value: 0

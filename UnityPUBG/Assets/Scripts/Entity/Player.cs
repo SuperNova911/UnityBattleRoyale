@@ -16,9 +16,7 @@ namespace UnityPUBG.Scripts.Entities
     [RequireComponent(typeof(PhotonView))]
     public class Player : Entity, IPunObservable
     {
-        public ProjectileBase projectileBasePrefab;
-        public AmmoData testAmmoData;
-
+        [Header("Player Settings")]
         [SerializeField, Range(0, 100)] private int maximumShield = 100;
         [SerializeField, Range(0f, 100f)] private float currentShield = 0f;
 
@@ -28,6 +26,10 @@ namespace UnityPUBG.Scripts.Entities
         [Header("QuickSlot")]
         [SerializeField, Range(0.1f, 1f)] private float speedMultiplyWhenUseItem = 0.5f;
         [SerializeField, Range(1, 6)] private int quickBarCapacity = 4;
+
+        [Header("Projectile")]
+        public ProjectileBase projectileBasePrefab;
+        public Transform projectileFirePosition;
 
         private PhotonView photonView;
         private InputManager inputManager;
@@ -76,6 +78,9 @@ namespace UnityPUBG.Scripts.Entities
             CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
             ItemQuickBar = new Item[quickBarCapacity];
+            EquipedWeapon = Item.EmptyItem;
+            EquipedArmor = Item.EmptyItem;
+            EquipedBackpack = Item.EmptyItem;
             for (int slot = 0; slot < ItemQuickBar.Length; slot++)
             {
                 ItemQuickBar[slot] = Item.EmptyItem;
@@ -209,19 +214,27 @@ namespace UnityPUBG.Scripts.Entities
             {
                 attackDirection = new Vector3(direction.x, 0, direction.y);
             }
+            attackDirection = attackDirection.normalized;
 
-            if (EquipedWeapon is MeleeWeaponData)
+            if (EquipedWeapon == null)
             {
-                // 근접 무기 공격
-            }
-            else if (EquipedWeapon is RangeWeaponData)
-            {
-                // 원거리 무기 공격
+                // 맨손 공격
+                MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
             }
             else
             {
-                // 맨손 공격
-                MeleeAttackTest(attackDirection.normalized, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+                switch (EquipedWeapon.Data)
+                {
+                    case MeleeWeaponData meleeWeaponData:
+                        MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
+                        break;
+                    case RangeWeaponData rangeWeaponData:
+                        RangeAttack(attackDirection);
+                        break;
+                    default:
+                        Debug.LogError($"관리되지 않고 있는 {nameof(WeaponData)}입니다, {EquipedWeapon.Data.GetType().Name}");
+                        break;
+                }
             }
         }
 
@@ -234,7 +247,7 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            if (EquipedArmor != null)
+            if (EquipedArmor.IsStackEmpty == false)
             {
                 DropItem(EquipedArmor);
             }
@@ -259,7 +272,7 @@ namespace UnityPUBG.Scripts.Entities
                 }
             }
 
-            if (EquipedBackpack != null)
+            if (EquipedBackpack.IsStackEmpty == false)
             {
                 DropItem(EquipedBackpack);
             }
@@ -413,7 +426,7 @@ namespace UnityPUBG.Scripts.Entities
 
             switch (selectedItem.Data)
             {
-                case ConsumableItemData consumable:
+                case ConsumableData consumable:
                     StartCoroutine(TryConsumeItem(selectedItem));
                     break;
 
@@ -483,12 +496,31 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
+        private void RangeAttack(Vector3 attackDirection)
+        {
+            var rangeWeaponData = EquipedWeapon.Data as RangeWeaponData;
+            if (rangeWeaponData.RequireAmmo != null)
+            {
+                var compatibleAmmo = ItemContainer.TryGetItem(rangeWeaponData.RequireAmmo.ItemName);
+                if (compatibleAmmo.IsStackEmpty)
+                {
+                    return;
+                }
+
+            }
+
+
+            var projectileBase = ObjectPoolManager.Instance.ReuseObject(projectileBasePrefab.gameObject).GetComponent<ProjectileBase>();
+
+            
+        }
+
         private void ProjectileTest()
         {
             var projectileObject = Instantiate(projectileBasePrefab);
-            projectileObject.transform.position = transform.position;
+            projectileObject.transform.position = projectileFirePosition.position;
 
-            projectileObject.InitializeProjectile(testAmmoData.ItemName);
+            //projectileObject.InitializeProjectile(testAmmoData.ItemName);
             projectileObject.Fire(transform.forward);
         }
 
@@ -521,8 +553,8 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            var consumableItemData = consumableItem.Data as ConsumableItemData;
-            switch (consumableItemData)
+            var consumableData = consumableItem.Data as ConsumableData;
+            switch (consumableData)
             {
                 case HealingKitData healingKit:
                     CurrentHealth += healingKit.HealthRestoreAmount;
@@ -535,9 +567,9 @@ namespace UnityPUBG.Scripts.Entities
             }
 
             // TODO ItemContainer에서 스택 개수 줄이기
-            if (ItemContainer.HasItem(consumableItemData.ItemName) == false)
+            if (ItemContainer.HasItem(consumableData.ItemName) == false)
             {
-                Debug.LogWarning($"사용하려고 하는 아이템이 {nameof(ItemContainer)}에 없습니다, {nameof(consumableItemData.ItemName)}: {consumableItemData.ItemName}");
+                Debug.LogWarning($"사용하려고 하는 아이템이 {nameof(ItemContainer)}에 없습니다, {nameof(consumableData.ItemName)}: {consumableData.ItemName}");
                 return;
             }
 
@@ -560,16 +592,16 @@ namespace UnityPUBG.Scripts.Entities
                 yield return null;
             }
 
-            if ((consumableItem.Data is ConsumableItemData) == false)
+            if ((consumableItem.Data is ConsumableData) == false)
             {
-                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableItemData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
+                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
                 yield return null;
             }
-            var consumableItemData = consumableItem.Data as ConsumableItemData;
+            var consumableData = consumableItem.Data as ConsumableData;
 
             // 아이템 사용 시전
             float startTime = Time.time;
-            float endTime = startTime + consumableItemData.TimeToUse;
+            float endTime = startTime + consumableData.TimeToUse;
             float progress = 0f;
             while (Time.time <= endTime)
             {

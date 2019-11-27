@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
+using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts
 {
     [RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
-    public class ProjectileBase : MonoBehaviour
+    public class ProjectileBase : PoolObject
     {
         public float speed;
         public float lifeTime;
+        public float damage;
+        public DamageType damageType;
 
         private Vector3 fireDirection;
         private bool isFired = false;
@@ -21,6 +24,7 @@ namespace UnityPUBG.Scripts
         private SphereCollider projectileSphereCollider;
         private Rigidbody projectileRigidbody;
 
+        #region 유니티 메시지
         private void Awake()
         {
             projectileSphereCollider = GetComponent<SphereCollider>();
@@ -38,6 +42,19 @@ namespace UnityPUBG.Scripts
         private void OnDestroy()
         {
         }
+        #endregion
+
+        #region PoolObject
+        public override void OnObjectReuse()
+        {
+
+        }
+
+        public override void OnObjectSaveToPool()
+        {
+
+        }
+        #endregion
 
         public void InitializeProjectile(string ammoDataName)
         {
@@ -51,7 +68,7 @@ namespace UnityPUBG.Scripts
 
                 var ammoData = itemData as AmmoData;
                 speed = ammoData.ProjectileSpeed;
-                lifeTime = ammoData.Range / speed;
+                //lifeTime = ammoData.Range / speed;
                 projectileSphereCollider.radius = ammoData.ColliderRadius;
             }
             else

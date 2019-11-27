@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityPUBG.Scripts.Entities;
 using UnityPUBG.Scripts.UI;
+using UnityEngine.U2D;
 
 namespace UnityPUBG.Scripts.Logic
 {
@@ -38,6 +39,20 @@ namespace UnityPUBG.Scripts.Logic
         /// </summary>
         [SerializeField]
         private GameObject quickSlot;
+
+        [SerializeField]
+        private SpriteAtlas iconAtlas;
+
+        /// <summary>
+        /// 아이콘 스프라이트 아틀라스
+        /// </summary>
+        public SpriteAtlas IconAtlas
+        {
+            get
+            {
+                return iconAtlas;
+            }
+        }
 
         private void Awake()
         {

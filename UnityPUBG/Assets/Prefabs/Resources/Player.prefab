@@ -4433,8 +4433,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchForLootPeriod: 0.2
-  lootRadius: 2
-  autoLootRadius: 1
+  lootRadius: 4
+  autoLootRadius: 1.75
   lootMask:
     serializedVersion: 2
     m_Bits: 1024

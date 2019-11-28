@@ -14,10 +14,10 @@ namespace UnityPUBG.Scripts.Entities
     {
         [Range(0.1f, 1f)]
         public float searchForLootPeriod = 0.2f;
-        [Range(1f, 5f)]
-        public float lootRadius = 2f;
-        [Range(1f, 2f)]
-        public float autoLootRadius = 1f;
+        [Range(1f, 8f)]
+        public float lootRadius = 4f;
+        [Range(1f, 3f)]
+        public float autoLootRadius = 1.75f;
         public LayerMask lootMask;
 
         [Header("Debug")]

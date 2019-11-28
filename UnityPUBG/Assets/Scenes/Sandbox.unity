@@ -6754,7 +6754,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1769509350}
-        m_MethodName: ShowTerrain
+        m_MethodName: ToggleTerrain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8765,7 +8765,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1769509350}
-        m_MethodName: ShowCamera
+        m_MethodName: ToggleCamera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9510,7 +9510,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1769509350}
-        m_MethodName: ShowDummy
+        m_MethodName: ToggleDummy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14062,7 +14062,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1769509350}
-        m_MethodName: ShowDynamicCanvas
+        m_MethodName: ToggleDynamicCanvas
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20921,7 +20921,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1769509350}
-        m_MethodName: RingStart
+        m_MethodName: StartRingSystem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -32792,7 +32792,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1769509350}
-        m_MethodName: ShowFixedCanvas
+        m_MethodName: ToggleFixedCanvas
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -35279,7 +35279,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1769509350}
-        m_MethodName: ShowMinimap
+        m_MethodName: ToggleMinimap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -35435,7 +35435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.133, y: 0.113000005}
   m_AnchorMax: {x: 0.268, y: 0.8694979}
-  m_AnchoredPosition: {x: -0.3000183, y: 0.8699951}
+  m_AnchoredPosition: {x: -0.30004883, y: 0.8699951}
   m_SizeDelta: {x: 0, y: 1.6900005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1779086643
@@ -40022,7 +40022,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1769509350}
-        m_MethodName: ShowFPS
+        m_MethodName: ToggleFPS
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -40151,7 +40151,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1769509350}
-        m_MethodName: ShowPostProcess
+        m_MethodName: TogglePostProcess
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -42717,6 +42717,16 @@ PrefabInstance:
       propertyPath: m_RenderShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 324033114654909635, guid: e2c21cd6693f2be47b0a9ee00f41675e,
+        type: 3}
+      propertyPath: antialiasingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 324033114654909635, guid: e2c21cd6693f2be47b0a9ee00f41675e,
+        type: 3}
+      propertyPath: fastApproximateAntialiasing.fastMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2c21cd6693f2be47b0a9ee00f41675e, type: 3}
 --- !u!114 &371323547158273447 stripped
@@ -44331,6 +44341,16 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 888954990}
+    - target: {fileID: 9101536519121333136, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: enableKeyboardMovement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101536519121333136, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: keyboardMovement
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604448, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: m_LocalPosition.x

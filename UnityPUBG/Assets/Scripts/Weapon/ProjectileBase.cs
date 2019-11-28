@@ -64,6 +64,7 @@ namespace UnityPUBG.Scripts
         {
             this.projectileInfo = projectileInfo;
             transform.position = startPosition;
+            transform.LookAt(transform.position + projectileInfo.fireDirection);
             projectileSphereCollider.radius = projectileInfo.colliderRadius;
         }
 

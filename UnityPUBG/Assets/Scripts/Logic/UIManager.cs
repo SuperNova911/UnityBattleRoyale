@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using UnityPUBG.Scripts.UI;
 using UnityEngine.U2D;
 using UnityPUBG.Scripts.Utilities;
+using UnityPUBG.Scripts.Entities;
+using UnityEngine.InputSystem;
 
 namespace UnityPUBG.Scripts.Logic
 {
@@ -29,37 +31,47 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text roundSubMessage;
         public TMP_Text killMessage;
         [Space]
-
-        [SerializeField]
-        private GameObject inventory;
-        //itemSlot들이 들어있는 창
-        [SerializeField]
-        private Transform inventoryWindow;
-
-        [SerializeField]
-        private GameObject quickSlot;
-        [SerializeField]
-        private SpriteAtlas iconAtlas;
-
+        [SerializeField] private GameObject inventory;
+        [SerializeField] private Transform inventoryWindow;     //itemSlot들이 들어있는 창
+        [SerializeField] private GameObject quickSlot;
+        [SerializeField] private SpriteAtlas iconAtlas;
         [Space]
-        /// <summary>
-        /// 일반 게임플레이시 보이는 UI 요소
-        /// </summary>
-        [SerializeField]
-        private GameObject normalUIElements;
+        public GameObject normalUIElements;
+        [SerializeField] private GameObject itemSlot;
 
-        [SerializeField]
-        private GameObject itemSlot;
+        [Header("Debug Options")]
+        public bool keyboardMovement = false;
 
         public SpriteAtlas IconAtlas => iconAtlas;
 
         private void Awake()
         {
-            EntityManager.Instance.OnMyPlayerSpawn += InitializePlayerUIElements;
-            EntityManager.Instance.OnMyPlayerDestory += DisablePlayerUIElements;
+            EntityManager.Instance.OnMyPlayerSpawn += ConnectPlayerUIElements;
+            EntityManager.Instance.OnMyPlayerDestory += DisconnectPlayerUIElements;
 
             RingSystem.Instance.OnRoundStart += RingSystem_OnRoundStart;
             RingSystem.Instance.OnRingCloseStart += RingSystem_OnRingCloseStart;
+        }
+
+        private void FixedUpdate()
+        {
+            // 디버깅용
+            if (keyboardMovement)
+            {
+                var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+                if (direction == Vector2.zero)
+                {
+                    if (Keyboard.current.wKey.wasReleasedThisFrame || Keyboard.current.sKey.wasReleasedThisFrame ||
+                    Keyboard.current.dKey.wasReleasedThisFrame || Keyboard.current.aKey.wasReleasedThisFrame)
+                    {
+                        PlayerMovementJoystick_OnJoystickRelease(null, direction);
+                    }
+                }
+                else
+                {
+                    PlayerMovementJoystick_OnJoystickDrag(null, direction);
+                }
+            }
         }
 
         /// <summary>
@@ -119,7 +131,7 @@ namespace UnityPUBG.Scripts.Logic
 
             int length = equipItemSlots.Length;
 
-            for(int i = 0; i<length; i++)
+            for (int i = 0; i < length; i++)
             {
                 equipItemSlots[i].UpdateEquipItemSlot();
             }
@@ -130,13 +142,13 @@ namespace UnityPUBG.Scripts.Logic
         /// </summary>
         public void DynamicItemSlots()
         {
-            if(itemSlot == null)
+            if (itemSlot == null)
             {
                 Debug.LogError("아이템 슬롯이 없습니다.");
                 return;
             }
 
-            if(inventoryWindow == null)
+            if (inventoryWindow == null)
             {
                 Debug.LogError("인벤토리 창이 없습니다.");
                 return;
@@ -144,7 +156,7 @@ namespace UnityPUBG.Scripts.Logic
 
             int instanceCount = EntityManager.Instance.MyPlayer.ItemContainer.Capacity - inventoryWindow.childCount;
 
-            if(instanceCount == 0)
+            if (instanceCount == 0)
             {
                 return;
             }
@@ -159,12 +171,12 @@ namespace UnityPUBG.Scripts.Logic
             {
                 instanceCount = -instanceCount;
 
-                for(int i = 0; i<instanceCount; i++)
+                for (int i = 0; i < instanceCount; i++)
                 {
-                    Destroy(inventoryWindow.GetChild(inventoryWindow.childCount - 1).gameObject);
+                    Destroy(inventoryWindow.GetChild(inventoryWindow.childCount - 1 - i).gameObject);
                 }
             }
-                   
+
         }
 
         /*
@@ -201,12 +213,13 @@ namespace UnityPUBG.Scripts.Logic
         }
         */
 
-        private void InitializePlayerUIElements(object sender, EventArgs e)
+        private void ConnectPlayerUIElements(object sender, EventArgs e)
         {
             var targetPlayer = EntityManager.Instance.MyPlayer;
 
             playerMovementJoystick.OnJoystickDrag += PlayerMovementJoystick_OnJoystickDrag;
             playerMovementJoystick.OnJoystickRelease += PlayerMovementJoystick_OnJoystickRelease;
+            playerAttackJoystick.OnJoystickDrag += PlayerAttackJoystick_OnJoystickDrag;
             playerAttackJoystick.OnJoystickRelease += PlayerAttackJoystick_OnJoystickRelease;
 
             // UI 초기값 설정
@@ -223,38 +236,47 @@ namespace UnityPUBG.Scripts.Logic
             targetPlayer.OnCurrentShieldUpdate += UpdatePlayerShieldSlider;
         }
 
-        private void DisablePlayerUIElements(object sender, EventArgs e)
+        private void DisconnectPlayerUIElements(object sender, EventArgs e)
         {
             playerMovementJoystick.OnJoystickDrag -= PlayerMovementJoystick_OnJoystickDrag;
             playerMovementJoystick.OnJoystickRelease -= PlayerMovementJoystick_OnJoystickRelease;
+            playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickDrag;
             playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickRelease;
         }
 
         private void PlayerMovementJoystick_OnJoystickDrag(object sender, Vector2 direction)
         {
             EntityManager.Instance.MyPlayer.MoveTo(direction);
+            EntityManager.Instance.MyPlayer.RotateTo(direction);
         }
 
-        private void PlayerMovementJoystick_OnJoystickRelease(object sender, Vector2 e)
+        private void PlayerMovementJoystick_OnJoystickRelease(object sender, Vector2 direction)
         {
             EntityManager.Instance.MyPlayer.MoveTo(Vector2.zero);
+            EntityManager.Instance.MyPlayer.RotateTo(Vector2.zero);
+        }
+
+        private void PlayerAttackJoystick_OnJoystickDrag(object sender, Vector2 direction)
+        {
+            EntityManager.Instance.MyPlayer.AimTo(direction);
         }
 
         private void PlayerAttackJoystick_OnJoystickRelease(object sender, Vector2 direction)
         {
+            EntityManager.Instance.MyPlayer.AimTo(Vector2.zero);
             EntityManager.Instance.MyPlayer.AttackTo(direction);
         }
 
         private void UpdatePlayerHealthSlider(object sender, float value)
         {
             playerHealthSlider.value = value;
-            playerHealthText.text = Mathf.RoundToInt(value).ToString();
+            playerHealthText.text = Mathf.CeilToInt(value).ToString();
         }
 
         private void UpdatePlayerShieldSlider(object sender, float value)
         {
             playerShieldSlider.value = value;
-            playerShieldText.text = Mathf.RoundToInt(value).ToString();
+            playerShieldText.text = Mathf.CeilToInt(value).ToString();
         }
 
         private void RingSystem_OnRoundStart(object sender, RingSystem.RoundData roundData)

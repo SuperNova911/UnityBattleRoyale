@@ -35,23 +35,34 @@ namespace UnityPUBG.Scripts.Logic
             if (debugMode)
             {
                 debugButtonCanvas.SetActive(true);
+
                 dynamicCanvas.SetActive(false);
                 fixedCanvas.SetActive(false);
                 terrain.SetActive(false);
                 postProcess.SetActive(false);
                 dummy.SetActive(false);
             }
+            else
+            {
+
+            }
         }
 
         private void Start()
         {
-            //if (testPlayerPrefab != null)
-            //{
-            //    PhotonNetwork.Instantiate(testPlayerPrefab.name, testPlayerSpawnPosition, Quaternion.identity, 0);
-            //}
+            if (debugMode)
+            {
+
+            }
+            else
+            {
+                SpawnItem();
+                SpawnPlayer();
+                StartRingSystem();
+            }
         }
 
-        public void ShowFPS()
+        public void ToggleFPS()
         {
             fpsCounter.SetActive(!fpsCounter.activeSelf);
         }
@@ -61,44 +72,44 @@ namespace UnityPUBG.Scripts.Logic
             ItemSpawnManager.Instance.SpawnRandomItemsAtSpawnPoints();
         }
 
-        public void RingStart()
+        public void StartRingSystem()
         {
             RingSystem.Instance.GenerateRoundDatas();
             RingSystem.Instance.StartRingSystem();
         }
 
-        public void ShowDynamicCanvas()
+        public void ToggleDynamicCanvas()
         {
             dynamicCanvas.SetActive(!dynamicCanvas.activeSelf);
         }
 
-        public void ShowFixedCanvas()
+        public void ToggleFixedCanvas()
         {
             fixedCanvas.SetActive(!fixedCanvas.activeSelf);
         }
 
-        public void ShowCamera()
+        public void ToggleCamera()
         {
             cameras.SetActive(!cameras.activeSelf);
         }
 
-        public void ShowMinimap()
+        public void ToggleMinimap()
         {
             minimapUI.SetActive(!minimapUI.activeSelf);
             minimapCamera.SetActive(!minimapCamera.activeSelf);
         }
 
-        public void ShowTerrain()
+        public void ToggleTerrain()
         {
             terrain.SetActive(!terrain.activeSelf);
         }
 
-        public void ShowPostProcess()
+        public void TogglePostProcess()
         {
             postProcess.SetActive(!postProcess.activeSelf);
         }
 
-        public void ShowDummy()
+        public void ToggleDummy()
         {
             dummy.SetActive(!dummy.activeSelf);
         }

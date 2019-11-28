@@ -44,7 +44,7 @@ namespace UnityPUBG.Scripts.Entities
         }
         public bool IsDead { get; private set; }
         public Vector2 MovementDirection { get; protected set; }
-        public Vector3 FacingDirection { get; private set; }
+        public Vector2 RotateDirection { get; protected set; }
 
         #region 유니티 메시지
         protected virtual void Awake()
@@ -100,14 +100,12 @@ namespace UnityPUBG.Scripts.Entities
         /// </summary>
         private void RotateEntity()
         {
-            if (MovementDirection == Vector2.zero)
+            if (RotateDirection == Vector2.zero)
             {
                 return;
             }
 
-            FacingDirection = new Vector3(MovementDirection.x, 0, MovementDirection.y);
-
-            var targetRotation = Quaternion.LookRotation(FacingDirection);
+            var targetRotation = Quaternion.LookRotation(new Vector3(RotateDirection.x, 0, RotateDirection.y));
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed);
         }
     }

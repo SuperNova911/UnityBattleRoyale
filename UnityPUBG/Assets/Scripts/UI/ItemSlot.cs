@@ -107,7 +107,7 @@ namespace UnityPUBG.Scripts.UI
                 slotImage.sprite = emptySlotImage;
             }
 
-            if (inventoryItem == Item.EmptyItem)
+            if (inventoryItem.IsStackEmpty)
             {
                 backGroundImage.sprite = defaultBackGroundImage;
                 return;
@@ -120,8 +120,7 @@ namespace UnityPUBG.Scripts.UI
                 int quickBarLength = targetPlayer.ItemQuickBar.Length;
                 for (int quickBarSlot = 0; quickBarSlot < quickBarLength; quickBarSlot++)
                 {
-                    if (!inventoryItem.IsStackEmpty &&
-                        targetPlayer.ItemQuickBar[quickBarSlot] == inventoryItem)
+                    if (!inventoryItem.IsStackEmpty && targetPlayer.ItemQuickBar[quickBarSlot] == inventoryItem)
                     {
                         backGroundImage.sprite = quickBackGroundImage;
                         return;

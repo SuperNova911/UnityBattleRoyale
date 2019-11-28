@@ -37,6 +37,7 @@ namespace UnityPUBG.Scripts.Entities
 
         // Weapon
         private float lastAttackTime = 0f;
+        private bool isAiming = false;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
 
@@ -65,6 +66,16 @@ namespace UnityPUBG.Scripts.Entities
 
         public int PhotonViewId => photonView.viewID;
         public bool IsMyPlayer => photonView.isMine;
+
+        public bool IsAiming
+        {
+            get { return isAiming; }
+            set
+            {
+                isAiming = value;
+                // TODO: 조준선 그리기
+            }
+        }
 
         #region 유니티 메시지
         protected override void Awake()
@@ -213,7 +224,29 @@ namespace UnityPUBG.Scripts.Entities
 
         public void MoveTo(Vector2 direction)
         {
-            MovementDirection = direction;
+            MovementDirection = direction.normalized;
+        }
+
+        public void RotateTo(Vector2 direction)
+        {
+            if (IsAiming == false)
+            {
+                RotateDirection = direction.normalized;
+            }
+        }
+
+        public void AimTo(Vector2 direction)
+        {
+            if (direction == Vector2.zero)
+            {
+                RotateDirection = Vector2.zero;
+                IsAiming = false;
+            }
+            else
+            {
+                RotateDirection = direction.normalized;
+                IsAiming = true;
+            }
         }
 
         public void AttackTo(Vector2 direction)
@@ -229,7 +262,7 @@ namespace UnityPUBG.Scripts.Entities
             }
             attackDirection = attackDirection.normalized;
 
-            if (EquipedWeapon == null)
+            if (EquipedWeapon.IsStackEmpty)
             {
                 // 맨손 공격
                 MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
@@ -424,7 +457,7 @@ namespace UnityPUBG.Scripts.Entities
             {
                 if (ItemQuickBar[i] == item)
                 {
-                    ItemQuickBar[i] = Item.EmptyItem;
+                    ItemQuickBar[i].ClearStack();
                     break;
                 }
             }

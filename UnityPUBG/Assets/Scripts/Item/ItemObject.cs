@@ -9,6 +9,7 @@ using UnityPUBG.Scripts.Utilities;
 using UnityPUBG.Scripts.Logic;
 using UnityEditor;
 using Knife.PostProcessing;
+using UnityPUBG.Scripts.UI;
 
 namespace UnityPUBG.Scripts.Items
 {
@@ -19,6 +20,7 @@ namespace UnityPUBG.Scripts.Items
         public float readyToLootDelay = 1f;
 
         private Item item = null;
+        private Rigidbody itemObjectRigidBody;
         private PhotonView photonView;
 
         public Item Item
@@ -43,19 +45,30 @@ namespace UnityPUBG.Scripts.Items
         }
         public GameObject ModelPrefab { get; private set; }
         public bool AllowLoot { get; private set; }
+        public LootButton LootButton { get; set; }
         public int PhotonViewId { get { return photonView.viewID; } }
 
         #region 유니티 메시지
         private void Awake()
         {
+            itemObjectRigidBody = GetComponent<Rigidbody>();
             photonView = GetComponent<PhotonView>();
 
             AllowLoot = false;
+            LootButton = null;
         }
 
         private void Start()
         {
             Invoke(nameof(ReadyToLoot), readyToLootDelay);
+        }
+
+        private void OnDestroy()
+        {
+            if (LootButton != null)
+            {
+                LootButton.SaveToPool();
+            }
         }
         #endregion
 

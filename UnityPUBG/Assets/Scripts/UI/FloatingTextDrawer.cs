@@ -11,18 +11,11 @@ namespace UnityPUBG.Scripts.UI
 {
     public class FloatingTextDrawer : Singleton<FloatingTextDrawer>
     {
-        public Canvas canvas;
-
         public DamageText damageTextPrefab;
 
         private void Awake()
         {
-            if (canvas == null)
-            {
-                canvas = FindObjectOfType<Canvas>();
-            }
-
-            ObjectPoolManager.Instance.InitializeUIObjectPool(damageTextPrefab.gameObject, canvas, 10);
+            ObjectPoolManager.Instance.InitializeUIObjectPool(damageTextPrefab.gameObject, UIManager.Instance.dynamicCanvas, 10);
         }
 
         public void DrawDamageText(Transform damageReceiver, float damage)

@@ -42870,27 +42870,27 @@ PrefabInstance:
     - target: {fileID: 324033114654909645, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.48780254
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 324033114654909645, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.872954
+      value: 0.8660254
       objectReference: {fileID: 0}
     - target: {fileID: 324033114654909645, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 63
+      value: 10.098255
       objectReference: {fileID: 0}
     - target: {fileID: 324033114654909645, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 490.38
+      value: 493.26
       objectReference: {fileID: 0}
     - target: {fileID: 324033114654909645, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 501.27
+      value: 499.16
       objectReference: {fileID: 0}
     - target: {fileID: 324033114654909645, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
@@ -42930,7 +42930,7 @@ PrefabInstance:
     - target: {fileID: 324033114654909644, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
       propertyPath: far clip plane
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 324033114654909644, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
@@ -44303,6 +44303,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6868717196056017665, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190848302033831359, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17b02e41963c46d4284ecd38c96e7565, type: 3}
 --- !u!1 &4554568196299936864 stripped
@@ -44607,6 +44617,16 @@ PrefabInstance:
       propertyPath: attackJoystickPivot
       value: 
       objectReference: {fileID: 4554568196299936864}
+    - target: {fileID: 9101536519121333136, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: dynamicCanvas
+      value: 
+      objectReference: {fileID: 984471910}
+    - target: {fileID: 9101536519121333136, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: fixedCanvas
+      value: 
+      objectReference: {fileID: 1828846519}
     - target: {fileID: 9173340600907604448, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: m_LocalPosition.x

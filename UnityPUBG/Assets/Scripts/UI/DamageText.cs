@@ -20,9 +20,8 @@ namespace UnityPUBG.Scripts.UI
         [Range(1f, 2f)] public float animationDuration = 1f;
         public Vector3 floatingOffset = new Vector3(0, 2.2f, 0);
 
-        private Canvas canvas;
         private RectTransform rectTransform;
-        private RectTransform canvasRectTransform;
+        private RectTransform holderRectTransform;
 
         public Transform DamageReceiver { private get; set; }
 
@@ -34,16 +33,15 @@ namespace UnityPUBG.Scripts.UI
                 text = GetComponentInChildren<TMP_Text>();
             }
 
-            canvas = GetComponentInParent<Canvas>();
             rectTransform = GetComponent<RectTransform>();
-            canvasRectTransform = canvas.GetComponent<RectTransform>();
+            holderRectTransform = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
         }
 
         private void LateUpdate()
         {
             var screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, DamageReceiver.position + floatingOffset);
-            rectTransform.anchoredPosition = screenPoint - canvasRectTransform.sizeDelta / 2f;
-        } 
+            rectTransform.anchoredPosition = screenPoint - holderRectTransform.sizeDelta / 2f;
+        }
         #endregion
 
         #region PoolObject

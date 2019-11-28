@@ -15,6 +15,10 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class UIManager : Singleton<UIManager>
     {
+        public Canvas dynamicCanvas;
+        public Canvas fixedCanvas;
+        public GameObject normalUIElements;
+        [Space]
         public GameObject movementJoystickPivot;
         public GameObject attackJoystickPivot;
         public FloatingJoystick playerMovementJoystick;
@@ -40,8 +44,6 @@ namespace UnityPUBG.Scripts.Logic
         [SerializeField] private Transform inventoryWindow;     //itemSlot들이 들어있는 창
         [SerializeField] private GameObject quickSlot;
         [SerializeField] private SpriteAtlas iconAtlas;
-        [Space]
-        public GameObject normalUIElements;
         [SerializeField] private GameObject itemSlot;
 
         [Header("Debug Options")]

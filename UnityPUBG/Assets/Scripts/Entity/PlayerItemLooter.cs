@@ -7,24 +7,28 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
+using UnityPUBG.Scripts.UI;
 
 namespace UnityPUBG.Scripts.Entities
 {
     public class PlayerItemLooter : MonoBehaviour
     {
-        [Range(0.1f, 1f)]
-        public float searchForLootPeriod = 0.2f;
-        [Range(1f, 8f)]
-        public float lootRadius = 4f;
-        [Range(1f, 3f)]
-        public float autoLootRadius = 1.75f;
+        [Range(3, 20)] public int maximumLootAtMoment = 10;
+        [Range(0.1f, 1f)] public float searchForLootPeriod = 0.2f;
+        [Range(1f, 8f)] public float lootRadius = 4f;
+        [Range(1f, 3f)] public float autoLootRadius = 1.75f;
         public LayerMask lootMask;
+
+        [Header("UI")]
+        public LootButton lootButtonPrefab;
 
         [Header("Debug")]
         public bool showLootRadius = false;
 
         private Player player;
-        public List<ItemObject> LootableItemObjects { get; private set; }
+        private Collider[] collideObjects;
+        private HashSet<ItemObject> currentLootableItemObjects = new HashSet<ItemObject>();
+        private HashSet<ItemObject> lastLootableItemObjects = new HashSet<ItemObject>();
 
         #region 유니티 메시지
         private void Awake()
@@ -35,7 +39,8 @@ namespace UnityPUBG.Scripts.Entities
                 Destroy(gameObject);
             }
 
-            LootableItemObjects = new List<ItemObject>();
+            collideObjects = new Collider[maximumLootAtMoment];
+            ObjectPoolManager.Instance.InitializeUIObjectPool(lootButtonPrefab.gameObject, UIManager.Instance.dynamicCanvas, maximumLootAtMoment);
         }
 
         private void Start()
@@ -111,25 +116,56 @@ namespace UnityPUBG.Scripts.Entities
 
             while (true)
             {
-                LootableItemObjects.Clear();
-
-                foreach (Collider collider in Physics.OverlapSphere(transform.position, lootRadius, lootMask))
+                int hitCount = Physics.OverlapSphereNonAlloc(transform.position, lootRadius, collideObjects, lootMask);
+                for (int index = 0; index < hitCount; index++)
                 {
-                    var collideItemObject = collider.gameObject.GetComponent<ItemObject>();
+                    // ItemObject가 유효한지 검사
+                    var collideItemObject = collideObjects[index].GetComponent<ItemObject>();
                     if (collideItemObject == null || collideItemObject.AllowLoot == false || collideItemObject.Item.IsStackEmpty)
                     {
                         continue;
                     }
 
+                    // 자동 루팅 대상인지 검사
                     if ((collideItemObject.transform.position - transform.position).sqrMagnitude <= autoLootSquaredRadius && IsAutoLootTarget(collideItemObject.Item))
                     {
                         player.LootItem(collideItemObject);
                     }
                     else
                     {
-                        LootableItemObjects.Add(collideItemObject);
+                        // LootButton이 표시중인지 검사
+                        if (collideItemObject.LootButton == null)
+                        {
+                            // ItemObject에게 새 LootButton을 할당
+                            var pooledLootButton = ObjectPoolManager.Instance.ReuseUIObject(lootButtonPrefab.gameObject).GetComponent<LootButton>();
+                            pooledLootButton.targetItemObject = collideItemObject;
+                            collideItemObject.LootButton = pooledLootButton;
+
+                            currentLootableItemObjects.Add(collideItemObject);
+                        }
+                        else
+                        {
+                            lastLootableItemObjects.Remove(collideItemObject);
+                            currentLootableItemObjects.Add(collideItemObject);
+                        }
                     }
                 }
+
+                // 루팅 범위 밖의 ItemObject가 가진 LootButton 제거
+                foreach (var item in lastLootableItemObjects)
+                {
+                    if (item != null && item.LootButton != null)
+                    {
+                        item.LootButton.SaveToPool();
+                        item.LootButton = null;
+                    }
+                }
+
+                // currentLootable을 lastLootable로 이동
+                var tempForSwap = lastLootableItemObjects;
+                lastLootableItemObjects = currentLootableItemObjects;
+                currentLootableItemObjects = tempForSwap;
+                currentLootableItemObjects.Clear();
 
                 yield return new WaitForSeconds(searchForLootPeriod);
             }

@@ -4432,10 +4432,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31805b88b40b95c458562cb4b22a7312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maximumLootAtMoment: 10
   searchForLootPeriod: 0.2
   lootRadius: 4
   autoLootRadius: 1.75
   lootMask:
     serializedVersion: 2
     m_Bits: 1024
+  lootButtonHolder: {fileID: 0}
+  lootButtonPrefab: {fileID: 6693592080578410819, guid: 524e9b0ff7df51146b66abf58877ff40,
+    type: 3}
   showLootRadius: 0

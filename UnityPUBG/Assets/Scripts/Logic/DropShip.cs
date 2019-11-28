@@ -297,6 +297,7 @@ namespace UnityPUBG.Scripts.Logic
         [PunRPC]
         private void NotifyLaunchDropShip()
         {
+            AddMyPlayer();
             Status = DropShipStatus.Preparation;
         }
 

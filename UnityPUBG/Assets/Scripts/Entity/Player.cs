@@ -164,6 +164,11 @@ namespace UnityPUBG.Scripts.Entities
             {
                 DropArmor();
             }
+            else if (Keyboard.current.digit4Key.wasPressedThisFrame)
+            {
+                CurrentShield -= 9.11f;
+                CurrentHealth -= 9.11f;
+            }
 
             if (photonView.isMine)
             {

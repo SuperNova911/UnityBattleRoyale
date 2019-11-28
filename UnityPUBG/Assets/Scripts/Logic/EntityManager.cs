@@ -13,10 +13,13 @@ namespace UnityPUBG.Scripts.Logic
     {
         private Player myPlayer = null;
         private List<Entity> entities = new List<Entity>();
+        private List<Player> players = new List<Player>();
         private List<IDamageable> damageables = new List<IDamageable>();
 
         public event EventHandler OnMyPlayerSpawn;
         public event EventHandler OnMyPlayerDestory;
+        public event EventHandler<Player> OnPlayerSpawn;
+        public event EventHandler<Player> OnPlayerDestroy;
 
         public Player MyPlayer
         {
@@ -35,6 +38,7 @@ namespace UnityPUBG.Scripts.Logic
             }
         }
         public List<Entity> Entities => entities;
+        public List<Player> Players => players;
         public List<IDamageable> Damageables => damageables;
 
         public void RegisterEntity(Entity entity)
@@ -50,6 +54,11 @@ namespace UnityPUBG.Scripts.Logic
             {
                 Damageables.Add((IDamageable)entity);
             }
+            if (entity is Player)
+            {
+                Players.Add((Player)entity);
+                OnPlayerSpawn?.Invoke(this, (Player)entity);
+            }
         }
 
         public void UnRegisterEntity(Entity entity)
@@ -64,6 +73,11 @@ namespace UnityPUBG.Scripts.Logic
             if (entity is IDamageable)
             {
                 Damageables.Remove((IDamageable)entity);
+            }
+            if (entity is Player)
+            {
+                Players.Remove((Player)entity);
+                OnPlayerDestroy?.Invoke(this, (Player)entity);
             }
         }
     }

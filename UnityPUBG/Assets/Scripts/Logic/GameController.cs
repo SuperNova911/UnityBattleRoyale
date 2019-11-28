@@ -12,6 +12,8 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class GameController : Singleton<GameController>
     {
+        public DropShip dropShipPrefab;
+
         [Header("Photon Networks")]
         public PhotonView photonView;
 
@@ -34,6 +36,12 @@ namespace UnityPUBG.Scripts.Logic
                 //RingSystem.Instance.GenerateRoundDatas();
                 //RingSystem.Instance.StartRingSystem();
             }
+        }
+
+        public void DeployDropShip()
+        {
+            var dropShip = FindObjectOfType<DropShip>();
+            dropShip.LaunchDropShip();
         }
 
         private void SetGraphicOptions()

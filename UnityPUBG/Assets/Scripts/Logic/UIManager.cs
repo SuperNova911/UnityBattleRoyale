@@ -9,11 +9,14 @@ using UnityEngine.U2D;
 using UnityPUBG.Scripts.Utilities;
 using UnityPUBG.Scripts.Entities;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 namespace UnityPUBG.Scripts.Logic
 {
     public class UIManager : Singleton<UIManager>
     {
+        public GameObject movementJoystickPivot;
+        public GameObject attackJoystickPivot;
         public FloatingJoystick playerMovementJoystick;
         public FloatingJoystick playerAttackJoystick;
         [Space]
@@ -31,6 +34,8 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text roundSubMessage;
         public TMP_Text killMessage;
         [Space]
+        public TMP_Text survivePlayersText;
+        [Space]
         [SerializeField] private GameObject inventory;
         [SerializeField] private Transform inventoryWindow;     //itemSlot들이 들어있는 창
         [SerializeField] private GameObject quickSlot;
@@ -42,12 +47,34 @@ namespace UnityPUBG.Scripts.Logic
         [Header("Debug Options")]
         public bool keyboardMovement = false;
 
+        private bool dragMovementJoystick;
+        private bool dragAttackJoystick;
+
         public SpriteAtlas IconAtlas => iconAtlas;
+
+        public bool DragMovementJoystick
+        {
+            get { return dragMovementJoystick; }
+            set
+            {
+                dragMovementJoystick = value;
+                movementJoystickPivot.SetActive(!value);
+            }
+        }
+        public bool DragAttackJoystick
+        {
+            get { return dragAttackJoystick; }
+            set
+            {
+                dragAttackJoystick = value;
+                attackJoystickPivot.SetActive(!value);
+            }
+        }
 
         private void Awake()
         {
-            EntityManager.Instance.OnMyPlayerSpawn += ConnectPlayerUIElements;
-            EntityManager.Instance.OnMyPlayerDestory += DisconnectPlayerUIElements;
+            EntityManager.Instance.OnMyPlayerSpawn += ConnectMyPlayerUIElements;
+            EntityManager.Instance.OnPlayerSpawn += EntityManager_OnPlayerSpawn;
 
             RingSystem.Instance.OnRoundStart += RingSystem_OnRoundStart;
             RingSystem.Instance.OnRingCloseStart += RingSystem_OnRingCloseStart;
@@ -213,7 +240,7 @@ namespace UnityPUBG.Scripts.Logic
         }
         */
 
-        private void ConnectPlayerUIElements(object sender, EventArgs e)
+        private void ConnectMyPlayerUIElements(object sender, EventArgs e)
         {
             var targetPlayer = EntityManager.Instance.MyPlayer;
 
@@ -234,9 +261,10 @@ namespace UnityPUBG.Scripts.Logic
             // 이벤트 구독
             targetPlayer.OnCurrentHealthUpdate += UpdatePlayerHealthSlider;
             targetPlayer.OnCurrentShieldUpdate += UpdatePlayerShieldSlider;
+            targetPlayer.OnDie += MyPlayer_OnDie;
         }
 
-        private void DisconnectPlayerUIElements(object sender, EventArgs e)
+        private void MyPlayer_OnDie(object sender, EventArgs e)
         {
             playerMovementJoystick.OnJoystickDrag -= PlayerMovementJoystick_OnJoystickDrag;
             playerMovementJoystick.OnJoystickRelease -= PlayerMovementJoystick_OnJoystickRelease;
@@ -244,25 +272,40 @@ namespace UnityPUBG.Scripts.Logic
             playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickRelease;
         }
 
+        private void EntityManager_OnPlayerSpawn(object sender, Player spawnedPlayer)
+        {
+            UpdateSurvivePlayers();
+            spawnedPlayer.OnDie += Player_OnDie;
+        }
+
+        private void Player_OnDie(object sender, EventArgs e)
+        {
+            UpdateSurvivePlayers();
+        }
+
         private void PlayerMovementJoystick_OnJoystickDrag(object sender, Vector2 direction)
         {
+            DragMovementJoystick = true;
             EntityManager.Instance.MyPlayer.MoveTo(direction);
             EntityManager.Instance.MyPlayer.RotateTo(direction);
         }
 
         private void PlayerMovementJoystick_OnJoystickRelease(object sender, Vector2 direction)
         {
+            DragMovementJoystick = false;
             EntityManager.Instance.MyPlayer.MoveTo(Vector2.zero);
             EntityManager.Instance.MyPlayer.RotateTo(Vector2.zero);
         }
 
         private void PlayerAttackJoystick_OnJoystickDrag(object sender, Vector2 direction)
         {
+            DragAttackJoystick = true;
             EntityManager.Instance.MyPlayer.AimTo(direction);
         }
 
         private void PlayerAttackJoystick_OnJoystickRelease(object sender, Vector2 direction)
         {
+            DragAttackJoystick = false;
             EntityManager.Instance.MyPlayer.AimTo(Vector2.zero);
             EntityManager.Instance.MyPlayer.AttackTo(direction);
         }
@@ -404,6 +447,16 @@ namespace UnityPUBG.Scripts.Logic
             roundMessage.gameObject.SetActive(false);
             roundSubMessage.gameObject.SetActive(false);
             yield return null;
+        }
+
+        private void UpdateSurvivePlayers()
+        {
+            int survivePlayerCount = EntityManager.Instance.Players
+                .Where(e => e.IsDead == false)
+                .Count();
+            int myPlayerKillCount = 0;
+
+            survivePlayersText.text = myPlayerKillCount > 0 ? $"{survivePlayerCount}명 생존 / {myPlayerKillCount}명 처치" : $"{survivePlayerCount}명 생존";
         }
     }
 }

@@ -78,6 +78,11 @@ namespace UnityPUBG.Scripts.Logic
             RingSystem.Instance.StartRingSystem();
         }
 
+        public void DeployDropShip()
+        {
+            GameController.Instance.DeployDropShip();
+        }
+
         public void ToggleDynamicCanvas()
         {
             dynamicCanvas.SetActive(!dynamicCanvas.activeSelf);

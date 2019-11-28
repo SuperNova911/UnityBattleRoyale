@@ -20,6 +20,7 @@ namespace UnityPUBG.Scripts.Entities
         private Rigidbody entityRigidbody;
 
         public event EventHandler<float> OnCurrentHealthUpdate;
+        public event EventHandler OnDie;
 
         public int MaximumHealth
         {
@@ -38,7 +39,7 @@ namespace UnityPUBG.Scripts.Entities
                 OnCurrentHealthUpdate?.Invoke(this, currentHealth);
                 if (IsDead)
                 {
-                    Destroy(gameObject);
+                    OnDie?.Invoke(this, EventArgs.Empty);
                 }
             }
         }

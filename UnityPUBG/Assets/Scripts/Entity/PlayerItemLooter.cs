@@ -84,6 +84,22 @@ namespace UnityPUBG.Scripts.Entities
                 {
                     return true;
                 }
+
+                //가방이 비었다면
+                if(player.ItemContainer.IsFull == false)
+                {
+                    //먹은적 없는 아이템이라면
+                    if(sameItemAtContainer.IsStackEmpty == true)
+                    {
+                        return true;
+                    }
+
+                    //무기라면
+                    if(sameItemAtContainer.Data is WeaponData)
+                    {
+                        return true;
+                    }
+                }
             }
 
             return false;

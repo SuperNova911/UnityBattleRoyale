@@ -372,7 +372,7 @@ namespace UnityPUBG.Scripts.Entities
 
         public void LootItem(ItemObject lootItemObject)
         {
-            if (lootItemObject.Item == null)
+            if (lootItemObject.Item.IsStackEmpty)
             {
                 return;
             }
@@ -393,9 +393,19 @@ namespace UnityPUBG.Scripts.Entities
             // 디버깅용 구문
             else if (lootItemObject.Item.Data is WeaponData)
             {
-                EquipWeapon(lootItemObject.Item);
+                //장착하지 않았다면 장착
+                if (EquipedWeapon.IsStackEmpty)
+                {
+                    EquipWeapon(lootItemObject.Item);
+                }
+                else
+                {
+                    ItemContainer.AddItem(lootItemObject.Item);
+                }
                 LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
                 lootItemObject.RequestDestroy();
+
+                UIManager.Instance.UpdateInventorySlots();
             }
             else
             {

@@ -69,7 +69,7 @@ namespace UnityPUBG.Scripts.Items
                 container.Add(itemToAdd);
                 container.Sort();
 
-                itemToAdd.ClearStack();
+                itemToAdd = Item.EmptyItem;
             }
 
             OnUpdateContainer?.Invoke(this, EventArgs.Empty);

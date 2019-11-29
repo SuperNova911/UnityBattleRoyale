@@ -45,7 +45,10 @@ namespace UnityPUBG.Scripts.Entities
         private bool isAiming = false;
         private bool isPlayingRangeAnimation = false;
 
-        private Vector2 previousDirection = Vector2.zero;
+        //원거리 공격 방향
+        private Vector3 rangeAttackDirection = Vector3.zero;
+
+        private Vector2 previousAnimationDirection = Vector2.zero;
         private bool isConsuming = false;
         private Coroutine tryConsumeItemCorutine = null;
 
@@ -256,7 +259,7 @@ namespace UnityPUBG.Scripts.Entities
                 //애니메이션 진행중이라면 조준했던 방향을 바라봄
                 if(isPlayingRangeAnimation)
                 {
-                    RotateDirection = previousDirection;
+                    RotateDirection = previousAnimationDirection;
                     return;
                 }
                 RotateDirection = direction.normalized;
@@ -269,12 +272,12 @@ namespace UnityPUBG.Scripts.Entities
             {
                 if (isPlayingRangeAnimation)
                 {
-                    RotateDirection = previousDirection;
+                    RotateDirection = previousAnimationDirection;
                 }
                 else
                 {
                     RotateDirection = Vector2.zero;
-                    previousDirection = Vector2.zero;
+                    previousAnimationDirection = Vector2.zero;
                 }
                 IsAiming = false;
             }
@@ -294,8 +297,8 @@ namespace UnityPUBG.Scripts.Entities
                 }
                 else
                 {
-                    previousDirection = DirectionOnRangeAnimation(direction);
-                    RotateDirection = previousDirection;
+                    previousAnimationDirection = DirectionOnRangeAnimation(direction);
+                    RotateDirection = previousAnimationDirection;
                 }
             }
         }
@@ -329,7 +332,8 @@ namespace UnityPUBG.Scripts.Entities
                         myAnimator.SetTrigger(meleeAttack);
                         break;
                     case RangeWeaponData rangeWeaponData:
-                        RangeAttack(attackDirection);
+                        rangeAttackDirection = attackDirection;
+                        //RangeAttack(attackDirection);
                         break;
                     default:
                         Debug.LogError($"관리되지 않고 있는 {nameof(WeaponData)}입니다, {EquipedWeapon.Data.GetType().Name}");
@@ -890,6 +894,7 @@ namespace UnityPUBG.Scripts.Entities
                 {
                     myAnimator.SetFloat(attackSpeed, 1f);
 
+                    RangeAttack(rangeAttackDirection);
                     yield return new WaitForSecondsRealtime(rangeAttackAnimationLength - aimTime);
 
                     isPlayingRangeAnimation = false;

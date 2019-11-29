@@ -2,24 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityPUBG.Scripts.Entities;
 using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.UI
 {
     public class EquipItemSlot : MonoBehaviour
     {
-        private enum ItemType { Backpack, Weapon, SecondaryWeapon, Armor }
         //아이템 종류 가방 or 실드
-        [SerializeField] private ItemType itemType;
+        public ItemType itemType;
+        public Image itemImage = null;
 
-        private Image itemIcon = null;
+        public enum ItemType { Backpack, Weapon, SecondaryWeapon, Armor }
 
         #region 유니티 콜백
-        private void Awake()
-        {
-            itemIcon = transform.GetChild(0).GetComponent<Image>();
-        }
-
         private void OnEnable()
         {
             UpdateEquipItemSlot();
@@ -28,25 +24,30 @@ namespace UnityPUBG.Scripts.UI
 
         public void UpdateEquipItemSlot()
         {
-            if (itemIcon == null)
+            Player myPlayer = EntityManager.Instance.MyPlayer;
+            if (myPlayer == null)
             {
-                Awake();
+                return;
             }
-
-            Entities.Player myPlayer = Logic.EntityManager.Instance.MyPlayer;
 
             switch (itemType)
             {
+                case ItemType.Armor:
+                    if (!myPlayer.EquipedArmor.IsStackEmpty)
+                    {
+                        itemImage.sprite = myPlayer.EquipedArmor.Data.Icon;
+                    }
+                    break;
                 case ItemType.Backpack:
                     if (!myPlayer.EquipedBackpack.IsStackEmpty)
                     {
-                        itemIcon.sprite = myPlayer.EquipedBackpack.Data.Icon;
+                        itemImage.sprite = myPlayer.EquipedBackpack.Data.Icon;
                     }
                     break;
                 case ItemType.Weapon:
                     if (!myPlayer.EquipedWeapon.IsStackEmpty)
                     {
-                        itemIcon.sprite = myPlayer.EquipedWeapon.Data.Icon;
+                        itemImage.sprite = myPlayer.EquipedWeapon.Data.Icon;
                     }
                     break;
                 case ItemType.SecondaryWeapon:
@@ -57,12 +58,6 @@ namespace UnityPUBG.Scripts.UI
                         itemIcon.sprite = myPlayer.EquipedSecondaryWeapon.Data.Icon;
                     }
                     */
-                    break;
-                case ItemType.Armor:
-                    if (!myPlayer.EquipedArmor.IsStackEmpty)
-                    {
-                        itemIcon.sprite = myPlayer.EquipedArmor.Data.Icon;
-                    }
                     break;
             }
         }

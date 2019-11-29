@@ -463,7 +463,7 @@ namespace UnityPUBG.Scripts.Entities
             {
                 if (ItemQuickBar[i] == item)
                 {
-                    ItemQuickBar[i].ClearStack();
+                    ItemQuickBar[i] = Item.EmptyItem;
                     break;
                 }
             }
@@ -610,8 +610,6 @@ namespace UnityPUBG.Scripts.Entities
                 float force = 6f;
                 itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
             }
-
-            UIManager.Instance.UpdateQuickSlots();
         }
 
         private void ConsumeItem(Item consumableItem)

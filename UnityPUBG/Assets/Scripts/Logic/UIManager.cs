@@ -140,11 +140,13 @@ namespace UnityPUBG.Scripts.Logic
         private void ItemContainer_OnContainerUpdate(object sender, EventArgs e)
         {
             UpdateInventorySlots();
+            UpdateQuickSlots();
         }
 
         private void ItemContainer_OnContainerResize(object sender, EventArgs e)
         {
             UpdateInventoryItemSlotSize((sender as ItemContainer).Capacity);
+            UpdateQuickSlots();
         }
 
         public void UpdateInventorySlots()

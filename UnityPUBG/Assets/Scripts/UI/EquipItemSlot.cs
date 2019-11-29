@@ -59,10 +59,13 @@ namespace UnityPUBG.Scripts.UI
                     }
                     break;
                 case ItemType.SecondaryWeapon:
+                    //TODO: 두번째 무기 아이콘 매핑
+                    /*
                     if(!myPlayer.EquipedSecondaryWeapon.IsStackEmpty)
                     {
                         itemIcon.sprite = myPlayer.EquipedSecondaryWeapon.Data.Icon;
                     }
+                    */
                     break;
                 case ItemType.Armor:
                     if (!myPlayer.EquipedArmor.IsStackEmpty)

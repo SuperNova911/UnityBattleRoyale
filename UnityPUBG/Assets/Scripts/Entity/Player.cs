@@ -108,18 +108,12 @@ namespace UnityPUBG.Scripts.Entities
             if (IsMyPlayer)
             {
                 EntityManager.Instance.MyPlayer = this;
-                myItemLooter = GetComponentInChildren<PlayerItemLooter>();
             }
         }
 
         protected override void Start()
         {
             base.Start();
-
-            if (IsMyPlayer)
-            {
-                UIManager.Instance.UpdateInventoryItemSlotSize();
-            }
         }
 
         protected override void Update()
@@ -129,15 +123,6 @@ namespace UnityPUBG.Scripts.Entities
             if (IsDead)
             {
                 return;
-            }
-
-            if (Keyboard.current.fKey.wasPressedThisFrame)
-            {
-                //if (myItemLooter.LootableItemObjects.Count > 0)
-                //{
-                //    LootItem(myItemLooter.LootableItemObjects[0]);
-                //    myItemLooter.LootableItemObjects.RemoveAt(0);
-                //}
             }
 
             if (Keyboard.current.digit9Key.wasPressedThisFrame)

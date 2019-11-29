@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityPUBG.Scripts.Entities;
 using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
 
@@ -10,139 +11,98 @@ namespace UnityPUBG.Scripts.UI
 {
     public class ItemSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
     {
-        /// <summary>
-        /// 내 시블링 인덱스
-        /// </summary>
-        private int siblingIndex;
-        /// <summary>
-        /// 캔버스의 plane distance
-        /// </summary>
-        private float planeDistance;
+        public int slotIndex;
 
-        /// <summary>
-        /// 아이템 슬롯 위치
-        /// </summary>
-        private Vector3 originPosition;
+        [Header("Background")]
+        public Image backgroundImage;
+        public Sprite defaultBackGroundSprite;
+        public Sprite quickSlotBackgroundSprite;
 
+        [Header("Slot")]
+        public Image slotImage;
+        public Sprite defaultSlotSprite;
+
+        private bool available;
         private bool isDrag = false;
-
+        private Vector3 originPosition;
         private GraphicRaycaster graphicRaycaster;
 
-        /// <summary>
-        /// 빈 슬롯 이미지
-        /// </summary>
-        [SerializeField]
-        private Sprite emptySlotImage;
+        public bool Available
+        {
+            get { return available; }
+            set
+            {
+                available = value;
 
-        /// <summary>
-        /// 현재 슬롯 이미지
-        /// </summary>
-        private Image slotImage = null;
+                if (value == false)
+                {
+                    backgroundImage.sprite = defaultBackGroundSprite;
+                    slotImage.sprite = defaultSlotSprite;
+                }
 
-        /// <summary>
-        /// 현재 백그라운드 이미지
-        /// </summary>
-        private Image backGroundImage = null;
-
-        /// <summary>
-        /// 기본 백그라운드 이미지
-        /// </summary>
-        private Sprite defaultBackGroundImage = null;
-
-        /// <summary>
-        /// 퀵슬롯 백그라운드 이미지
-        /// </summary>
-        [SerializeField]
-        private Sprite quickBackGroundImage = null;
+                Color newColor = backgroundImage.color;
+                newColor.a = value ? 1f : 0.25f;
+                backgroundImage.color = newColor;
+                slotImage.color = newColor;
+            }
+        }
 
         #region Unity 콜백
         private void Awake()
         {
+            backgroundImage.sprite = defaultBackGroundSprite;
+            slotImage.sprite = defaultSlotSprite;
+
+            Available = false;
             graphicRaycaster = transform.root.GetComponent<GraphicRaycaster>();
-            siblingIndex = transform.GetSiblingIndex();
-            planeDistance = transform.root.GetComponent<Canvas>().planeDistance;
-
-            slotImage = transform.GetChild(0).GetComponent<Image>();
-
-            backGroundImage = GetComponent<Image>();
-            defaultBackGroundImage = backGroundImage.sprite;
-
-            //Debug.Log(slotImage.gameObject);
-        }
-
-        private void Start()
-        {
-            slotImage.sprite = emptySlotImage;
-
-            UpdateSlotObject();
         }
 
         private void OnEnable()
         {
             UpdateSlotObject();
         }
-
-        private void OnDisable()
-        {
-            if (slotImage.sprite != emptySlotImage)
-            {
-                slotImage.sprite = emptySlotImage;
-            }
-        }
         #endregion
 
-        /// <summary>
-        /// 슬롯의 오브젝트 갱신
-        /// </summary>
         public void UpdateSlotObject()
         {
-            siblingIndex = transform.GetSiblingIndex();
-
-            var targetPlayer = EntityManager.Instance.MyPlayer;
-            Item inventoryItem = targetPlayer.ItemContainer.GetItemAt(siblingIndex);
-
-            if (slotImage.sprite != emptySlotImage)
+            if (Available == false)
             {
-                //Debug.Log(siblingIndex);
-                slotImage.sprite = emptySlotImage;
-            }
-
-            if (inventoryItem.IsStackEmpty)
-            {
-                backGroundImage.sprite = defaultBackGroundImage;
                 return;
             }
 
+            Player targetPlayer = EntityManager.Instance.MyPlayer;
+            Item itemAtSlot = targetPlayer.ItemContainer.GetItemAt(slotIndex);
+
+            if (itemAtSlot.IsStackEmpty)
+            {
+                slotImage.sprite = defaultSlotSprite;
+                backgroundImage.sprite = defaultBackGroundSprite;
+            }
             else
             {
-                slotImage.sprite = inventoryItem.Data.Icon;
+                slotImage.sprite = itemAtSlot.Data.Icon;
 
-                int quickBarLength = targetPlayer.ItemQuickBar.Length;
-                for (int quickBarSlot = 0; quickBarSlot < quickBarLength; quickBarSlot++)
+                for (int quickBarSlot = 0; quickBarSlot < targetPlayer.ItemQuickBar.Length; quickBarSlot++)
                 {
-                    if (!inventoryItem.IsStackEmpty && targetPlayer.ItemQuickBar[quickBarSlot] == inventoryItem)
+                    if (itemAtSlot.IsStackEmpty == false && targetPlayer.ItemQuickBar[quickBarSlot] == itemAtSlot)
                     {
-                        backGroundImage.sprite = quickBackGroundImage;
+                        backgroundImage.sprite = quickSlotBackgroundSprite;
                         return;
                     }
                 }
-
-                backGroundImage.sprite = defaultBackGroundImage;
+                backgroundImage.sprite = defaultBackGroundSprite;
             }
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            siblingIndex = transform.GetSiblingIndex();
-            if (EntityManager.Instance.MyPlayer.ItemContainer.Count < siblingIndex + 1)
+            if (EntityManager.Instance.MyPlayer.ItemContainer.Count < slotIndex + 1)
             {
                 isDrag = false;
                 return;
             }
 
             originPosition = transform.position;
-
-            transform.parent.GetComponent<GridLayoutGroup>().enabled = false;
             isDrag = true;
         }
 
@@ -159,10 +119,6 @@ namespace UnityPUBG.Scripts.UI
             if (isDrag)
             {
                 transform.position = originPosition;
-                transform.SetSiblingIndex(siblingIndex);
-                transform.parent.GetComponent<GridLayoutGroup>().enabled = true;
-
-                List<RaycastResult> results = new List<RaycastResult>();
 
                 PointerEventData pointerEventData = new PointerEventData(GetComponent<EventSystem>());
 #if !UNITY_ANDRIOD
@@ -170,28 +126,24 @@ namespace UnityPUBG.Scripts.UI
 #else
                 pointerEventData.position = Input.touches[0].position;
 #endif
+                List<RaycastResult> results = new List<RaycastResult>();
                 graphicRaycaster.Raycast(pointerEventData, results);
-
                 isDrag = false;
 
-                if (results.Count <= 0)
+                if (results.Count > 0)
                 {
-                    return;
-                }
-                //다른 곳에 놓은 경우
-                else
-                {
-                    var item = EntityManager.Instance.MyPlayer.ItemContainer.GetItemAt(siblingIndex);
+                    Item itemAtSlot = EntityManager.Instance.MyPlayer.ItemContainer.GetItemAt(slotIndex);
+
                     //쓰레기 통에 넣은 경우
-                    if (results[0].gameObject.name == "TrashCanBackGround")
+                    if (results[0].gameObject.name == "TrashCanBackground")
                     {
-                        EntityManager.Instance.MyPlayer.DropItemsAtSlot(siblingIndex, item.CurrentStack);
+                        EntityManager.Instance.MyPlayer.DropItemsAtSlot(slotIndex, itemAtSlot.CurrentStack);
                     }
                     //퀵슬롯에 넣은 경우
-                    else if (results[0].gameObject.name == "QuickItemSlot")
+                    else if (results[0].gameObject.GetComponent<QuickItemSlot>() != null)
                     {
-                        int assignedItemSlotIndex = results[0].gameObject.transform.GetSiblingIndex();
-                        EntityManager.Instance.MyPlayer.AssignItemToQuickBar(assignedItemSlotIndex, item);
+                        int quickSlotIndex = results[0].gameObject.GetComponent<QuickItemSlot>().quickSlotIndex;
+                        EntityManager.Instance.MyPlayer.AssignItemToQuickBar(quickSlotIndex, itemAtSlot);
                     }
                 }
             }

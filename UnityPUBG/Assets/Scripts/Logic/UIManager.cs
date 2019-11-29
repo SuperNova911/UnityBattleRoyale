@@ -10,6 +10,7 @@ using UnityPUBG.Scripts.Utilities;
 using UnityPUBG.Scripts.Entities;
 using UnityEngine.InputSystem;
 using System.Linq;
+using UnityPUBG.Scripts.Items;
 
 namespace UnityPUBG.Scripts.Logic
 {
@@ -18,6 +19,8 @@ namespace UnityPUBG.Scripts.Logic
         public Canvas dynamicCanvas;
         public Canvas fixedCanvas;
         public GameObject normalUIElements;
+        public GameObject quickSlotUIElements;
+        public GameObject inventoryUIElements;
         [Space]
         public GameObject movementJoystickPivot;
         public GameObject attackJoystickPivot;
@@ -40,11 +43,10 @@ namespace UnityPUBG.Scripts.Logic
         [Space]
         public TMP_Text survivePlayersText;
         [Space]
-        [SerializeField] private GameObject inventory;
-        [SerializeField] private Transform inventoryWindow;     //itemSlot들이 들어있는 창
-        [SerializeField] private GameObject quickSlot;
+        public List<ItemSlot> inventoryItemSlots = new List<ItemSlot>();
+        public List<EquipItemSlot> inventoryEquipItemSlots = new List<EquipItemSlot>();
+        public List<QuickItemSlot> quickItemSlots = new List<QuickItemSlot>();
         [SerializeField] private SpriteAtlas iconAtlas;
-        [SerializeField] private GameObject itemSlot;
 
         [Header("Debug Options")]
         public bool keyboardMovement = false;
@@ -75,6 +77,21 @@ namespace UnityPUBG.Scripts.Logic
 
         private void Awake()
         {
+            for (int index = 0; index < inventoryItemSlots.Count; index++)
+            {
+                inventoryItemSlots[index].slotIndex = index;
+                inventoryItemSlots[index].Available = false;
+            }
+            for (int index = 0; index < quickItemSlots.Count; index++)
+            {
+                quickItemSlots[index].quickSlotIndex = index;
+            }
+
+            normalUIElements.SetActive(true);
+            quickSlotUIElements.SetActive(true);
+            inventoryUIElements.SetActive(true);
+            inventoryUIElements.SetActive(false);
+
             EntityManager.Instance.OnMyPlayerSpawn += ConnectMyPlayerUIElements;
             EntityManager.Instance.OnPlayerSpawn += EntityManager_OnPlayerSpawn;
 
@@ -104,22 +121,19 @@ namespace UnityPUBG.Scripts.Logic
         }
 
         /// <summary>
-        /// 창 열고 닫기
+        /// 인벤토리 창 열고 닫기
         /// </summary>
-        /// <param name="window">열고 닫을 창</param>
-        public void ControlWindow(GameObject window)
+        public void ToggleInventoryWindow()
         {
-            if (window.activeSelf)
+            if (inventoryUIElements.activeSelf)
             {
-                //DisableChild(window);
                 normalUIElements.SetActive(true);
-                window.SetActive(false);
+                inventoryUIElements.SetActive(false);
             }
             else
             {
-                //EnableChild(window);
                 normalUIElements.SetActive(false);
-                window.SetActive(true);
+                inventoryUIElements.SetActive(true);
             }
         }
 
@@ -130,21 +144,30 @@ namespace UnityPUBG.Scripts.Logic
 
         private void ItemContainer_OnContainerResize(object sender, EventArgs e)
         {
-            UpdateInventoryItemSlotSize();
+            UpdateInventoryItemSlotSize((sender as ItemContainer).Capacity);
         }
 
-        //인벤토리 슬롯을 업데이트 함
         public void UpdateInventorySlots()
         {
-            if (!inventory.activeSelf)
+            for (int index = 0; index < inventoryItemSlots.Count; index++)
             {
-                return;
-            }
+                if (inventoryItemSlots[index].Available == false)
+                {
+                    break;
+                }
 
-            var itemSlots = inventory.transform.GetComponentsInChildren<ItemSlot>();
-            foreach (var itemSlot in itemSlots)
+                inventoryItemSlots[index].UpdateSlotObject();
+            }
+        }
+
+        /// <summary>
+        /// 동적으로 아이템 슬롯 갯수를 조정함
+        /// </summary>
+        public void UpdateInventoryItemSlotSize(int newCapacity)
+        {
+            for (int index = 0; index < inventoryItemSlots.Count; index++)
             {
-                itemSlot.UpdateSlotObject();
+                inventoryItemSlots[index].Available = index < newCapacity ? true : false;
             }
         }
 
@@ -153,7 +176,6 @@ namespace UnityPUBG.Scripts.Logic
         /// </summary>
         public void UpdateQuickSlots()
         {
-            var quickItemSlots = quickSlot.transform.GetComponentsInChildren<QuickItemSlot>();
             foreach (var quickItemSlot in quickItemSlots)
             {
                 quickItemSlot.UpdateQuickItemSlot();
@@ -162,91 +184,11 @@ namespace UnityPUBG.Scripts.Logic
 
         public void UpdateEquipItemSlots()
         {
-            EquipItemSlot[] equipItemSlots = inventory.transform.GetComponentsInChildren<EquipItemSlot>();
-
-            int length = equipItemSlots.Length;
-
-            for (int i = 0; i < length; i++)
+            foreach (var equipItemSlot in inventoryEquipItemSlots)
             {
-                equipItemSlots[i].UpdateEquipItemSlot();
+                equipItemSlot.UpdateEquipItemSlot();
             }
         }
-
-        /// <summary>
-        /// 동적으로 아이템 슬롯 갯수를 조정함
-        /// </summary>
-        public void UpdateInventoryItemSlotSize()
-        {
-            if (itemSlot == null)
-            {
-                Debug.LogError("아이템 슬롯이 없습니다.");
-                return;
-            }
-
-            if (inventoryWindow == null)
-            {
-                Debug.LogError("인벤토리 창이 없습니다.");
-                return;
-            }
-
-            int instanceCount = EntityManager.Instance.MyPlayer.ItemContainer.Capacity - inventoryWindow.childCount;
-
-            if (instanceCount == 0)
-            {
-                return;
-            }
-            else if (instanceCount > 0)
-            {
-                for (int i = 0; i < instanceCount; i++)
-                {
-                    Instantiate(itemSlot, inventoryWindow);
-                }
-            }
-            else
-            {
-                instanceCount = -instanceCount;
-
-                for (int i = 0; i < instanceCount; i++)
-                {
-                    Destroy(inventoryWindow.GetChild(inventoryWindow.childCount - 1 - i).gameObject);
-                }
-            }
-
-        }
-
-        /*
-        /// <summary>
-        /// 인자로 받은 게임 오브젝트의 자식 오브젝트를 disable함
-        /// </summary>
-        /// <param name="gameObject"></param>
-        private void DisableChild(GameObject gameObject)
-        {
-            int childCount = gameObject.transform.childCount;
-
-            for (int i = 0; i < childCount; i++)
-            {
-                DisableChild(gameObject.transform.GetChild(i).gameObject);
-            }
-
-            gameObject.SetActive(false);
-        }
-
-        /// <summary>
-        /// 인자로 받은 게임 오브젝트의 자식 오브젝트를 Enable함
-        /// </summary>
-        /// <param name="gameObject"></param>
-        private void EnableChild(GameObject gameObject)
-        {
-            int childCount = gameObject.transform.childCount;
-
-            for (int i = 0; i < childCount; i++)
-            {
-                EnableChild(gameObject.transform.GetChild(i).gameObject);
-            }
-
-            gameObject.SetActive(true);
-        }
-        */
 
         private void ConnectMyPlayerUIElements(object sender, EventArgs e)
         {
@@ -272,6 +214,9 @@ namespace UnityPUBG.Scripts.Logic
             targetPlayer.OnDie += MyPlayer_OnDie;
             targetPlayer.ItemContainer.OnContainerUpdate += ItemContainer_OnContainerUpdate;
             targetPlayer.ItemContainer.OnContainerResize += ItemContainer_OnContainerResize;
+
+            UpdateInventoryItemSlotSize(targetPlayer.ItemContainer.Capacity);
+            UpdateInventorySlots();
         }
 
         private void MyPlayer_OnDie(object sender, EventArgs e)

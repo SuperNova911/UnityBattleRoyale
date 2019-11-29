@@ -160,6 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757b52b4ac559c44bb557aaf88695eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptySlotImage: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2, type: 3}
-  quickBackGroundImage: {fileID: 21300000, guid: 9f05a238a2a6849ed9804a7b84ce1093,
+  slotIndex: 0
+  backgroundImage: {fileID: 6446370764391923765}
+  defaultBackGroundSprite: {fileID: 21300000, guid: 69b61dff3df3f4d9ca08de580156d919,
+    type: 3}
+  slotImage: {fileID: 6446370763653602245}
+  defaultSlotSprite: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2, type: 3}
+  quickSlotBackgroundSprite: {fileID: 21300000, guid: 9f05a238a2a6849ed9804a7b84ce1093,
     type: 3}

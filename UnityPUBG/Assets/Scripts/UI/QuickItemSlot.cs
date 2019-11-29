@@ -11,23 +11,15 @@ namespace UnityPUBG.Scripts.UI
     {
         /// <summary>
         /// 퀵슬롯 인덱스
-        /// 시블링 인덱스와 같다.
         /// </summary>
-        private int quickSlotIndex;
-        private Image iconImage;
-
+        public int quickSlotIndex;
         /// <summary>
         /// 빈 슬롯 이미지
         /// </summary>
-        [SerializeField]
-        private Sprite emptySlotImage;
+        public Image slotImage;
+        public Sprite defaultSlotSprite;
 
         #region Unity 콜백
-        private void Awake()
-        {
-            iconImage = transform.GetChild(0).GetComponent<Image>();
-        }
-
         private void Start()
         {
             quickSlotIndex = transform.GetSiblingIndex();
@@ -39,11 +31,8 @@ namespace UnityPUBG.Scripts.UI
         /// </summary>
         public void UpdateQuickItemSlot()
         {
-            quickSlotIndex = transform.GetSiblingIndex();
             Item quickSlotItem = EntityManager.Instance.MyPlayer.ItemQuickBar[quickSlotIndex];
-            //Sprite icon = Logic.EntityManager.Instance.MyPlayer.ItemQuickBar[quickslotIndex].Data.Icon;
-
-            iconImage.sprite = (quickSlotItem.IsStackEmpty == false) ? quickSlotItem.Data.Icon : emptySlotImage;
+            slotImage.sprite = (quickSlotItem.IsStackEmpty == false) ? quickSlotItem.Data.Icon : defaultSlotSprite;
         }
     }
 }

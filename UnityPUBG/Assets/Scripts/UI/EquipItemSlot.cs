@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.UI
 {
@@ -18,17 +19,7 @@ namespace UnityPUBG.Scripts.UI
             itemIcon = transform.GetChild(0).GetComponent<Image>();
         }
 
-        private void Start()
-        {
-            UpdateEquipItemSlot();
-        }
-
         private void OnEnable()
-        {
-            UpdateEquipItemSlot();
-        }
-
-        private void OnDisable()
         {
             UpdateEquipItemSlot();
         }
@@ -36,11 +27,21 @@ namespace UnityPUBG.Scripts.UI
 
         public void UpdateEquipItemSlot()
         {
-            Entities.Player myPlayer = Logic.EntityManager.Instance.MyPlayer;
+            var myPlayer = EntityManager.Instance.MyPlayer;
+            if (myPlayer == null)
+            {
+                return;
+            }
 
             switch (itemType)
             {
-                case "BackPack":
+                case "Armor":
+                    if (!myPlayer.EquipedArmor.IsStackEmpty)
+                    {
+                        itemIcon.sprite = myPlayer.EquipedArmor.Data.Icon;
+                    }
+                    break;
+                case "Backpack":
                     if (!myPlayer.EquipedBackpack.IsStackEmpty)
                     {
                         itemIcon.sprite = myPlayer.EquipedBackpack.Data.Icon;
@@ -50,12 +51,6 @@ namespace UnityPUBG.Scripts.UI
                     if (!myPlayer.EquipedWeapon.IsStackEmpty)
                     {
                         itemIcon.sprite = myPlayer.EquipedWeapon.Data.Icon;
-                    }
-                    break;
-                case "Armor":
-                    if (!myPlayer.EquipedArmor.IsStackEmpty)
-                    {
-                        itemIcon.sprite = myPlayer.EquipedArmor.Data.Icon;
                     }
                     break;
                 default:

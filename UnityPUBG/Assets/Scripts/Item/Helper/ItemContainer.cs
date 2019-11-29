@@ -211,8 +211,8 @@ namespace UnityPUBG.Scripts.Items
             }
 
             container = newContainer;
-            OnContainerUpdate?.Invoke(this, EventArgs.Empty);
             OnContainerResize?.Invoke(this, EventArgs.Empty);
+            OnContainerUpdate?.Invoke(this, EventArgs.Empty);
             return overflowItems;
         }
     }

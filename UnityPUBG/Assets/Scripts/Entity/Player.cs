@@ -257,7 +257,7 @@ namespace UnityPUBG.Scripts.Entities
             if (IsAiming == false)
             {
                 //애니메이션 진행중이라면 조준했던 방향을 바라봄
-                if(isPlayingRangeAnimation)
+                if (isPlayingRangeAnimation)
                 {
                     RotateDirection = previousAnimationDirection;
                     return;
@@ -327,9 +327,7 @@ namespace UnityPUBG.Scripts.Entities
                 {
                     case MeleeWeaponData meleeWeaponData:
                         //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
-
-                        //근접 공격 애니메이션 설정
-                        myAnimator.SetTrigger(meleeAttack);
+                        myAnimator.SetTrigger(meleeAttack);     // 근접 공격 애니메이션 설정
                         break;
                     case RangeWeaponData rangeWeaponData:
                         rangeAttackDirection = attackDirection;
@@ -841,14 +839,14 @@ namespace UnityPUBG.Scripts.Entities
                     Destroy(rangeWeaponPosition.GetChild(0).gameObject);
                 }
             }
-                        
+
             GameObject switchWeaponModel = null;
             //교체할 무기 모델 생성
             if (EquipedWeapon.Data is MeleeWeaponData)
             {
                 switchWeaponModel = Instantiate(EquipedWeapon.Data.Model, meleeWeaponPosition);
             }
-            else if(EquipedWeapon.Data is RangeWeaponData)
+            else if (EquipedWeapon.Data is RangeWeaponData)
             {
                 switchWeaponModel = Instantiate(EquipedWeapon.Data.Model, rangeWeaponPosition);
             }
@@ -877,7 +875,7 @@ namespace UnityPUBG.Scripts.Entities
         private IEnumerator PlayRangeAttackAnimation()
         {
             isPlayingRangeAnimation = true;
-            
+
             //myAnimator.runtimeAnimatorController.
 
             myAnimator.SetTrigger(rangeAttack);

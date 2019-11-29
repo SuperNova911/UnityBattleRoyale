@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1624077629}
-  m_IndirectSpecularColor: {r: 0.2846211, g: 0.37120932, b: 0.49880475, a: 1}
+  m_IndirectSpecularColor: {r: 0.2846214, g: 0.37120992, b: 0.498806, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -33078,7 +33078,7 @@ MonoBehaviour:
   dummy: {fileID: 1574925977}
   testPlayerPrefab: {fileID: 251370033469873360, guid: e0566180537794649b98b41c66b507bb,
     type: 3}
-  testPlayerSpawnPosition: {x: 500, y: 2, z: 500}
+  testPlayerSpawnPosition: {x: 500, y: 0, z: 500}
   debugButtonCanvas: {fileID: 1192592292}
   debugMode: 0
 --- !u!4 &1769509351
@@ -42503,8 +42503,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemImage
       value: 
-      objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 270177874207913115, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

@@ -25780,18 +25780,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc9a70325f5396446aab164ea6854ceb, type: 3}
---- !u!114 &1361646701 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7376262715831974719, guid: 17b02e41963c46d4284ecd38c96e7565,
-    type: 3}
-  m_PrefabInstance: {fileID: 4554568196299936863}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1365322786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33082,7 +33070,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fpsCounter: {fileID: 648889187}
   dynamicCanvas: {fileID: 984471907}
-  fixedCanvas: {fileID: 0}
   cameras: {fileID: 1061157068}
   minimapUI: {fileID: 1992963732}
   minimapCamera: {fileID: 812715436}
@@ -40618,6 +40605,27 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7161362164626056054, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: quickSlotIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161362164626056054, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: slotImage
+      value: 
+      objectReference: {fileID: 309419833}
+    - target: {fileID: 7161362164626056054, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: defaultSlotSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
+        type: 3}
+    - target: {fileID: 7161362164626056054, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: itemType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4006962329895301730, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -40628,10 +40636,47 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1473177641113988606, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: slotImage
+      value: 
+      objectReference: {fileID: 2045301159}
+    - target: {fileID: 1473177641113988606, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: defaultSlotSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
+        type: 3}
+    - target: {fileID: 1942658860034448176, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4192799765070005025, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -0.00008514309
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806778220568992191, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: quickSlotIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806778220568992191, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: slotImage
+      value: 
+      objectReference: {fileID: 855303162}
+    - target: {fileID: 1806778220568992191, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: defaultSlotSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
+        type: 3}
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -40641,27 +40686,48 @@ PrefabInstance:
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
-      value: 2.25
+      value: 20.4
       objectReference: {fileID: 0}
     - target: {fileID: 7568829510510280210, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
       value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352278331202108186, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: quickSlotIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352278331202108186, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: slotImage
+      value: 
+      objectReference: {fileID: 761386839}
+    - target: {fileID: 2352278331202108186, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: defaultSlotSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
+        type: 3}
+    - target: {fileID: 2352278331202108186, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: itemType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -41723,16 +41789,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4192799765070005025, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -0.00008514309
-      objectReference: {fileID: 0}
-    - target: {fileID: 1942658860034448176, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5497328048706568368, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -42050,25 +42106,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7161362164626056054, guid: 17b02e41963c46d4284ecd38c96e7565,
+    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
-      propertyPath: quickSlotIndex
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7161362164626056054, guid: 17b02e41963c46d4284ecd38c96e7565,
+    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
-      propertyPath: slotImage
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 309419833}
-    - target: {fileID: 7161362164626056054, guid: 17b02e41963c46d4284ecd38c96e7565,
+      objectReference: {fileID: 535186569}
+    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
-      propertyPath: defaultSlotSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Button_OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1842078684331832159, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: itemImage
@@ -42076,25 +42146,39 @@ PrefabInstance:
       objectReference: {fileID: 691651287}
     - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2352278331202108186, guid: 17b02e41963c46d4284ecd38c96e7565,
+    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
-      propertyPath: quickSlotIndex
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2352278331202108186, guid: 17b02e41963c46d4284ecd38c96e7565,
+    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
-      propertyPath: slotImage
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 761386839}
-    - target: {fileID: 2352278331202108186, guid: 17b02e41963c46d4284ecd38c96e7565,
+      objectReference: {fileID: 1911316109}
+    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
-      propertyPath: defaultSlotSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Button_OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8997153767567296727, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: itemImage
@@ -42410,41 +42494,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 95.36959
       objectReference: {fileID: 0}
-    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 535186569}
-    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Button_OnClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 6213811823665079959, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161362164626056054, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: itemType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7148957040941407394, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: itemImage
@@ -42456,47 +42505,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
         type: 3}
-    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
+    - target: {fileID: 270177874207913115, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
+    - target: {fileID: 270177874207913115, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: 
       value: 
-      objectReference: {fileID: 1911316109}
-    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Button_OnClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 5601267083683697533, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2352278331202108186, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: itemType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 270177874207913115, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-    - target: {fileID: 270177874207913115, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 270177874207913115, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -42523,17 +42540,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 1473177641113988606, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: slotImage
-      value: 
-      objectReference: {fileID: 2045301159}
-    - target: {fileID: 1473177641113988606, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: defaultSlotSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
-        type: 3}
     - target: {fileID: 4230687578364102295, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -42564,22 +42570,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 1806778220568992191, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: quickSlotIndex
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1806778220568992191, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: slotImage
-      value: 
-      objectReference: {fileID: 855303162}
-    - target: {fileID: 1806778220568992191, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: defaultSlotSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b12026c97bc164607ac46e8b25442ea2,
-        type: 3}
     - target: {fileID: 9057106037007882249, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_textInfo.characterCount

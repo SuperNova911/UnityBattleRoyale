@@ -13,7 +13,7 @@ namespace UnityPUBG.Scripts.Logic
     {
         public GameObject fpsCounter;
         public GameObject dynamicCanvas;
-        public GameObject fixedCanvas;
+        //public GameObject fixedCanvas;
         public GameObject cameras;
         public GameObject minimapUI;
         public GameObject minimapCamera;
@@ -37,7 +37,7 @@ namespace UnityPUBG.Scripts.Logic
                 debugButtonCanvas.SetActive(true);
 
                 dynamicCanvas.SetActive(false);
-                fixedCanvas.SetActive(false);
+                //fixedCanvas.SetActive(false);
                 terrain.SetActive(false);
                 postProcess.SetActive(false);
                 dummy.SetActive(false);
@@ -88,10 +88,12 @@ namespace UnityPUBG.Scripts.Logic
             dynamicCanvas.SetActive(!dynamicCanvas.activeSelf);
         }
 
+        /*
         public void ToggleFixedCanvas()
         {
             fixedCanvas.SetActive(!fixedCanvas.activeSelf);
         }
+        */
 
         public void ToggleCamera()
         {

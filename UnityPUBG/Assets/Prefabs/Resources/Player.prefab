@@ -632,7 +632,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251370033490503834}
-  m_LocalRotation: {x: 0.6443777, y: 0.024462728, z: -0.0047377087, w: 0.7643013}
+  m_LocalRotation: {x: 0.6443777, y: 0.02446273, z: -0.0047377087, w: 0.76430136}
   m_LocalPosition: {x: -0.39930904, y: 7.105427e-17, z: 7.9936054e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1143,7 +1143,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251370033490512214}
-  m_LocalRotation: {x: -0.5785476, y: 0.63248587, z: -0.35251343, w: -0.37547135}
+  m_LocalRotation: {x: -0.5785476, y: 0.6324858, z: -0.35251343, w: -0.3754713}
   m_LocalPosition: {x: -0.058011726, y: -0.041914478, z: -0.07447154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1380,9 +1380,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251370033490515048}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4a5a8c8ff5d6d2e48ab8d2b27100cf57, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9d7139a0cf364c141bf459028be94c44, type: 2}
+  m_Controller: {fileID: 9100000, guid: b0987a5a9d1963b49b47938649dcd886, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1445,6 +1445,7 @@ MonoBehaviour:
   projectileBasePrefab: {fileID: 2364344030809358519, guid: 3ff01fddd5ff0f6468bb67588f02dfe3,
     type: 3}
   projectileFirePosition: {fileID: 4133543043523785284}
+  weaponPosition: {fileID: 2053244640088670907}
 --- !u!114 &1330880535016543195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1566,12 +1567,17 @@ MonoBehaviour:
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
   m_SynchronizeParameters:
-  - Type: 3
+  - Type: 9
     SynchronizeType: 0
-    Name: CharacterState
+    Name: MeleeAttack
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsRun
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+  - SynchronizeType: 0
+    LayerIndex: 1
 --- !u!1 &251370033490516470
 GameObject:
   m_ObjectHideFlags: 0
@@ -3795,7 +3801,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251370033490581412}
-  m_LocalRotation: {x: 0.6443777, y: 0.024462728, z: -0.0047377087, w: 0.7643013}
+  m_LocalRotation: {x: 0.6443777, y: 0.02446273, z: -0.0047377087, w: 0.76430136}
   m_LocalPosition: {x: 0.3993092, y: -0.00000038050263, z: 1.8651746e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4241,7 +4247,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 251370033490591508}
-  m_LocalRotation: {x: 0.6324858, y: 0.57854754, z: 0.37547135, w: -0.3525134}
+  m_LocalRotation: {x: 0.63248587, y: 0.57854754, z: 0.37547138, w: -0.3525134}
   m_LocalPosition: {x: -0.05801534, y: -0.04191418, z: 0.0744715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4439,7 +4445,6 @@ MonoBehaviour:
   lootMask:
     serializedVersion: 2
     m_Bits: 1024
-  lootButtonHolder: {fileID: 0}
   lootButtonPrefab: {fileID: 6693592080578410819, guid: 524e9b0ff7df51146b66abf58877ff40,
     type: 3}
   showLootRadius: 0

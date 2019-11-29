@@ -32,8 +32,12 @@ namespace UnityPUBG.Scripts.Entities
         public ProjectileBase projectileBasePrefab;
         public Transform projectileFirePosition;
 
+        [Header("WeaponPosition")]
+        [SerializeField] private Transform weaponPosition;
+
         private PhotonView photonView;
         private PlayerItemLooter myItemLooter;
+        private Animator myAnimator;
 
         // Weapon
         private float lastAttackTime = 0f;
@@ -88,6 +92,9 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
+        private readonly string MeleeAttack = "MeleeAttack";
+        private readonly string IsRun = "IsRun";
+
         #region 유니티 메시지
         protected override void Awake()
         {
@@ -104,6 +111,7 @@ namespace UnityPUBG.Scripts.Entities
             CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
             ItemQuickBar = new Item[quickBarCapacity];
+            myAnimator = GetComponent<Animator>();
 
             //장착하지 않았으므로 emptyItem으로 초기화
             EquipedWeapon = Item.EmptyItem;
@@ -216,9 +224,20 @@ namespace UnityPUBG.Scripts.Entities
         }
         #endregion
 
+        #region public 함수
         public void MoveTo(Vector2 direction)
         {
             MovementDirection = direction.normalized;
+
+            //이동 애니메이션 설정
+            if (direction != Vector2.zero)
+            {
+                myAnimator.SetBool(IsRun, true);
+            }
+            else
+            {
+                myAnimator.SetBool(IsRun, false);
+            }
         }
 
         public void RotateTo(Vector2 direction)
@@ -266,7 +285,10 @@ namespace UnityPUBG.Scripts.Entities
                 switch (EquipedWeapon.Data)
                 {
                     case MeleeWeaponData meleeWeaponData:
-                        MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
+                        //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
+
+                        //근접 공격 애니메이션 설정
+                        myAnimator.SetTrigger(MeleeAttack);
                         break;
                     case RangeWeaponData rangeWeaponData:
                         RangeAttack(attackDirection);
@@ -332,6 +354,8 @@ namespace UnityPUBG.Scripts.Entities
                 DropItem(EquipedWeapon);
             }
             EquipedWeapon = weaponItem;
+
+            SwitchWeaponModel();
         }
 
         // TODO: 쉴드 제거
@@ -655,7 +679,9 @@ namespace UnityPUBG.Scripts.Entities
                     return;
             }
         }
+        #endregion
 
+        #region private 함수
         // 테스트 전용
         private void MeleeAttackTest(DamageType damageType)
         {
@@ -743,6 +769,121 @@ namespace UnityPUBG.Scripts.Entities
             projectileBase.InitializeProjectile(projectileInfo, projectileFirePosition.position);
 
             projectileBase.Fire();
+        }
+
+        private void DropItem(Item dropItem)
+        {
+            var dropItemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
+            if (dropItemObject == null)
+            {
+                return;
+            }
+
+            // 무작위 방향으로 던짐
+            Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
+            var itemObjectRigidbody = dropItemObject.GetComponent<Rigidbody>();
+            if (itemObjectRigidbody != null)
+            {
+                float force = 6f;
+                itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
+            }
+        }
+
+        private void ConsumeItem(Item consumableItem)
+        {
+            if (consumableItem.IsStackEmpty)
+            {
+                Debug.LogWarning($"사용하려고 하는 아이템이 비어 있습니다");
+                return;
+            }
+
+            var consumableData = consumableItem.Data as ConsumableData;
+            switch (consumableData)
+            {
+                case HealingKitData healingKit:
+                    CurrentHealth += healingKit.HealthRestoreAmount;
+                    CurrentShield += healingKit.ShieldRestoreAmount;
+                    break;
+
+                default:
+                    Debug.LogWarning($"관리되지 않고 있는 {nameof(ItemData)}입니다, {consumableItem.Data.GetType().Name}");
+                    return;
+            }
+
+            // TODO ItemContainer에서 스택 개수 줄이기
+            if (ItemContainer.HasItem(consumableData.ItemName) == false)
+            {
+                Debug.LogWarning($"사용하려고 하는 아이템이 {nameof(ItemContainer)}에 없습니다, {nameof(consumableData.ItemName)}: {consumableData.ItemName}");
+                return;
+            }
+
+            for (int slot = 0; slot < ItemContainer.Count; slot++)
+            {
+                var targetItem = ItemContainer.GetItemAt(slot);
+                if (targetItem == consumableItem)
+                {
+                    ItemContainer.SubtrackItemAtSlot(slot);
+                }
+            }
+        }
+
+        private void SwitchWeaponModel()
+        {
+            if (EquipedWeapon.IsStackEmpty)
+            {
+                Debug.LogError("무기 스택이 0입니다.");
+                return;
+            }
+
+            //무기 모델이 있다면 제거
+            if (weaponPosition.childCount > 0)
+            {
+                int childCount = weaponPosition.childCount;
+
+                for (int i = 0; i < childCount; i++)
+                {
+                    Destroy(weaponPosition.GetChild(0).gameObject);
+                }
+            }
+
+            //교체할 무기 모델 생성
+            GameObject switchWeaponModel = Instantiate(EquipedWeapon.Data.Model, weaponPosition);
+
+            switchWeaponModel.transform.localPosition = Vector3.zero;
+            switchWeaponModel.transform.localRotation = Quaternion.identity;
+        }
+        #endregion
+
+        // TODO: 아이템 사용 시전 중단 기능
+        private IEnumerator TryConsumeItem(Item consumableItem)
+        {
+            if (consumableItem.IsStackEmpty)
+            {
+                Debug.LogWarning($"빈 아이템을 사용하려고 하고 있습니다");
+                yield return null;
+            }
+
+            if ((consumableItem.Data is ConsumableData) == false)
+            {
+                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
+                yield return null;
+            }
+            var consumableData = consumableItem.Data as ConsumableData;
+
+            // 아이템 사용 시전
+            float startTime = Time.time;
+            float endTime = startTime + consumableData.TimeToUse;
+            float progress = 0f;
+            while (Time.time <= endTime)
+            {
+                // TODO: 플레이어 이동속도 느려지게, UI와 동기화
+                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
+                Debug.Log($"RemainTime: {endTime - Time.time}, Progress: {progress}");
+                yield return null;
+            }
+
+            // 아이템 사용
+            ConsumeItem(consumableItem);
         }
     }
 }

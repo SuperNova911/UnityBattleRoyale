@@ -1,0 +1,120 @@
+fileFormatVersion: 2
+guid: 30a3e6a795c1e584284d3ac291d450df
+timeCreated: 1494013176
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: bip_hordeLCollarbone
+    100002: bip_hordeLForearm
+    100004: bip_hordeLPalm
+    100006: bip_hordeLUpperarm
+    100008: bip_hordePelvis
+    100010: bip_hordeRibcage
+    100012: bip_hordeSpine1
+    100014: bip_hordeSpine2
+    100016: bip_hordeSpine3
+    100018: bip_hordeSpine4
+    100020: Dummy001
+    100022: ShortBow_LOD0
+    100024: ShortBow_LOD1
+    100026: ShortBowBottonArm
+    100028: ShortBowBottonString
+    100030: //RootNode
+    100032: ShortBowHub001
+    100034: ShortBowTopArm
+    100036: ShortBowTopString
+    100038: BowMain
+    400000: bip_hordeLCollarbone
+    400002: bip_hordeLForearm
+    400004: bip_hordeLPalm
+    400006: bip_hordeLUpperarm
+    400008: bip_hordePelvis
+    400010: bip_hordeRibcage
+    400012: bip_hordeSpine1
+    400014: bip_hordeSpine2
+    400016: bip_hordeSpine3
+    400018: bip_hordeSpine4
+    400020: Dummy001
+    400022: ShortBow_LOD0
+    400024: ShortBow_LOD1
+    400026: ShortBowBottonArm
+    400028: ShortBowBottonString
+    400030: //RootNode
+    400032: ShortBowHub001
+    400034: ShortBowTopArm
+    400036: ShortBowTopString
+    400038: BowMain
+    4300000: ShortBow_LOD0
+    4300002: ShortBow_LOD1
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: ShortBow_LOD0
+    13700002: ShortBow_LOD1
+    20500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages:
+    - 0.25
+    - 0.01
+    globalScale: 1.25
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

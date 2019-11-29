@@ -32,7 +32,8 @@ namespace UnityPUBG.Scripts.Entities
         public Transform projectileFirePosition;
 
         [Header("WeaponPosition")]
-        [SerializeField] private Transform weaponPosition;
+        [SerializeField] private Transform meleeWeaponPosition;
+        [SerializeField] private Transform rangeWeaponPosition;
 
         private PhotonView photonView;
         private InputManager inputManager;
@@ -42,6 +43,9 @@ namespace UnityPUBG.Scripts.Entities
         // Weapon
         private float lastAttackTime = 0f;
         private bool isAiming = false;
+        private bool isPlayingRangeAnimation = false;
+
+        private Vector2 previousDirection = Vector2.zero;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
 
@@ -81,8 +85,13 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        private readonly string MeleeAttack = "MeleeAttack";
-        private readonly string IsRun = "IsRun";
+        //애니메이션 파라미터 이름
+        private readonly string meleeAttack = "MeleeAttack";
+        private readonly string isRun = "IsRun";
+        private readonly string rangeAttack = "RangeAttack";
+        private readonly string attackSpeed = "AttackSpeed";
+
+        private readonly float rangeAttackAnimationLength = 1.833336f;
 
         #region 유니티 메시지
         protected override void Awake()
@@ -232,11 +241,11 @@ namespace UnityPUBG.Scripts.Entities
             //이동 애니메이션 설정
             if (direction != Vector2.zero)
             {
-                myAnimator.SetBool(IsRun, true);
+                myAnimator.SetBool(isRun, true);
             }
             else
             {
-                myAnimator.SetBool(IsRun, false);
+                myAnimator.SetBool(isRun, false);
             }
         }
 
@@ -244,6 +253,12 @@ namespace UnityPUBG.Scripts.Entities
         {
             if (IsAiming == false)
             {
+                //애니메이션 진행중이라면 조준했던 방향을 바라봄
+                if(isPlayingRangeAnimation)
+                {
+                    RotateDirection = previousDirection;
+                    return;
+                }
                 RotateDirection = direction.normalized;
             }
         }
@@ -252,13 +267,36 @@ namespace UnityPUBG.Scripts.Entities
         {
             if (direction == Vector2.zero)
             {
-                RotateDirection = Vector2.zero;
+                if (isPlayingRangeAnimation)
+                {
+                    RotateDirection = previousDirection;
+                }
+                else
+                {
+                    RotateDirection = Vector2.zero;
+                    previousDirection = Vector2.zero;
+                }
                 IsAiming = false;
             }
             else
             {
-                RotateDirection = direction.normalized;
-                IsAiming = true;
+                //원거리 애니메이션 실행중이 아니라면
+                if (!isPlayingRangeAnimation)
+                {
+                    RotateDirection = direction.normalized;
+                    IsAiming = true;
+
+                    //원거리 무기를 장착하고 있다면 애니메이션 실행
+                    if (EquipedWeapon.Data is RangeWeaponData)
+                    {
+                        StartCoroutine(PlayRangeAttackAnimation());
+                    }
+                }
+                else
+                {
+                    previousDirection = DirectionOnRangeAnimation(direction);
+                    RotateDirection = previousDirection;
+                }
             }
         }
 
@@ -288,7 +326,7 @@ namespace UnityPUBG.Scripts.Entities
                         //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
 
                         //근접 공격 애니메이션 설정
-                        myAnimator.SetTrigger(MeleeAttack);
+                        myAnimator.SetTrigger(meleeAttack);
                         break;
                     case RangeWeaponData rangeWeaponData:
                         RangeAttack(attackDirection);
@@ -685,21 +723,54 @@ namespace UnityPUBG.Scripts.Entities
             }
 
             //무기 모델이 있다면 제거
-            if (weaponPosition.childCount > 0)
+            if (meleeWeaponPosition.childCount > 0)
             {
-                int childCount = weaponPosition.childCount;
+                int childCount = meleeWeaponPosition.childCount;
 
                 for (int i = 0; i < childCount; i++)
                 {
-                    Destroy(weaponPosition.GetChild(0).gameObject);
+                    Destroy(meleeWeaponPosition.GetChild(0).gameObject);
                 }
             }
 
+            if (rangeWeaponPosition.childCount > 0)
+            {
+                int childCount = rangeWeaponPosition.childCount;
+
+                for (int i = 0; i < childCount; i++)
+                {
+                    Destroy(rangeWeaponPosition.GetChild(0).gameObject);
+                }
+            }
+                        
+            GameObject switchWeaponModel = null;
             //교체할 무기 모델 생성
-            GameObject switchWeaponModel = Instantiate(EquipedWeapon.Data.Model, weaponPosition);
+            if (EquipedWeapon.Data is MeleeWeaponData)
+            {
+                switchWeaponModel = Instantiate(EquipedWeapon.Data.Model, meleeWeaponPosition);
+            }
+            else if(EquipedWeapon.Data is RangeWeaponData)
+            {
+                switchWeaponModel = Instantiate(EquipedWeapon.Data.Model, rangeWeaponPosition);
+            }
+            else
+            {
+                Debug.LogError("무기가 아닙니다.");
+                return;
+            }
 
             switchWeaponModel.transform.localPosition = Vector3.zero;
             switchWeaponModel.transform.localRotation = Quaternion.identity;
+        }
+
+        //원거리 애니메이션 재생 중 캐릭터의 바라보는 방향 return
+        private Vector2 DirectionOnRangeAnimation(Vector2 originDirection)
+        {
+            Vector3 vector3Direction = new Vector3(originDirection.x, 0, originDirection.y);
+
+            vector3Direction = Quaternion.Euler(0, 60, 0) * vector3Direction;
+
+            return new Vector2(vector3Direction.x, vector3Direction.z);
         }
         #endregion
 
@@ -733,6 +804,35 @@ namespace UnityPUBG.Scripts.Entities
 
             // 아이템 사용
             ConsumeItem(consumableItem);
+        }
+
+        //원거리 공격 재생
+        private IEnumerator PlayRangeAttackAnimation()
+        {
+            isPlayingRangeAnimation = true;
+            
+            //myAnimator.runtimeAnimatorController.
+
+            myAnimator.SetTrigger(rangeAttack);
+            float aimTime = 1.1f;
+            yield return new WaitForSecondsRealtime(aimTime);
+            while (true)
+            {
+                if (IsAiming)
+                {
+                    myAnimator.SetFloat(attackSpeed, 0f);
+                    yield return null;
+                }
+                else
+                {
+                    myAnimator.SetFloat(attackSpeed, 1f);
+
+                    yield return new WaitForSecondsRealtime(rangeAttackAnimationLength - aimTime);
+
+                    isPlayingRangeAnimation = false;
+                    yield break;
+                }
+            }
         }
     }
 }

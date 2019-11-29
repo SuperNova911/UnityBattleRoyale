@@ -1445,7 +1445,8 @@ MonoBehaviour:
   projectileBasePrefab: {fileID: 2364344030809358519, guid: 3ff01fddd5ff0f6468bb67588f02dfe3,
     type: 3}
   projectileFirePosition: {fileID: 4133543043523785284}
-  weaponPosition: {fileID: 2053244640088670907}
+  meleeWeaponPosition: {fileID: 2053244640088670907}
+  rangeWeaponPosition: {fileID: 6303089189300066232}
 --- !u!114 &1330880535016543195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1573,6 +1574,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: IsRun
+  - Type: 9
+    SynchronizeType: 0
+    Name: RangeAttack
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -3491,6 +3495,7 @@ Transform:
   - {fileID: 251370033490748066}
   - {fileID: 251370033490750402}
   - {fileID: 251370033490729812}
+  - {fileID: 6303089189300066232}
   m_Father: {fileID: 251370033490781976}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4375,7 +4380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2053244640088670907}
   m_Layer: 0
-  m_Name: WeaponPosition
+  m_Name: MeleeWeaponPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4448,3 +4453,33 @@ MonoBehaviour:
   lootButtonPrefab: {fileID: 6693592080578410819, guid: 524e9b0ff7df51146b66abf58877ff40,
     type: 3}
   showLootRadius: 0
+--- !u!1 &7915687895509543727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6303089189300066232}
+  m_Layer: 0
+  m_Name: RangeWeaponPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6303089189300066232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7915687895509543727}
+  m_LocalRotation: {x: -0.70441604, y: 0.06162846, z: -0.06162846, w: 0.70441604}
+  m_LocalPosition: {x: 0.1, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 251370033490802972}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -80, y: 90, z: -90}

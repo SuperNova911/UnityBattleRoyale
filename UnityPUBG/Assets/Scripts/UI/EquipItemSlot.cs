@@ -7,10 +7,11 @@ namespace UnityPUBG.Scripts.UI
 {
     public class EquipItemSlot : MonoBehaviour
     {
+        private enum ItemType { BackPack, Weapon, SecondaryWeapon, Armor }
         //아이템 종류 가방 or 실드
-        [SerializeField] private string itemType;
+        [SerializeField] private ItemType itemType;
 
-        private Image itemIcon;
+        private Image itemIcon = null;
 
         #region 유니티 콜백
         private void Awake()
@@ -36,30 +37,38 @@ namespace UnityPUBG.Scripts.UI
 
         public void UpdateEquipItemSlot()
         {
+            if(itemIcon == null)
+            {
+                Awake();
+            }
+
             Entities.Player myPlayer = Logic.EntityManager.Instance.MyPlayer;
 
             switch (itemType)
             {
-                case "BackPack":
+                case ItemType.BackPack:
                     if (!myPlayer.EquipedBackpack.IsStackEmpty)
                     {
                         itemIcon.sprite = myPlayer.EquipedBackpack.Data.Icon;
                     }
                     break;
-                case "Weapon":
+                case ItemType.Weapon:
                     if (!myPlayer.EquipedWeapon.IsStackEmpty)
                     {
                         itemIcon.sprite = myPlayer.EquipedWeapon.Data.Icon;
                     }
                     break;
-                case "Armor":
+                case ItemType.SecondaryWeapon:
+                    if(!myPlayer.EquipedSecondaryWeapon.IsStackEmpty)
+                    {
+                        itemIcon.sprite = myPlayer.EquipedSecondaryWeapon.Data.Icon;
+                    }
+                    break;
+                case ItemType.Armor:
                     if (!myPlayer.EquipedArmor.IsStackEmpty)
                     {
                         itemIcon.sprite = myPlayer.EquipedArmor.Data.Icon;
                     }
-                    break;
-                default:
-                    Debug.LogError("장착 아이템이 아닙니다.");
                     break;
             }
         }

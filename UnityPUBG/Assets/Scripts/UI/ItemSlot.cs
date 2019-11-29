@@ -14,10 +14,6 @@ namespace UnityPUBG.Scripts.UI
         /// 내 시블링 인덱스
         /// </summary>
         private int siblingIndex;
-        /// <summary>
-        /// 캔버스의 plane distance
-        /// </summary>
-        private float planeDistance;
 
         /// <summary>
         /// 아이템 슬롯 위치
@@ -60,7 +56,6 @@ namespace UnityPUBG.Scripts.UI
         {
             graphicRaycaster = transform.root.GetComponent<GraphicRaycaster>();
             siblingIndex = transform.GetSiblingIndex();
-            planeDistance = transform.root.GetComponent<Canvas>().planeDistance;
 
             slotImage = transform.GetChild(0).GetComponent<Image>();
 
@@ -96,6 +91,11 @@ namespace UnityPUBG.Scripts.UI
         /// </summary>
         public void UpdateSlotObject()
         {
+            if(slotImage == null)
+            {
+                Awake();
+            }
+
             siblingIndex = transform.GetSiblingIndex();
 
             var targetPlayer = EntityManager.Instance.MyPlayer;

@@ -39,6 +39,11 @@ namespace UnityPUBG.Scripts.UI
         /// </summary>
         public void UpdateQuickItemSlot()
         {
+            if(iconImage == null)
+            {
+                Awake();
+            }
+
             quickSlotIndex = transform.GetSiblingIndex();
             Item quickSlotItem = EntityManager.Instance.MyPlayer.ItemQuickBar[quickSlotIndex];
             //Sprite icon = Logic.EntityManager.Instance.MyPlayer.ItemQuickBar[quickslotIndex].Data.Icon;

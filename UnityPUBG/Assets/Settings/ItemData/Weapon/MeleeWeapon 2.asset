@@ -17,9 +17,11 @@ MonoBehaviour:
   sortingOrder: 300
   model: {fileID: 125116, guid: 97503f4ff258a7249b51978f52418a85, type: 3}
   icon: {fileID: -3448368210441442691, guid: fbf1e9ac7f5c09d44af31f72a01365bd, type: 3}
-  maximumStack: 5
-  defaultStack: 2
+  maximumStack: 1
+  defaultStack: 1
   damage: 10
-  attackSpeed: 1
+  damageType: 0
+  castDelay: 0.1
+  attackCooldown: 1
   attackRange: 1
   knockbackPower: 1

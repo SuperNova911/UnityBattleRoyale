@@ -24082,7 +24082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1230559335
 RectTransform:
   m_ObjectHideFlags: 0
@@ -43253,6 +43253,36 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 1.3
       objectReference: {fileID: 0}
+    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 2.85
+      objectReference: {fileID: 0}
     - target: {fileID: 4184450334776920568, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
@@ -43577,36 +43607,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 2.85
       objectReference: {fileID: 0}
     - target: {fileID: 6577969935300200249, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}

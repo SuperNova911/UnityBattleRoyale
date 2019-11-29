@@ -64,7 +64,7 @@ namespace UnityPUBG.Scripts.Items
             }
             else if (data.Rarity != other.data.Rarity)
             {
-                return data.Rarity.CompareTo(other.data.Rarity);
+                return other.data.Rarity.CompareTo(data.Rarity);
             }
             else if (data.ItemName != other.data.ItemName)
             {
@@ -72,7 +72,7 @@ namespace UnityPUBG.Scripts.Items
             }
             else
             {
-                return CurrentStack.CompareTo(other.CurrentStack);
+                return other.currentStack.CompareTo(currentStack);
             }
         }
         #endregion

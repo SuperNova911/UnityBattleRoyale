@@ -118,7 +118,7 @@ namespace UnityPUBG.Scripts.Entities
 
             if(IsMyPlayer)
             {
-                UIManager.Instance.DynamicItemSlots();
+                UIManager.Instance.UpdateInventoryItemSlotSize();
             }
         }
 
@@ -163,6 +163,10 @@ namespace UnityPUBG.Scripts.Entities
             else if (Keyboard.current.digit6Key.wasPressedThisFrame)
             {
                 DropArmor();
+            }
+            else if (Keyboard.current.digit5Key.wasPressedThisFrame)
+            {
+                DropWeapon();
             }
             else if (Keyboard.current.digit4Key.wasPressedThisFrame)
             {
@@ -348,25 +352,34 @@ namespace UnityPUBG.Scripts.Entities
         // TODO: 쉴드 제거
         public void DropArmor()
         {
-            if (EquipedArmor != null)
+            if (EquipedArmor.IsStackEmpty == false)
             {
                 DropItem(EquipedArmor);
-                EquipedArmor = null;
+                EquipedArmor = Item.EmptyItem;
             }
         }
 
         public void DropBackpack()
         {
-            if (EquipedBackpack != null)
+            if (EquipedBackpack.IsStackEmpty == false)
             {
                 var overflowItems = ItemContainer.ResizeCapacity(defaultContainerCapacity);
                 foreach (var item in overflowItems)
                 {
                     DropItem(item);
-                    EquipedArmor = null;
                 }
 
                 DropItem(EquipedBackpack);
+                EquipedBackpack = Item.EmptyItem;
+            }
+        }
+
+        public void DropWeapon()
+        {
+            if (EquipedWeapon.IsStackEmpty == false)
+            {
+                DropItem(EquipedWeapon);
+                EquipedWeapon = Item.EmptyItem;
             }
         }
 
@@ -388,13 +401,12 @@ namespace UnityPUBG.Scripts.Entities
                 EquipBackpack(lootItemObject.Item);
                 LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
                 lootItemObject.RequestDestroy();
-                UIManager.Instance.DynamicItemSlots();
+
+                UIManager.Instance.UpdateInventoryItemSlotSize();
             }
-            // 디버깅용 구문
             else if (lootItemObject.Item.Data is WeaponData)
             {
-                //장착하지 않았다면 장착
-                if (EquipedWeapon.IsStackEmpty)
+                if (EquipedWeapon.IsStackEmpty || EquipedWeapon.Data.Rarity < lootItemObject.Item.Data.Rarity)
                 {
                     EquipWeapon(lootItemObject.Item);
                 }
@@ -587,7 +599,7 @@ namespace UnityPUBG.Scripts.Entities
             }
 
             // 필요한 탄약이 있는지 검사
-            int ammoSlot = ItemContainer.FindMatchItemSlot(rangeWeaponData.RequireAmmo.ItemName);
+            int ammoSlot = ItemContainer.FindMatchItemSlotFromLast(rangeWeaponData.RequireAmmo.ItemName);
             if (ammoSlot < 0)
             {
                 return;

@@ -131,12 +131,10 @@ namespace UnityPUBG.Scripts.Logic
                 return;
             }
 
-            ItemSlot[] itemSlots = inventory.transform.GetComponentsInChildren<ItemSlot>();
-
-            int length = itemSlots.Length;
-            for (int i = 0; i < length; i++)
+            var itemSlots = inventory.transform.GetComponentsInChildren<ItemSlot>();
+            foreach (var itemSlot in itemSlots)
             {
-                itemSlots[i].UpdateSlotObject();
+                itemSlot.UpdateSlotObject();
             }
         }
 
@@ -145,12 +143,10 @@ namespace UnityPUBG.Scripts.Logic
         /// </summary>
         public void UpdateQuickSlots()
         {
-            QuickItemSlot[] quickItemSlots = quickSlot.transform.GetComponentsInChildren<QuickItemSlot>();
-
-            int length = quickItemSlots.Length;
-            for (int i = 0; i < length; i++)
+            var quickItemSlots = quickSlot.transform.GetComponentsInChildren<QuickItemSlot>();
+            foreach (var quickItemSlot in quickItemSlots)
             {
-                quickItemSlots[i].UpdateQuickItemSlot();
+                quickItemSlot.UpdateQuickItemSlot();
             }
         }
 
@@ -169,7 +165,7 @@ namespace UnityPUBG.Scripts.Logic
         /// <summary>
         /// 동적으로 아이템 슬롯 갯수를 조정함
         /// </summary>
-        public void DynamicItemSlots()
+        public void UpdateInventoryItemSlotSize()
         {
             if (itemSlot == null)
             {

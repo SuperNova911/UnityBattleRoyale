@@ -157,7 +157,7 @@ namespace UnityPUBG.Scripts.Items
         /// </summary>
         /// <param name="itemName">검색할 ItemName</param>
         /// <returns>일치하는 아이템의 슬롯 번호</returns>
-        public int FindMatchItemSlot(string itemName)
+        public int FindMatchItemSlotFromLast(string itemName)
         {
             for (int slot = Count - 1; slot >= 0; slot--)
             {
@@ -175,10 +175,10 @@ namespace UnityPUBG.Scripts.Items
         /// </summary>
         /// <param name="itemName">검색 할 아이템 데이터의 아이템 이름</param>
         /// <returns>일치하는 아이템 또는 EmptyItem</returns>
-        public Item TryGetItem(string itemName)
+        public Item TryGetItemFromLast(string itemName)
         {
             var matchItem = container.LastOrDefault(e => e.Data.ItemName.Equals(itemName));
-            return matchItem != null ? matchItem : Item.EmptyItem;
+            return matchItem ?? Item.EmptyItem;
         }
 
         /// <summary>

@@ -68,43 +68,55 @@ namespace UnityPUBG.Scripts.Entities
             }
 
             // TODO: 실드 내구도가 더 많이 남아있는 경우도 true
-            if (lootItem.Data is ArmorData)
+            switch (lootItem.Data)
             {
-                if (player.EquipedArmor.IsStackEmpty || player.EquipedArmor.Data.Rarity < lootItem.Data.Rarity)
-                {
-                    return true;
-                }
-            }
-            else if (lootItem.Data is BackpackData)
-            {
-                if (player.EquipedBackpack.IsStackEmpty || player.EquipedBackpack.Data.Rarity < lootItem.Data.Rarity)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                var sameItemAtContainer = player.ItemContainer.TryGetItem(lootItem.Data.ItemName);
-                if (sameItemAtContainer.IsStackEmpty == false && sameItemAtContainer.IsStackFull == false)
-                {
-                    return true;
-                }
-
-                //가방이 비었다면
-                if(player.ItemContainer.IsFull == false)
-                {
-                    //먹은적 없는 아이템이라면
-                    if(sameItemAtContainer.IsStackEmpty == true)
+                case ArmorData ammoData:
+                    if (player.EquipedArmor.IsStackEmpty || player.EquipedArmor.Data.Rarity < ammoData.Rarity)
                     {
                         return true;
                     }
+                    break;
 
-                    //무기라면
-                    if(sameItemAtContainer.Data is WeaponData)
+                case BackpackData backpackData:
+                    if (player.EquipedBackpack.IsStackEmpty || player.EquipedBackpack.Data.Rarity < backpackData.Rarity)
                     {
                         return true;
                     }
-                }
+                    break;
+
+                case WeaponData weaponData:
+                    if (player.EquipedWeapon.IsStackEmpty)
+                    {
+                        return true;
+                    }
+                    else if (player.EquipedWeapon.Data.GetType().Equals(weaponData.GetType()) && player.EquipedWeapon.Data.Rarity < weaponData.Rarity)
+                    {
+                        return true;
+                    }
+                    break;
+
+                case AmmoData ammoData:
+                    if (player.EquipedWeapon.Data is RangeWeaponData)
+                    {
+                        var requireAmmoName = (player.EquipedWeapon.Data as RangeWeaponData).RequireAmmo.ItemName;
+                        if (requireAmmoName.Equals(ammoData.ItemName))
+                        {
+                            var sameAmmoAtConatainer = player.ItemContainer.TryGetItemFromLast(requireAmmoName);
+                            if (sameAmmoAtConatainer.IsStackEmpty || sameAmmoAtConatainer.IsStackFull == false)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    break;
+
+                default:
+                    var sameItemAtContainer = player.ItemContainer.TryGetItemFromLast(lootItem.Data.ItemName);
+                    if (sameItemAtContainer.IsStackEmpty == false && sameItemAtContainer.IsStackFull == false)
+                    {
+                        return true;
+                    }
+                    break;
             }
 
             return false;

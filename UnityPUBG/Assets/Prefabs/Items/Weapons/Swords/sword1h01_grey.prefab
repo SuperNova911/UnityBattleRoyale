@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 408740}
   - component: {fileID: 3310568}
   - component: {fileID: 2394576}
+  - component: {fileID: 8785265735098557007}
   m_Layer: 0
   m_Name: sword1h01_grey
   m_TagString: Untagged
@@ -78,3 +79,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &8785265735098557007
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139746}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.08156517
+  m_Height: 0.4135979
+  m_Direction: 1
+  m_Center: {x: 0.000050773226, y: 0.30103484, z: 0.000000014901163}

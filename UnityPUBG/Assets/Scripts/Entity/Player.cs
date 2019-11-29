@@ -31,9 +31,13 @@ namespace UnityPUBG.Scripts.Entities
         public ProjectileBase projectileBasePrefab;
         public Transform projectileFirePosition;
 
+        [Header("WeaponPosition")]
+        [SerializeField] private Transform weaponPosition;
+
         private PhotonView photonView;
         private InputManager inputManager;
         private PlayerItemLooter myItemLooter;
+        private Animator myAnimator;
 
         // Weapon
         private float lastAttackTime = 0f;
@@ -77,6 +81,9 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
+        private readonly string MeleeAttack = "MeleeAttack";
+        private readonly string IsRun = "IsRun";
+
         #region 유니티 메시지
         protected override void Awake()
         {
@@ -94,6 +101,7 @@ namespace UnityPUBG.Scripts.Entities
             CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
             ItemQuickBar = new Item[quickBarCapacity];
+            myAnimator = GetComponent<Animator>();
 
             //장착하지 않았으므로 emptyItem으로 초기화
             EquipedWeapon = Item.EmptyItem;
@@ -216,9 +224,20 @@ namespace UnityPUBG.Scripts.Entities
         }
         #endregion
 
+        #region public 함수
         public void MoveTo(Vector2 direction)
         {
             MovementDirection = direction.normalized;
+
+            //이동 애니메이션 설정
+            if (direction != Vector2.zero)
+            {
+                myAnimator.SetBool(IsRun, true);
+            }
+            else
+            {
+                myAnimator.SetBool(IsRun, false);
+            }
         }
 
         public void RotateTo(Vector2 direction)
@@ -266,7 +285,10 @@ namespace UnityPUBG.Scripts.Entities
                 switch (EquipedWeapon.Data)
                 {
                     case MeleeWeaponData meleeWeaponData:
-                        MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
+                        //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
+
+                        //근접 공격 애니메이션 설정
+                        myAnimator.SetTrigger(MeleeAttack);
                         break;
                     case RangeWeaponData rangeWeaponData:
                         RangeAttack(attackDirection);
@@ -332,6 +354,8 @@ namespace UnityPUBG.Scripts.Entities
                 DropItem(EquipedWeapon);
             }
             EquipedWeapon = weaponItem;
+
+            SwitchWeaponModel();
         }
 
         // TODO: 쉴드 제거
@@ -504,7 +528,9 @@ namespace UnityPUBG.Scripts.Entities
         {
 
         }
+        #endregion
 
+        #region private 함수
         // 테스트 전용
         private void MeleeAttackTest(DamageType damageType)
         {
@@ -649,6 +675,33 @@ namespace UnityPUBG.Scripts.Entities
                 }
             }
         }
+
+        private void SwitchWeaponModel()
+        {
+            if (EquipedWeapon.IsStackEmpty)
+            {
+                Debug.LogError("무기 스택이 0입니다.");
+                return;
+            }
+
+            //무기 모델이 있다면 제거
+            if (weaponPosition.childCount > 0)
+            {
+                int childCount = weaponPosition.childCount;
+
+                for (int i = 0; i < childCount; i++)
+                {
+                    Destroy(weaponPosition.GetChild(0).gameObject);
+                }
+            }
+
+            //교체할 무기 모델 생성
+            GameObject switchWeaponModel = Instantiate(EquipedWeapon.Data.Model, weaponPosition);
+
+            switchWeaponModel.transform.localPosition = Vector3.zero;
+            switchWeaponModel.transform.localRotation = Quaternion.identity;
+        }
+        #endregion
 
         // TODO: 아이템 사용 시전 중단 기능
         private IEnumerator TryConsumeItem(Item consumableItem)

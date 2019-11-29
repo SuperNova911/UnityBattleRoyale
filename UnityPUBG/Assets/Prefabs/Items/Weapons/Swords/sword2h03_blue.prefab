@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 425470}
   - component: {fileID: 3314844}
   - component: {fileID: 2332996}
+  - component: {fileID: 9041760691630823861}
   m_Layer: 0
   m_Name: sword2h03_blue
   m_TagString: Untagged
@@ -78,3 +79,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &9041760691630823861
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.07700528
+  m_Height: 0.5652643
+  m_Direction: 1
+  m_Center: {x: 0.011803637, y: 0.37991235, z: 0.000000014901167}

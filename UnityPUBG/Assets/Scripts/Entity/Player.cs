@@ -869,38 +869,6 @@ namespace UnityPUBG.Scripts.Entities
         }
         #endregion
 
-        // TODO: 아이템 사용 시전 중단 기능
-        private IEnumerator TryConsumeItem(Item consumableItem)
-        {
-            if (consumableItem.IsStackEmpty)
-            {
-                Debug.LogWarning($"빈 아이템을 사용하려고 하고 있습니다");
-                yield return null;
-            }
-
-            if ((consumableItem.Data is ConsumableData) == false)
-            {
-                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
-                yield return null;
-            }
-            var consumableData = consumableItem.Data as ConsumableData;
-
-            // 아이템 사용 시전
-            float startTime = Time.time;
-            float endTime = startTime + consumableData.TimeToUse;
-            float progress = 0f;
-            while (Time.time <= endTime)
-            {
-                // TODO: 플레이어 이동속도 느려지게, UI와 동기화
-                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
-                Debug.Log($"RemainTime: {endTime - Time.time}, Progress: {progress}");
-                yield return null;
-            }
-
-            // 아이템 사용
-            ConsumeItem(consumableItem);
-        }
-
         //원거리 공격 재생
         private IEnumerator PlayRangeAttackAnimation()
         {

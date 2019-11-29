@@ -28,7 +28,8 @@ namespace UnityPUBG.Scripts.Items
             container = new List<Item>(initialCapacity);
         }
 
-        public event EventHandler OnUpdateContainer;
+        public event EventHandler OnContainerUpdate;
+        public event EventHandler OnContainerResize;
 
         public int Count => container.Count;
         public int Capacity => container.Capacity;
@@ -72,7 +73,7 @@ namespace UnityPUBG.Scripts.Items
                 itemToAdd = Item.EmptyItem;
             }
 
-            OnUpdateContainer?.Invoke(this, EventArgs.Empty);
+            OnContainerUpdate?.Invoke(this, EventArgs.Empty);
 
             return itemToAdd;
         }
@@ -116,7 +117,7 @@ namespace UnityPUBG.Scripts.Items
                 container.RemoveAt(slot);
             }
 
-            OnUpdateContainer?.Invoke(this, EventArgs.Empty);
+            OnContainerUpdate?.Invoke(this, EventArgs.Empty);
 
             return splitedItem;
         }
@@ -210,7 +211,8 @@ namespace UnityPUBG.Scripts.Items
             }
 
             container = newContainer;
-            OnUpdateContainer?.Invoke(this, EventArgs.Empty);
+            OnContainerUpdate?.Invoke(this, EventArgs.Empty);
+            OnContainerResize?.Invoke(this, EventArgs.Empty);
             return overflowItems;
         }
     }

@@ -123,6 +123,16 @@ namespace UnityPUBG.Scripts.Logic
             }
         }
 
+        private void ItemContainer_OnContainerUpdate(object sender, EventArgs e)
+        {
+            UpdateInventorySlots();
+        }
+
+        private void ItemContainer_OnContainerResize(object sender, EventArgs e)
+        {
+            UpdateInventoryItemSlotSize();
+        }
+
         //인벤토리 슬롯을 업데이트 함
         public void UpdateInventorySlots()
         {
@@ -260,6 +270,8 @@ namespace UnityPUBG.Scripts.Logic
             targetPlayer.OnCurrentHealthUpdate += UpdatePlayerHealthSlider;
             targetPlayer.OnCurrentShieldUpdate += UpdatePlayerShieldSlider;
             targetPlayer.OnDie += MyPlayer_OnDie;
+            targetPlayer.ItemContainer.OnContainerUpdate += ItemContainer_OnContainerUpdate;
+            targetPlayer.ItemContainer.OnContainerResize += ItemContainer_OnContainerResize;
         }
 
         private void MyPlayer_OnDie(object sender, EventArgs e)

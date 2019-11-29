@@ -116,7 +116,7 @@ namespace UnityPUBG.Scripts.Entities
         {
             base.Start();
 
-            if(IsMyPlayer)
+            if (IsMyPlayer)
             {
                 UIManager.Instance.UpdateInventoryItemSlotSize();
             }
@@ -401,8 +401,6 @@ namespace UnityPUBG.Scripts.Entities
                 EquipBackpack(lootItemObject.Item);
                 LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
                 lootItemObject.RequestDestroy();
-
-                UIManager.Instance.UpdateInventoryItemSlotSize();
             }
             else if (lootItemObject.Item.Data is WeaponData)
             {
@@ -416,8 +414,6 @@ namespace UnityPUBG.Scripts.Entities
                 }
                 LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
                 lootItemObject.RequestDestroy();
-
-                UIManager.Instance.UpdateInventorySlots();
             }
             else
             {
@@ -438,8 +434,6 @@ namespace UnityPUBG.Scripts.Entities
                         lootItemObject.NotifyUpdateCurrentStack();
                     }
                 }
-
-                UIManager.Instance.UpdateInventorySlots();
             }
         }
 
@@ -472,7 +466,7 @@ namespace UnityPUBG.Scripts.Entities
                 Debug.LogError($"null이거나 비어있는 {nameof(Item)}은 등록할 수 없습니다");
                 return;
             }
-            
+
             if (slot < 0 || slot >= quickBarCapacity)
             {
                 Debug.LogWarning($"퀵바의 범위를 벗어나는 슬롯 인덱스, {nameof(slot)}: {slot}");
@@ -632,7 +626,6 @@ namespace UnityPUBG.Scripts.Entities
                 itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
             }
 
-            UIManager.Instance.UpdateInventorySlots();
             UIManager.Instance.UpdateQuickSlots();
         }
 

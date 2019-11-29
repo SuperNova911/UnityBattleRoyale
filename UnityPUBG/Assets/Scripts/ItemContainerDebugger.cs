@@ -27,7 +27,7 @@ namespace UnityPUBG.Scripts
                 containerOwner = EntityManager.Instance.MyPlayer;
                 if (containerOwner != null && containerOwner.ItemContainer != null)
                 {
-                    containerOwner.ItemContainer.OnUpdateContainer += ItemContainer_OnUpdateContainer;
+                    containerOwner.ItemContainer.OnContainerUpdate += ItemContainer_OnUpdateContainer;
                     debugText.text = $"ItemConainer: Count[{containerOwner.ItemContainer.Count}/{containerOwner.ItemContainer.Capacity}]";
                 }
                 else

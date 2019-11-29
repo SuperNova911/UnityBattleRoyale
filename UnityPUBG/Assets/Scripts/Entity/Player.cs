@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
+using UnityPUBG.Scripts.UI;
 using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Entities
@@ -17,6 +18,7 @@ namespace UnityPUBG.Scripts.Entities
     public class Player : Entity, IPunObservable
     {
         [Header("Player Settings")]
+        [SerializeField, Range(0.1f, 1f)] private float speedMultiplyWhenUseItem = 0.5f;
         [SerializeField, Range(0, 100)] private int maximumShield = 100;
         [SerializeField, Range(0f, 100f)] private float currentShield = 0f;
 
@@ -24,7 +26,6 @@ namespace UnityPUBG.Scripts.Entities
         [SerializeField, Range(2, 8)] private int defaultContainerCapacity = 6;
 
         [Header("QuickSlot")]
-        [SerializeField, Range(0.1f, 1f)] private float speedMultiplyWhenUseItem = 0.5f;
         [SerializeField, Range(1, 6)] private int quickBarCapacity = 4;
 
         [Header("Projectile")]
@@ -32,12 +33,13 @@ namespace UnityPUBG.Scripts.Entities
         public Transform projectileFirePosition;
 
         private PhotonView photonView;
-        private InputManager inputManager;
         private PlayerItemLooter myItemLooter;
 
         // Weapon
         private float lastAttackTime = 0f;
         private bool isAiming = false;
+        private bool isConsuming = false;
+        private Coroutine tryConsumeItemCorutine = null;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
 
@@ -76,6 +78,15 @@ namespace UnityPUBG.Scripts.Entities
                 // TODO: 조준선 그리기
             }
         }
+        public bool IsConsuming
+        {
+            get { return isConsuming; }
+            set
+            {
+                isConsuming = value;
+                SpeedMultiplier = value ? speedMultiplyWhenUseItem : 1f;
+            }
+        }
 
         #region 유니티 메시지
         protected override void Awake()
@@ -85,7 +96,6 @@ namespace UnityPUBG.Scripts.Entities
             ObjectPoolManager.Instance.InitializeObjectPool(projectileBasePrefab.gameObject, 20);
 
             photonView = GetComponent<PhotonView>();
-            inputManager = new InputManager();
             if (photonView == null)
             {
                 Debug.LogError($"{nameof(photonView)}가 없습니다");
@@ -188,16 +198,6 @@ namespace UnityPUBG.Scripts.Entities
             {
                 EntityManager.Instance.MyPlayer = null;
             }
-        }
-
-        private void OnEnable()
-        {
-            inputManager.Enable();
-        }
-
-        private void OnDisable()
-        {
-            inputManager.Disable();
         }
         #endregion
 
@@ -488,10 +488,55 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
+            UseItem(selectedItem);
+        }
+
+        public void UseItemAtItemContainer(int slot)
+        {
+            if (slot < 0 || slot >= ItemContainer.Count)
+            {
+                Debug.LogWarning($"{nameof(ItemContainer)}의 범위를 벗어나는 슬롯 인덱스, {nameof(slot)}: {slot}");
+                slot = Mathf.Clamp(slot, 0, ItemContainer.Count - 1);
+            }
+
+            var selectedItem = ItemContainer.GetItemAt(slot);
+            if (selectedItem.IsStackEmpty)
+            {
+                return;
+            }
+
+            UseItem(selectedItem);
+        }
+
+        private void DropItem(Item dropItem)
+        {
+            var dropItemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
+            if (dropItemObject == null)
+            {
+                return;
+            }
+
+            // 무작위 방향으로 던짐
+            Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
+            var itemObjectRigidbody = dropItemObject.GetComponent<Rigidbody>();
+            if (itemObjectRigidbody != null)
+            {
+                float force = 6f;
+                itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
+            }
+        }
+
+        private void UseItem(Item selectedItem)
+        {
             switch (selectedItem.Data)
             {
                 case ConsumableData consumable:
-                    StartCoroutine(TryConsumeItem(selectedItem));
+                    if (tryConsumeItemCorutine != null)
+                    {
+                        Debug.LogWarning("Interrupt");
+                        StopCoroutine(tryConsumeItemCorutine);
+                    }
+                    tryConsumeItemCorutine = StartCoroutine(TryConsumeItem(selectedItem));
                     break;
 
                 case WeaponData weapon:
@@ -500,9 +545,115 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        public void UseItemAtItemContainer(int slot)
+        // TODO: 아이템 사용 시전 중단 기능
+        private IEnumerator TryConsumeItem(Item consumableItem)
         {
+            if (consumableItem.IsStackEmpty)
+            {
+                // TODO: 사용할 수 없는 아이템 사운드 재생
+                Debug.LogWarning($"빈 아이템을 사용하려고 하고 있습니다");
+                yield break;
+            }
 
+            if ((consumableItem.Data is ConsumableData) == false)
+            {
+                // TODO: 사용할 수 없는 아이템 사운드 재생
+                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
+                yield break;
+            }
+            var consumableData = consumableItem.Data as ConsumableData;
+
+            // 아이템 사용이 의미 있는지 검사
+            if (IsEffectable(consumableData) == false)
+            {
+                // TODO: 사용할 수 없는 아이템 사운드 재생, UI 텍스트 안내
+                Debug.Log($"Not effectable");
+                yield break;
+            }
+
+            // 아이템 사용 시전
+            IsConsuming = true;
+            ItemConsumeProgress consumeProgress = UIManager.Instance.itemConsumeProgress;
+            consumeProgress.InitializeProgress(consumableData);
+
+            float startTime = Time.time;
+            float endTime = startTime + consumableData.TimeToUse;
+            float progress = 0f;
+            while (Time.time <= endTime)
+            {
+                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
+                consumeProgress.UpdateProgress(progress, endTime - Time.time);
+                yield return new WaitForSeconds(0.05f);
+            }
+
+            consumeProgress.Clear();
+            IsConsuming = false;
+
+            // 아이템 사용
+            ConsumeItem(consumableItem);
+
+            tryConsumeItemCorutine = null;
+        }
+
+        private bool IsEffectable(ConsumableData consumableData)
+        {
+            switch (consumableData)
+            {
+                case HealingKitData healingKitData:
+                    float restorableHealth = MaximumHealth - CurrentHealth;
+                    float restorableShield = MaximumShield - CurrentShield;
+                    if (restorableHealth > 0 && healingKitData.HealthRestoreAmount > 0 ||
+                        restorableShield > 0 && healingKitData.ShieldRestoreAmount > 0)
+                    {
+                        return true;
+                    }
+                    break;
+
+                default:
+                    Debug.LogError($"관리되지 않고 있는 {nameof(ConsumableData)}입니다, {consumableData.GetType().Name}");
+                    break;
+            }
+
+            return false;
+        }
+
+        private void ConsumeItem(Item consumableItem)
+        {
+            if (consumableItem.IsStackEmpty)
+            {
+                Debug.LogWarning($"사용하려고 하는 아이템이 비어 있습니다");
+                return;
+            }
+
+            // 아이템 사용이 의미 있는지 검사
+            var consumableData = consumableItem.Data as ConsumableData;
+            if (IsEffectable(consumableData) == false)
+            {
+                // TODO: 사용할 수 없는 아이템 사운드 재생, UI 텍스트 안내
+                Debug.LogWarning($"Not effectable");
+                return;
+            }
+
+            // ItemContainer에 사용하려는 아이템이 있는지 검사
+            int targetSlot = ItemContainer.FindMatchItemSlotFromLast(consumableData.ItemName);
+            if (targetSlot == -1)
+            {
+                Debug.LogWarning($"사용하려고 하는 아이템이 {nameof(ItemContainer)}에 없습니다, {nameof(consumableData.ItemName)}: {consumableData.ItemName}");
+                return;
+            }
+            ItemContainer.SubtrackItemAtSlot(targetSlot);
+
+            // 사용 효과 적용
+            switch (consumableData)
+            {
+                case HealingKitData healingKit:
+                    CurrentHealth += healingKit.HealthRestoreAmount;
+                    CurrentShield += healingKit.ShieldRestoreAmount;
+                    break;
+                default:
+                    Debug.LogWarning($"관리되지 않고 있는 {nameof(ItemData)}입니다, {consumableItem.Data.GetType().Name}");
+                    return;
+            }
         }
 
         // 테스트 전용
@@ -592,94 +743,6 @@ namespace UnityPUBG.Scripts.Entities
             projectileBase.InitializeProjectile(projectileInfo, projectileFirePosition.position);
 
             projectileBase.Fire();
-        }
-
-        private void DropItem(Item dropItem)
-        {
-            var dropItemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
-            if (dropItemObject == null)
-            {
-                return;
-            }
-
-            // 무작위 방향으로 던짐
-            Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
-            var itemObjectRigidbody = dropItemObject.GetComponent<Rigidbody>();
-            if (itemObjectRigidbody != null)
-            {
-                float force = 6f;
-                itemObjectRigidbody.AddForce(new Vector3(randomDirection.x, 0.5f, randomDirection.y).normalized * force, ForceMode.Impulse);
-            }
-        }
-
-        private void ConsumeItem(Item consumableItem)
-        {
-            if (consumableItem.IsStackEmpty)
-            {
-                Debug.LogWarning($"사용하려고 하는 아이템이 비어 있습니다");
-                return;
-            }
-
-            var consumableData = consumableItem.Data as ConsumableData;
-            switch (consumableData)
-            {
-                case HealingKitData healingKit:
-                    CurrentHealth += healingKit.HealthRestoreAmount;
-                    CurrentShield += healingKit.ShieldRestoreAmount;
-                    break;
-
-                default:
-                    Debug.LogWarning($"관리되지 않고 있는 {nameof(ItemData)}입니다, {consumableItem.Data.GetType().Name}");
-                    return;
-            }
-
-            // TODO ItemContainer에서 스택 개수 줄이기
-            if (ItemContainer.HasItem(consumableData.ItemName) == false)
-            {
-                Debug.LogWarning($"사용하려고 하는 아이템이 {nameof(ItemContainer)}에 없습니다, {nameof(consumableData.ItemName)}: {consumableData.ItemName}");
-                return;
-            }
-
-            for (int slot = 0; slot < ItemContainer.Count; slot++)
-            {
-                var targetItem = ItemContainer.GetItemAt(slot);
-                if (targetItem == consumableItem)
-                {
-                    ItemContainer.SubtrackItemAtSlot(slot);
-                }
-            }
-        }
-
-        // TODO: 아이템 사용 시전 중단 기능
-        private IEnumerator TryConsumeItem(Item consumableItem)
-        {
-            if (consumableItem.IsStackEmpty)
-            {
-                Debug.LogWarning($"빈 아이템을 사용하려고 하고 있습니다");
-                yield return null;
-            }
-
-            if ((consumableItem.Data is ConsumableData) == false)
-            {
-                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
-                yield return null;
-            }
-            var consumableData = consumableItem.Data as ConsumableData;
-
-            // 아이템 사용 시전
-            float startTime = Time.time;
-            float endTime = startTime + consumableData.TimeToUse;
-            float progress = 0f;
-            while (Time.time <= endTime)
-            {
-                // TODO: 플레이어 이동속도 느려지게, UI와 동기화
-                progress = Mathf.InverseLerp(startTime, endTime, Time.time);
-                Debug.Log($"RemainTime: {endTime - Time.time}, Progress: {progress}");
-                yield return null;
-            }
-
-            // 아이템 사용
-            ConsumeItem(consumableItem);
         }
     }
 }

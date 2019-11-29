@@ -15,7 +15,7 @@ namespace UnityPUBG.Scripts.UI
 
         private void Awake()
         {
-            ObjectPoolManager.Instance.InitializeUIObjectPool(damageTextPrefab.gameObject, UIManager.Instance.dynamicCanvas, 10);
+            ObjectPoolManager.Instance.InitializeUIObjectPool(damageTextPrefab.gameObject, UIManager.Instance.masterCanvas, 10);
         }
 
         public void DrawDamageText(Transform damageReceiver, float damage)

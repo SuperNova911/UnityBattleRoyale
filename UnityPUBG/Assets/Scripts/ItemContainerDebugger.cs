@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ namespace UnityPUBG.Scripts
     public class ItemContainerDebugger : MonoBehaviour
     {
         [Header("UI")]
-        [SerializeField] private Text debugText;
+        [SerializeField] private TMP_Text debugText;
 
         private Player containerOwner;
         private readonly StringBuilder stringBuilder = new StringBuilder();

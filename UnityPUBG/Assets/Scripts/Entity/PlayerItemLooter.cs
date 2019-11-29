@@ -40,7 +40,7 @@ namespace UnityPUBG.Scripts.Entities
             }
 
             collideObjects = new Collider[maximumLootAtMoment];
-            ObjectPoolManager.Instance.InitializeUIObjectPool(lootButtonPrefab.gameObject, UIManager.Instance.dynamicCanvas, maximumLootAtMoment);
+            ObjectPoolManager.Instance.InitializeUIObjectPool(lootButtonPrefab.gameObject, UIManager.Instance.masterCanvas, maximumLootAtMoment);
         }
 
         private void Start()

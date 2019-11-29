@@ -16,8 +16,7 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class UIManager : Singleton<UIManager>
     {
-        public Canvas dynamicCanvas;
-        public Canvas fixedCanvas;
+        public Canvas masterCanvas;
         public GameObject normalUIElements;
         public GameObject quickSlotUIElements;
         public GameObject inventoryUIElements;
@@ -42,6 +41,8 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text killMessage;
         [Space]
         public TMP_Text survivePlayersText;
+        [Space]
+        public ItemConsumeProgress itemConsumeProgress;
         [Space]
         public List<ItemSlot> inventoryItemSlots = new List<ItemSlot>();
         public List<EquipItemSlot> inventoryEquipItemSlots = new List<EquipItemSlot>();

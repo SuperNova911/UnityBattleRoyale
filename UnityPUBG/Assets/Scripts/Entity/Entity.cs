@@ -44,6 +44,7 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         public bool IsDead { get; private set; }
+        public float SpeedMultiplier { get; set; }
         public Vector2 MovementDirection { get; protected set; }
         public Vector2 RotateDirection { get; protected set; }
 
@@ -53,6 +54,7 @@ namespace UnityPUBG.Scripts.Entities
             entityRigidbody = GetComponent<Rigidbody>();
 
             CurrentHealth = MaximumHealth;
+            SpeedMultiplier = 1f;
 
             EntityManager.Instance.RegisterEntity(this);
         }
@@ -92,7 +94,7 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            Vector3 direction = new Vector3(MovementDirection.x, 0, MovementDirection.y) * movementSpeed * Time.fixedDeltaTime;
+            Vector3 direction = new Vector3(MovementDirection.x, 0, MovementDirection.y) * movementSpeed * SpeedMultiplier * Time.fixedDeltaTime;
             entityRigidbody.MovePosition(transform.position + direction);
         }
 

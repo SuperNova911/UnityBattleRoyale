@@ -34,5 +34,14 @@ namespace UnityPUBG.Scripts.UI
             Item quickSlotItem = EntityManager.Instance.MyPlayer.ItemQuickBar[quickSlotIndex];
             slotImage.sprite = (quickSlotItem.IsStackEmpty == false) ? quickSlotItem.Data.Icon : defaultSlotSprite;
         }
+
+        public void Button_OnClick()
+        {
+            var targetPlayer = EntityManager.Instance.MyPlayer;
+            if (targetPlayer != null)
+            {
+                targetPlayer.UseItemAtQuickBar(quickSlotIndex);
+            }
+        }
     }
 }

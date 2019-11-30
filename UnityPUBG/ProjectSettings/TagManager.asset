@@ -9,6 +9,8 @@ TagManager:
   - UI
   - Camera
   - Projectile
+  - MyPlayer
+  - Enemy
   layers:
   - Default
   - TransparentFX

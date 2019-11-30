@@ -38,13 +38,17 @@ namespace UnityPUBG.Scripts.Entities
         [SerializeField] private Transform rangeWeaponPosition;
         #endregion
 
+        #region 애니메이션 파라미터
         //애니메이션 파라미터 이름
         private readonly string meleeAttack = "MeleeAttack";
         private readonly string isRun = "IsRun";
         private readonly string rangeAttack = "RangeAttack";
         private readonly string attackSpeed = "AttackSpeed";
+        private readonly string handAttack = "HandAttack";
         private readonly float rangeAttackAnimationLength = 1.833336f;
         private readonly float meleeAttackAnimationLength = 1.166668f;
+        private readonly float handAttackAnimationLength = 0.4f;
+        #endregion
 
         private PhotonView photonView;
         private PlayerItemLooter myItemLooter;
@@ -333,9 +337,8 @@ namespace UnityPUBG.Scripts.Entities
 
             if (EquipedPrimaryWeapon.IsStackEmpty)
             {
-                // 맨손 공격
                 //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
-                if(!isPlayingAttackAnimation)
+                if (!isPlayingAttackAnimation)
                 {
                     previousAnimationDirection = direction;
                     StartCoroutine(PlayMeleeAttackAnimation());
@@ -347,10 +350,9 @@ namespace UnityPUBG.Scripts.Entities
                 {
                     case MeleeWeaponData meleeWeaponData:
                         //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
-                        if(!isPlayingAttackAnimation)
+                        if (!isPlayingAttackAnimation)
                         {
                             previousAnimationDirection = direction;
-
                             StartCoroutine(PlayMeleeAttackAnimation());
                         }
                         break;
@@ -951,15 +953,23 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        //근접 공격 재생
+        //근접, 맨손 공격 재생
         private IEnumerator PlayMeleeAttackAnimation()
         {
             isPlayingAttackAnimation = true;
 
-            myAnimator.SetTrigger(meleeAttack);
+            //근접무기 장착중이라면 근접 애니메이션
+            if (!EquipedPrimaryWeapon.IsStackEmpty)
+            {
+                myAnimator.SetTrigger(meleeAttack);
 
-            yield return new WaitForSecondsRealtime(meleeAttackAnimationLength);
-
+                yield return new WaitForSecondsRealtime(meleeAttackAnimationLength);
+            }
+            else
+            {
+                myAnimator.SetTrigger(handAttack);
+                yield return new WaitForSecondsRealtime(handAttackAnimationLength);
+            }
             isPlayingAttackAnimation = false;
 
             yield break;

@@ -1437,10 +1437,10 @@ MonoBehaviour:
   currentHealth: 100
   movementSpeed: 5
   rotationSpeed: 0.2
+  speedMultiplyWhenUseItem: 0.5
   maximumShield: 100
   currentShield: 0
   defaultContainerCapacity: 4
-  speedMultiplyWhenUseItem: 0.5
   quickBarCapacity: 4
   projectileBasePrefab: {fileID: 2364344030809358519, guid: 3ff01fddd5ff0f6468bb67588f02dfe3,
     type: 3}
@@ -4379,6 +4379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2053244640088670907}
+  - component: {fileID: 3957982545120817901}
   m_Layer: 0
   m_Name: MeleeWeaponPosition
   m_TagString: Untagged
@@ -4400,6 +4401,19 @@ Transform:
   m_Father: {fileID: 251370033490795076}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 45, y: 90, z: -90}
+--- !u!135 &3957982545120817901
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529402710166183051}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5686530042220700473
 GameObject:
   m_ObjectHideFlags: 0

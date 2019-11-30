@@ -618,6 +618,18 @@ namespace UnityPUBG.Scripts.Entities
             UseItem(selectedItem);
         }
 
+        public void InterruptItemUse()
+        {
+            if (tryConsumeItemCoroutine != null)
+            {
+                // TODO: 아이템 사용 취소 사운드
+                StopCoroutine(tryConsumeItemCoroutine);
+                UIManager.Instance.itemConsumeProgress.Clear();
+                IsConsuming = false;
+            }
+        }
+        #endregion
+
         #region private 함수
         private void DropItem(Item dropItem)
         {
@@ -642,16 +654,11 @@ namespace UnityPUBG.Scripts.Entities
             switch (selectedItem.Data)
             {
                 case ConsumableData consumable:
-                    if (tryConsumeItemCoroutine != null)
-                    {
-                        Debug.LogWarning("Interrupt");
-                        StopCoroutine(tryConsumeItemCoroutine);
-                    }
+                    InterruptItemUse();
                     tryConsumeItemCoroutine = StartCoroutine(TryConsumeItem(selectedItem));
                     break;
-
-                case WeaponData weapon:
-                    // switch weapon
+                default:
+                    // TODO: 사용할 수 없는 아이템 사운드
                     break;
             }
         }
@@ -766,7 +773,6 @@ namespace UnityPUBG.Scripts.Entities
                     return;
             }
         }
-        #endregion
 
         /*
         // 테스트 전용

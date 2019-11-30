@@ -17214,14 +17214,14 @@ Terrain:
   m_Enabled: 1
   serializedVersion: 5
   m_TerrainData: {fileID: 15600000, guid: 80edaf4679f06ba4d8615a3043e240c0, type: 2}
-  m_TreeDistance: 5000
+  m_TreeDistance: 100
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
   m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 100
+  m_HeightmapPixelError: 20
+  m_SplatMapDistance: 30
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 1
   m_DrawHeightmap: 1
@@ -28926,6 +28926,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc9a70325f5396446aab164ea6854ceb, type: 3}
+--- !u!114 &1534118285 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5003475566517369187, guid: 17b02e41963c46d4284ecd38c96e7565,
+    type: 3}
+  m_PrefabInstance: {fileID: 4554568196299936863}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1535101799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3908805739431913725, guid: dc9a70325f5396446aab164ea6854ceb,
@@ -40676,7 +40688,7 @@ PrefabInstance:
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -40686,27 +40698,27 @@ PrefabInstance:
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1804969488735535462, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
-      value: 20.4
+      value: 30.6
       objectReference: {fileID: 0}
     - target: {fileID: 7568829510510280210, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
-      value: 1.6
+      value: 21.4
       objectReference: {fileID: 0}
     - target: {fileID: 2352278331202108186, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -40757,7 +40769,7 @@ PrefabInstance:
     - target: {fileID: 8882939575746986579, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
-      value: 3.4
+      value: 45.9
       objectReference: {fileID: 0}
     - target: {fileID: 4184450334776920568, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -40857,12 +40869,12 @@ PrefabInstance:
     - target: {fileID: 2799578641830981059, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
-      value: 4.3
+      value: 57.4
       objectReference: {fileID: 0}
     - target: {fileID: 4642326339327752540, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
-      value: 2.55
+      value: 34.4
       objectReference: {fileID: 0}
     - target: {fileID: 4642326339327752540, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -40872,7 +40884,7 @@ PrefabInstance:
     - target: {fileID: 9080016048624298717, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
-      value: 2.55
+      value: 34.4
       objectReference: {fileID: 0}
     - target: {fileID: 1127325696875519050, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -41997,7 +42009,7 @@ PrefabInstance:
     - target: {fileID: 8738610875201056115, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
-      value: 2.85
+      value: 38.25
       objectReference: {fileID: 0}
     - target: {fileID: 2298185215651059369, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -42342,7 +42354,7 @@ PrefabInstance:
     - target: {fileID: 8108781006678365416, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_fontSize
-      value: 3.85
+      value: 51.45
       objectReference: {fileID: 0}
     - target: {fileID: 1159249417971672089, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -42499,11 +42511,6 @@ PrefabInstance:
       propertyPath: itemImage
       value: 
       objectReference: {fileID: 1521449928}
-    - target: {fileID: 6517579051131420451, guid: 17b02e41963c46d4284ecd38c96e7565,
-        type: 3}
-      propertyPath: itemImage
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 270177874207913115, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -43779,6 +43786,11 @@ PrefabInstance:
       propertyPath: itemConsumeProgress
       value: 
       objectReference: {fileID: 762921396}
+    - target: {fileID: 9101536519121333136, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: playerWeaponSwapButton
+      value: 
+      objectReference: {fileID: 1534118285}
     - target: {fileID: 9173340600907604448, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: m_LocalPosition.x

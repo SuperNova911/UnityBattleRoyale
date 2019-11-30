@@ -45,19 +45,16 @@ namespace UnityPUBG.Scripts.UI
                     }
                     break;
                 case ItemType.Weapon:
-                    if (!myPlayer.EquipedWeapon.IsStackEmpty)
+                    if (!myPlayer.EquipedPrimaryWeapon.IsStackEmpty)
                     {
-                        itemImage.sprite = myPlayer.EquipedWeapon.Data.Icon;
+                        itemImage.sprite = myPlayer.EquipedPrimaryWeapon.Data.Icon;
                     }
                     break;
                 case ItemType.SecondaryWeapon:
-                    //TODO: 두번째 무기 아이콘 매핑
-                    /*
                     if(!myPlayer.EquipedSecondaryWeapon.IsStackEmpty)
                     {
-                        itemIcon.sprite = myPlayer.EquipedSecondaryWeapon.Data.Icon;
+                        itemImage.sprite = myPlayer.EquipedSecondaryWeapon.Data.Icon;
                     }
-                    */
                     break;
             }
         }

@@ -38,11 +38,13 @@ namespace UnityPUBG.Scripts.Logic
         [Space]
         public TMP_Text roundMessage;
         public TMP_Text roundSubMessage;
-        public TMP_Text killMessage;
         [Space]
+        public TMP_Text killMessage;
         public TMP_Text survivePlayersText;
         [Space]
         public ItemConsumeProgress itemConsumeProgress;
+        [Space]
+        public Button playerWeaponSwapButton;
         [Space]
         public List<ItemSlot> inventoryItemSlots = new List<ItemSlot>();
         public List<EquipItemSlot> inventoryEquipItemSlots = new List<EquipItemSlot>();
@@ -201,6 +203,7 @@ namespace UnityPUBG.Scripts.Logic
             playerMovementJoystick.OnJoystickRelease += PlayerMovementJoystick_OnJoystickRelease;
             playerAttackJoystick.OnJoystickDrag += PlayerAttackJoystick_OnJoystickDrag;
             playerAttackJoystick.OnJoystickRelease += PlayerAttackJoystick_OnJoystickRelease;
+            playerWeaponSwapButton.onClick.AddListener(() => targetPlayer.SwapWeapon());
 
             // UI 초기값 설정
             playerHealthSlider.maxValue = targetPlayer.MaximumHealth;
@@ -228,6 +231,7 @@ namespace UnityPUBG.Scripts.Logic
             playerMovementJoystick.OnJoystickRelease -= PlayerMovementJoystick_OnJoystickRelease;
             playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickDrag;
             playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickRelease;
+            playerWeaponSwapButton.onClick.RemoveAllListeners();
         }
 
         private void EntityManager_OnPlayerSpawn(object sender, Player spawnedPlayer)

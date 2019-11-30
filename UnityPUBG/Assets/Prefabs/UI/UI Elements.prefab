@@ -6651,7 +6651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 2
-  itemImage: {fileID: 0}
+  itemImage: {fileID: 7376262715831974719}
 --- !u!1 &8629726393669123659
 GameObject:
   m_ObjectHideFlags: 0

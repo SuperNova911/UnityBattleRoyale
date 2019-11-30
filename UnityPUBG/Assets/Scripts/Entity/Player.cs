@@ -17,6 +17,7 @@ namespace UnityPUBG.Scripts.Entities
     [RequireComponent(typeof(PhotonView))]
     public class Player : Entity, IPunObservable
     {
+        #region 유니티 인스펙터
         [Header("Player Settings")]
         [SerializeField, Range(0.1f, 1f)] private float speedMultiplyWhenUseItem = 0.5f;
         [SerializeField, Range(0, 100)] private int maximumShield = 100;
@@ -32,9 +33,17 @@ namespace UnityPUBG.Scripts.Entities
         public ProjectileBase projectileBasePrefab;
         public Transform projectileFirePosition;
 
-        [Header("WeaponPosition")]
+        [Header("Weapon Position")]
         [SerializeField] private Transform meleeWeaponPosition;
         [SerializeField] private Transform rangeWeaponPosition;
+        #endregion
+
+        //애니메이션 파라미터 이름
+        private readonly string meleeAttack = "MeleeAttack";
+        private readonly string isRun = "IsRun";
+        private readonly string rangeAttack = "RangeAttack";
+        private readonly string attackSpeed = "AttackSpeed";
+        private readonly float rangeAttackAnimationLength = 1.833336f;
 
         private PhotonView photonView;
         private PlayerItemLooter myItemLooter;
@@ -44,13 +53,13 @@ namespace UnityPUBG.Scripts.Entities
         private float lastAttackTime = 0f;
         private bool isAiming = false;
         private bool isPlayingRangeAnimation = false;
-
-        //원거리 공격 방향
+        // 원거리 공격 방향
         private Vector3 rangeAttackDirection = Vector3.zero;
-
         private Vector2 previousAnimationDirection = Vector2.zero;
+
         private bool isConsuming = false;
-        private Coroutine tryConsumeItemCorutine = null;
+        private Coroutine tryConsumeItemCoroutine = null;
+        private Item equipedPrimaryWeapon;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
 
@@ -72,9 +81,18 @@ namespace UnityPUBG.Scripts.Entities
         }
         public ItemContainer ItemContainer { get; private set; }
         public Item[] ItemQuickBar { get; private set; }
-        public Item EquipedWeapon { get; private set; }   // TODO: 장착은 메서드로 바꾸기
         public Item EquipedArmor { get; private set; }
         public Item EquipedBackpack { get; private set; }
+        public Item EquipedPrimaryWeapon
+        {
+            get { return equipedPrimaryWeapon; }
+            private set
+            {
+                equipedPrimaryWeapon = value;
+                UpdatePrimaryWeaponModel();
+            }
+        }
+        public Item EquipedSecondaryWeapon { get; private set; }
         public Vehicle RidingVehicle { get; private set; }
 
         public int PhotonViewId => photonView.viewID;
@@ -99,14 +117,6 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        //애니메이션 파라미터 이름
-        private readonly string meleeAttack = "MeleeAttack";
-        private readonly string isRun = "IsRun";
-        private readonly string rangeAttack = "RangeAttack";
-        private readonly string attackSpeed = "AttackSpeed";
-
-        private readonly float rangeAttackAnimationLength = 1.833336f;
-
         #region 유니티 메시지
         protected override void Awake()
         {
@@ -126,9 +136,10 @@ namespace UnityPUBG.Scripts.Entities
             myAnimator = GetComponent<Animator>();
 
             //장착하지 않았으므로 emptyItem으로 초기화
-            EquipedWeapon = Item.EmptyItem;
             EquipedArmor = Item.EmptyItem;
             EquipedBackpack = Item.EmptyItem;
+            EquipedPrimaryWeapon = Item.EmptyItem;
+            EquipedSecondaryWeapon = Item.EmptyItem;
 
             for (int slot = 0; slot < ItemQuickBar.Length; slot++)
             {
@@ -181,7 +192,7 @@ namespace UnityPUBG.Scripts.Entities
             }
             else if (Keyboard.current.digit5Key.wasPressedThisFrame)
             {
-                DropWeapon();
+                DropPrimaryWeapon();
             }
             else if (Keyboard.current.digit4Key.wasPressedThisFrame)
             {
@@ -290,7 +301,7 @@ namespace UnityPUBG.Scripts.Entities
                     IsAiming = true;
 
                     //원거리 무기를 장착하고 있다면 애니메이션 실행
-                    if (EquipedWeapon.Data is RangeWeaponData)
+                    if (EquipedPrimaryWeapon.Data is RangeWeaponData)
                     {
                         StartCoroutine(PlayRangeAttackAnimation());
                     }
@@ -316,14 +327,14 @@ namespace UnityPUBG.Scripts.Entities
             }
             attackDirection = attackDirection.normalized;
 
-            if (EquipedWeapon.IsStackEmpty)
+            if (EquipedPrimaryWeapon.IsStackEmpty)
             {
                 // 맨손 공격
                 MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
             }
             else
             {
-                switch (EquipedWeapon.Data)
+                switch (EquipedPrimaryWeapon.Data)
                 {
                     case MeleeWeaponData meleeWeaponData:
                         //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
@@ -334,10 +345,17 @@ namespace UnityPUBG.Scripts.Entities
                         //RangeAttack(attackDirection);
                         break;
                     default:
-                        Debug.LogError($"관리되지 않고 있는 {nameof(WeaponData)}입니다, {EquipedWeapon.Data.GetType().Name}");
+                        Debug.LogError($"관리되지 않고 있는 {nameof(WeaponData)}입니다, {EquipedPrimaryWeapon.Data.GetType().Name}");
                         break;
                 }
             }
+        }
+
+        public void SwapWeapon()
+        {
+            var tempForSwap = EquipedPrimaryWeapon;
+            EquipedPrimaryWeapon = EquipedSecondaryWeapon;
+            EquipedSecondaryWeapon = tempForSwap;
         }
 
         // TODO: 쉴드
@@ -389,13 +407,20 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            if (EquipedWeapon.IsStackEmpty == false)
+            if (EquipedPrimaryWeapon.IsStackEmpty)
             {
-                DropItem(EquipedWeapon);
-            }
-            EquipedWeapon = weaponItem;
+                EquipedPrimaryWeapon = weaponItem;
 
-            SwitchWeaponModel();
+            }
+            else if (EquipedSecondaryWeapon.IsStackEmpty)
+            {
+                EquipedSecondaryWeapon = weaponItem;
+            }
+            else
+            {
+                DropPrimaryWeapon();
+                EquipedPrimaryWeapon = weaponItem;
+            }
         }
 
         // TODO: 쉴드 제거
@@ -423,12 +448,21 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        public void DropWeapon()
+        public void DropPrimaryWeapon()
         {
-            if (EquipedWeapon.IsStackEmpty == false)
+            if (EquipedPrimaryWeapon.IsStackEmpty == false)
             {
-                DropItem(EquipedWeapon);
-                EquipedWeapon = Item.EmptyItem;
+                DropItem(EquipedPrimaryWeapon);
+                EquipedPrimaryWeapon = Item.EmptyItem;
+            }
+        }
+
+        public void DropSecondaryWeapon()
+        {
+            if (EquipedSecondaryWeapon.IsStackEmpty == false)
+            {
+                DropItem(EquipedSecondaryWeapon);
+                EquipedSecondaryWeapon = Item.EmptyItem;
             }
         }
 
@@ -453,7 +487,7 @@ namespace UnityPUBG.Scripts.Entities
             }
             else if (lootItemObject.Item.Data is WeaponData)
             {
-                if (EquipedWeapon.IsStackEmpty || EquipedWeapon.Data.Rarity < lootItemObject.Item.Data.Rarity)
+                if (EquipedPrimaryWeapon.IsStackEmpty || EquipedPrimaryWeapon.Data.Rarity < lootItemObject.Item.Data.Rarity)
                 {
                     EquipWeapon(lootItemObject.Item);
                 }
@@ -572,6 +606,7 @@ namespace UnityPUBG.Scripts.Entities
             UseItem(selectedItem);
         }
 
+        #region private 함수
         private void DropItem(Item dropItem)
         {
             var dropItemObject = ItemSpawnManager.Instance.SpawnItemObjectAt(dropItem, transform.position + new Vector3(0, 1.5f, 0));
@@ -595,12 +630,12 @@ namespace UnityPUBG.Scripts.Entities
             switch (selectedItem.Data)
             {
                 case ConsumableData consumable:
-                    if (tryConsumeItemCorutine != null)
+                    if (tryConsumeItemCoroutine != null)
                     {
                         Debug.LogWarning("Interrupt");
-                        StopCoroutine(tryConsumeItemCorutine);
+                        StopCoroutine(tryConsumeItemCoroutine);
                     }
-                    tryConsumeItemCorutine = StartCoroutine(TryConsumeItem(selectedItem));
+                    tryConsumeItemCoroutine = StartCoroutine(TryConsumeItem(selectedItem));
                     break;
 
                 case WeaponData weapon:
@@ -656,7 +691,7 @@ namespace UnityPUBG.Scripts.Entities
             // 아이템 사용
             ConsumeItem(consumableItem);
 
-            tryConsumeItemCorutine = null;
+            tryConsumeItemCoroutine = null;
         }
 
         private bool IsEffectable(ConsumableData consumableData)
@@ -721,7 +756,6 @@ namespace UnityPUBG.Scripts.Entities
         }
         #endregion
 
-        #region private 함수
         // 테스트 전용
         private void MeleeAttackTest(DamageType damageType)
         {
@@ -780,7 +814,7 @@ namespace UnityPUBG.Scripts.Entities
         // TODO: Cast Delay 구현
         private void RangeAttack(Vector3 attackDirection)
         {
-            var rangeWeaponData = EquipedWeapon.Data as RangeWeaponData;
+            var rangeWeaponData = EquipedPrimaryWeapon.Data as RangeWeaponData;
             var requireAmmoData = rangeWeaponData.RequireAmmo;
             if (requireAmmoData == null)
             {
@@ -811,11 +845,12 @@ namespace UnityPUBG.Scripts.Entities
             projectileBase.Fire();
         }
 
-        private void SwitchWeaponModel()
+        // Renamed: SwitchWeaponModel -> UpdatePrimaryWeaponModel
+        private void UpdatePrimaryWeaponModel()
         {
-            if (EquipedWeapon.IsStackEmpty)
+            if (EquipedPrimaryWeapon.IsStackEmpty)
             {
-                Debug.LogError("무기 스택이 0입니다.");
+                //Debug.LogError("장착하고 있는 무기가 없습니다");
                 return;
             }
 
@@ -823,7 +858,6 @@ namespace UnityPUBG.Scripts.Entities
             if (meleeWeaponPosition.childCount > 0)
             {
                 int childCount = meleeWeaponPosition.childCount;
-
                 for (int i = 0; i < childCount; i++)
                 {
                     Destroy(meleeWeaponPosition.GetChild(0).gameObject);
@@ -833,31 +867,30 @@ namespace UnityPUBG.Scripts.Entities
             if (rangeWeaponPosition.childCount > 0)
             {
                 int childCount = rangeWeaponPosition.childCount;
-
                 for (int i = 0; i < childCount; i++)
                 {
                     Destroy(rangeWeaponPosition.GetChild(0).gameObject);
                 }
             }
 
-            GameObject switchWeaponModel = null;
+            GameObject primaryWeaponModel;
             //교체할 무기 모델 생성
-            if (EquipedWeapon.Data is MeleeWeaponData)
+            if (EquipedPrimaryWeapon.Data is MeleeWeaponData)
             {
-                switchWeaponModel = Instantiate(EquipedWeapon.Data.Model, meleeWeaponPosition);
+                primaryWeaponModel = Instantiate(EquipedPrimaryWeapon.Data.Model, meleeWeaponPosition);
             }
-            else if (EquipedWeapon.Data is RangeWeaponData)
+            else if (EquipedPrimaryWeapon.Data is RangeWeaponData)
             {
-                switchWeaponModel = Instantiate(EquipedWeapon.Data.Model, rangeWeaponPosition);
+                primaryWeaponModel = Instantiate(EquipedPrimaryWeapon.Data.Model, rangeWeaponPosition);
             }
             else
             {
-                Debug.LogError("무기가 아닙니다.");
+                Debug.LogError($"무기가 아닙니다, {EquipedPrimaryWeapon.Data.GetType().Name}");
                 return;
             }
 
-            switchWeaponModel.transform.localPosition = Vector3.zero;
-            switchWeaponModel.transform.localRotation = Quaternion.identity;
+            primaryWeaponModel.transform.localPosition = Vector3.zero;
+            primaryWeaponModel.transform.localRotation = Quaternion.identity;
         }
 
         //원거리 애니메이션 재생 중 캐릭터의 바라보는 방향 return
@@ -869,7 +902,6 @@ namespace UnityPUBG.Scripts.Entities
 
             return new Vector2(vector3Direction.x, vector3Direction.z);
         }
-        #endregion
 
         //원거리 공격 재생
         private IEnumerator PlayRangeAttackAnimation()
@@ -900,5 +932,6 @@ namespace UnityPUBG.Scripts.Entities
                 }
             }
         }
+        #endregion
     }
 }

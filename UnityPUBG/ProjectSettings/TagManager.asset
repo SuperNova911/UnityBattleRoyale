@@ -11,6 +11,8 @@ TagManager:
   - Projectile
   - MyPlayer
   - Enemy
+  - MyWeapon
+  - EnemyWeapon
   layers:
   - Default
   - TransparentFX

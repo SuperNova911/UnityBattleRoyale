@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3319570}
   - component: {fileID: 2396358}
   - component: {fileID: 8890984077596061122}
+  - component: {fileID: 4047009957473210740}
   m_Layer: 0
   m_Name: sword2h21_green
   m_TagString: Untagged
@@ -93,3 +94,15 @@ CapsuleCollider:
   m_Height: 0.52978134
   m_Direction: 1
   m_Center: {x: -0.009524703, y: 0.38033262, z: -0.0013018647}
+--- !u!114 &4047009957473210740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f278478e63b7a714ea3d11cbd671aea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

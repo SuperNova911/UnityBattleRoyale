@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3316010}
   - component: {fileID: 2347216}
   - component: {fileID: 4094595417621232600}
+  - component: {fileID: -956971486484899076}
   m_Layer: 0
   m_Name: sword2h18_yellow
   m_TagString: Untagged
@@ -93,3 +94,15 @@ CapsuleCollider:
   m_Height: 0.53520024
   m_Direction: 1
   m_Center: {x: 0.018035408, y: 0.3788406, z: -3.3385232e-15}
+--- !u!114 &-956971486484899076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 186464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f278478e63b7a714ea3d11cbd671aea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

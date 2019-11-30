@@ -13,6 +13,7 @@ namespace UnityPUBG.Scripts.UI
         /// 퀵슬롯 인덱스
         /// </summary>
         public int quickSlotIndex;
+        public Button actionButton;
         /// <summary>
         /// 빈 슬롯 이미지
         /// </summary>
@@ -20,6 +21,11 @@ namespace UnityPUBG.Scripts.UI
         public Sprite defaultSlotSprite;
 
         #region Unity 콜백
+        private void Awake()
+        {
+            actionButton.onClick.AddListener(() => Button_OnClick());
+        }
+
         private void Start()
         {
             quickSlotIndex = transform.GetSiblingIndex();

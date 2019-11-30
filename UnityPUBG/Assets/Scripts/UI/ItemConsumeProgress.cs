@@ -12,11 +12,17 @@ namespace UnityPUBG.Scripts.UI
 {
     public class ItemConsumeProgress : MonoBehaviour
     {
+        public Button interruptButton;
         public Image itemIcon;
         public TMP_Text itemName;
         public Slider progressSlider;
         public Image progressSliderFill;
         public TMP_Text remainTimeText;
+
+        private void Awake()
+        {
+            interruptButton.onClick.AddListener(() => InterruptProgress());
+        }
 
         public void InitializeProgress(ConsumableData consumableData)
         {
@@ -38,6 +44,15 @@ namespace UnityPUBG.Scripts.UI
         public void Clear()
         {
             gameObject.SetActive(false);
+        }
+
+        private void InterruptProgress()
+        {
+            var targetPlayer = EntityManager.Instance.MyPlayer;
+            if (targetPlayer != null)
+            {
+                targetPlayer.InterruptItemUse();
+            }
         }
     }
 }

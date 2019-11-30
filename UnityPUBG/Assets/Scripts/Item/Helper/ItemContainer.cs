@@ -74,8 +74,34 @@ namespace UnityPUBG.Scripts.Items
             }
 
             OnContainerUpdate?.Invoke(this, EventArgs.Empty);
-
             return itemToAdd;
+        }
+
+        public Item FillItem(Item itemToFill)
+        {
+            if (itemToFill == null)
+            {
+                Debug.LogError("null인 아이템은 컨테이너에 넣을 수 없습니다");
+                return itemToFill;
+            }
+
+            if (itemToFill.IsStackEmpty)
+            {
+                Debug.LogWarning($"비어있는 아이템은 컨테이너에 넣을 수 없습니다, {nameof(itemToFill.Data.ItemName)}: {itemToFill.Data.ItemName}");
+                return itemToFill;
+            }
+
+            foreach (var targetItem in container.Where(e => e.Data.ItemName == itemToFill.Data.ItemName && e.IsStackFull == false))
+            {
+                itemToFill = targetItem.MergeStack(itemToFill);
+                if (itemToFill.IsStackEmpty)
+                {
+                    break;
+                }
+            }
+
+            OnContainerUpdate?.Invoke(this, EventArgs.Empty);
+            return itemToFill;
         }
 
         /// <summary>

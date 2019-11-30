@@ -25,11 +25,6 @@ namespace UnityPUBG.Scripts.UI
         {
             actionButton.onClick.AddListener(() => Button_OnClick());
         }
-
-        private void Start()
-        {
-            quickSlotIndex = transform.GetSiblingIndex();
-        }
         #endregion
 
         /// <summary>
@@ -37,8 +32,8 @@ namespace UnityPUBG.Scripts.UI
         /// </summary>
         public void UpdateQuickItemSlot()
         {
-            Item quickSlotItem = EntityManager.Instance.MyPlayer.ItemQuickBar[quickSlotIndex];
-            slotImage.sprite = (quickSlotItem.IsStackEmpty == false) ? quickSlotItem.Data.Icon : defaultSlotSprite;
+            ItemData quickSlotItemData = EntityManager.Instance.MyPlayer.ItemQuickBar[quickSlotIndex];
+            slotImage.sprite = (quickSlotItemData != null) ? quickSlotItemData.Icon : defaultSlotSprite;
         }
 
         public void Button_OnClick()

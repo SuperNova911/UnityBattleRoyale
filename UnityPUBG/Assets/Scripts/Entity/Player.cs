@@ -10,7 +10,6 @@ using UnityEngine.UI;
 using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
 using UnityPUBG.Scripts.UI;
-using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Entities
 {
@@ -86,7 +85,7 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         public ItemContainer ItemContainer { get; private set; }
-        public Item[] ItemQuickBar { get; private set; }
+        public ItemData[] ItemQuickBar { get; private set; }
         public Item EquipedArmor { get; private set; }
         public Item EquipedBackpack { get; private set; }
         public Item EquipedPrimaryWeapon
@@ -139,7 +138,7 @@ namespace UnityPUBG.Scripts.Entities
 
             CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
-            ItemQuickBar = new Item[quickBarCapacity];
+            ItemQuickBar = new ItemData[quickBarCapacity];
             myAnimator = GetComponent<Animator>();
 
             //장착하지 않았으므로 emptyItem으로 초기화
@@ -150,7 +149,7 @@ namespace UnityPUBG.Scripts.Entities
 
             for (int slot = 0; slot < ItemQuickBar.Length; slot++)
             {
-                ItemQuickBar[slot] = Item.EmptyItem;
+                ItemQuickBar[slot] = null;
             }
 
             if (IsMyPlayer)
@@ -495,7 +494,7 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        public void LootItem(ItemObject lootItemObject)
+        public void LootItem(ItemObject lootItemObject, bool fillOnly = false)
         {
             if (lootItemObject.Item.IsStackEmpty)
             {
@@ -523,7 +522,7 @@ namespace UnityPUBG.Scripts.Entities
             else
             {
                 int previousStack = lootItemObject.Item.CurrentStack;
-                var remainItem = ItemContainer.AddItem(lootItemObject.Item);
+                Item remainItem = fillOnly ? ItemContainer.FillItem(lootItemObject.Item) : ItemContainer.AddItem(lootItemObject.Item);
 
                 if (previousStack != remainItem.CurrentStack)
                 {
@@ -573,9 +572,9 @@ namespace UnityPUBG.Scripts.Entities
             DropItem(dropItem);
         }
 
-        public void AssignItemToQuickBar(int slot, Item item)
+        public void AssignItemToQuickBar(int slot, Item itemToAssign)
         {
-            if (item == null || item.IsStackEmpty)
+            if (itemToAssign == null || itemToAssign.IsStackEmpty)
             {
                 Debug.LogError($"null이거나 비어있는 {nameof(Item)}은 등록할 수 없습니다");
                 return;
@@ -587,17 +586,17 @@ namespace UnityPUBG.Scripts.Entities
                 slot = Mathf.Clamp(slot, 0, quickBarCapacity - 1);
             }
 
-            //퀵슬롯에 동일한 아이템이 들어가있지 않도록 함
+            //퀵슬롯에 동일한 아이템 종류가 들어가있지 않도록 함
             for (int i = 0; i < quickBarCapacity; i++)
             {
-                if (ItemQuickBar[i] == item)
+                if (ItemQuickBar[i] != null && ItemQuickBar[i].ItemName.Equals(itemToAssign.Data.ItemName))
                 {
-                    ItemQuickBar[i] = Item.EmptyItem;
+                    ItemQuickBar[i] = null;
                     break;
                 }
             }
 
-            ItemQuickBar[slot] = item;
+            ItemQuickBar[slot] = itemToAssign.Data;
 
             UIManager.Instance.UpdateInventorySlots();
             UIManager.Instance.UpdateQuickSlots();
@@ -611,13 +610,13 @@ namespace UnityPUBG.Scripts.Entities
                 slot = Mathf.Clamp(slot, 0, quickBarCapacity - 1);
             }
 
-            var selectedItem = ItemQuickBar[slot];
-            if (selectedItem.IsStackEmpty)
+            var selectedItemData = ItemQuickBar[slot];
+            if (selectedItemData == null)
             {
                 return;
             }
 
-            UseItem(selectedItem);
+            UseItem(selectedItemData);
         }
 
         public void UseItemAtItemContainer(int slot)
@@ -634,7 +633,7 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            UseItem(selectedItem);
+            UseItem(selectedItem.Data);
         }
 
         public void InterruptItemUse()
@@ -668,13 +667,13 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        private void UseItem(Item selectedItem)
+        private void UseItem(ItemData itemDataToUse)
         {
-            switch (selectedItem.Data)
+            switch (itemDataToUse)
             {
                 case ConsumableData consumable:
                     InterruptItemUse();
-                    tryConsumeItemCoroutine = StartCoroutine(TryConsumeItem(selectedItem));
+                    tryConsumeItemCoroutine = StartCoroutine(TryConsumeItem(consumable));
                     break;
                 default:
                     // TODO: 사용할 수 없는 아이템 사운드
@@ -683,22 +682,13 @@ namespace UnityPUBG.Scripts.Entities
         }
 
         // TODO: 아이템 사용 시전 중단 기능
-        private IEnumerator TryConsumeItem(Item consumableItem)
+        private IEnumerator TryConsumeItem(ConsumableData consumableData)
         {
-            if (consumableItem.IsStackEmpty)
+            if (consumableData == null)
             {
-                // TODO: 사용할 수 없는 아이템 사운드 재생
-                Debug.LogWarning($"빈 아이템을 사용하려고 하고 있습니다");
+                Debug.LogError($"사용하려고 하는 {nameof(ConsumableData)}가 null입니다");
                 yield break;
             }
-
-            if ((consumableItem.Data is ConsumableData) == false)
-            {
-                // TODO: 사용할 수 없는 아이템 사운드 재생
-                Debug.LogError($"사용하려는 아이템이 {nameof(ConsumableData)}를 상속하지 않습니다, {nameof(consumableItem.Data.ItemName)}: {consumableItem.Data.ItemName}");
-                yield break;
-            }
-            var consumableData = consumableItem.Data as ConsumableData;
 
             // 아이템 사용이 의미 있는지 검사
             if (IsEffectable(consumableData) == false)
@@ -727,7 +717,7 @@ namespace UnityPUBG.Scripts.Entities
             IsConsuming = false;
 
             // 아이템 사용
-            ConsumeItem(consumableItem);
+            ConsumeItem(consumableData);
 
             tryConsumeItemCoroutine = null;
         }
@@ -754,16 +744,15 @@ namespace UnityPUBG.Scripts.Entities
             return false;
         }
 
-        private void ConsumeItem(Item consumableItem)
+        private void ConsumeItem(ConsumableData consumableData)
         {
-            if (consumableItem.IsStackEmpty)
+            if (consumableData == null)
             {
-                Debug.LogWarning($"사용하려고 하는 아이템이 비어 있습니다");
+                Debug.LogError($"사용하려고 하는 {nameof(ConsumableData)}가 null입니다");
                 return;
             }
 
             // 아이템 사용이 의미 있는지 검사
-            var consumableData = consumableItem.Data as ConsumableData;
             if (IsEffectable(consumableData) == false)
             {
                 // TODO: 사용할 수 없는 아이템 사운드 재생, UI 텍스트 안내
@@ -788,7 +777,7 @@ namespace UnityPUBG.Scripts.Entities
                     CurrentShield += healingKit.ShieldRestoreAmount;
                     break;
                 default:
-                    Debug.LogWarning($"관리되지 않고 있는 {nameof(ItemData)}입니다, {consumableItem.Data.GetType().Name}");
+                    Debug.LogWarning($"관리되지 않고 있는 {nameof(ConsumableData)}입니다, {consumableData.GetType().Name}");
                     return;
             }
         }

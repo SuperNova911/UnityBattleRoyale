@@ -173,7 +173,7 @@ namespace UnityPUBG.Scripts.Entities
                     // 자동 루팅 대상인지 검사
                     if ((collideItemObject.transform.position - transform.position).sqrMagnitude <= autoLootSquaredRadius && IsAutoLootTarget(collideItemObject.Item))
                     {
-                        player.LootItem(collideItemObject);
+                        player.LootItem(collideItemObject, true);
                     }
                     else
                     {

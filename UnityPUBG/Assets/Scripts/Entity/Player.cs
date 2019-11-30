@@ -393,6 +393,8 @@ namespace UnityPUBG.Scripts.Entities
                         previousAnimationDirection = DirectionOnRangeAnimation(direction);
                     }
                     RotateDirection = previousAnimationDirection;
+                    //공격 방향도 맞춰줌
+                    rangeAttackDirection = direction.normalized;
                 }
             }
         }

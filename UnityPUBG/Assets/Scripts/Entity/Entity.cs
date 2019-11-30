@@ -32,8 +32,16 @@ namespace UnityPUBG.Scripts.Entities
             get { return currentHealth; }
             protected set
             {
+                float prevHealth = currentHealth;
                 currentHealth = value;
                 currentHealth = Mathf.Clamp(currentHealth, 0f, MaximumHealth);
+
+                float damagedAmount = prevHealth - currentHealth;
+
+                if (damagedAmount > 0)
+                {
+                    UI.FloatingTextDrawer.Instance.DrawDamageText(transform, damagedAmount);
+                }
 
                 IsDead = currentHealth <= 0;
                 OnCurrentHealthUpdate?.Invoke(this, currentHealth);

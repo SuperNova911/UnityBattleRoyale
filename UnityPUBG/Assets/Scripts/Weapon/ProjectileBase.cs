@@ -18,6 +18,8 @@ namespace UnityPUBG.Scripts
         private SphereCollider projectileSphereCollider;
         private Rigidbody projectileRigidbody;
 
+        private readonly static string myPlayerTag = "MyPlayer";
+
         public bool isFired { get; private set; }
 
         #region 유니티 메시지
@@ -40,7 +42,7 @@ namespace UnityPUBG.Scripts
         private void OnTriggerEnter(Collider other)
         {
             var damageableEntity = other.gameObject.GetComponent<IDamageable>();
-            if (damageableEntity != null)
+            if (damageableEntity != null /* && other.tag != myPlayerTag */)
             {
                 damageableEntity.OnTakeDamage(projectileInfo.damage, projectileInfo.damageType);
                 SaveToPool();

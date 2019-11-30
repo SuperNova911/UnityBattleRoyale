@@ -82,10 +82,21 @@ namespace UnityPUBG.Scripts.Entities
             get { return currentShield; }
             set
             {
+                float prevShield = currentShield;
                 currentShield = value;
                 currentShield = Mathf.Clamp(currentShield, 0f, MaximumShield);
 
-                OnCurrentShieldUpdate?.Invoke(this, currentShield);
+                float damagedAmount = prevShield - currentShield;
+
+                if (damagedAmount > 0)
+                {
+                    FloatingTextDrawer.Instance.DrawDamageText(transform, damagedAmount);
+                }
+
+                if (IsMyPlayer)
+                {
+                    OnCurrentShieldUpdate?.Invoke(this, currentShield);
+                }
             }
         }
         public ItemContainer ItemContainer { get; private set; }
@@ -283,9 +294,9 @@ namespace UnityPUBG.Scripts.Entities
         {
             if (IsMyPlayer)
             {
-                float leftDamage = CurrentShield - damage;
+                float leftDamage = damage - CurrentShield;
 
-                if(leftDamage>0)
+                if (leftDamage >= 0)
                 {
                     CurrentShield = 0;
                 }

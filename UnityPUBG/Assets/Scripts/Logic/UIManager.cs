@@ -48,6 +48,7 @@ namespace UnityPUBG.Scripts.Logic
         public Button playerQuickLootButton;
         [Space]
         public ItemConsumeProgress itemConsumeProgress;
+        public InventoryPreview inventoryPreview;
         [Space]
         public List<ItemSlot> inventoryItemSlots = new List<ItemSlot>();
         public List<EquipItemSlot> inventoryEquipItemSlots = new List<EquipItemSlot>();
@@ -292,9 +293,15 @@ namespace UnityPUBG.Scripts.Logic
 
         private void MyPlayer_OnContainerUpdate(object sender, EventArgs e)
         {
+            var targetItemContainer = sender as ItemContainer;
+
             if (inventoryUIElements.activeSelf)
             {
                 UpdateInventorySlots();
+            }
+            else
+            {
+                inventoryPreview.UpdatePreview(targetItemContainer.Count, targetItemContainer.Capacity);
             }
 
             UpdateQuickSlots();

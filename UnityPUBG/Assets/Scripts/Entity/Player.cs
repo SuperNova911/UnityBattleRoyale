@@ -191,7 +191,11 @@ namespace UnityPUBG.Scripts.Entities
         {
             base.Start();
 
-            OnDie += OnDieAnimation;
+            if(IsMyPlayer)
+            {
+                OnDie += OnDieAnimation;
+                OnDie += OnDieDrops;
+            }
         }
 
         protected override void Update()
@@ -997,6 +1001,21 @@ namespace UnityPUBG.Scripts.Entities
         private void OnDieAnimation(object sender, EventArgs e)
         {
             myAnimator.SetTrigger(isDie);
+        }
+
+        //사망시 아이템 모두 떨굼
+        private void OnDieDrops(object sender, EventArgs e)
+        {
+            DropPrimaryWeapon();
+            DropSecondaryWeapon();
+            DropBackpack();
+            DropArmor();
+
+            //컨테이너에 든 아이템을 모두 떨굼
+            while(!ItemContainer.IsEmpty)
+            {
+                DropItemsAtSlot(0, ItemContainer.GetItemAt(0).CurrentStack);
+            }
         }
 
         //원거리 공격 재생

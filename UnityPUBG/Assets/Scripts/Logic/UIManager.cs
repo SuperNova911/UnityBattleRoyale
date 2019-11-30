@@ -41,6 +41,7 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text roundSubMessage;
         [Space]
         public TMP_Text killMessage;
+        public TMP_Text remainAmmoText;
         public TMP_Text survivePlayersText;
         [Space]
         public ItemConsumeProgress itemConsumeProgress;
@@ -141,18 +142,6 @@ namespace UnityPUBG.Scripts.Logic
             }
         }
 
-        private void ItemContainer_OnContainerUpdate(object sender, EventArgs e)
-        {
-            UpdateInventorySlots();
-            UpdateQuickSlots();
-        }
-
-        private void ItemContainer_OnContainerResize(object sender, EventArgs e)
-        {
-            UpdateInventoryItemSlotSize((sender as ItemContainer).Capacity);
-            UpdateQuickSlots();
-        }
-
         public void UpdateInventorySlots()
         {
             for (int index = 0; index < inventoryItemSlots.Count; index++)
@@ -216,23 +205,15 @@ namespace UnityPUBG.Scripts.Logic
             playerShieldText.text = Mathf.RoundToInt(targetPlayer.CurrentShield).ToString();
 
             // 이벤트 구독
-            targetPlayer.OnCurrentHealthUpdate += UpdatePlayerHealthSlider;
-            targetPlayer.OnCurrentShieldUpdate += UpdatePlayerShieldSlider;
             targetPlayer.OnDie += MyPlayer_OnDie;
-            targetPlayer.ItemContainer.OnContainerUpdate += ItemContainer_OnContainerUpdate;
-            targetPlayer.ItemContainer.OnContainerResize += ItemContainer_OnContainerResize;
+            targetPlayer.OnCurrentHealthUpdate += MyPlayer_OnHealthUpdate;
+            targetPlayer.OnCurrentShieldUpdate += MyPlayer_OnShieldUpdate;
+            targetPlayer.OnPrimaryWeaponChange += MyPlayer_OnPrimaryWeaponChange;
+            targetPlayer.ItemContainer.OnContainerUpdate += MyPlayer_OnContainerUpdate;
+            targetPlayer.ItemContainer.OnContainerResize += MyPlayer_OnContainerResize;
 
             UpdateInventoryItemSlotSize(targetPlayer.ItemContainer.Capacity);
             UpdateInventorySlots();
-        }
-
-        private void MyPlayer_OnDie(object sender, EventArgs e)
-        {
-            playerMovementJoystick.OnJoystickDrag -= PlayerMovementJoystick_OnJoystickDrag;
-            playerMovementJoystick.OnJoystickRelease -= PlayerMovementJoystick_OnJoystickRelease;
-            playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickDrag;
-            playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickRelease;
-            playerWeaponSwapButton.onClick.RemoveAllListeners();
         }
 
         private void EntityManager_OnPlayerSpawn(object sender, Player spawnedPlayer)
@@ -273,16 +254,54 @@ namespace UnityPUBG.Scripts.Logic
             EntityManager.Instance.MyPlayer.AttackTo(direction);
         }
 
-        private void UpdatePlayerHealthSlider(object sender, float value)
+        private void MyPlayer_OnDie(object sender, EventArgs e)
+        {
+            playerMovementJoystick.OnJoystickDrag -= PlayerMovementJoystick_OnJoystickDrag;
+            playerMovementJoystick.OnJoystickRelease -= PlayerMovementJoystick_OnJoystickRelease;
+            playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickDrag;
+            playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickRelease;
+            playerWeaponSwapButton.onClick.RemoveAllListeners();
+
+            var myPlayer = sender as Player;
+            myPlayer.OnCurrentHealthUpdate -= MyPlayer_OnHealthUpdate;
+            myPlayer.OnCurrentShieldUpdate -= MyPlayer_OnShieldUpdate;
+            myPlayer.ItemContainer.OnContainerUpdate -= MyPlayer_OnContainerUpdate;
+            myPlayer.ItemContainer.OnContainerUpdate -= MyPlayer_OnContainerUpdate;
+            myPlayer.ItemContainer.OnContainerResize -= MyPlayer_OnContainerResize;
+        }
+
+        private void MyPlayer_OnHealthUpdate(object sender, float value)
         {
             playerHealthSlider.value = value;
             playerHealthText.text = Mathf.CeilToInt(value).ToString();
         }
 
-        private void UpdatePlayerShieldSlider(object sender, float value)
+        private void MyPlayer_OnShieldUpdate(object sender, float value)
         {
             playerShieldSlider.value = value;
             playerShieldText.text = Mathf.CeilToInt(value).ToString();
+        }
+
+        private void MyPlayer_OnPrimaryWeaponChange(object sender, EventArgs e)
+        {
+            UpdateRemainAmmoText();
+        }
+
+        private void MyPlayer_OnContainerUpdate(object sender, EventArgs e)
+        {
+            if (inventoryUIElements.activeSelf)
+            {
+                UpdateInventorySlots();
+            }
+
+            UpdateQuickSlots();
+            UpdateRemainAmmoText();
+        }
+
+        private void MyPlayer_OnContainerResize(object sender, EventArgs e)
+        {
+            UpdateInventoryItemSlotSize((sender as ItemContainer).Capacity);
+            UpdateQuickSlots();
         }
 
         private void RingSystem_OnRoundStart(object sender, RingSystem.RoundData roundData)
@@ -410,6 +429,42 @@ namespace UnityPUBG.Scripts.Logic
             roundMessage.gameObject.SetActive(false);
             roundSubMessage.gameObject.SetActive(false);
             yield return null;
+        }
+
+        private void UpdateRemainAmmoText()
+        {
+            Player targetPlayer = EntityManager.Instance.MyPlayer;
+            if (targetPlayer == null)
+            {
+                remainAmmoText.enabled = false;
+                return;
+            }
+
+            Item equipedWeapon = targetPlayer.EquipedPrimaryWeapon;
+            if (equipedWeapon.IsStackEmpty || (equipedWeapon.Data is RangeWeaponData) == false)
+            {
+                remainAmmoText.enabled = false;
+                return;
+            }
+
+            AmmoData requireAmmoData = (equipedWeapon.Data as RangeWeaponData).RequireAmmo;
+            List<Item> remainAmmoItems = targetPlayer.ItemContainer.FindAllMatchItem(requireAmmoData.ItemName);
+            int remainAmmoCount = remainAmmoItems.Sum(e => e.CurrentStack);
+
+            if (remainAmmoCount > 5)
+            {
+                remainAmmoText.text = $"남은 화살: {remainAmmoCount}";
+            }
+            else if (remainAmmoCount > 0)
+            {
+                remainAmmoText.text = $"남은 화살: <color=yellow>{remainAmmoCount}</color>";
+            }
+            else
+            {
+                remainAmmoText.text = $"남은 화살: <color=red>{remainAmmoCount}</color>";
+            }
+
+            remainAmmoText.enabled = true;
         }
 
         private void UpdateSurvivePlayers()

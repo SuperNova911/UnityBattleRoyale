@@ -172,6 +172,25 @@ namespace UnityPUBG.Scripts.Items
         }
 
         /// <summary>
+        /// 입력으로 받은 ItemName과 일치하는 컨테이너의 모든 아이템을 반환
+        /// </summary>
+        /// <param name="itemName">검색할 ItemName</param>
+        /// <returns>일치하는 아이템 리스트</returns>
+        public List<Item> FindAllMatchItem(string itemName)
+        {
+            var matchItems = new List<Item>();
+            foreach (var item in container)
+            {
+                if (item.IsStackEmpty == false && item.Data.ItemName.Equals(itemName))
+                {
+                    matchItems.Add(item);
+                }
+            }
+
+            return matchItems;
+        }
+
+        /// <summary>
         /// 아이템 데이터 이름과 일치하는 아이템을 뒤에서부터 찾아서 반환, 일치하는 아이템이 없으면 EmptyItem 반환 
         /// </summary>
         /// <param name="itemName">검색 할 아이템 데이터의 아이템 이름</param>

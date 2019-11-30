@@ -28233,6 +28233,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc9a70325f5396446aab164ea6854ceb, type: 3}
+--- !u!114 &1510249906 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8738610875201056115, guid: 17b02e41963c46d4284ecd38c96e7565,
+    type: 3}
+  m_PrefabInstance: {fileID: 4554568196299936863}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1510500784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30806,7 +30818,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.8407e-41, y: 1.02e-43, z: 1.5784e-41, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 3.3915175e-32}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -41869,6 +41881,11 @@ PrefabInstance:
       propertyPath: floatingUIHolder
       value: 
       objectReference: {fileID: 2129425603}
+    - target: {fileID: 9101536519121333136, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: remainAmmoText
+      value: 
+      objectReference: {fileID: 1510249906}
     - target: {fileID: 9173340600907604448, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -163,6 +163,7 @@ namespace UnityPUBG.Scripts.Entities
 
             if (IsMyPlayer)
             {
+                myItemLooter = GetComponentInChildren<PlayerItemLooter>();
                 EntityManager.Instance.MyPlayer = this;
                 gameObject.tag = "MyPlayer";
                 //meleeWeaponPosition.gameObject.tag = myWeaponTag;
@@ -587,6 +588,15 @@ namespace UnityPUBG.Scripts.Entities
                         lootItemObject.NotifyUpdateCurrentStack();
                     }
                 }
+            }
+        }
+
+        public void LootClosestItem()
+        {
+            ItemObject closestItemObject = myItemLooter.FindClosestLootableItemObject();
+            if (closestItemObject != null)
+            {
+                LootItem(closestItemObject);
             }
         }
 

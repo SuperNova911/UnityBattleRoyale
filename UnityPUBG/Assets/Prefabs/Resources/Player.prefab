@@ -1567,16 +1567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 9
-    SynchronizeType: 0
-    Name: MeleeAttack
-  - Type: 4
-    SynchronizeType: 0
-    Name: IsRun
-  - Type: 9
-    SynchronizeType: 0
-    Name: RangeAttack
+  m_SynchronizeParameters: []
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

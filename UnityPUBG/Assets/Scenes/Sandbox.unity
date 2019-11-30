@@ -39967,6 +39967,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757b52b4ac559c44bb557aaf88695eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2129425603 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5312322737846059522, guid: 17b02e41963c46d4284ecd38c96e7565,
+    type: 3}
+  m_PrefabInstance: {fileID: 4554568196299936863}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2131709296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40550,7 +40556,7 @@ PrefabInstance:
     - target: {fileID: 4554568196192701402, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4554568196192701402, guid: 17b02e41963c46d4284ecd38c96e7565,
         type: 3}
@@ -43791,6 +43797,11 @@ PrefabInstance:
       propertyPath: playerWeaponSwapButton
       value: 
       objectReference: {fileID: 1534118285}
+    - target: {fileID: 9101536519121333136, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: floatingUIHolder
+      value: 
+      objectReference: {fileID: 2129425603}
     - target: {fileID: 9173340600907604448, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}
       propertyPath: m_LocalPosition.x

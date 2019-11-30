@@ -33,7 +33,7 @@ namespace UnityPUBG.Scripts.Logic
             }
         }
 
-        public void InitializeUIObjectPool(GameObject prefab, Canvas parentCanvas, int initialPoolSize)
+        public void InitializeUIObjectPool(GameObject prefab, RectTransform parentRect, int initialPoolSize)
         {
             int key = prefab.GetInstanceID();
             if (uiObjectPools.ContainsKey(key))
@@ -42,12 +42,19 @@ namespace UnityPUBG.Scripts.Logic
                 return;
             }
 
-            parentDictionary.Add(key, parentCanvas.transform);
+            var poolHolder = new GameObject($"{prefab.name} pool").AddComponent<RectTransform>();
+            poolHolder.transform.SetParent(parentRect);
+            poolHolder.anchorMin = Vector2.zero;
+            poolHolder.anchorMax = Vector2.one;
+            poolHolder.offsetMin = Vector2.zero;
+            poolHolder.offsetMax = Vector2.zero;
+
+            parentDictionary.Add(key, poolHolder.transform);
 
             uiObjectPools.Add(key, new Queue<PoolObject>());
             for (int i = 0; i < initialPoolSize; i++)
             {
-                var newPoolObject = Instantiate(prefab, parentCanvas.transform).GetComponent<PoolObject>();
+                var newPoolObject = Instantiate(prefab, poolHolder.transform).GetComponent<PoolObject>();
                 newPoolObject.gameObject.SetActive(false);
                 newPoolObject.ObjectPoolKey = key;
                 uiObjectPools[key].Enqueue(newPoolObject);

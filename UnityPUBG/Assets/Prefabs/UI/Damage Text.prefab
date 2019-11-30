@@ -69,11 +69,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91cb6c096f5dda8478e0fb95053abff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textAnimator: {fileID: 0}
   text: {fileID: 0}
+  animationDuration: 1
   floatingOffset: {x: 0, y: 2.2, z: 0}
-  duration: 1
-  damageReceiver: {fileID: 0}
 --- !u!1 &8184257200605469213
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -166,7 +164,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 23.05
+  m_fontSize: 63.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

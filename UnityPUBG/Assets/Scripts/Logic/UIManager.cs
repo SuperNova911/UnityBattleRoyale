@@ -17,6 +17,7 @@ namespace UnityPUBG.Scripts.Logic
     public class UIManager : Singleton<UIManager>
     {
         public Canvas masterCanvas;
+        public RectTransform floatingUIHolder;
         public GameObject normalUIElements;
         public GameObject quickSlotUIElements;
         public GameObject inventoryUIElements;

@@ -62,6 +62,7 @@ namespace UnityPUBG.Scripts.Entities
         private Item equipedPrimaryWeapon;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
+        public event EventHandler OnPrimaryWeaponChange;
 
         public int MaximumShield
         {
@@ -89,6 +90,7 @@ namespace UnityPUBG.Scripts.Entities
             private set
             {
                 equipedPrimaryWeapon = value;
+                OnPrimaryWeaponChange?.Invoke(this, EventArgs.Empty);
                 UpdatePrimaryWeaponModel();
             }
         }

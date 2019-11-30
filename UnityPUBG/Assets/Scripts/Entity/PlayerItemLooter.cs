@@ -85,11 +85,7 @@ namespace UnityPUBG.Scripts.Entities
                     break;
 
                 case WeaponData weaponData:
-                    if (player.EquipedPrimaryWeapon.IsStackEmpty)
-                    {
-                        return true;
-                    }
-                    else if (player.EquipedPrimaryWeapon.Data.GetType().Equals(weaponData.GetType()) && player.EquipedPrimaryWeapon.Data.Rarity < weaponData.Rarity)
+                    if (player.EquipedPrimaryWeapon.Data.GetType().Equals(weaponData.GetType()) && player.EquipedPrimaryWeapon.Data.Rarity < weaponData.Rarity)
                     {
                         return true;
                     }
@@ -99,6 +95,18 @@ namespace UnityPUBG.Scripts.Entities
                     if (player.EquipedPrimaryWeapon.Data is RangeWeaponData)
                     {
                         var requireAmmoName = (player.EquipedPrimaryWeapon.Data as RangeWeaponData).RequireAmmo.ItemName;
+                        if (requireAmmoName.Equals(ammoData.ItemName))
+                        {
+                            var sameAmmoAtConatainer = player.ItemContainer.TryGetItemFromLast(requireAmmoName);
+                            if (sameAmmoAtConatainer.IsStackEmpty || sameAmmoAtConatainer.IsStackFull == false)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    else if (player.EquipedSecondaryWeapon.Data is RangeWeaponData)
+                    {
+                        var requireAmmoName = (player.EquipedSecondaryWeapon.Data as RangeWeaponData).RequireAmmo.ItemName;
                         if (requireAmmoName.Equals(ammoData.ItemName))
                         {
                             var sameAmmoAtConatainer = player.ItemContainer.TryGetItemFromLast(requireAmmoName);

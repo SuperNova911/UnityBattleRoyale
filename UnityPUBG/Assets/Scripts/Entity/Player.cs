@@ -410,7 +410,12 @@ namespace UnityPUBG.Scripts.Entities
             if (EquipedPrimaryWeapon.IsStackEmpty)
             {
                 EquipedPrimaryWeapon = weaponItem;
-
+            }
+            else if (EquipedPrimaryWeapon.Data.GetType().Equals(weaponItem.Data.GetType()) && EquipedPrimaryWeapon.Data.Rarity < weaponItem.Data.Rarity)
+            {
+                // 상위 호환인 경우
+                DropPrimaryWeapon();
+                EquipedPrimaryWeapon = weaponItem;
             }
             else if (EquipedSecondaryWeapon.IsStackEmpty)
             {
@@ -487,14 +492,7 @@ namespace UnityPUBG.Scripts.Entities
             }
             else if (lootItemObject.Item.Data is WeaponData)
             {
-                if (EquipedPrimaryWeapon.IsStackEmpty || EquipedPrimaryWeapon.Data.Rarity < lootItemObject.Item.Data.Rarity)
-                {
-                    EquipWeapon(lootItemObject.Item);
-                }
-                else
-                {
-                    ItemContainer.AddItem(lootItemObject.Item);
-                }
+                EquipWeapon(lootItemObject.Item);
                 LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
                 lootItemObject.RequestDestroy();
             }
@@ -848,12 +846,6 @@ namespace UnityPUBG.Scripts.Entities
         // Renamed: SwitchWeaponModel -> UpdatePrimaryWeaponModel
         private void UpdatePrimaryWeaponModel()
         {
-            if (EquipedPrimaryWeapon.IsStackEmpty)
-            {
-                //Debug.LogError("장착하고 있는 무기가 없습니다");
-                return;
-            }
-
             //무기 모델이 있다면 제거
             if (meleeWeaponPosition.childCount > 0)
             {
@@ -871,6 +863,11 @@ namespace UnityPUBG.Scripts.Entities
                 {
                     Destroy(rangeWeaponPosition.GetChild(0).gameObject);
                 }
+            }
+
+            if (EquipedPrimaryWeapon.IsStackEmpty)
+            {
+                return;
             }
 
             GameObject primaryWeaponModel;

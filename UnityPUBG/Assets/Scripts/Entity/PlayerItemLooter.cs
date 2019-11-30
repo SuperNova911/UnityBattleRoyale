@@ -29,6 +29,17 @@ namespace UnityPUBG.Scripts.Entities
         private Collider[] collideObjects;
         private HashSet<ItemObject> currentLootableItemObjects = new HashSet<ItemObject>();
         private HashSet<ItemObject> lastLootableItemObjects = new HashSet<ItemObject>();
+        private bool hasLootableItems = false;
+
+        public bool HasLootableItems
+        {
+            get { return hasLootableItems; }
+            private set
+            {
+                hasLootableItems = value;
+                UIManager.Instance.playerQuickLootButton.interactable = value;
+            }
+        }
 
         #region 유니티 메시지
         private void Awake()
@@ -59,6 +70,19 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         #endregion
+
+        public ItemObject FindClosestLootableItemObject()
+        {
+            var lootableItems = lastLootableItemObjects.Where(e => e != null);
+            if (lootableItems.Count() == 0)
+            {
+                return null;
+            }
+
+            ItemObject closestItemObject = lootableItems.Aggregate((closest, next) => 
+                (closest.transform.position - transform.position).sqrMagnitude > (next.transform.position - transform.position).sqrMagnitude ? next : closest);
+            return closestItemObject;
+        }
 
         private bool IsAutoLootTarget(Item lootItem)
         {
@@ -170,6 +194,8 @@ namespace UnityPUBG.Scripts.Entities
                         }
                     }
                 }
+
+                HasLootableItems = currentLootableItemObjects.Count > 0;
 
                 // 루팅 범위 밖의 ItemObject가 가진 LootButton 제거
                 foreach (var item in lastLootableItemObjects)

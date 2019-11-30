@@ -44,9 +44,10 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text remainAmmoText;
         public TMP_Text survivePlayersText;
         [Space]
-        public ItemConsumeProgress itemConsumeProgress;
-        [Space]
         public Button playerWeaponSwapButton;
+        public Button playerQuickLootButton;
+        [Space]
+        public ItemConsumeProgress itemConsumeProgress;
         [Space]
         public List<ItemSlot> inventoryItemSlots = new List<ItemSlot>();
         public List<EquipItemSlot> inventoryEquipItemSlots = new List<EquipItemSlot>();
@@ -194,6 +195,7 @@ namespace UnityPUBG.Scripts.Logic
             playerAttackJoystick.OnJoystickDrag += PlayerAttackJoystick_OnJoystickDrag;
             playerAttackJoystick.OnJoystickRelease += PlayerAttackJoystick_OnJoystickRelease;
             playerWeaponSwapButton.onClick.AddListener(() => targetPlayer.SwapWeapon());
+            playerQuickLootButton.onClick.AddListener(() => targetPlayer.LootClosestItem());
 
             // UI 초기값 설정
             playerHealthSlider.maxValue = targetPlayer.MaximumHealth;
@@ -261,6 +263,7 @@ namespace UnityPUBG.Scripts.Logic
             playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickDrag;
             playerAttackJoystick.OnJoystickRelease -= PlayerAttackJoystick_OnJoystickRelease;
             playerWeaponSwapButton.onClick.RemoveAllListeners();
+            playerQuickLootButton.onClick.RemoveAllListeners();
 
             var myPlayer = sender as Player;
             myPlayer.OnCurrentHealthUpdate -= MyPlayer_OnHealthUpdate;

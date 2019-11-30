@@ -84,7 +84,8 @@ namespace UnityPUBG.Scripts.UI
 
                 for (int quickBarSlot = 0; quickBarSlot < targetPlayer.ItemQuickBar.Length; quickBarSlot++)
                 {
-                    if (itemAtSlot.IsStackEmpty == false && targetPlayer.ItemQuickBar[quickBarSlot] == itemAtSlot)
+                    ItemData itemDataAtQuickSlot = targetPlayer.ItemQuickBar[quickBarSlot];
+                    if (itemDataAtQuickSlot != null && itemDataAtQuickSlot.ItemName.Equals(itemAtSlot.Data.ItemName))
                     {
                         backgroundImage.sprite = quickSlotBackgroundSprite;
                         return;

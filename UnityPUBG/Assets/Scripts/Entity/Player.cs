@@ -15,7 +15,7 @@ using UnityPUBG.Scripts.Utilities;
 namespace UnityPUBG.Scripts.Entities
 {
     [RequireComponent(typeof(PhotonView))]
-    public class Player : Entity, IPunObservable
+    public class Player : Entity, IPunObservable, IDamageable
     {
         #region 유니티 인스펙터
         [Header("Player Settings")]
@@ -62,6 +62,9 @@ namespace UnityPUBG.Scripts.Entities
         private Vector3 rangeAttackDirection = Vector3.zero;
         private Vector2 previousAnimationDirection = Vector2.zero;
 
+        //private readonly string myWeaponTag = "MyWeapon";
+        //private readonly string enemyWeaponTag = "EnemyWeapon";
+
         private bool isConsuming = false;
         private Coroutine tryConsumeItemCoroutine = null;
         private Item equipedPrimaryWeapon;
@@ -101,6 +104,11 @@ namespace UnityPUBG.Scripts.Entities
         }
         public Item EquipedSecondaryWeapon { get; private set; }
         public Vehicle RidingVehicle { get; private set; }
+        public bool IsPlayingAttackAnimation
+        {
+            get { return isPlayingAttackAnimation; }
+            private set { isPlayingAttackAnimation = value; }
+        }
 
         public int PhotonViewId => photonView.viewID;
         public bool IsMyPlayer => photonView.isMine;
@@ -157,10 +165,12 @@ namespace UnityPUBG.Scripts.Entities
             {
                 EntityManager.Instance.MyPlayer = this;
                 gameObject.tag = "MyPlayer";
+                //meleeWeaponPosition.gameObject.tag = myWeaponTag;
             }
             else
             {
                 gameObject.tag = "Enemy";
+                //meleeWeaponPosition.gameObject.tag = enemyWeaponTag;
             }
         }
 
@@ -251,10 +261,49 @@ namespace UnityPUBG.Scripts.Entities
             {
                 // 체력 동기화
                 stream.SendNext(CurrentHealth);
+                // 실드 동기화
+                stream.SendNext(CurrentShield);
+                // 공격 애니메이션 실행 여부 동기화
+                stream.SendNext(IsPlayingAttackAnimation);
             }
             else
             {
                 CurrentHealth = (float)stream.ReceiveNext();
+                CurrentShield = (float)stream.ReceiveNext();
+                IsPlayingAttackAnimation = (bool)stream.ReceiveNext();
+            }
+        }
+        #endregion
+
+        #region IDamageable 인터페이스 
+        //캐릭터 주인만 hp 조작
+        //그러면 자동으로 hp가 동기화 됨
+        public void OnTakeDamage(float damage, DamageType type)
+        {
+            if (IsMyPlayer)
+            {
+                float leftDamage = CurrentShield - damage;
+
+                if(leftDamage>0)
+                {
+                    CurrentShield = 0;
+                }
+                else
+                {
+                    CurrentShield -= damage;
+                    return;
+                }
+
+                float damagedHealth = CurrentHealth - leftDamage;
+                
+                if(damagedHealth <= 0)
+                {
+                    CurrentHealth = 0;
+                }
+                else
+                {
+                    CurrentHealth = damagedHealth;
+                }
             }
         }
         #endregion
@@ -280,7 +329,7 @@ namespace UnityPUBG.Scripts.Entities
             if (IsAiming == false)
             {
                 //애니메이션 진행중이라면 조준했던 방향을 바라봄
-                if (isPlayingAttackAnimation)
+                if (IsPlayingAttackAnimation)
                 {
                     RotateDirection = previousAnimationDirection;
                     return;
@@ -293,7 +342,7 @@ namespace UnityPUBG.Scripts.Entities
         {
             if (direction == Vector2.zero)
             {
-                if (isPlayingAttackAnimation)
+                if (IsPlayingAttackAnimation)
                 {
                     RotateDirection = previousAnimationDirection;
                 }
@@ -307,7 +356,7 @@ namespace UnityPUBG.Scripts.Entities
             else
             {
                 //공격 애니메이션 실행중이 아니라면
-                if (!isPlayingAttackAnimation)
+                if (!IsPlayingAttackAnimation)
                 {
                     RotateDirection = direction.normalized;
                     IsAiming = true;
@@ -345,7 +394,7 @@ namespace UnityPUBG.Scripts.Entities
             if (EquipedPrimaryWeapon.IsStackEmpty)
             {
                 //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
-                if (!isPlayingAttackAnimation)
+                if (!IsPlayingAttackAnimation)
                 {
                     previousAnimationDirection = direction;
                     StartCoroutine(PlayMeleeAttackAnimation());
@@ -357,7 +406,7 @@ namespace UnityPUBG.Scripts.Entities
                 {
                     case MeleeWeaponData meleeWeaponData:
                         //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
-                        if (!isPlayingAttackAnimation)
+                        if (!IsPlayingAttackAnimation)
                         {
                             previousAnimationDirection = direction;
                             StartCoroutine(PlayMeleeAttackAnimation());
@@ -933,7 +982,7 @@ namespace UnityPUBG.Scripts.Entities
         //원거리 공격 재생
         private IEnumerator PlayRangeAttackAnimation()
         {
-            isPlayingAttackAnimation = true;
+            IsPlayingAttackAnimation = true;
 
             //myAnimator.runtimeAnimatorController.
 
@@ -954,7 +1003,7 @@ namespace UnityPUBG.Scripts.Entities
                     RangeAttack(rangeAttackDirection);
                     yield return new WaitForSecondsRealtime(rangeAttackAnimationLength - aimTime);
 
-                    isPlayingAttackAnimation = false;
+                    IsPlayingAttackAnimation = false;
                     yield break;
                 }
             }
@@ -963,7 +1012,7 @@ namespace UnityPUBG.Scripts.Entities
         //근접, 맨손 공격 재생
         private IEnumerator PlayMeleeAttackAnimation()
         {
-            isPlayingAttackAnimation = true;
+            IsPlayingAttackAnimation = true;
 
             //근접무기 장착중이라면 근접 애니메이션
             if (!EquipedPrimaryWeapon.IsStackEmpty)
@@ -977,7 +1026,7 @@ namespace UnityPUBG.Scripts.Entities
                 myAnimator.SetTrigger(handAttack);
                 yield return new WaitForSecondsRealtime(handAttackAnimationLength);
             }
-            isPlayingAttackAnimation = false;
+            IsPlayingAttackAnimation = false;
 
             yield break;
         }

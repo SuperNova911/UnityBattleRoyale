@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using UnityPUBG.Scripts.Items;
 using UnityPUBG.Scripts.Logic;
 using UnityPUBG.Scripts.UI;
+using UnityPUBG.Scripts.Utilities;
 
 namespace UnityPUBG.Scripts.Entities
 {

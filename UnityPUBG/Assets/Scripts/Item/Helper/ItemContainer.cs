@@ -68,10 +68,9 @@ namespace UnityPUBG.Scripts.Items
             if (itemToAdd.IsStackEmpty == false && IsFull == false)
             {
                 container.Add(itemToAdd);
-                container.Sort();
-
                 itemToAdd = Item.EmptyItem;
             }
+            container.Sort();
 
             OnContainerUpdate?.Invoke(this, EventArgs.Empty);
             return itemToAdd;
@@ -91,14 +90,23 @@ namespace UnityPUBG.Scripts.Items
                 return itemToFill;
             }
 
-            foreach (var targetItem in container.Where(e => e.Data.ItemName == itemToFill.Data.ItemName && e.IsStackFull == false))
+            if (HasItem(itemToFill.Data.ItemName))
             {
-                itemToFill = targetItem.MergeStack(itemToFill);
-                if (itemToFill.IsStackEmpty)
+                foreach (var targetItem in container.Where(e => e.Data.ItemName == itemToFill.Data.ItemName && e.IsStackFull == false))
                 {
-                    break;
+                    itemToFill = targetItem.MergeStack(itemToFill);
+                    if (itemToFill.IsStackEmpty)
+                    {
+                        break;
+                    }
                 }
             }
+            else
+            {
+                container.Add(itemToFill);
+                itemToFill = Item.EmptyItem;
+            }
+            container.Sort();
 
             OnContainerUpdate?.Invoke(this, EventArgs.Empty);
             return itemToFill;

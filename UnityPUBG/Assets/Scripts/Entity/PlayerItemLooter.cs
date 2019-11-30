@@ -170,8 +170,8 @@ namespace UnityPUBG.Scripts.Entities
                         continue;
                     }
 
-                    // 자동 루팅 대상인지 검사
-                    if ((collideItemObject.transform.position - transform.position).sqrMagnitude <= autoLootSquaredRadius && IsAutoLootTarget(collideItemObject.Item))
+                    bool isAutoLootTarget = IsAutoLootTarget(collideItemObject.Item);
+                    if (isAutoLootTarget && (collideItemObject.transform.position - transform.position).sqrMagnitude <= autoLootSquaredRadius)
                     {
                         player.LootItem(collideItemObject, true);
                     }
@@ -182,17 +182,43 @@ namespace UnityPUBG.Scripts.Entities
                         {
                             // ItemObject에게 새 LootButton을 할당
                             var pooledLootButton = ObjectPoolManager.Instance.ReuseUIObject(lootButtonPrefab.gameObject).GetComponent<LootButton>();
-                            pooledLootButton.targetItemObject = collideItemObject;
+                            pooledLootButton.TargetItemObject = collideItemObject;
+                            pooledLootButton.IsAutoLootTarget = isAutoLootTarget;
                             collideItemObject.LootButton = pooledLootButton;
 
                             currentLootableItemObjects.Add(collideItemObject);
                         }
                         else
                         {
+                            collideItemObject.LootButton.IsAutoLootTarget = isAutoLootTarget;
                             lastLootableItemObjects.Remove(collideItemObject);
                             currentLootableItemObjects.Add(collideItemObject);
                         }
                     }
+
+                    // 자동 루팅 대상인지 검사
+                    //if ((collideItemObject.transform.position - transform.position).sqrMagnitude <= autoLootSquaredRadius && IsAutoLootTarget(collideItemObject.Item))
+                    //{
+                    //    player.LootItem(collideItemObject, true);
+                    //}
+                    //else
+                    //{
+                    //    // LootButton이 표시중인지 검사
+                    //    if (collideItemObject.LootButton == null)
+                    //    {
+                    //        // ItemObject에게 새 LootButton을 할당
+                    //        var pooledLootButton = ObjectPoolManager.Instance.ReuseUIObject(lootButtonPrefab.gameObject).GetComponent<LootButton>();
+                    //        pooledLootButton.TargetItemObject = collideItemObject;
+                    //        collideItemObject.LootButton = pooledLootButton;
+
+                    //        currentLootableItemObjects.Add(collideItemObject);
+                    //    }
+                    //    else
+                    //    {
+                    //        lastLootableItemObjects.Remove(collideItemObject);
+                    //        currentLootableItemObjects.Add(collideItemObject);
+                    //    }
+                    //}
                 }
 
                 HasLootableItems = currentLootableItemObjects.Count > 0;

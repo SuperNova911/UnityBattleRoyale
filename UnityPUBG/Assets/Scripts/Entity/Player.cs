@@ -45,6 +45,7 @@ namespace UnityPUBG.Scripts.Entities
         private readonly string rangeAttack = "RangeAttack";
         private readonly string attackSpeed = "AttackSpeed";
         private readonly string handAttack = "HandAttack";
+        private readonly string isDie = "IsDie";
         private readonly float rangeAttackAnimationLength = 1.833336f;
         private readonly float meleeAttackAnimationLength = 1.166668f;
         private readonly float handAttackAnimationLength = 0.4f;
@@ -189,6 +190,8 @@ namespace UnityPUBG.Scripts.Entities
         protected override void Start()
         {
             base.Start();
+
+            OnDie += OnDieAnimation;
         }
 
         protected override void Update()
@@ -998,6 +1001,12 @@ namespace UnityPUBG.Scripts.Entities
             vector3Direction = Quaternion.Euler(0, 60, 0) * vector3Direction;
 
             return new Vector2(vector3Direction.x, vector3Direction.z);
+        }
+
+        //사망 애니메이션 재생
+        private void OnDieAnimation(object sender, EventArgs e)
+        {
+            myAnimator.SetTrigger(isDie);
         }
 
         //원거리 공격 재생

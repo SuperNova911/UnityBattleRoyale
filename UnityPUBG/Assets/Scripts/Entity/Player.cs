@@ -38,12 +38,17 @@ namespace UnityPUBG.Scripts.Entities
         [SerializeField] private Transform rangeWeaponPosition;
         #endregion
 
+        #region 애니메이션 파라미터
         //애니메이션 파라미터 이름
         private readonly string meleeAttack = "MeleeAttack";
         private readonly string isRun = "IsRun";
         private readonly string rangeAttack = "RangeAttack";
         private readonly string attackSpeed = "AttackSpeed";
+        private readonly string handAttack = "HandAttack";
         private readonly float rangeAttackAnimationLength = 1.833336f;
+        private readonly float meleeAttackAnimationLength = 1.166668f;
+        private readonly float handAttackAnimationLength = 0.4f;
+        #endregion
 
         private PhotonView photonView;
         private PlayerItemLooter myItemLooter;
@@ -52,7 +57,7 @@ namespace UnityPUBG.Scripts.Entities
         // Weapon
         private float lastAttackTime = 0f;
         private bool isAiming = false;
-        private bool isPlayingRangeAnimation = false;
+        private bool isPlayingAttackAnimation = false;
         // 원거리 공격 방향
         private Vector3 rangeAttackDirection = Vector3.zero;
         private Vector2 previousAnimationDirection = Vector2.zero;
@@ -270,7 +275,7 @@ namespace UnityPUBG.Scripts.Entities
             if (IsAiming == false)
             {
                 //애니메이션 진행중이라면 조준했던 방향을 바라봄
-                if (isPlayingRangeAnimation)
+                if (isPlayingAttackAnimation)
                 {
                     RotateDirection = previousAnimationDirection;
                     return;
@@ -283,7 +288,7 @@ namespace UnityPUBG.Scripts.Entities
         {
             if (direction == Vector2.zero)
             {
-                if (isPlayingRangeAnimation)
+                if (isPlayingAttackAnimation)
                 {
                     RotateDirection = previousAnimationDirection;
                 }
@@ -296,8 +301,8 @@ namespace UnityPUBG.Scripts.Entities
             }
             else
             {
-                //원거리 애니메이션 실행중이 아니라면
-                if (!isPlayingRangeAnimation)
+                //공격 애니메이션 실행중이 아니라면
+                if (!isPlayingAttackAnimation)
                 {
                     RotateDirection = direction.normalized;
                     IsAiming = true;
@@ -310,7 +315,10 @@ namespace UnityPUBG.Scripts.Entities
                 }
                 else
                 {
-                    previousAnimationDirection = DirectionOnRangeAnimation(direction);
+                    if (equipedPrimaryWeapon.Data is RangeWeaponData)
+                    {
+                        previousAnimationDirection = DirectionOnRangeAnimation(direction);
+                    }
                     RotateDirection = previousAnimationDirection;
                 }
             }
@@ -331,8 +339,12 @@ namespace UnityPUBG.Scripts.Entities
 
             if (EquipedPrimaryWeapon.IsStackEmpty)
             {
-                // 맨손 공격
-                MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+                //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
+                if (!isPlayingAttackAnimation)
+                {
+                    previousAnimationDirection = direction;
+                    StartCoroutine(PlayMeleeAttackAnimation());
+                }
             }
             else
             {
@@ -340,7 +352,11 @@ namespace UnityPUBG.Scripts.Entities
                 {
                     case MeleeWeaponData meleeWeaponData:
                         //MeleeAttackTest(attackDirection, UnityEngine.Random.Range(0f, 100f), meleeWeaponData.DamageType);
-                        myAnimator.SetTrigger(meleeAttack);     // 근접 공격 애니메이션 설정
+                        if (!isPlayingAttackAnimation)
+                        {
+                            previousAnimationDirection = direction;
+                            StartCoroutine(PlayMeleeAttackAnimation());
+                        }
                         break;
                     case RangeWeaponData rangeWeaponData:
                         rangeAttackDirection = attackDirection;
@@ -762,6 +778,7 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
+        /*
         // 테스트 전용
         private void MeleeAttackTest(DamageType damageType)
         {
@@ -816,8 +833,8 @@ namespace UnityPUBG.Scripts.Entities
                 hitObject.OnTakeDamage(damage, damageType);
             }
         }
+        */
 
-        // TODO: Cast Delay 구현
         private void RangeAttack(Vector3 attackDirection)
         {
             var rangeWeaponData = EquipedPrimaryWeapon.Data as RangeWeaponData;
@@ -911,7 +928,7 @@ namespace UnityPUBG.Scripts.Entities
         //원거리 공격 재생
         private IEnumerator PlayRangeAttackAnimation()
         {
-            isPlayingRangeAnimation = true;
+            isPlayingAttackAnimation = true;
 
             //myAnimator.runtimeAnimatorController.
 
@@ -932,10 +949,32 @@ namespace UnityPUBG.Scripts.Entities
                     RangeAttack(rangeAttackDirection);
                     yield return new WaitForSecondsRealtime(rangeAttackAnimationLength - aimTime);
 
-                    isPlayingRangeAnimation = false;
+                    isPlayingAttackAnimation = false;
                     yield break;
                 }
             }
+        }
+
+        //근접, 맨손 공격 재생
+        private IEnumerator PlayMeleeAttackAnimation()
+        {
+            isPlayingAttackAnimation = true;
+
+            //근접무기 장착중이라면 근접 애니메이션
+            if (!EquipedPrimaryWeapon.IsStackEmpty)
+            {
+                myAnimator.SetTrigger(meleeAttack);
+
+                yield return new WaitForSecondsRealtime(meleeAttackAnimationLength);
+            }
+            else
+            {
+                myAnimator.SetTrigger(handAttack);
+                yield return new WaitForSecondsRealtime(handAttackAnimationLength);
+            }
+            isPlayingAttackAnimation = false;
+
+            yield break;
         }
         #endregion
     }

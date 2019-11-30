@@ -1,604 +1,1753 @@
 fileFormatVersion: 2
 guid: 38b38e35a1631da488b5be9ddd9c1363
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: bip_gob_magLIKTarget
-    100002: fantasy horde-orc_avg_arm calf_R
-    100004: fantasy horde-orc_avg_knee armor L
-    100006: fantasy horde-orc_avg_arm calf_L
-    100008: fantasy horde-orc_avg_arm armor_R
-    100010: fantasy horde-orc_avg_shoulder armor B_R
-    100012: fantasy horde-orc_avg_shoulder armor C_L
-    100014: fantasy horde-orc_avg_shoulder armor A_R
-    100016: fantasy horde-orc_avg_ponny tail
-    100018: fantasy horde-orc_avg_wrist armor_L
-    100020: fantasy horde-orc_avg_arm armor_L
-    100022: fantasy horde-orc_avg_knee armor_R
-    100024: fantasy horde-orc_avg_shoulder armor B_L
-    100026: fantasy horde-orc_avg_armor pelvis
-    100028: fantasy horde-orc_avg_shoulder armor C_R
-    100030: fantasy horde-orc_avg_helmet closed
-    100032: fantasy horde-orc_avg_arm armor_L 1
-    100034: fantasy horde-orc_avg_wrist armor_R
-    100036: fantasy horde-orc_avg_shoulder armor A_L
-    100038: //RootNode
-    100040: bip_gob_magRIKTarget
-    100042: bon_gob_war_jaw
-    100044: goblin_quiver
-    100046: bip_gob_magRPlatform
-    100048: bip_gob_mag
-    100050: fantasy horde-orc_flag B
-    100052: fantasy horde-orc_sword
-    100054: bon_gob_war_face
-    100056: fantasy horde-orc_mace
-    100058: fantasy horde-orc_avg_body
-    100060: bon_gob_war_ear R_tip 1
-    100062: fantasy horde-orc_avg_mask
-    100064: fantasy horde-orc_staff C
-    100066: fantasy horde-orc_morningstar
-    100068: bip_gob_magLThigh
-    100070: bip_gob_magLCalf
-    100072: bip_gob_magLFoot
-    100074: bip_gob_magRThigh
-    100076: bip_gob_magLDigit11
-    100078: bip_gob_magPelvis
-    100080: bip_gob_magLForearm
-    100082: fantasy horde-orc_avg_hair
-    100084: fantasy horde-orc_staff A
-    100086: bip_gob_magRPalm
-    100088: bip_gob_magRDigit11 1
-    100090: bip_gob_magRUpperarm
-    100092: bip_gob_magLUpperarm
-    100094: fantasy horde-orc_avg_helmet
-    100096: bon_gob_war_ear R
-    100098: bip_gob_magSpine4
-    100100: bip_gob_magRibcage
-    100102: bip_gob_magLCollarbone
-    100104: bip_gob_magSpine3
-    100106: bip_gob_magRFoot
-    100108: bip_gob_magRDigit11
-    100110: bone_orc arch_main
-    100112: bip_gob_magSpine1
-    100114: bon_gob_war_hair_tip
-    100116: bip_gob_magSpine2
-    100118: fantasy horde-orc_shield A
-    100120: bip_gob_magRCalf
-    100122: bon_gob_war_hair
-    100124: bip_gob_magNeck2
-    100126: fantasy horde-orc_spearskull
-    100128: bon_gob_war_cloth00
-    100130: fantasy horde-orc_staff B
-    100132: fantasy horde-orc_avg_mohican
-    100134: fantasy horde-orc_flag A
-    100136: bip_gob_magLDigit22
-    100138: bip_gob_magHeadBone001
-    100140: bip_gob_magLDigit31
-    100142: bip_gob_magLDigit32
-    100144: bip_gob_magLDigit12
-    100146: fantasy horde-orc_avg_shoe
-    100148: bip_gob_magRForearm
-    100150: bip_gob_magRDigit21
-    100152: bip_gob_magLPalm
-    100154: bon_gob_war_jaw_tip 1
-    100156: bon_gob_war_ear L
-    100158: bip_gob_magLDigit21
-    100160: bip_gob_magRDigit12
-    100162: bon_gob_war_cloth_tip
-    100164: fantasy horde-orc_avg_cap
-    100166: bip_gob_magRDigit22
-    100168: bip_gob_magRCollarbone
-    100170: bip_gob_magRDigit31
-    100172: bip_gob_magLDigit11 1
-    100174: bip_gob_magRDigit32
-    100176: fantasy horde-orc_arch
-    100178: bip_gob_magHeadBone002
-    100180: bon_gob_war_cloth01
-    100182: fantasy horde-orc_avg_skull
-    100184: fantasy horde-orc_spear
-    100186: fantasy horde-orc_avg_cloth
-    100188: fantasy horde-orc_axe
-    100190: bon_gob_war_jaw_tip
-    100192: bip_gob_magLPlatform
-    100194: bip_gob_magNeck1
-    100196: fantasy horde-orc_avg_boot
-    100198: fantasy horde-orc_avg_armor
-    100200: bip_gob_magHead
-    100202: fantasy horde-orc_club
-    100204: bon_gob_war_ear R_tip
-    100206: fantasy horde-orc_scimitar
-    100208: fantasy horde-orc_flag C
-    100210: ik_orc arch_top01
-    100212: bone_orc arch_top00
-    100214: ctrl_orc arch_dummie botton
-    100216: bone_orc arch_top01
-    100218: ik_bone_orc arch_botton01
-    100220: bone_orc arch_botton01
-    100222: ctrl_orc arch_main
-    100224: bone_orc arch_botton_tip
-    100226: bone_orc arch_botton00
-    100228: ctrl_orc arch_dummie top
-    100230: bone_orc arch_top_tip
-    100232: ctrl_orc arch_arrow
-    100234: bip_horde
-    100236: bip_hordeHead
-    100238: bip_hordeHeadBone001
-    100240: bip_hordeHeadBone002
-    100242: bip_hordeLCalf
-    100244: bip_hordeLCollarbone
-    100246: bip_hordeLDigit11
-    100248: bip_hordeLDigit11 1
-    100250: bip_hordeLDigit12
-    100252: bip_hordeLDigit21
-    100254: bip_hordeLDigit22
-    100256: bip_hordeLDigit31
-    100258: bip_hordeLDigit32
-    100260: bip_hordeLFoot
-    100262: bip_hordeLForearm
-    100264: bip_hordeLIKTarget
-    100266: bip_hordeLPalm
-    100268: bip_hordeLPlatform
-    100270: bip_hordeLThigh
-    100272: bip_hordeLUpperarm
-    100274: bip_hordeNeck1
-    100276: bip_hordeNeck2
-    100278: bip_hordePelvis
-    100280: bip_hordeRCalf
-    100282: bip_hordeRCollarbone
-    100284: bip_hordeRDigit11
-    100286: bip_hordeRDigit11 1
-    100288: bip_hordeRDigit12
-    100290: bip_hordeRDigit21
-    100292: bip_hordeRDigit22
-    100294: bip_hordeRDigit31
-    100296: bip_hordeRDigit32
-    100298: bip_hordeRFoot
-    100300: bip_hordeRForearm
-    100302: bip_hordeRibcage
-    100304: bip_hordeRIKTarget
-    100306: bip_hordeRPalm
-    100308: bip_hordeRPlatform
-    100310: bip_hordeRThigh
-    100312: bip_hordeRUpperarm
-    100314: bip_hordeSpine1
-    100316: bip_hordeSpine2
-    100318: bip_hordeSpine3
-    100320: bip_hordeSpine4
-    100322: fantasy horde-orc_avg_beard
-    100324: fantasy horde-orc_fat_body
-    100326: fantasy horde-orc_atl body
-    100328: fantasy horde-orc_atl_mask
-    100330: fantasy horde-orc_fat_boot
-    100332: fantasy horde-orc_fat_mask
-    100334: fantasy horde-orc_fat_shoe
-    100336: BowPivot
-    100338: fantasy horde-orc_shield
-    400000: bip_gob_magLIKTarget
-    400002: fantasy horde-orc_avg_arm calf_R
-    400004: fantasy horde-orc_avg_knee armor L
-    400006: fantasy horde-orc_avg_arm calf_L
-    400008: fantasy horde-orc_avg_arm armor_R
-    400010: fantasy horde-orc_avg_shoulder armor B_R
-    400012: fantasy horde-orc_avg_shoulder armor C_L
-    400014: fantasy horde-orc_avg_shoulder armor A_R
-    400016: fantasy horde-orc_avg_ponny tail
-    400018: fantasy horde-orc_avg_wrist armor_L
-    400020: fantasy horde-orc_avg_arm armor_L
-    400022: fantasy horde-orc_avg_knee armor_R
-    400024: fantasy horde-orc_avg_shoulder armor B_L
-    400026: fantasy horde-orc_avg_armor pelvis
-    400028: fantasy horde-orc_avg_shoulder armor C_R
-    400030: fantasy horde-orc_avg_helmet closed
-    400032: fantasy horde-orc_avg_arm armor_L 1
-    400034: fantasy horde-orc_avg_wrist armor_R
-    400036: fantasy horde-orc_avg_shoulder armor A_L
-    400038: //RootNode
-    400040: bip_gob_magRIKTarget
-    400042: bon_gob_war_jaw
-    400044: goblin_quiver
-    400046: bip_gob_magRPlatform
-    400048: bip_gob_mag
-    400050: fantasy horde-orc_flag B
-    400052: fantasy horde-orc_sword
-    400054: bon_gob_war_face
-    400056: fantasy horde-orc_mace
-    400058: fantasy horde-orc_avg_body
-    400060: bon_gob_war_ear R_tip 1
-    400062: fantasy horde-orc_avg_mask
-    400064: fantasy horde-orc_staff C
-    400066: fantasy horde-orc_morningstar
-    400068: bip_gob_magLThigh
-    400070: bip_gob_magLCalf
-    400072: bip_gob_magLFoot
-    400074: bip_gob_magRThigh
-    400076: bip_gob_magLDigit11
-    400078: bip_gob_magPelvis
-    400080: bip_gob_magLForearm
-    400082: fantasy horde-orc_avg_hair
-    400084: fantasy horde-orc_staff A
-    400086: bip_gob_magRPalm
-    400088: bip_gob_magRDigit11 1
-    400090: bip_gob_magRUpperarm
-    400092: bip_gob_magLUpperarm
-    400094: fantasy horde-orc_avg_helmet
-    400096: bon_gob_war_ear R
-    400098: bip_gob_magSpine4
-    400100: bip_gob_magRibcage
-    400102: bip_gob_magLCollarbone
-    400104: bip_gob_magSpine3
-    400106: bip_gob_magRFoot
-    400108: bip_gob_magRDigit11
-    400110: bone_orc arch_main
-    400112: bip_gob_magSpine1
-    400114: bon_gob_war_hair_tip
-    400116: bip_gob_magSpine2
-    400118: fantasy horde-orc_shield A
-    400120: bip_gob_magRCalf
-    400122: bon_gob_war_hair
-    400124: bip_gob_magNeck2
-    400126: fantasy horde-orc_spearskull
-    400128: bon_gob_war_cloth00
-    400130: fantasy horde-orc_staff B
-    400132: fantasy horde-orc_avg_mohican
-    400134: fantasy horde-orc_flag A
-    400136: bip_gob_magLDigit22
-    400138: bip_gob_magHeadBone001
-    400140: bip_gob_magLDigit31
-    400142: bip_gob_magLDigit32
-    400144: bip_gob_magLDigit12
-    400146: fantasy horde-orc_avg_shoe
-    400148: bip_gob_magRForearm
-    400150: bip_gob_magRDigit21
-    400152: bip_gob_magLPalm
-    400154: bon_gob_war_jaw_tip 1
-    400156: bon_gob_war_ear L
-    400158: bip_gob_magLDigit21
-    400160: bip_gob_magRDigit12
-    400162: bon_gob_war_cloth_tip
-    400164: fantasy horde-orc_avg_cap
-    400166: bip_gob_magRDigit22
-    400168: bip_gob_magRCollarbone
-    400170: bip_gob_magRDigit31
-    400172: bip_gob_magLDigit11 1
-    400174: bip_gob_magRDigit32
-    400176: fantasy horde-orc_arch
-    400178: bip_gob_magHeadBone002
-    400180: bon_gob_war_cloth01
-    400182: fantasy horde-orc_avg_skull
-    400184: fantasy horde-orc_spear
-    400186: fantasy horde-orc_avg_cloth
-    400188: fantasy horde-orc_axe
-    400190: bon_gob_war_jaw_tip
-    400192: bip_gob_magLPlatform
-    400194: bip_gob_magNeck1
-    400196: fantasy horde-orc_avg_boot
-    400198: fantasy horde-orc_avg_armor
-    400200: bip_gob_magHead
-    400202: fantasy horde-orc_club
-    400204: bon_gob_war_ear R_tip
-    400206: fantasy horde-orc_scimitar
-    400208: fantasy horde-orc_flag C
-    400210: ik_orc arch_top01
-    400212: bone_orc arch_top00
-    400214: ctrl_orc arch_dummie botton
-    400216: bone_orc arch_top01
-    400218: ik_bone_orc arch_botton01
-    400220: bone_orc arch_botton01
-    400222: ctrl_orc arch_main
-    400224: bone_orc arch_botton_tip
-    400226: bone_orc arch_botton00
-    400228: ctrl_orc arch_dummie top
-    400230: bone_orc arch_top_tip
-    400232: ctrl_orc arch_arrow
-    400234: bip_horde
-    400236: bip_hordeHead
-    400238: bip_hordeHeadBone001
-    400240: bip_hordeHeadBone002
-    400242: bip_hordeLCalf
-    400244: bip_hordeLCollarbone
-    400246: bip_hordeLDigit11
-    400248: bip_hordeLDigit11 1
-    400250: bip_hordeLDigit12
-    400252: bip_hordeLDigit21
-    400254: bip_hordeLDigit22
-    400256: bip_hordeLDigit31
-    400258: bip_hordeLDigit32
-    400260: bip_hordeLFoot
-    400262: bip_hordeLForearm
-    400264: bip_hordeLIKTarget
-    400266: bip_hordeLPalm
-    400268: bip_hordeLPlatform
-    400270: bip_hordeLThigh
-    400272: bip_hordeLUpperarm
-    400274: bip_hordeNeck1
-    400276: bip_hordeNeck2
-    400278: bip_hordePelvis
-    400280: bip_hordeRCalf
-    400282: bip_hordeRCollarbone
-    400284: bip_hordeRDigit11
-    400286: bip_hordeRDigit11 1
-    400288: bip_hordeRDigit12
-    400290: bip_hordeRDigit21
-    400292: bip_hordeRDigit22
-    400294: bip_hordeRDigit31
-    400296: bip_hordeRDigit32
-    400298: bip_hordeRFoot
-    400300: bip_hordeRForearm
-    400302: bip_hordeRibcage
-    400304: bip_hordeRIKTarget
-    400306: bip_hordeRPalm
-    400308: bip_hordeRPlatform
-    400310: bip_hordeRThigh
-    400312: bip_hordeRUpperarm
-    400314: bip_hordeSpine1
-    400316: bip_hordeSpine2
-    400318: bip_hordeSpine3
-    400320: bip_hordeSpine4
-    400322: fantasy horde-orc_avg_beard
-    400324: fantasy horde-orc_fat_body
-    400326: fantasy horde-orc_atl body
-    400328: fantasy horde-orc_atl_mask
-    400330: fantasy horde-orc_fat_boot
-    400332: fantasy horde-orc_fat_mask
-    400334: fantasy horde-orc_fat_shoe
-    400336: BowPivot
-    400338: fantasy horde-orc_shield
-    2300000: fantasy horde-orc_avg_arm calf_R
-    2300002: fantasy horde-orc_avg_knee armor L
-    2300004: fantasy horde-orc_avg_arm calf_L
-    2300006: fantasy horde-orc_avg_arm armor_R
-    2300008: fantasy horde-orc_avg_shoulder armor B_R
-    2300010: fantasy horde-orc_avg_shoulder armor C_L
-    2300012: fantasy horde-orc_avg_shoulder armor A_R
-    2300014: fantasy horde-orc_avg_wrist armor_L
-    2300016: fantasy horde-orc_avg_arm armor_L
-    2300018: fantasy horde-orc_avg_knee armor_R
-    2300020: fantasy horde-orc_avg_shoulder armor B_L
-    2300022: fantasy horde-orc_avg_shoulder armor C_R
-    2300024: fantasy horde-orc_avg_helmet closed
-    2300026: fantasy horde-orc_avg_arm armor_L 1
-    2300028: fantasy horde-orc_avg_wrist armor_R
-    2300030: fantasy horde-orc_avg_shoulder armor A_L
-    2300032: goblin_quiver
-    2300034: fantasy horde-orc_flag B
-    2300036: fantasy horde-orc_sword
-    2300038: fantasy horde-orc_mace
-    2300040: fantasy horde-orc_staff C
-    2300042: fantasy horde-orc_morningstar
-    2300044: fantasy horde-orc_avg_hair
-    2300046: fantasy horde-orc_staff A
-    2300048: fantasy horde-orc_avg_helmet
-    2300050: fantasy horde-orc_avg_beard
-    2300052: fantasy horde-orc_shield A
-    2300054: fantasy horde-orc_spearskull
-    2300056: fantasy horde-orc_staff B
-    2300058: fantasy horde-orc_avg_mohican
-    2300060: fantasy horde-orc_flag A
-    2300062: fantasy horde-orc_arch
-    2300064: fantasy horde-orc_avg_skull
-    2300066: fantasy horde-orc_spear
-    2300068: fantasy horde-orc_axe
-    2300070: fantasy horde-orc_avg_armor
-    2300072: fantasy horde-orc_club
-    2300074: fantasy horde-orc_scimitar
-    2300076: fantasy horde-orc_flag C
-    2300078: fantasy horde-orc_shield
-    3300000: fantasy horde-orc_avg_arm calf_R
-    3300002: fantasy horde-orc_avg_knee armor L
-    3300004: fantasy horde-orc_avg_arm calf_L
-    3300006: fantasy horde-orc_avg_arm armor_R
-    3300008: fantasy horde-orc_avg_shoulder armor B_R
-    3300010: fantasy horde-orc_avg_shoulder armor C_L
-    3300012: fantasy horde-orc_avg_shoulder armor A_R
-    3300014: fantasy horde-orc_avg_wrist armor_L
-    3300016: fantasy horde-orc_avg_arm armor_L
-    3300018: fantasy horde-orc_avg_knee armor_R
-    3300020: fantasy horde-orc_avg_shoulder armor B_L
-    3300022: fantasy horde-orc_avg_shoulder armor C_R
-    3300024: fantasy horde-orc_avg_helmet closed
-    3300026: fantasy horde-orc_avg_arm armor_L 1
-    3300028: fantasy horde-orc_avg_wrist armor_R
-    3300030: fantasy horde-orc_avg_shoulder armor A_L
-    3300032: goblin_quiver
-    3300034: fantasy horde-orc_flag B
-    3300036: fantasy horde-orc_sword
-    3300038: fantasy horde-orc_mace
-    3300040: fantasy horde-orc_staff C
-    3300042: fantasy horde-orc_morningstar
-    3300044: fantasy horde-orc_avg_hair
-    3300046: fantasy horde-orc_staff A
-    3300048: fantasy horde-orc_avg_helmet
-    3300050: fantasy horde-orc_avg_beard
-    3300052: fantasy horde-orc_shield A
-    3300054: fantasy horde-orc_spearskull
-    3300056: fantasy horde-orc_staff B
-    3300058: fantasy horde-orc_avg_mohican
-    3300060: fantasy horde-orc_flag A
-    3300062: fantasy horde-orc_arch
-    3300064: fantasy horde-orc_avg_skull
-    3300066: fantasy horde-orc_spear
-    3300068: fantasy horde-orc_axe
-    3300070: fantasy horde-orc_avg_armor
-    3300072: fantasy horde-orc_club
-    3300074: fantasy horde-orc_scimitar
-    3300076: fantasy horde-orc_flag C
-    3300078: fantasy horde-orc_shield
-    4300000: fantasy horde-orc_avg_body
-    4300002: fantasy horde-orc_avg_arm calf_L
-    4300004: fantasy horde-orc_avg_knee armor L
-    4300006: fantasy horde-orc_avg_arm calf_R
-    4300008: fantasy horde-orc_avg_knee armor_R
-    4300010: fantasy horde-orc_shield A
-    4300012: fantasy horde-orc_avg_arm armor_L
-    4300014: fantasy horde-orc_avg_shoulder armor B_L
-    4300016: fantasy horde-orc_avg_shoulder armor C_L
-    4300018: fantasy horde-orc_avg_shoulder armor A_L
-    4300020: fantasy horde-orc_sword
-    4300022: fantasy horde-orc_spear
-    4300024: fantasy horde-orc_club
-    4300026: fantasy horde-orc_axe
-    4300028: fantasy horde-orc_scimitar
-    4300030: fantasy horde-orc_mace
-    4300032: fantasy horde-orc_morningstar
-    4300034: fantasy horde-orc_staff A
-    4300036: fantasy horde-orc_staff B
-    4300038: fantasy horde-orc_staff C
-    4300040: fantasy horde-orc_spearskull
-    4300042: fantasy horde-orc_avg_arm armor_R
-    4300044: fantasy horde-orc_avg_wrist armor_R
-    4300046: fantasy horde-orc_avg_shoulder armor B_R
-    4300048: fantasy horde-orc_avg_shoulder armor C_R
-    4300050: fantasy horde-orc_avg_shoulder armor A_R
-    4300052: fantasy horde-orc_avg_beard
-    4300054: fantasy horde-orc_avg_skull
-    4300056: fantasy horde-orc_avg_helmet closed
-    4300058: fantasy horde-orc_avg_helmet
-    4300060: fantasy horde-orc_avg_hair
-    4300062: fantasy horde-orc_avg_mohican
-    4300064: goblin_quiver
-    4300066: fantasy horde-orc_flag B
-    4300068: fantasy horde-orc_flag C
-    4300070: fantasy horde-orc_flag A
-    4300072: fantasy horde-orc_avg_armor
-    4300074: fantasy horde-orc_arch
-    4300076: fantasy horde-orc_avg_ponny tail
-    4300078: fantasy horde-orc_avg_cap
-    4300080: fantasy horde-orc_avg_shoe
-    4300082: fantasy horde-orc_avg_boot
-    4300084: fantasy horde-orc_avg_cloth
-    4300086: fantasy horde-orc_avg_mask
-    4300088: fantasy horde-orc_avg_armor pelvis
-    4300090: fantasy horde-orc_avg_arm armor_L
-    4300092: fantasy horde-orc_avg_wrist armor_L
-    4300094: bip_gob_magPelvis
-    4300096: bip_gob_magLThigh
-    4300098: bip_gob_magLCalf
-    4300100: bip_gob_magLFoot
-    4300102: bip_gob_magLDigit11
-    4300104: bip_gob_magRThigh
-    4300106: bip_gob_magRCalf
-    4300108: bip_gob_magRFoot
-    4300110: bip_gob_magRDigit11
-    4300112: bip_gob_magSpine1
-    4300114: bip_gob_magSpine2
-    4300116: bip_gob_magSpine3
-    4300118: bip_gob_magSpine4
-    4300120: bip_gob_magRibcage
-    4300122: bip_gob_magLCollarbone
-    4300124: bip_gob_magLUpperarm
-    4300126: bip_gob_magLForearm
-    4300128: bip_gob_magLPalm
-    4300130: bip_gob_magLDigit11
-    4300132: bip_gob_magLDigit12
-    4300134: bip_gob_magLDigit21
-    4300136: bip_gob_magLDigit22
-    4300138: bip_gob_magLDigit31
-    4300140: bip_gob_magLDigit32
-    4300142: bip_gob_magRCollarbone
-    4300144: bip_gob_magRUpperarm
-    4300146: bip_gob_magRForearm
-    4300148: bip_gob_magRPalm
-    4300150: bip_gob_magRDigit11
-    4300152: bip_gob_magRDigit12
-    4300154: bip_gob_magRDigit21
-    4300156: bip_gob_magRDigit22
-    4300158: bip_gob_magRDigit31
-    4300160: bip_gob_magRDigit32
-    4300162: bip_gob_magNeck1
-    4300164: bip_gob_magNeck2
-    4300166: bip_gob_magHead
-    4300168: bip_gob_magHeadBone001
-    4300170: bip_gob_magHeadBone002
-    4300172: fantasy horde-orc_fat_body
-    4300174: fantasy horde-orc_atl body
-    4300176: fantasy horde-orc_atl_mask
-    4300178: fantasy horde-orc_fat_mask
-    4300180: fantasy horde-orc_fat_boot
-    4300182: fantasy horde-orc_fat_shoe
-    4300184: fantasy horde-orc_shield
-    7400000: Take 001
-    7400002: idle
-    7400004: idle0
-    7400006: idle break 1
-    7400008: idle break 2
-    7400010: salute
-    7400012: walk
-    7400014: run
-    7400016: run fast
-    7400018: crouch
-    7400020: crouch walk
-    7400022: hit
-    7400024: hit back
-    7400026: jump
-    7400028: falling
-    7400030: die soft
-    7400032: die hard
-    7400034: idle fight
-    7400036: idle break fight
-    7400038: blocking
-    7400040: axe attack
-    7400042: sword attack
-    7400044: sword double attack
-    7400046: arch attack
-    7400048: prepare spear
-    7400050: spear attack
-    7400052: casting A
-    7400054: casting B
-    9500000: //RootNode
-    11100000: //RootNode
-    13700000: fantasy horde-orc_avg_ponny tail
-    13700002: fantasy horde-orc_avg_armor pelvis
-    13700004: fantasy horde-orc_avg_body
-    13700006: fantasy horde-orc_avg_mask
-    13700008: fantasy horde-orc_avg_shoe
-    13700010: fantasy horde-orc_avg_cap
-    13700012: fantasy horde-orc_avg_cloth
-    13700014: fantasy horde-orc_avg_boot
-    13700016: fantasy horde-orc_arch
-    13700018: fantasy horde-orc_fat_body
-    13700020: fantasy horde-orc_atl body
-    13700022: fantasy horde-orc_atl_mask
-    13700024: fantasy horde-orc_fat_boot
-    13700026: fantasy horde-orc_fat_mask
-    13700028: fantasy horde-orc_fat_shoe
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: bip_gob_magLIKTarget
+  - first:
+      1: 100002
+    second: fantasy horde-orc_avg_arm calf_R
+  - first:
+      1: 100004
+    second: fantasy horde-orc_avg_knee armor L
+  - first:
+      1: 100006
+    second: fantasy horde-orc_avg_arm calf_L
+  - first:
+      1: 100008
+    second: fantasy horde-orc_avg_arm armor_R
+  - first:
+      1: 100010
+    second: fantasy horde-orc_avg_shoulder armor B_R
+  - first:
+      1: 100012
+    second: fantasy horde-orc_avg_shoulder armor C_L
+  - first:
+      1: 100014
+    second: fantasy horde-orc_avg_shoulder armor A_R
+  - first:
+      1: 100016
+    second: fantasy horde-orc_avg_ponny tail
+  - first:
+      1: 100018
+    second: fantasy horde-orc_avg_wrist armor_L
+  - first:
+      1: 100020
+    second: fantasy horde-orc_avg_arm armor_L
+  - first:
+      1: 100022
+    second: fantasy horde-orc_avg_knee armor_R
+  - first:
+      1: 100024
+    second: fantasy horde-orc_avg_shoulder armor B_L
+  - first:
+      1: 100026
+    second: fantasy horde-orc_avg_armor pelvis
+  - first:
+      1: 100028
+    second: fantasy horde-orc_avg_shoulder armor C_R
+  - first:
+      1: 100030
+    second: fantasy horde-orc_avg_helmet closed
+  - first:
+      1: 100032
+    second: fantasy horde-orc_avg_arm armor_L 1
+  - first:
+      1: 100034
+    second: fantasy horde-orc_avg_wrist armor_R
+  - first:
+      1: 100036
+    second: fantasy horde-orc_avg_shoulder armor A_L
+  - first:
+      1: 100038
+    second: //RootNode
+  - first:
+      1: 100040
+    second: bip_gob_magRIKTarget
+  - first:
+      1: 100042
+    second: bon_gob_war_jaw
+  - first:
+      1: 100044
+    second: goblin_quiver
+  - first:
+      1: 100046
+    second: bip_gob_magRPlatform
+  - first:
+      1: 100048
+    second: bip_gob_mag
+  - first:
+      1: 100050
+    second: fantasy horde-orc_flag B
+  - first:
+      1: 100052
+    second: fantasy horde-orc_sword
+  - first:
+      1: 100054
+    second: bon_gob_war_face
+  - first:
+      1: 100056
+    second: fantasy horde-orc_mace
+  - first:
+      1: 100058
+    second: fantasy horde-orc_avg_body
+  - first:
+      1: 100060
+    second: bon_gob_war_ear R_tip 1
+  - first:
+      1: 100062
+    second: fantasy horde-orc_avg_mask
+  - first:
+      1: 100064
+    second: fantasy horde-orc_staff C
+  - first:
+      1: 100066
+    second: fantasy horde-orc_morningstar
+  - first:
+      1: 100068
+    second: bip_gob_magLThigh
+  - first:
+      1: 100070
+    second: bip_gob_magLCalf
+  - first:
+      1: 100072
+    second: bip_gob_magLFoot
+  - first:
+      1: 100074
+    second: bip_gob_magRThigh
+  - first:
+      1: 100076
+    second: bip_gob_magLDigit11
+  - first:
+      1: 100078
+    second: bip_gob_magPelvis
+  - first:
+      1: 100080
+    second: bip_gob_magLForearm
+  - first:
+      1: 100082
+    second: fantasy horde-orc_avg_hair
+  - first:
+      1: 100084
+    second: fantasy horde-orc_staff A
+  - first:
+      1: 100086
+    second: bip_gob_magRPalm
+  - first:
+      1: 100088
+    second: bip_gob_magRDigit11 1
+  - first:
+      1: 100090
+    second: bip_gob_magRUpperarm
+  - first:
+      1: 100092
+    second: bip_gob_magLUpperarm
+  - first:
+      1: 100094
+    second: fantasy horde-orc_avg_helmet
+  - first:
+      1: 100096
+    second: bon_gob_war_ear R
+  - first:
+      1: 100098
+    second: bip_gob_magSpine4
+  - first:
+      1: 100100
+    second: bip_gob_magRibcage
+  - first:
+      1: 100102
+    second: bip_gob_magLCollarbone
+  - first:
+      1: 100104
+    second: bip_gob_magSpine3
+  - first:
+      1: 100106
+    second: bip_gob_magRFoot
+  - first:
+      1: 100108
+    second: bip_gob_magRDigit11
+  - first:
+      1: 100110
+    second: bone_orc arch_main
+  - first:
+      1: 100112
+    second: bip_gob_magSpine1
+  - first:
+      1: 100114
+    second: bon_gob_war_hair_tip
+  - first:
+      1: 100116
+    second: bip_gob_magSpine2
+  - first:
+      1: 100118
+    second: fantasy horde-orc_shield A
+  - first:
+      1: 100120
+    second: bip_gob_magRCalf
+  - first:
+      1: 100122
+    second: bon_gob_war_hair
+  - first:
+      1: 100124
+    second: bip_gob_magNeck2
+  - first:
+      1: 100126
+    second: fantasy horde-orc_spearskull
+  - first:
+      1: 100128
+    second: bon_gob_war_cloth00
+  - first:
+      1: 100130
+    second: fantasy horde-orc_staff B
+  - first:
+      1: 100132
+    second: fantasy horde-orc_avg_mohican
+  - first:
+      1: 100134
+    second: fantasy horde-orc_flag A
+  - first:
+      1: 100136
+    second: bip_gob_magLDigit22
+  - first:
+      1: 100138
+    second: bip_gob_magHeadBone001
+  - first:
+      1: 100140
+    second: bip_gob_magLDigit31
+  - first:
+      1: 100142
+    second: bip_gob_magLDigit32
+  - first:
+      1: 100144
+    second: bip_gob_magLDigit12
+  - first:
+      1: 100146
+    second: fantasy horde-orc_avg_shoe
+  - first:
+      1: 100148
+    second: bip_gob_magRForearm
+  - first:
+      1: 100150
+    second: bip_gob_magRDigit21
+  - first:
+      1: 100152
+    second: bip_gob_magLPalm
+  - first:
+      1: 100154
+    second: bon_gob_war_jaw_tip 1
+  - first:
+      1: 100156
+    second: bon_gob_war_ear L
+  - first:
+      1: 100158
+    second: bip_gob_magLDigit21
+  - first:
+      1: 100160
+    second: bip_gob_magRDigit12
+  - first:
+      1: 100162
+    second: bon_gob_war_cloth_tip
+  - first:
+      1: 100164
+    second: fantasy horde-orc_avg_cap
+  - first:
+      1: 100166
+    second: bip_gob_magRDigit22
+  - first:
+      1: 100168
+    second: bip_gob_magRCollarbone
+  - first:
+      1: 100170
+    second: bip_gob_magRDigit31
+  - first:
+      1: 100172
+    second: bip_gob_magLDigit11 1
+  - first:
+      1: 100174
+    second: bip_gob_magRDigit32
+  - first:
+      1: 100176
+    second: fantasy horde-orc_arch
+  - first:
+      1: 100178
+    second: bip_gob_magHeadBone002
+  - first:
+      1: 100180
+    second: bon_gob_war_cloth01
+  - first:
+      1: 100182
+    second: fantasy horde-orc_avg_skull
+  - first:
+      1: 100184
+    second: fantasy horde-orc_spear
+  - first:
+      1: 100186
+    second: fantasy horde-orc_avg_cloth
+  - first:
+      1: 100188
+    second: fantasy horde-orc_axe
+  - first:
+      1: 100190
+    second: bon_gob_war_jaw_tip
+  - first:
+      1: 100192
+    second: bip_gob_magLPlatform
+  - first:
+      1: 100194
+    second: bip_gob_magNeck1
+  - first:
+      1: 100196
+    second: fantasy horde-orc_avg_boot
+  - first:
+      1: 100198
+    second: fantasy horde-orc_avg_armor
+  - first:
+      1: 100200
+    second: bip_gob_magHead
+  - first:
+      1: 100202
+    second: fantasy horde-orc_club
+  - first:
+      1: 100204
+    second: bon_gob_war_ear R_tip
+  - first:
+      1: 100206
+    second: fantasy horde-orc_scimitar
+  - first:
+      1: 100208
+    second: fantasy horde-orc_flag C
+  - first:
+      1: 100210
+    second: ik_orc arch_top01
+  - first:
+      1: 100212
+    second: bone_orc arch_top00
+  - first:
+      1: 100214
+    second: ctrl_orc arch_dummie botton
+  - first:
+      1: 100216
+    second: bone_orc arch_top01
+  - first:
+      1: 100218
+    second: ik_bone_orc arch_botton01
+  - first:
+      1: 100220
+    second: bone_orc arch_botton01
+  - first:
+      1: 100222
+    second: ctrl_orc arch_main
+  - first:
+      1: 100224
+    second: bone_orc arch_botton_tip
+  - first:
+      1: 100226
+    second: bone_orc arch_botton00
+  - first:
+      1: 100228
+    second: ctrl_orc arch_dummie top
+  - first:
+      1: 100230
+    second: bone_orc arch_top_tip
+  - first:
+      1: 100232
+    second: ctrl_orc arch_arrow
+  - first:
+      1: 100234
+    second: bip_horde
+  - first:
+      1: 100236
+    second: bip_hordeHead
+  - first:
+      1: 100238
+    second: bip_hordeHeadBone001
+  - first:
+      1: 100240
+    second: bip_hordeHeadBone002
+  - first:
+      1: 100242
+    second: bip_hordeLCalf
+  - first:
+      1: 100244
+    second: bip_hordeLCollarbone
+  - first:
+      1: 100246
+    second: bip_hordeLDigit11
+  - first:
+      1: 100248
+    second: bip_hordeLDigit11 1
+  - first:
+      1: 100250
+    second: bip_hordeLDigit12
+  - first:
+      1: 100252
+    second: bip_hordeLDigit21
+  - first:
+      1: 100254
+    second: bip_hordeLDigit22
+  - first:
+      1: 100256
+    second: bip_hordeLDigit31
+  - first:
+      1: 100258
+    second: bip_hordeLDigit32
+  - first:
+      1: 100260
+    second: bip_hordeLFoot
+  - first:
+      1: 100262
+    second: bip_hordeLForearm
+  - first:
+      1: 100264
+    second: bip_hordeLIKTarget
+  - first:
+      1: 100266
+    second: bip_hordeLPalm
+  - first:
+      1: 100268
+    second: bip_hordeLPlatform
+  - first:
+      1: 100270
+    second: bip_hordeLThigh
+  - first:
+      1: 100272
+    second: bip_hordeLUpperarm
+  - first:
+      1: 100274
+    second: bip_hordeNeck1
+  - first:
+      1: 100276
+    second: bip_hordeNeck2
+  - first:
+      1: 100278
+    second: bip_hordePelvis
+  - first:
+      1: 100280
+    second: bip_hordeRCalf
+  - first:
+      1: 100282
+    second: bip_hordeRCollarbone
+  - first:
+      1: 100284
+    second: bip_hordeRDigit11
+  - first:
+      1: 100286
+    second: bip_hordeRDigit11 1
+  - first:
+      1: 100288
+    second: bip_hordeRDigit12
+  - first:
+      1: 100290
+    second: bip_hordeRDigit21
+  - first:
+      1: 100292
+    second: bip_hordeRDigit22
+  - first:
+      1: 100294
+    second: bip_hordeRDigit31
+  - first:
+      1: 100296
+    second: bip_hordeRDigit32
+  - first:
+      1: 100298
+    second: bip_hordeRFoot
+  - first:
+      1: 100300
+    second: bip_hordeRForearm
+  - first:
+      1: 100302
+    second: bip_hordeRibcage
+  - first:
+      1: 100304
+    second: bip_hordeRIKTarget
+  - first:
+      1: 100306
+    second: bip_hordeRPalm
+  - first:
+      1: 100308
+    second: bip_hordeRPlatform
+  - first:
+      1: 100310
+    second: bip_hordeRThigh
+  - first:
+      1: 100312
+    second: bip_hordeRUpperarm
+  - first:
+      1: 100314
+    second: bip_hordeSpine1
+  - first:
+      1: 100316
+    second: bip_hordeSpine2
+  - first:
+      1: 100318
+    second: bip_hordeSpine3
+  - first:
+      1: 100320
+    second: bip_hordeSpine4
+  - first:
+      1: 100322
+    second: fantasy horde-orc_avg_beard
+  - first:
+      1: 100324
+    second: fantasy horde-orc_fat_body
+  - first:
+      1: 100326
+    second: fantasy horde-orc_atl body
+  - first:
+      1: 100328
+    second: fantasy horde-orc_atl_mask
+  - first:
+      1: 100330
+    second: fantasy horde-orc_fat_boot
+  - first:
+      1: 100332
+    second: fantasy horde-orc_fat_mask
+  - first:
+      1: 100334
+    second: fantasy horde-orc_fat_shoe
+  - first:
+      1: 100336
+    second: BowPivot
+  - first:
+      1: 100338
+    second: fantasy horde-orc_shield
+  - first:
+      4: 400000
+    second: bip_gob_magLIKTarget
+  - first:
+      4: 400002
+    second: fantasy horde-orc_avg_arm calf_R
+  - first:
+      4: 400004
+    second: fantasy horde-orc_avg_knee armor L
+  - first:
+      4: 400006
+    second: fantasy horde-orc_avg_arm calf_L
+  - first:
+      4: 400008
+    second: fantasy horde-orc_avg_arm armor_R
+  - first:
+      4: 400010
+    second: fantasy horde-orc_avg_shoulder armor B_R
+  - first:
+      4: 400012
+    second: fantasy horde-orc_avg_shoulder armor C_L
+  - first:
+      4: 400014
+    second: fantasy horde-orc_avg_shoulder armor A_R
+  - first:
+      4: 400016
+    second: fantasy horde-orc_avg_ponny tail
+  - first:
+      4: 400018
+    second: fantasy horde-orc_avg_wrist armor_L
+  - first:
+      4: 400020
+    second: fantasy horde-orc_avg_arm armor_L
+  - first:
+      4: 400022
+    second: fantasy horde-orc_avg_knee armor_R
+  - first:
+      4: 400024
+    second: fantasy horde-orc_avg_shoulder armor B_L
+  - first:
+      4: 400026
+    second: fantasy horde-orc_avg_armor pelvis
+  - first:
+      4: 400028
+    second: fantasy horde-orc_avg_shoulder armor C_R
+  - first:
+      4: 400030
+    second: fantasy horde-orc_avg_helmet closed
+  - first:
+      4: 400032
+    second: fantasy horde-orc_avg_arm armor_L 1
+  - first:
+      4: 400034
+    second: fantasy horde-orc_avg_wrist armor_R
+  - first:
+      4: 400036
+    second: fantasy horde-orc_avg_shoulder armor A_L
+  - first:
+      4: 400038
+    second: //RootNode
+  - first:
+      4: 400040
+    second: bip_gob_magRIKTarget
+  - first:
+      4: 400042
+    second: bon_gob_war_jaw
+  - first:
+      4: 400044
+    second: goblin_quiver
+  - first:
+      4: 400046
+    second: bip_gob_magRPlatform
+  - first:
+      4: 400048
+    second: bip_gob_mag
+  - first:
+      4: 400050
+    second: fantasy horde-orc_flag B
+  - first:
+      4: 400052
+    second: fantasy horde-orc_sword
+  - first:
+      4: 400054
+    second: bon_gob_war_face
+  - first:
+      4: 400056
+    second: fantasy horde-orc_mace
+  - first:
+      4: 400058
+    second: fantasy horde-orc_avg_body
+  - first:
+      4: 400060
+    second: bon_gob_war_ear R_tip 1
+  - first:
+      4: 400062
+    second: fantasy horde-orc_avg_mask
+  - first:
+      4: 400064
+    second: fantasy horde-orc_staff C
+  - first:
+      4: 400066
+    second: fantasy horde-orc_morningstar
+  - first:
+      4: 400068
+    second: bip_gob_magLThigh
+  - first:
+      4: 400070
+    second: bip_gob_magLCalf
+  - first:
+      4: 400072
+    second: bip_gob_magLFoot
+  - first:
+      4: 400074
+    second: bip_gob_magRThigh
+  - first:
+      4: 400076
+    second: bip_gob_magLDigit11
+  - first:
+      4: 400078
+    second: bip_gob_magPelvis
+  - first:
+      4: 400080
+    second: bip_gob_magLForearm
+  - first:
+      4: 400082
+    second: fantasy horde-orc_avg_hair
+  - first:
+      4: 400084
+    second: fantasy horde-orc_staff A
+  - first:
+      4: 400086
+    second: bip_gob_magRPalm
+  - first:
+      4: 400088
+    second: bip_gob_magRDigit11 1
+  - first:
+      4: 400090
+    second: bip_gob_magRUpperarm
+  - first:
+      4: 400092
+    second: bip_gob_magLUpperarm
+  - first:
+      4: 400094
+    second: fantasy horde-orc_avg_helmet
+  - first:
+      4: 400096
+    second: bon_gob_war_ear R
+  - first:
+      4: 400098
+    second: bip_gob_magSpine4
+  - first:
+      4: 400100
+    second: bip_gob_magRibcage
+  - first:
+      4: 400102
+    second: bip_gob_magLCollarbone
+  - first:
+      4: 400104
+    second: bip_gob_magSpine3
+  - first:
+      4: 400106
+    second: bip_gob_magRFoot
+  - first:
+      4: 400108
+    second: bip_gob_magRDigit11
+  - first:
+      4: 400110
+    second: bone_orc arch_main
+  - first:
+      4: 400112
+    second: bip_gob_magSpine1
+  - first:
+      4: 400114
+    second: bon_gob_war_hair_tip
+  - first:
+      4: 400116
+    second: bip_gob_magSpine2
+  - first:
+      4: 400118
+    second: fantasy horde-orc_shield A
+  - first:
+      4: 400120
+    second: bip_gob_magRCalf
+  - first:
+      4: 400122
+    second: bon_gob_war_hair
+  - first:
+      4: 400124
+    second: bip_gob_magNeck2
+  - first:
+      4: 400126
+    second: fantasy horde-orc_spearskull
+  - first:
+      4: 400128
+    second: bon_gob_war_cloth00
+  - first:
+      4: 400130
+    second: fantasy horde-orc_staff B
+  - first:
+      4: 400132
+    second: fantasy horde-orc_avg_mohican
+  - first:
+      4: 400134
+    second: fantasy horde-orc_flag A
+  - first:
+      4: 400136
+    second: bip_gob_magLDigit22
+  - first:
+      4: 400138
+    second: bip_gob_magHeadBone001
+  - first:
+      4: 400140
+    second: bip_gob_magLDigit31
+  - first:
+      4: 400142
+    second: bip_gob_magLDigit32
+  - first:
+      4: 400144
+    second: bip_gob_magLDigit12
+  - first:
+      4: 400146
+    second: fantasy horde-orc_avg_shoe
+  - first:
+      4: 400148
+    second: bip_gob_magRForearm
+  - first:
+      4: 400150
+    second: bip_gob_magRDigit21
+  - first:
+      4: 400152
+    second: bip_gob_magLPalm
+  - first:
+      4: 400154
+    second: bon_gob_war_jaw_tip 1
+  - first:
+      4: 400156
+    second: bon_gob_war_ear L
+  - first:
+      4: 400158
+    second: bip_gob_magLDigit21
+  - first:
+      4: 400160
+    second: bip_gob_magRDigit12
+  - first:
+      4: 400162
+    second: bon_gob_war_cloth_tip
+  - first:
+      4: 400164
+    second: fantasy horde-orc_avg_cap
+  - first:
+      4: 400166
+    second: bip_gob_magRDigit22
+  - first:
+      4: 400168
+    second: bip_gob_magRCollarbone
+  - first:
+      4: 400170
+    second: bip_gob_magRDigit31
+  - first:
+      4: 400172
+    second: bip_gob_magLDigit11 1
+  - first:
+      4: 400174
+    second: bip_gob_magRDigit32
+  - first:
+      4: 400176
+    second: fantasy horde-orc_arch
+  - first:
+      4: 400178
+    second: bip_gob_magHeadBone002
+  - first:
+      4: 400180
+    second: bon_gob_war_cloth01
+  - first:
+      4: 400182
+    second: fantasy horde-orc_avg_skull
+  - first:
+      4: 400184
+    second: fantasy horde-orc_spear
+  - first:
+      4: 400186
+    second: fantasy horde-orc_avg_cloth
+  - first:
+      4: 400188
+    second: fantasy horde-orc_axe
+  - first:
+      4: 400190
+    second: bon_gob_war_jaw_tip
+  - first:
+      4: 400192
+    second: bip_gob_magLPlatform
+  - first:
+      4: 400194
+    second: bip_gob_magNeck1
+  - first:
+      4: 400196
+    second: fantasy horde-orc_avg_boot
+  - first:
+      4: 400198
+    second: fantasy horde-orc_avg_armor
+  - first:
+      4: 400200
+    second: bip_gob_magHead
+  - first:
+      4: 400202
+    second: fantasy horde-orc_club
+  - first:
+      4: 400204
+    second: bon_gob_war_ear R_tip
+  - first:
+      4: 400206
+    second: fantasy horde-orc_scimitar
+  - first:
+      4: 400208
+    second: fantasy horde-orc_flag C
+  - first:
+      4: 400210
+    second: ik_orc arch_top01
+  - first:
+      4: 400212
+    second: bone_orc arch_top00
+  - first:
+      4: 400214
+    second: ctrl_orc arch_dummie botton
+  - first:
+      4: 400216
+    second: bone_orc arch_top01
+  - first:
+      4: 400218
+    second: ik_bone_orc arch_botton01
+  - first:
+      4: 400220
+    second: bone_orc arch_botton01
+  - first:
+      4: 400222
+    second: ctrl_orc arch_main
+  - first:
+      4: 400224
+    second: bone_orc arch_botton_tip
+  - first:
+      4: 400226
+    second: bone_orc arch_botton00
+  - first:
+      4: 400228
+    second: ctrl_orc arch_dummie top
+  - first:
+      4: 400230
+    second: bone_orc arch_top_tip
+  - first:
+      4: 400232
+    second: ctrl_orc arch_arrow
+  - first:
+      4: 400234
+    second: bip_horde
+  - first:
+      4: 400236
+    second: bip_hordeHead
+  - first:
+      4: 400238
+    second: bip_hordeHeadBone001
+  - first:
+      4: 400240
+    second: bip_hordeHeadBone002
+  - first:
+      4: 400242
+    second: bip_hordeLCalf
+  - first:
+      4: 400244
+    second: bip_hordeLCollarbone
+  - first:
+      4: 400246
+    second: bip_hordeLDigit11
+  - first:
+      4: 400248
+    second: bip_hordeLDigit11 1
+  - first:
+      4: 400250
+    second: bip_hordeLDigit12
+  - first:
+      4: 400252
+    second: bip_hordeLDigit21
+  - first:
+      4: 400254
+    second: bip_hordeLDigit22
+  - first:
+      4: 400256
+    second: bip_hordeLDigit31
+  - first:
+      4: 400258
+    second: bip_hordeLDigit32
+  - first:
+      4: 400260
+    second: bip_hordeLFoot
+  - first:
+      4: 400262
+    second: bip_hordeLForearm
+  - first:
+      4: 400264
+    second: bip_hordeLIKTarget
+  - first:
+      4: 400266
+    second: bip_hordeLPalm
+  - first:
+      4: 400268
+    second: bip_hordeLPlatform
+  - first:
+      4: 400270
+    second: bip_hordeLThigh
+  - first:
+      4: 400272
+    second: bip_hordeLUpperarm
+  - first:
+      4: 400274
+    second: bip_hordeNeck1
+  - first:
+      4: 400276
+    second: bip_hordeNeck2
+  - first:
+      4: 400278
+    second: bip_hordePelvis
+  - first:
+      4: 400280
+    second: bip_hordeRCalf
+  - first:
+      4: 400282
+    second: bip_hordeRCollarbone
+  - first:
+      4: 400284
+    second: bip_hordeRDigit11
+  - first:
+      4: 400286
+    second: bip_hordeRDigit11 1
+  - first:
+      4: 400288
+    second: bip_hordeRDigit12
+  - first:
+      4: 400290
+    second: bip_hordeRDigit21
+  - first:
+      4: 400292
+    second: bip_hordeRDigit22
+  - first:
+      4: 400294
+    second: bip_hordeRDigit31
+  - first:
+      4: 400296
+    second: bip_hordeRDigit32
+  - first:
+      4: 400298
+    second: bip_hordeRFoot
+  - first:
+      4: 400300
+    second: bip_hordeRForearm
+  - first:
+      4: 400302
+    second: bip_hordeRibcage
+  - first:
+      4: 400304
+    second: bip_hordeRIKTarget
+  - first:
+      4: 400306
+    second: bip_hordeRPalm
+  - first:
+      4: 400308
+    second: bip_hordeRPlatform
+  - first:
+      4: 400310
+    second: bip_hordeRThigh
+  - first:
+      4: 400312
+    second: bip_hordeRUpperarm
+  - first:
+      4: 400314
+    second: bip_hordeSpine1
+  - first:
+      4: 400316
+    second: bip_hordeSpine2
+  - first:
+      4: 400318
+    second: bip_hordeSpine3
+  - first:
+      4: 400320
+    second: bip_hordeSpine4
+  - first:
+      4: 400322
+    second: fantasy horde-orc_avg_beard
+  - first:
+      4: 400324
+    second: fantasy horde-orc_fat_body
+  - first:
+      4: 400326
+    second: fantasy horde-orc_atl body
+  - first:
+      4: 400328
+    second: fantasy horde-orc_atl_mask
+  - first:
+      4: 400330
+    second: fantasy horde-orc_fat_boot
+  - first:
+      4: 400332
+    second: fantasy horde-orc_fat_mask
+  - first:
+      4: 400334
+    second: fantasy horde-orc_fat_shoe
+  - first:
+      4: 400336
+    second: BowPivot
+  - first:
+      4: 400338
+    second: fantasy horde-orc_shield
+  - first:
+      23: 2300000
+    second: fantasy horde-orc_avg_arm calf_R
+  - first:
+      23: 2300002
+    second: fantasy horde-orc_avg_knee armor L
+  - first:
+      23: 2300004
+    second: fantasy horde-orc_avg_arm calf_L
+  - first:
+      23: 2300006
+    second: fantasy horde-orc_avg_arm armor_R
+  - first:
+      23: 2300008
+    second: fantasy horde-orc_avg_shoulder armor B_R
+  - first:
+      23: 2300010
+    second: fantasy horde-orc_avg_shoulder armor C_L
+  - first:
+      23: 2300012
+    second: fantasy horde-orc_avg_shoulder armor A_R
+  - first:
+      23: 2300014
+    second: fantasy horde-orc_avg_wrist armor_L
+  - first:
+      23: 2300016
+    second: fantasy horde-orc_avg_arm armor_L
+  - first:
+      23: 2300018
+    second: fantasy horde-orc_avg_knee armor_R
+  - first:
+      23: 2300020
+    second: fantasy horde-orc_avg_shoulder armor B_L
+  - first:
+      23: 2300022
+    second: fantasy horde-orc_avg_shoulder armor C_R
+  - first:
+      23: 2300024
+    second: fantasy horde-orc_avg_helmet closed
+  - first:
+      23: 2300026
+    second: fantasy horde-orc_avg_arm armor_L 1
+  - first:
+      23: 2300028
+    second: fantasy horde-orc_avg_wrist armor_R
+  - first:
+      23: 2300030
+    second: fantasy horde-orc_avg_shoulder armor A_L
+  - first:
+      23: 2300032
+    second: goblin_quiver
+  - first:
+      23: 2300034
+    second: fantasy horde-orc_flag B
+  - first:
+      23: 2300036
+    second: fantasy horde-orc_sword
+  - first:
+      23: 2300038
+    second: fantasy horde-orc_mace
+  - first:
+      23: 2300040
+    second: fantasy horde-orc_staff C
+  - first:
+      23: 2300042
+    second: fantasy horde-orc_morningstar
+  - first:
+      23: 2300044
+    second: fantasy horde-orc_avg_hair
+  - first:
+      23: 2300046
+    second: fantasy horde-orc_staff A
+  - first:
+      23: 2300048
+    second: fantasy horde-orc_avg_helmet
+  - first:
+      23: 2300050
+    second: fantasy horde-orc_avg_beard
+  - first:
+      23: 2300052
+    second: fantasy horde-orc_shield A
+  - first:
+      23: 2300054
+    second: fantasy horde-orc_spearskull
+  - first:
+      23: 2300056
+    second: fantasy horde-orc_staff B
+  - first:
+      23: 2300058
+    second: fantasy horde-orc_avg_mohican
+  - first:
+      23: 2300060
+    second: fantasy horde-orc_flag A
+  - first:
+      23: 2300062
+    second: fantasy horde-orc_arch
+  - first:
+      23: 2300064
+    second: fantasy horde-orc_avg_skull
+  - first:
+      23: 2300066
+    second: fantasy horde-orc_spear
+  - first:
+      23: 2300068
+    second: fantasy horde-orc_axe
+  - first:
+      23: 2300070
+    second: fantasy horde-orc_avg_armor
+  - first:
+      23: 2300072
+    second: fantasy horde-orc_club
+  - first:
+      23: 2300074
+    second: fantasy horde-orc_scimitar
+  - first:
+      23: 2300076
+    second: fantasy horde-orc_flag C
+  - first:
+      23: 2300078
+    second: fantasy horde-orc_shield
+  - first:
+      33: 3300000
+    second: fantasy horde-orc_avg_arm calf_R
+  - first:
+      33: 3300002
+    second: fantasy horde-orc_avg_knee armor L
+  - first:
+      33: 3300004
+    second: fantasy horde-orc_avg_arm calf_L
+  - first:
+      33: 3300006
+    second: fantasy horde-orc_avg_arm armor_R
+  - first:
+      33: 3300008
+    second: fantasy horde-orc_avg_shoulder armor B_R
+  - first:
+      33: 3300010
+    second: fantasy horde-orc_avg_shoulder armor C_L
+  - first:
+      33: 3300012
+    second: fantasy horde-orc_avg_shoulder armor A_R
+  - first:
+      33: 3300014
+    second: fantasy horde-orc_avg_wrist armor_L
+  - first:
+      33: 3300016
+    second: fantasy horde-orc_avg_arm armor_L
+  - first:
+      33: 3300018
+    second: fantasy horde-orc_avg_knee armor_R
+  - first:
+      33: 3300020
+    second: fantasy horde-orc_avg_shoulder armor B_L
+  - first:
+      33: 3300022
+    second: fantasy horde-orc_avg_shoulder armor C_R
+  - first:
+      33: 3300024
+    second: fantasy horde-orc_avg_helmet closed
+  - first:
+      33: 3300026
+    second: fantasy horde-orc_avg_arm armor_L 1
+  - first:
+      33: 3300028
+    second: fantasy horde-orc_avg_wrist armor_R
+  - first:
+      33: 3300030
+    second: fantasy horde-orc_avg_shoulder armor A_L
+  - first:
+      33: 3300032
+    second: goblin_quiver
+  - first:
+      33: 3300034
+    second: fantasy horde-orc_flag B
+  - first:
+      33: 3300036
+    second: fantasy horde-orc_sword
+  - first:
+      33: 3300038
+    second: fantasy horde-orc_mace
+  - first:
+      33: 3300040
+    second: fantasy horde-orc_staff C
+  - first:
+      33: 3300042
+    second: fantasy horde-orc_morningstar
+  - first:
+      33: 3300044
+    second: fantasy horde-orc_avg_hair
+  - first:
+      33: 3300046
+    second: fantasy horde-orc_staff A
+  - first:
+      33: 3300048
+    second: fantasy horde-orc_avg_helmet
+  - first:
+      33: 3300050
+    second: fantasy horde-orc_avg_beard
+  - first:
+      33: 3300052
+    second: fantasy horde-orc_shield A
+  - first:
+      33: 3300054
+    second: fantasy horde-orc_spearskull
+  - first:
+      33: 3300056
+    second: fantasy horde-orc_staff B
+  - first:
+      33: 3300058
+    second: fantasy horde-orc_avg_mohican
+  - first:
+      33: 3300060
+    second: fantasy horde-orc_flag A
+  - first:
+      33: 3300062
+    second: fantasy horde-orc_arch
+  - first:
+      33: 3300064
+    second: fantasy horde-orc_avg_skull
+  - first:
+      33: 3300066
+    second: fantasy horde-orc_spear
+  - first:
+      33: 3300068
+    second: fantasy horde-orc_axe
+  - first:
+      33: 3300070
+    second: fantasy horde-orc_avg_armor
+  - first:
+      33: 3300072
+    second: fantasy horde-orc_club
+  - first:
+      33: 3300074
+    second: fantasy horde-orc_scimitar
+  - first:
+      33: 3300076
+    second: fantasy horde-orc_flag C
+  - first:
+      33: 3300078
+    second: fantasy horde-orc_shield
+  - first:
+      43: 4300000
+    second: fantasy horde-orc_avg_body
+  - first:
+      43: 4300002
+    second: fantasy horde-orc_avg_arm calf_L
+  - first:
+      43: 4300004
+    second: fantasy horde-orc_avg_knee armor L
+  - first:
+      43: 4300006
+    second: fantasy horde-orc_avg_arm calf_R
+  - first:
+      43: 4300008
+    second: fantasy horde-orc_avg_knee armor_R
+  - first:
+      43: 4300010
+    second: fantasy horde-orc_shield A
+  - first:
+      43: 4300012
+    second: fantasy horde-orc_avg_arm armor_L
+  - first:
+      43: 4300014
+    second: fantasy horde-orc_avg_shoulder armor B_L
+  - first:
+      43: 4300016
+    second: fantasy horde-orc_avg_shoulder armor C_L
+  - first:
+      43: 4300018
+    second: fantasy horde-orc_avg_shoulder armor A_L
+  - first:
+      43: 4300020
+    second: fantasy horde-orc_sword
+  - first:
+      43: 4300022
+    second: fantasy horde-orc_spear
+  - first:
+      43: 4300024
+    second: fantasy horde-orc_club
+  - first:
+      43: 4300026
+    second: fantasy horde-orc_axe
+  - first:
+      43: 4300028
+    second: fantasy horde-orc_scimitar
+  - first:
+      43: 4300030
+    second: fantasy horde-orc_mace
+  - first:
+      43: 4300032
+    second: fantasy horde-orc_morningstar
+  - first:
+      43: 4300034
+    second: fantasy horde-orc_staff A
+  - first:
+      43: 4300036
+    second: fantasy horde-orc_staff B
+  - first:
+      43: 4300038
+    second: fantasy horde-orc_staff C
+  - first:
+      43: 4300040
+    second: fantasy horde-orc_spearskull
+  - first:
+      43: 4300042
+    second: fantasy horde-orc_avg_arm armor_R
+  - first:
+      43: 4300044
+    second: fantasy horde-orc_avg_wrist armor_R
+  - first:
+      43: 4300046
+    second: fantasy horde-orc_avg_shoulder armor B_R
+  - first:
+      43: 4300048
+    second: fantasy horde-orc_avg_shoulder armor C_R
+  - first:
+      43: 4300050
+    second: fantasy horde-orc_avg_shoulder armor A_R
+  - first:
+      43: 4300052
+    second: fantasy horde-orc_avg_beard
+  - first:
+      43: 4300054
+    second: fantasy horde-orc_avg_skull
+  - first:
+      43: 4300056
+    second: fantasy horde-orc_avg_helmet closed
+  - first:
+      43: 4300058
+    second: fantasy horde-orc_avg_helmet
+  - first:
+      43: 4300060
+    second: fantasy horde-orc_avg_hair
+  - first:
+      43: 4300062
+    second: fantasy horde-orc_avg_mohican
+  - first:
+      43: 4300064
+    second: goblin_quiver
+  - first:
+      43: 4300066
+    second: fantasy horde-orc_flag B
+  - first:
+      43: 4300068
+    second: fantasy horde-orc_flag C
+  - first:
+      43: 4300070
+    second: fantasy horde-orc_flag A
+  - first:
+      43: 4300072
+    second: fantasy horde-orc_avg_armor
+  - first:
+      43: 4300074
+    second: fantasy horde-orc_arch
+  - first:
+      43: 4300076
+    second: fantasy horde-orc_avg_ponny tail
+  - first:
+      43: 4300078
+    second: fantasy horde-orc_avg_cap
+  - first:
+      43: 4300080
+    second: fantasy horde-orc_avg_shoe
+  - first:
+      43: 4300082
+    second: fantasy horde-orc_avg_boot
+  - first:
+      43: 4300084
+    second: fantasy horde-orc_avg_cloth
+  - first:
+      43: 4300086
+    second: fantasy horde-orc_avg_mask
+  - first:
+      43: 4300088
+    second: fantasy horde-orc_avg_armor pelvis
+  - first:
+      43: 4300090
+    second: fantasy horde-orc_avg_arm armor_L
+  - first:
+      43: 4300092
+    second: fantasy horde-orc_avg_wrist armor_L
+  - first:
+      43: 4300094
+    second: bip_gob_magPelvis
+  - first:
+      43: 4300096
+    second: bip_gob_magLThigh
+  - first:
+      43: 4300098
+    second: bip_gob_magLCalf
+  - first:
+      43: 4300100
+    second: bip_gob_magLFoot
+  - first:
+      43: 4300102
+    second: bip_gob_magLDigit11
+  - first:
+      43: 4300104
+    second: bip_gob_magRThigh
+  - first:
+      43: 4300106
+    second: bip_gob_magRCalf
+  - first:
+      43: 4300108
+    second: bip_gob_magRFoot
+  - first:
+      43: 4300110
+    second: bip_gob_magRDigit11
+  - first:
+      43: 4300112
+    second: bip_gob_magSpine1
+  - first:
+      43: 4300114
+    second: bip_gob_magSpine2
+  - first:
+      43: 4300116
+    second: bip_gob_magSpine3
+  - first:
+      43: 4300118
+    second: bip_gob_magSpine4
+  - first:
+      43: 4300120
+    second: bip_gob_magRibcage
+  - first:
+      43: 4300122
+    second: bip_gob_magLCollarbone
+  - first:
+      43: 4300124
+    second: bip_gob_magLUpperarm
+  - first:
+      43: 4300126
+    second: bip_gob_magLForearm
+  - first:
+      43: 4300128
+    second: bip_gob_magLPalm
+  - first:
+      43: 4300130
+    second: bip_gob_magLDigit11
+  - first:
+      43: 4300132
+    second: bip_gob_magLDigit12
+  - first:
+      43: 4300134
+    second: bip_gob_magLDigit21
+  - first:
+      43: 4300136
+    second: bip_gob_magLDigit22
+  - first:
+      43: 4300138
+    second: bip_gob_magLDigit31
+  - first:
+      43: 4300140
+    second: bip_gob_magLDigit32
+  - first:
+      43: 4300142
+    second: bip_gob_magRCollarbone
+  - first:
+      43: 4300144
+    second: bip_gob_magRUpperarm
+  - first:
+      43: 4300146
+    second: bip_gob_magRForearm
+  - first:
+      43: 4300148
+    second: bip_gob_magRPalm
+  - first:
+      43: 4300150
+    second: bip_gob_magRDigit11
+  - first:
+      43: 4300152
+    second: bip_gob_magRDigit12
+  - first:
+      43: 4300154
+    second: bip_gob_magRDigit21
+  - first:
+      43: 4300156
+    second: bip_gob_magRDigit22
+  - first:
+      43: 4300158
+    second: bip_gob_magRDigit31
+  - first:
+      43: 4300160
+    second: bip_gob_magRDigit32
+  - first:
+      43: 4300162
+    second: bip_gob_magNeck1
+  - first:
+      43: 4300164
+    second: bip_gob_magNeck2
+  - first:
+      43: 4300166
+    second: bip_gob_magHead
+  - first:
+      43: 4300168
+    second: bip_gob_magHeadBone001
+  - first:
+      43: 4300170
+    second: bip_gob_magHeadBone002
+  - first:
+      43: 4300172
+    second: fantasy horde-orc_fat_body
+  - first:
+      43: 4300174
+    second: fantasy horde-orc_atl body
+  - first:
+      43: 4300176
+    second: fantasy horde-orc_atl_mask
+  - first:
+      43: 4300178
+    second: fantasy horde-orc_fat_mask
+  - first:
+      43: 4300180
+    second: fantasy horde-orc_fat_boot
+  - first:
+      43: 4300182
+    second: fantasy horde-orc_fat_shoe
+  - first:
+      43: 4300184
+    second: fantasy horde-orc_shield
+  - first:
+      74: 7400000
+    second: Take 001
+  - first:
+      74: 7400002
+    second: idle
+  - first:
+      74: 7400004
+    second: idle0
+  - first:
+      74: 7400006
+    second: idle break 1
+  - first:
+      74: 7400008
+    second: idle break 2
+  - first:
+      74: 7400010
+    second: salute
+  - first:
+      74: 7400012
+    second: walk
+  - first:
+      74: 7400014
+    second: run
+  - first:
+      74: 7400016
+    second: run fast
+  - first:
+      74: 7400018
+    second: crouch
+  - first:
+      74: 7400020
+    second: crouch walk
+  - first:
+      74: 7400022
+    second: hit
+  - first:
+      74: 7400024
+    second: hit back
+  - first:
+      74: 7400026
+    second: jump
+  - first:
+      74: 7400028
+    second: falling
+  - first:
+      74: 7400030
+    second: die soft
+  - first:
+      74: 7400032
+    second: die hard
+  - first:
+      74: 7400034
+    second: idle fight
+  - first:
+      74: 7400036
+    second: idle break fight
+  - first:
+      74: 7400038
+    second: blocking
+  - first:
+      74: 7400040
+    second: axe attack
+  - first:
+      74: 7400042
+    second: sword attack
+  - first:
+      74: 7400044
+    second: sword double attack
+  - first:
+      74: 7400046
+    second: arch attack
+  - first:
+      74: 7400048
+    second: prepare spear
+  - first:
+      74: 7400050
+    second: spear attack
+  - first:
+      74: 7400052
+    second: casting A
+  - first:
+      74: 7400054
+    second: casting B
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      111: 11100000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: fantasy horde-orc_avg_ponny tail
+  - first:
+      137: 13700002
+    second: fantasy horde-orc_avg_armor pelvis
+  - first:
+      137: 13700004
+    second: fantasy horde-orc_avg_body
+  - first:
+      137: 13700006
+    second: fantasy horde-orc_avg_mask
+  - first:
+      137: 13700008
+    second: fantasy horde-orc_avg_shoe
+  - first:
+      137: 13700010
+    second: fantasy horde-orc_avg_cap
+  - first:
+      137: 13700012
+    second: fantasy horde-orc_avg_cloth
+  - first:
+      137: 13700014
+    second: fantasy horde-orc_avg_boot
+  - first:
+      137: 13700016
+    second: fantasy horde-orc_arch
+  - first:
+      137: 13700018
+    second: fantasy horde-orc_fat_body
+  - first:
+      137: 13700020
+    second: fantasy horde-orc_atl body
+  - first:
+      137: 13700022
+    second: fantasy horde-orc_atl_mask
+  - first:
+      137: 13700024
+    second: fantasy horde-orc_fat_boot
+  - first:
+      137: 13700026
+    second: fantasy horde-orc_fat_mask
+  - first:
+      137: 13700028
+    second: fantasy horde-orc_fat_shoe
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orc_A
+    second: {fileID: 2100000, guid: 44d76ee514bc34842a9fb972c49640a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orc_A_transp
+    second: {fileID: 2100000, guid: 3e09aa9d37330ce42a3809c9bd230434, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orc_Flag
+    second: {fileID: 2100000, guid: a60122155e5b8fb46a45452abf493aa6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orc_Staff
+    second: {fileID: 2100000, guid: 1f204f00c32d8e8448d238e232d21e8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orc_Weapons
+    second: {fileID: 2100000, guid: cd67c88ca781a3b419ce829bf39ccfe9, type: 2}
   materials:
     importMaterials: 1
     materialName: 1
     materialSearch: 0
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar to
       improve retargeting quality.\n\t'bip_hordeSpine1' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n\t'bip_hordeSpine4' is inbetween
       humanoid transforms and has rotation animation that will be discarded.\n\t'bip_hordeRibcage'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bip_hordeLDigit11
-      1' has scale animation that will be discarded.\n\t'bip_hordeLDigit12' has scale
-      animation that will be discarded.\n\t'bip_hordeLDigit22' has scale animation
-      that will be discarded.\n\t'bip_hordeLDigit32' has scale animation that will
-      be discarded.\n\t'bip_hordeRDigit12' has scale animation that will be discarded.\n\t'bip_hordeRDigit21'
-      has scale animation that will be discarded.\n\t'bip_hordeRDigit22' has scale
-      animation that will be discarded.\n\t'bip_hordeRDigit31' has scale animation
-      that will be discarded.\n\t'bip_hordeRDigit32' has scale animation that will
-      be discarded.\n\t'bip_hordeNeck2' is inbetween humanoid transforms and has rotation
-      animation that will be discarded.\n"
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'bip_hordeLPalm'
+      has scale animation that will be discarded.\n\t'bip_hordeLDigit11 1' has scale
+      animation that will be discarded.\n\t'bip_hordeLDigit12' has scale animation
+      that will be discarded.\n\t'bip_hordeLDigit22' has scale animation that will
+      be discarded.\n\t'bip_hordeLDigit32' has scale animation that will be discarded.\n\t'bip_hordeRDigit12'
+      has scale animation that will be discarded.\n\t'bip_hordeRDigit21' has scale
+      animation that will be discarded.\n\t'bip_hordeRDigit22' has scale animation
+      that will be discarded.\n\t'bip_hordeRDigit31' has scale animation that will
+      be discarded.\n\t'bip_hordeRDigit32' has scale animation that will be discarded.\n\t'bip_hordeNeck2'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: idle
       takeName: 
+      internalID: 0
       firstFrame: 5
       lastFrame: 120
       wrapMode: 2
@@ -627,6 +1776,7 @@ ModelImporter:
     - serializedVersion: 16
       name: idle break 1
       takeName: 
+      internalID: 0
       firstFrame: 120
       lastFrame: 190
       wrapMode: 0
@@ -655,6 +1805,7 @@ ModelImporter:
     - serializedVersion: 16
       name: idle break 2
       takeName: 
+      internalID: 0
       firstFrame: 190
       lastFrame: 290
       wrapMode: 0
@@ -683,6 +1834,7 @@ ModelImporter:
     - serializedVersion: 16
       name: salute
       takeName: 
+      internalID: 0
       firstFrame: 290
       lastFrame: 340
       wrapMode: 0
@@ -711,6 +1863,7 @@ ModelImporter:
     - serializedVersion: 16
       name: walk
       takeName: 
+      internalID: 0
       firstFrame: 385
       lastFrame: 415
       wrapMode: 2
@@ -739,6 +1892,7 @@ ModelImporter:
     - serializedVersion: 16
       name: run
       takeName: 
+      internalID: 0
       firstFrame: 420
       lastFrame: 445
       wrapMode: 2
@@ -767,6 +1921,7 @@ ModelImporter:
     - serializedVersion: 16
       name: run fast
       takeName: 
+      internalID: 0
       firstFrame: 455
       lastFrame: 478
       wrapMode: 2
@@ -775,7 +1930,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 1
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -795,6 +1950,7 @@ ModelImporter:
     - serializedVersion: 16
       name: crouch
       takeName: 
+      internalID: 0
       firstFrame: 485
       lastFrame: 499
       wrapMode: 0
@@ -823,6 +1979,7 @@ ModelImporter:
     - serializedVersion: 16
       name: crouch walk
       takeName: 
+      internalID: 0
       firstFrame: 500
       lastFrame: 550
       wrapMode: 2
@@ -851,6 +2008,7 @@ ModelImporter:
     - serializedVersion: 16
       name: hit
       takeName: 
+      internalID: 0
       firstFrame: 554
       lastFrame: 575
       wrapMode: 0
@@ -879,6 +2037,7 @@ ModelImporter:
     - serializedVersion: 16
       name: jump
       takeName: 
+      internalID: 0
       firstFrame: 580
       lastFrame: 623
       wrapMode: 0
@@ -907,6 +2066,7 @@ ModelImporter:
     - serializedVersion: 16
       name: falling
       takeName: 
+      internalID: 0
       firstFrame: 625
       lastFrame: 665
       wrapMode: 2
@@ -935,6 +2095,7 @@ ModelImporter:
     - serializedVersion: 16
       name: die soft
       takeName: 
+      internalID: 0
       firstFrame: 668
       lastFrame: 740
       wrapMode: 0
@@ -963,6 +2124,7 @@ ModelImporter:
     - serializedVersion: 16
       name: die hard
       takeName: 
+      internalID: 0
       firstFrame: 745
       lastFrame: 770
       wrapMode: 0
@@ -991,6 +2153,7 @@ ModelImporter:
     - serializedVersion: 16
       name: idle fight
       takeName: 
+      internalID: 0
       firstFrame: 775
       lastFrame: 820
       wrapMode: 2
@@ -999,7 +2162,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -1019,6 +2182,7 @@ ModelImporter:
     - serializedVersion: 16
       name: idle break fight
       takeName: 
+      internalID: 0
       firstFrame: 820
       lastFrame: 870
       wrapMode: 0
@@ -1047,6 +2211,7 @@ ModelImporter:
     - serializedVersion: 16
       name: blocking
       takeName: 
+      internalID: 0
       firstFrame: 870
       lastFrame: 890
       wrapMode: 0
@@ -1075,6 +2240,7 @@ ModelImporter:
     - serializedVersion: 16
       name: axe attack
       takeName: 
+      internalID: 0
       firstFrame: 890
       lastFrame: 910
       wrapMode: 0
@@ -1103,6 +2269,7 @@ ModelImporter:
     - serializedVersion: 16
       name: sword attack
       takeName: 
+      internalID: 0
       firstFrame: 910
       lastFrame: 930
       wrapMode: 0
@@ -1131,6 +2298,7 @@ ModelImporter:
     - serializedVersion: 16
       name: sword double attack
       takeName: 
+      internalID: 0
       firstFrame: 930
       lastFrame: 960
       wrapMode: 0
@@ -1159,6 +2327,7 @@ ModelImporter:
     - serializedVersion: 16
       name: arch attack
       takeName: 
+      internalID: 0
       firstFrame: 960
       lastFrame: 1015
       wrapMode: 0
@@ -1187,6 +2356,7 @@ ModelImporter:
     - serializedVersion: 16
       name: prepare spear
       takeName: 
+      internalID: 0
       firstFrame: 1015
       lastFrame: 1025
       wrapMode: 0
@@ -1215,6 +2385,7 @@ ModelImporter:
     - serializedVersion: 16
       name: spear attack
       takeName: 
+      internalID: 0
       firstFrame: 1025
       lastFrame: 1045
       wrapMode: 0
@@ -1243,6 +2414,7 @@ ModelImporter:
     - serializedVersion: 16
       name: casting A
       takeName: 
+      internalID: 0
       firstFrame: 1060
       lastFrame: 1090
       wrapMode: 0
@@ -1271,6 +2443,7 @@ ModelImporter:
     - serializedVersion: 16
       name: casting B
       takeName: 
+      internalID: 0
       firstFrame: 1090
       lastFrame: 1115
       wrapMode: 0
@@ -1302,13 +2475,23 @@ ModelImporter:
     globalScale: 0.01
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -1318,9 +2501,15 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 1
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
+    serializedVersion: 3
     human:
     - boneName: bip_hordePelvis
       humanName: Hips
@@ -1612,535 +2801,535 @@ ModelImporter:
         modified: 0
     skeleton:
     - name: fantasy horde_orc_avg(Clone)
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: bip_hordePelvis
+      parentName: 
       position: {x: 0.000000028124122, y: 0.727314, z: -0.0548782}
       rotation: {x: 0.49912265, y: -0.50086725, z: -0.4991312, w: 0.5008759}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: bip_hordeLThigh
+      parentName: 
       position: {x: -0.010401077, y: 0.028359583, z: 0.116508506}
       rotation: {x: -0.110452585, y: 0.99117416, z: -0.027961947, w: 0.06776644}
       scale: {x: 1.0000001, y: 1.0000001, z: 1.0000002}
-      transformModified: 1
     - name: bip_hordeLCalf
+      parentName: 
       position: {x: -0.34843665, y: 0.000000095367426, z: 0.000000076293944}
       rotation: {x: -0.008034153, y: 0.02106807, z: 0.34021163, w: 0.94007856}
       scale: {x: 1.0000001, y: 1, z: 1}
-      transformModified: 1
     - name: bip_hordeLFoot
+      parentName: 
       position: {x: -0.339098, y: -0.000000009536743, z: 0}
       rotation: {x: -0.06863839, y: 0.02565883, z: -0.7625335, w: 0.6427855}
       scale: {x: 1, y: 0.9999999, z: 0.99999994}
-      transformModified: 1
     - name: bip_hordeLDigit11
+      parentName: 
       position: {x: -0.2727673, y: 0.000000009536743, z: -0.000000019073486}
       rotation: {x: 0.000009213287, y: -0.00006167807, z: -0.14642318, w: 0.98922205}
       scale: {x: 0.9999999, y: 1, z: 0.99999976}
-      transformModified: 1
     - name: fantasy horde-orc_avg_arm calf_L
+      parentName: 
       position: {x: -0.35817352, y: 0.09088592, z: 0.2485617}
       rotation: {x: 0.7458117, y: -0.18713832, z: 0.61671627, w: 0.16853842}
       scale: {x: 1.0000025, y: 1.0000011, z: 1.0000017}
-      transformModified: 1
     - name: fantasy horde-orc_avg_knee armor L
+      parentName: 
       position: {x: -0.35817352, y: 0.09088592, z: 0.2485617}
       rotation: {x: 0.7458117, y: -0.18713832, z: 0.61671627, w: 0.16853842}
       scale: {x: 1.0000025, y: 1.0000011, z: 1.0000017}
-      transformModified: 1
     - name: bip_hordeRThigh
+      parentName: 
       position: {x: -0.010401077, y: 0.028359583, z: -0.11650855}
       rotation: {x: -0.11045278, y: 0.99117416, z: 0.0279626, w: -0.067765184}
       scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
-      transformModified: 1
     - name: bip_hordeRCalf
+      parentName: 
       position: {x: -0.34843665, y: 0.000000038146972, z: -0.000000076293944}
       rotation: {x: 0.007954014, y: -0.02109724, z: 0.34021023, w: 0.9400791}
       scale: {x: 0.99999994, y: 0.9999998, z: 1}
-      transformModified: 1
     - name: bip_hordeRFoot
+      parentName: 
       position: {x: -0.339098, y: 0, z: 0.000000019073486}
       rotation: {x: 0.06872926, y: -0.025548033, z: -0.76263654, w: 0.64265794}
       scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
-      transformModified: 1
     - name: bip_hordeRDigit11
+      parentName: 
       position: {x: -0.2727673, y: 0, z: 0}
       rotation: {x: 0.000000018065805, y: -0.000000032797434, z: -0.14626393, w: 0.9892456}
       scale: {x: 0.9999998, y: 0.99999994, z: 0.99999994}
-      transformModified: 1
     - name: fantasy horde-orc_avg_arm calf_R
+      parentName: 
       position: {x: -0.35817543, y: 0.09090897, z: -0.248551}
       rotation: {x: 0.61672884, y: -0.16857584, z: 0.74580276, w: 0.18709883}
       scale: {x: 1.0000032, y: 1.000001, z: 1.0000017}
-      transformModified: 1
     - name: fantasy horde-orc_avg_knee armor_R
+      parentName: 
       position: {x: -0.35817543, y: 0.090908974, z: -0.248551}
       rotation: {x: 0.61672884, y: -0.16857584, z: 0.74580276, w: 0.18709883}
       scale: {x: 1.0000032, y: 1.000001, z: 1.0000017}
-      transformModified: 1
     - name: bip_hordeSpine1
+      parentName: 
       position: {x: -0.027610473, y: -0.0021124887, z: -0.000000005242837}
       rotation: {x: 0.000000008064103, y: -0.00000003700321, z: -0.14943992, w: 0.98877084}
       scale: {x: 1.0000002, y: 1.0000002, z: 1}
-      transformModified: 1
     - name: bip_hordeSpine2
+      parentName: 
       position: {x: -0.15611182, y: 0.000000019073486, z: 7.2759575e-14}
       rotation: {x: 5.323155e-10, y: -0.000000010003837, z: 0.16945663, w: 0.98553765}
       scale: {x: 1.0000004, y: 1.0000004, z: 1.0000001}
-      transformModified: 1
     - name: bip_hordeSpine3
+      parentName: 
       position: {x: -0.13298653, y: 0.0000000023841857, z: 7.2759575e-14}
       rotation: {x: 0.0000000048457496, y: 0.0000000664838, z: 0.084482946, w: 0.9964249}
       scale: {x: 0.99999994, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: bip_hordeSpine4
+      parentName: 
       position: {x: -0.14291069, y: 0, z: 7.2759575e-14}
       rotation: {x: 0.0000000025552058, y: 0.000000011468991, z: -0.086376436, w: 0.9962626}
       scale: {x: 0.9999992, y: 0.9999992, z: 0.9999998}
-      transformModified: 1
     - name: bip_hordeRibcage
+      parentName: 
       position: {x: -0.19257697, y: 0, z: 7.2759575e-14}
       rotation: {x: 2.818776e-10, y: -0.000000029703832, z: -0.020119103, w: 0.9997976}
       scale: {x: 1.0000004, y: 1.0000004, z: 1.0000001}
-      transformModified: 1
     - name: bip_hordeLCollarbone
+      parentName: 
       position: {x: 0.00014648437, y: 0.052127525, z: 0.076203085}
       rotation: {x: 0.04592916, y: 0.7246256, z: 0.16804904, w: 0.66675925}
       scale: {x: 0.99999994, y: 0.9999999, z: 1}
-      transformModified: 1
     - name: bip_hordeLUpperarm
+      parentName: 
       position: {x: -0.1411635, y: 0.000000019073486, z: -0.00000015258789}
       rotation: {x: 0.15676902, y: -0.042379133, z: -0.18477988, w: 0.9692698}
       scale: {x: 1, y: 1, z: 0.9999999}
-      transformModified: 1
     - name: bip_hordeLForearm
+      parentName: 
       position: {x: -0.2893366, y: 0.000000019073486, z: 0}
       rotation: {x: -0.08401805, y: -0.012193792, z: 0.006124821, w: 0.99637085}
       scale: {x: 0.99999994, y: 1.0000001, z: 1.0000002}
-      transformModified: 1
     - name: bip_hordeLPalm
+      parentName: 
       position: {x: -0.27469072, y: 0.000000019073486, z: 0}
       rotation: {x: -0.6880299, y: 0.083322465, z: -0.027650453, w: 0.7203525}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
-      transformModified: 1
     - name: bip_hordeLDigit11 1
+      parentName: 
       position: {x: -0.046464413, y: -0.012190138, z: 0.06375552}
       rotation: {x: 0.42904487, y: 0.29078934, z: -0.102694266, w: 0.84900886}
       scale: {x: 0.9999999, y: 0.9999998, z: 0.9999999}
-      transformModified: 1
     - name: bip_hordeLDigit12
+      parentName: 
       position: {x: -0.09882387, y: -0.000000038146972, z: 0}
       rotation: {x: 0.00006312323, y: 0.0000072516, z: 0.22500908, w: 0.97435665}
       scale: {x: 1, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: bip_hordeLDigit21
+      parentName: 
       position: {x: -0.15915401, y: -0.008363379, z: 0.05603337}
       rotation: {x: 0.09590551, y: 0.040428802, z: 0.010529818, w: 0.9945134}
       scale: {x: 0.99999994, y: 0.9999998, z: 0.99999994}
-      transformModified: 1
     - name: bip_hordeLDigit22
+      parentName: 
       position: {x: -0.08066669, y: 0, z: 0}
       rotation: {x: 0.00000043590268, y: -0.000000047767756, z: 0.096570395, w: 0.99532616}
       scale: {x: 1.0000001, y: 1, z: 1}
-      transformModified: 1
     - name: bip_hordeLDigit31
+      parentName: 
       position: {x: -0.16665894, y: -0.0056266785, z: -0.014528999}
       rotation: {x: -0.0054003485, y: -0.0067661074, z: 0.083980024, w: 0.9964299}
       scale: {x: 0.99999994, y: 0.9999998, z: 0.9999999}
-      transformModified: 1
     - name: bip_hordeLDigit32
+      parentName: 
       position: {x: -0.08758961, y: 0.00000015258789, z: -0.000000019073486}
       rotation: {x: -0.000025444137, y: -0.00016512733, z: 0.15663941, w: 0.9876559}
       scale: {x: 1.0000001, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: ctrl_orc arch_main
+      parentName: 
       position: {x: -0.124559365, y: -0.049852446, z: 0.02655876}
       rotation: {x: 0.69218045, y: 0.0193315, z: 0.017708264, w: 0.72124827}
       scale: {x: 1.0000004, y: 0.9999999, z: 0.9999997}
-      transformModified: 1
     - name: bone_orc arch_main
+      parentName: 
       position: {x: 0.008793068, y: -0.044656467, z: 0}
       rotation: {x: 0.000000013385079, y: -0.00000000753406, z: -0.68721557, w: 0.72645354}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: ctrl_orc arch_arrow
+      parentName: 
       position: {x: 0.19199483, y: 0.021117954, z: 0.0069422913}
       rotation: {x: -0.7071069, y: -0.000000009219626, z: 0.000000019756337, w: 0.70710677}
       scale: {x: 1, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: bone_orc arch_botton00
+      parentName: 
       position: {x: 0.0042595672, y: 0.0013941955, z: 0.0022053337}
       rotation: {x: -0.7067756, y: 0.07456464, z: -0.058984235, w: -0.7010201}
       scale: {x: 0.9999998, y: 0.9999996, z: 0.99999976}
-      transformModified: 1
     - name: bone_orc arch_botton01
+      parentName: 
       position: {x: -0.57511705, y: 0.0000023651123, z: 0}
       rotation: {x: 0.00032495084, y: -0.00010862037, z: 0.9812576, w: -0.19270039}
       scale: {x: 1.0000004, y: 0.99999994, z: 1.0000001}
-      transformModified: 1
     - name: bone_orc arch_top00
+      parentName: 
       position: {x: 0.002952938, y: 0.0013583374, z: 0.000663414}
       rotation: {x: -0.50307083, y: -0.49418244, z: 0.51059294, w: -0.49193326}
       scale: {x: 1.0000001, y: 0.9999999, z: 0.9999997}
-      transformModified: 1
     - name: bone_orc arch_top01
+      parentName: 
       position: {x: -0.52761924, y: -0.00000030517577, z: 0}
       rotation: {x: 0.00076090696, y: -0.00006894394, z: 0.98132604, w: 0.19235031}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_arm armor_L
+      parentName: 
       position: {x: -0.46352372, y: -0.03004157, z: 1.02955}
       rotation: {x: -0.11972002, y: 0.688873, z: -0.0038977645, w: 0.7149167}
       scale: {x: 0.99999946, y: 1.0000001, z: 1.0000006}
-      transformModified: 1
     - name: fantasy horde-orc_avg_wrist armor_L
+      parentName: 
       position: {x: -0.46352318, y: -0.030041598, z: 1.0295502}
       rotation: {x: -0.11972028, y: 0.688873, z: -0.003897978, w: 0.7149167}
       scale: {x: 0.99999946, y: 1.0000001, z: 1.0000006}
-      transformModified: 1
     - name: fantasy horde-orc_shield A
+      parentName: 
       position: {x: -0.38523567, y: 0.030911217, z: -0.07241134}
       rotation: {x: 0.09340565, y: 0.69391006, z: 0.7139653, w: 0.0042302}
       scale: {x: 0.9999995, y: 1.0000001, z: 1.0000004}
-      transformModified: 1
     - name: fantasy horde-orc_avg_shoulder armor A_L
+      parentName: 
       position: {x: -0.8675732, y: 0.312881, z: 0.95995915}
       rotation: {x: -0.077161245, y: -0.4243208, z: -0.040929224, w: 0.9012895}
       scale: {x: -1.0000006, y: -1.0000002, z: -1.0000006}
-      transformModified: 1
     - name: fantasy horde-orc_avg_shoulder armor B_L
+      parentName: 
       position: {x: -0.8675732, y: 0.312881, z: 0.95995915}
       rotation: {x: -0.07716156, y: -0.42432082, z: -0.040929507, w: 0.90128946}
       scale: {x: -1.0000007, y: -1.0000001, z: -1.0000007}
-      transformModified: 1
     - name: fantasy horde-orc_avg_shoulder armor C_L
+      parentName: 
       position: {x: -0.23275273, y: -0.17633653, z: 1.3162881}
       rotation: {x: 0.08234341, y: -0.08776398, z: -0.32453775, w: 0.93818563}
       scale: {x: -0.9999999, y: -1, z: -1}
-      transformModified: 1
     - name: bip_hordeNeck1
+      parentName: 
       position: {x: 0.0010609436, y: 0.013585076, z: -0.0000000071134854}
       rotation: {x: -0.000000013885395, y: -0.000000054548632, z: -0.13572192, w: 0.99074703}
       scale: {x: 0.99999994, y: 0.9999999, z: 0.99999994}
-      transformModified: 1
     - name: bip_hordeNeck2
+      parentName: 
       position: {x: -0.046398927, y: 0, z: 0}
       rotation: {x: -0.000000012594278, y: -0.0000000067993113, z: -0.1736482, w: 0.9848078}
       scale: {x: 0.99999994, y: 1, z: 0.9999999}
-      transformModified: 1
     - name: bip_hordeHead
+      parentName: 
       position: {x: -0.08140343, y: -0.000000076293944, z: 7.2759575e-14}
       rotation: {x: -0.0000000028017748, y: 0.00000006698079, z: 0.34852353, w: 0.9373}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: bip_hordeHeadBone001
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -4.5732342e-14, y: -1.2997914e-27, z: 2.8421713e-14, w: 1}
       scale: {x: 0.99999994, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: bip_hordeHeadBone002
+      parentName: 
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -4.5732342e-14, y: -1.2997914e-27, z: 2.8421713e-14, w: 1}
       scale: {x: 0.99999994, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: bon_gob_war_ear L
+      parentName: 
       position: {x: -0.039403837, y: 0.02647791, z: 0.08821074}
       rotation: {x: -0.48700225, y: 0.22235677, z: 0.5126682, w: 0.67123586}
       scale: {x: 0.9999999, y: 0.9999999, z: 1.0000004}
-      transformModified: 1
     - name: bon_gob_war_ear R
+      parentName: 
       position: {x: -0.036259003, y: 0.026478035, z: -0.0792688}
       rotation: {x: 0.6688721, y: 0.5129636, z: 0.22936535, w: -0.48669288}
       scale: {x: 1.0000002, y: 0.9999998, z: 0.99999994}
-      transformModified: 1
     - name: bon_gob_war_face
+      parentName: 
       position: {x: -0.07152664, y: 0.07165781, z: 0.0000006103516}
       rotation: {x: -0.6736263, y: 0.73907214, z: -0.00000071777197, w: 0.0000003391819}
       scale: {x: 1.0000011, y: 1.0000006, z: 0.9999997}
-      transformModified: 1
     - name: bon_gob_war_hair
+      parentName: 
       position: {x: -0.14209794, y: -0.02778291, z: 0.00000045776366}
       rotation: {x: 0.9018486, y: 0.43205217, z: 0.00000045145828, w: 0.0000008411843}
       scale: {x: 1.0000004, y: 1.0000006, z: 0.9999999}
-      transformModified: 1
     - name: bon_gob_war_jaw
+      parentName: 
       position: {x: -0.0017311096, y: 0.038811497, z: 0.0000010681152}
       rotation: {x: -0.46909833, y: 0.8831459, z: -0.00000064888104, w: 0.00000014219111}
       scale: {x: 0.9999997, y: 1.0000001, z: 0.9999999}
-      transformModified: 1
     - name: fantasy horde-orc_avg_beard
+      parentName: 
       position: {x: -0.7576412, y: -1.240401, z: 0.0000014113784}
       rotation: {x: 0.6244785, y: 0.33170265, z: 0.6244785, w: -0.33170265}
       scale: {x: 0.9999999, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_hair
+      parentName: 
       position: {x: 1.4502199, y: -0.027926575, z: 0.000000042915417}
       rotation: {x: 0.7071068, y: 0.000000053589115, z: -0.7071068, w: 0.000000053589115}
       scale: {x: 0.9999999, y: 1, z: 1.0000001}
-      transformModified: 1
     - name: fantasy horde-orc_avg_helmet
+      parentName: 
       position: {x: 1.4502199, y: -0.027926575, z: 0.000000042915417}
       rotation: {x: 0.7071068, y: 0.00000020044466, z: -0.7071068, w: 0.00000020044466}
       scale: {x: 0.99999976, y: 1.0000001, z: 0.9999998}
-      transformModified: 1
     - name: fantasy horde-orc_avg_helmet closed
+      parentName: 
       position: {x: 1.4502199, y: -0.027926575, z: 0.000000042915417}
       rotation: {x: 0.7071068, y: 0.00000020044466, z: -0.7071068, w: 0.00000020044466}
       scale: {x: 0.99999976, y: 1.0000001, z: 0.9999998}
-      transformModified: 1
     - name: fantasy horde-orc_avg_mohican
+      parentName: 
       position: {x: 1.4502199, y: -0.027926575, z: 0.000000042915417}
       rotation: {x: 0.7071068, y: 0.00000020044466, z: -0.7071068, w: 0.00000020044466}
       scale: {x: 0.99999976, y: 1.0000001, z: 0.9999998}
-      transformModified: 1
     - name: fantasy horde-orc_avg_skull
+      parentName: 
       position: {x: -0.0813594, y: 0.18052094, z: -2.1827872e-13}
       rotation: {x: 0.7071068, y: 0.00000020044466, z: -0.7071068, w: 0.00000020044466}
       scale: {x: 0.99999976, y: 1.0000001, z: 0.9999998}
-      transformModified: 1
     - name: bip_hordeRCollarbone
+      parentName: 
       position: {x: 0.00014648437, y: 0.05212752, z: -0.076203085}
       rotation: {x: -0.04592893, y: -0.7246253, z: 0.1680491, w: 0.66675955}
       scale: {x: 1, y: 0.99999994, z: 1}
-      transformModified: 1
     - name: bip_hordeRUpperarm
+      parentName: 
       position: {x: -0.14116348, y: 0.000000019073486, z: 0}
       rotation: {x: -0.15656127, y: 0.042817436, z: -0.18458503, w: 0.9693212}
       scale: {x: 0.9999999, y: 0.99999994, z: 0.99999994}
-      transformModified: 1
     - name: bip_hordeRForearm
+      parentName: 
       position: {x: -0.28933656, y: -0.000000019073486, z: 0}
       rotation: {x: 0.08401926, y: 0.012216405, z: 0.0059241247, w: 0.9963716}
       scale: {x: 0.99999994, y: 0.9999999, z: 0.9999999}
-      transformModified: 1
     - name: bip_hordeRPalm
+      parentName: 
       position: {x: -0.2746908, y: -0.000000009536743, z: 0}
       rotation: {x: 0.688506, y: -0.08155007, z: -0.02237784, w: 0.7202835}
       scale: {x: 1.0000001, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: bip_hordeRDigit11 1
+      parentName: 
       position: {x: -0.046465926, y: -0.012188631, z: -0.06375808}
       rotation: {x: -0.39377645, y: -0.3086168, z: -0.07445129, w: 0.86264294}
       scale: {x: 1.0000001, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: bip_hordeRDigit12
+      parentName: 
       position: {x: -0.09882389, y: 0, z: 0}
       rotation: {x: -0.000063202555, y: -0.000007239327, z: 0.22500907, w: 0.9743567}
       scale: {x: 0.99999994, y: 0.9999998, z: 1}
-      transformModified: 1
     - name: bip_hordeRDigit21
+      parentName: 
       position: {x: -0.15915558, y: -0.008359356, z: -0.05602922}
       rotation: {x: -0.01225898, y: -0.0033233261, z: 0.0885827, w: 0.9959879}
       scale: {x: 1, y: 1, z: 1.0000002}
-      transformModified: 1
     - name: bip_hordeRDigit22
+      parentName: 
       position: {x: -0.080666654, y: -0.00000015258789, z: 0.000000038146972}
       rotation: {x: -0.0000004631529, y: -0.000000030609062, z: 0.09657043, w: 0.99532616}
       scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
-      transformModified: 1
     - name: bip_hordeRDigit31
+      parentName: 
       position: {x: -0.16666193, y: -0.0056208936, z: 0.014533008}
       rotation: {x: 0.05859028, y: 0.036038768, z: 0.08992042, w: 0.9935707}
       scale: {x: 1, y: 0.9999999, z: 1.0000001}
-      transformModified: 1
     - name: bip_hordeRDigit32
+      parentName: 
       position: {x: -0.08758968, y: 0, z: -0.000000038146972}
       rotation: {x: 0.00002545716, y: 0.00016506902, z: 0.15663935, w: 0.9876559}
       scale: {x: 1.0000001, y: 1.0000001, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_axe
+      parentName: 
       position: {x: -0.12089699, y: -0.04781601, z: -0.011411209}
       rotation: {x: -0.000000116635384, y: 0.9931647, z: -0.0000012477632, w: -0.11672124}
       scale: {x: 1.0000001, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_club
+      parentName: 
       position: {x: -0.12089699, y: -0.04781601, z: -0.011411209}
       rotation: {x: 0.00000012392805, y: 0.9931647, z: -0.0000016264682, w: -0.116721295}
       scale: {x: 0.9999998, y: 0.99999917, z: 1.0000012}
-      transformModified: 1
     - name: fantasy horde-orc_mace
+      parentName: 
       position: {x: -0.12089699, y: -0.04781601, z: -0.011411209}
       rotation: {x: 0.00000014448226, y: 0.9931647, z: -0.0000013877434, w: -0.1167213}
       scale: {x: 0.9999997, y: 0.99999946, z: 1.0000012}
-      transformModified: 1
     - name: fantasy horde-orc_morningstar
+      parentName: 
       position: {x: -0.12089699, y: -0.04781601, z: -0.011411209}
       rotation: {x: 0.00000014448226, y: 0.9931647, z: -0.0000013877434, w: -0.1167213}
       scale: {x: 0.9999997, y: 0.99999946, z: 1.0000012}
-      transformModified: 1
     - name: fantasy horde-orc_scimitar
+      parentName: 
       position: {x: -0.12089699, y: -0.04781601, z: -0.011411209}
       rotation: {x: 0.00000018002659, y: 0.9931647, z: -0.000001149132, w: -0.11672131}
       scale: {x: 1.0000005, y: 1.0000002, z: 0.99999964}
-      transformModified: 1
     - name: fantasy horde-orc_spear
+      parentName: 
       position: {x: -0.1632968, y: -0.0437883, z: -0.2433287}
       rotation: {x: -0.15221077, y: 0.9785654, z: 0.006685524, w: -0.13855337}
       scale: {x: 0.99999976, y: 1, z: 0.99999994}
-      transformModified: 1
     - name: fantasy horde-orc_spearskull
+      parentName: 
       position: {x: -0.16329692, y: -0.043788146, z: -0.2433288}
       rotation: {x: -0.15221073, y: 0.9785654, z: 0.0066855066, w: -0.13855329}
       scale: {x: 1, y: 1.0000001, z: 1.0000002}
-      transformModified: 1
     - name: fantasy horde-orc_staff A
+      parentName: 
       position: {x: -0.17912994, y: -0.041832276, z: -0.25712883}
       rotation: {x: -0.15221067, y: 0.9785654, z: 0.0066852905, w: -0.13855334}
       scale: {x: 0.99999994, y: 1.0000001, z: 0.9999999}
-      transformModified: 1
     - name: fantasy horde-orc_staff B
+      parentName: 
       position: {x: -0.17915484, y: -0.073930666, z: -0.27856848}
       rotation: {x: -0.15221067, y: 0.9785654, z: 0.006685617, w: -0.13855337}
       scale: {x: 1.0000001, y: 1.0000001, z: 1.0000004}
-      transformModified: 1
     - name: fantasy horde-orc_staff C
+      parentName: 
       position: {x: -0.17912994, y: -0.041832276, z: -0.25712883}
       rotation: {x: -0.15221067, y: 0.9785654, z: 0.006685617, w: -0.13855337}
       scale: {x: 1.0000001, y: 1.0000001, z: 1.0000004}
-      transformModified: 1
     - name: fantasy horde-orc_sword
+      parentName: 
       position: {x: -0.12089699, y: -0.04781601, z: -0.011411132}
       rotation: {x: -0.0000012386583, y: -0.0000005313201, z: 0.00000020861572, w: 1}
       scale: {x: 0.9999994, y: 1.0000005, z: 1.0000002}
-      transformModified: 1
     - name: fantasy horde-orc_avg_arm armor_R
+      parentName: 
       position: {x: -0.43633938, y: -0.030932913, z: -1.0299681}
       rotation: {x: 0.38132602, y: 0.07404921, z: 0.9162382, w: -0.09805512}
       scale: {x: 0.9999999, y: 1.0000007, z: 1.0000004}
-      transformModified: 1
     - name: fantasy horde-orc_avg_wrist armor_R
+      parentName: 
       position: {x: -0.43633938, y: -0.030933084, z: -1.0299679}
       rotation: {x: -0.09805481, y: 0.91623825, z: -0.074048884, w: -0.38132596}
       scale: {x: -1, y: -1.0000002, z: -0.9999998}
-      transformModified: 1
     - name: fantasy horde-orc_avg_shoulder armor A_R
+      parentName: 
       position: {x: -0.87000763, y: 0.30222175, z: -0.9611701}
       rotation: {x: 0.42415774, y: -0.074585766, z: 0.90181917, w: 0.035346232}
       scale: {x: 1.0000006, y: 1.0000001, z: 1.0000004}
-      transformModified: 1
     - name: fantasy horde-orc_avg_shoulder armor B_R
+      parentName: 
       position: {x: -0.87000763, y: 0.30222175, z: -0.9611701}
       rotation: {x: 0.42415774, y: -0.07458592, z: 0.90181917, w: 0.03534647}
       scale: {x: 1.0000006, y: 1.0000005, z: 1.0000005}
-      transformModified: 1
     - name: fantasy horde-orc_avg_shoulder armor C_R
+      parentName: 
       position: {x: -0.23275264, y: -0.1763364, z: -1.316288}
       rotation: {x: 0.08776404, y: 0.08234341, z: 0.9381858, w: 0.32453737}
       scale: {x: 0.9999997, y: 0.9999997, z: 1.0000002}
-      transformModified: 1
     - name: fantasy horde-orc_flag A
+      parentName: 
       position: {x: -0.67477906, y: -0.048531134, z: -0.12955184}
       rotation: {x: 0.7262807, y: 0.00336165, z: -0.6854692, w: -0.0513525}
       scale: {x: 0.70140994, y: 0.70141006, z: 0.70141006}
-      transformModified: 1
     - name: fantasy horde-orc_flag B
+      parentName: 
       position: {x: -0.47281432, y: -0.062721886, z: -0.11840179}
       rotation: {x: 0.5518303, y: 0.4722057, z: -0.4896663, w: -0.48242304}
       scale: {x: 0.70141006, y: 0.7014099, z: 0.70141}
-      transformModified: 1
     - name: fantasy horde-orc_flag C
+      parentName: 
       position: {x: -0.67477906, y: -0.048531134, z: -0.12955184}
       rotation: {x: 0.7262807, y: 0.00336165, z: -0.6854692, w: -0.0513525}
       scale: {x: 0.70140994, y: 0.70141006, z: 0.70141006}
-      transformModified: 1
     - name: goblin_quiver
+      parentName: 
       position: {x: 1.3250881, y: -0.0047632693, z: 0.046647128}
       rotation: {x: 0.71921575, y: 0.08419335, z: -0.6776087, w: -0.12840022}
       scale: {x: 1.0000001, y: 1.0000007, z: 0.9999997}
-      transformModified: 1
     - name: fantasy horde-orc_avg_armor
+      parentName: 
       position: {x: 0.8809734, y: -0.027340975, z: 0.000000045299675}
       rotation: {x: 0.70693535, y: -0.015570036, z: -0.70693535, w: -0.015570036}
       scale: {x: 1.0000002, y: 0.99999976, z: 0.99999946}
-      transformModified: 1
     - name: bon_gob_war_cloth00
+      parentName: 
       position: {x: -0.075379334, y: 0.20983398, z: -0.00000032350187}
       rotation: {x: -0.023121089, y: 0.6752007, z: 0.7368413, w: -0.025185607}
       scale: {x: 1.0000008, y: 0.9999995, z: 1.0000004}
-      transformModified: 1
     - name: bon_gob_war_cloth01
+      parentName: 
       position: {x: -0.23386863, y: 0.000000051259992, z: -0.000000057220458}
       rotation: {x: 0.00043509118, y: -0.016128402, z: -0.0005329398, w: 0.9998697}
       scale: {x: 1, y: 0.99999994, z: 1.0000001}
-      transformModified: 1
     - name: fantasy horde-orc_arch
+      parentName: 
       position: {x: -0.6848572, y: 0.7213583, z: -0.036638938}
       rotation: {x: 0.87819207, y: 0.43721202, z: -0.17118387, w: 0.091216594}
       scale: {x: 1.0000001, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_atl body
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_atl_mask
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_armor pelvis
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_body
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_boot
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_cap
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_cloth
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_mask
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_ponny tail
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_avg_shoe
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_fat_body
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_fat_boot
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_fat_mask
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     - name: fantasy horde-orc_fat_shoe
+      parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
-      transformModified: 1
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -2148,8 +3337,11 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 0.01
     rootMotionBoneName: 
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 3
   humanoidOversampling: 1

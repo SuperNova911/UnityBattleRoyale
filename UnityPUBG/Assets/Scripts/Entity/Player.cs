@@ -40,15 +40,17 @@ namespace UnityPUBG.Scripts.Entities
 
         #region 애니메이션 파라미터
         //애니메이션 파라미터 이름
-        private readonly string meleeAttack = "MeleeAttack";
-        private readonly string isRun = "IsRun";
-        private readonly string rangeAttack = "RangeAttack";
-        private readonly string attackSpeed = "AttackSpeed";
-        private readonly string handAttack = "HandAttack";
-        private readonly string isDie = "IsDie";
-        private readonly float rangeAttackAnimationLength = 1.833336f;
-        private readonly float meleeAttackAnimationLength = 1.166668f;
-        private readonly float handAttackAnimationLength = 0.4f;
+        private static readonly string meleeAttack = "MeleeAttack";
+        private static readonly string isRun = "IsRun";
+        private static readonly string rangeAttack = "RangeAttack";
+        private static readonly string attackSpeed = "AttackSpeed";
+        private static readonly string handAttack = "HandAttack";
+        private static readonly string isDie = "IsDie";
+        private static readonly string isConsume = "IsConsume";
+        private static readonly string consumeSpeed = "ConsumeSpeed";
+        private static readonly float rangeAttackAnimationLength = 1.833336f;
+        private static readonly float meleeAttackAnimationLength = 1.166668f;
+        private static readonly float handAttackAnimationLength = 0.4f;
         #endregion
 
         private PhotonView photonView;
@@ -154,7 +156,7 @@ namespace UnityPUBG.Scripts.Entities
 
                 if(isFalling)
                 {
-                    AntiGrivity = 100f;
+                    AntiGrivity = 20f;
                 }
                 else
                 {
@@ -358,7 +360,7 @@ namespace UnityPUBG.Scripts.Entities
                 //떨어지는 상태라면 움직일 때 안티 그래비티 적용
                 if(IsFalling)
                 {
-                    AntiGrivity = 100;
+                    AntiGrivity = 20;
                 }
             }
             else
@@ -747,6 +749,8 @@ namespace UnityPUBG.Scripts.Entities
                 StopCoroutine(tryConsumeItemCoroutine);
                 UIManager.Instance.itemConsumeProgress.Clear();
                 IsConsuming = false;
+                //애니메이션 캔슬
+                myAnimator.ResetTrigger(isConsume);
             }
         }
 
@@ -810,6 +814,10 @@ namespace UnityPUBG.Scripts.Entities
             IsConsuming = true;
             ItemConsumeProgress consumeProgress = UIManager.Instance.itemConsumeProgress;
             consumeProgress.InitializeProgress(consumableData);
+
+            //애니메이션 실행
+            myAnimator.SetFloat(consumeSpeed, 2f / consumableData.TimeToUse);
+            myAnimator.SetTrigger(isConsume);            
 
             float startTime = Time.time;
             float endTime = startTime + consumableData.TimeToUse;

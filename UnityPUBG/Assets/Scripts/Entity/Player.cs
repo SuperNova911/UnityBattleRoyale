@@ -844,6 +844,7 @@ namespace UnityPUBG.Scripts.Entities
 
             // 아이템 사용
             ConsumeItem(consumableData);
+            myAnimator.ResetTrigger(isConsume);
 
             tryConsumeItemCoroutine = null;
         }

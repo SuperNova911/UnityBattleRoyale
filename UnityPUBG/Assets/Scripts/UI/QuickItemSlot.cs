@@ -37,7 +37,7 @@ namespace UnityPUBG.Scripts.UI
             {
                 slotImage.sprite = quickSlotItemData.Icon;
             }
-            if (EntityManager.Instance.MyPlayer.ItemContainer.HasItem(quickSlotItemData.ItemName))
+            else
             {
                 slotImage.sprite = defaultSlotSprite;
             }

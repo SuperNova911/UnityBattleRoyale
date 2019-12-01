@@ -40,15 +40,17 @@ namespace UnityPUBG.Scripts.Entities
 
         #region 애니메이션 파라미터
         //애니메이션 파라미터 이름
-        private readonly string meleeAttack = "MeleeAttack";
-        private readonly string isRun = "IsRun";
-        private readonly string rangeAttack = "RangeAttack";
-        private readonly string attackSpeed = "AttackSpeed";
-        private readonly string handAttack = "HandAttack";
-        private readonly string isDie = "IsDie";
-        private readonly float rangeAttackAnimationLength = 1.833336f;
-        private readonly float meleeAttackAnimationLength = 1.166668f;
-        private readonly float handAttackAnimationLength = 0.4f;
+        private static readonly string meleeAttack = "MeleeAttack";
+        private static readonly string isRun = "IsRun";
+        private static readonly string rangeAttack = "RangeAttack";
+        private static readonly string attackSpeed = "AttackSpeed";
+        private static readonly string handAttack = "HandAttack";
+        private static readonly string isDie = "IsDie";
+        private static readonly string isConsume = "IsConsume";
+        private static readonly string consumeSpeed = "ConsumeSpeed";
+        private static readonly float rangeAttackAnimationLength = 1.833336f;
+        private static readonly float meleeAttackAnimationLength = 1.166668f;
+        private static readonly float handAttackAnimationLength = 0.4f;
         #endregion
 
         private PhotonView photonView;
@@ -69,6 +71,7 @@ namespace UnityPUBG.Scripts.Entities
         private bool isConsuming = false;
         private Coroutine tryConsumeItemCoroutine = null;
         private Item equipedPrimaryWeapon;
+        private bool isFalling = false;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
         public event EventHandler OnPrimaryWeaponChange;
@@ -141,6 +144,24 @@ namespace UnityPUBG.Scripts.Entities
             {
                 isConsuming = value;
                 SpeedMultiplier = value ? speedMultiplyWhenUseItem : 1f;
+            }
+        }
+
+        private bool IsFalling
+        {
+            get { return isFalling; }
+            set
+            {
+                isFalling = value;
+
+                if(isFalling)
+                {
+                    AntiGrivity = 20f;
+                }
+                else
+                {
+                    AntiGrivity = 0f;
+                }
             }
         }
 
@@ -336,10 +357,20 @@ namespace UnityPUBG.Scripts.Entities
             if (direction != Vector2.zero)
             {
                 myAnimator.SetBool(isRun, true);
+                //떨어지는 상태라면 움직일 때 안티 그래비티 적용
+                if(IsFalling)
+                {
+                    AntiGrivity = 20;
+                }
             }
             else
             {
                 myAnimator.SetBool(isRun, false);
+                //움직이지 않는다면 안티 그래비티 미적용
+                if(IsFalling)
+                {
+                    AntiGrivity = 0;
+                }
             }
         }
 
@@ -359,6 +390,11 @@ namespace UnityPUBG.Scripts.Entities
 
         public void AimTo(Vector2 direction)
         {
+            if(IsConsuming)
+            {
+                return;
+            }
+
             if (direction == Vector2.zero)
             {
                 if (IsPlayingAttackAnimation)
@@ -401,6 +437,11 @@ namespace UnityPUBG.Scripts.Entities
 
         public void AttackTo(Vector2 direction)
         {
+            if(IsConsuming)
+            {
+                return;
+            }
+
             Vector3 attackDirection;
             if (direction == Vector2.zero)
             {
@@ -446,6 +487,10 @@ namespace UnityPUBG.Scripts.Entities
 
         public void SwapWeapon()
         {
+            if(isPlayingAttackAnimation)
+            {
+                return;
+            }
             var tempForSwap = EquipedPrimaryWeapon;
             EquipedPrimaryWeapon = EquipedSecondaryWeapon;
             EquipedSecondaryWeapon = tempForSwap;
@@ -714,6 +759,8 @@ namespace UnityPUBG.Scripts.Entities
                 StopCoroutine(tryConsumeItemCoroutine);
                 UIManager.Instance.itemConsumeProgress.Clear();
                 IsConsuming = false;
+                //애니메이션 캔슬
+                myAnimator.ResetTrigger(isConsume);
             }
         }
 
@@ -778,6 +825,10 @@ namespace UnityPUBG.Scripts.Entities
             ItemConsumeProgress consumeProgress = UIManager.Instance.itemConsumeProgress;
             consumeProgress.InitializeProgress(consumableData);
 
+            //애니메이션 실행
+            myAnimator.SetFloat(consumeSpeed, (2f / consumableData.TimeToUse) * (2f / 3f));
+            myAnimator.SetTrigger(isConsume);            
+
             float startTime = Time.time;
             float endTime = startTime + consumableData.TimeToUse;
             float progress = 0f;
@@ -793,6 +844,7 @@ namespace UnityPUBG.Scripts.Entities
 
             // 아이템 사용
             ConsumeItem(consumableData);
+            myAnimator.ResetTrigger(isConsume);
 
             tryConsumeItemCoroutine = null;
         }
@@ -1082,12 +1134,16 @@ namespace UnityPUBG.Scripts.Entities
         //지상에 있는 상태로 변경
         private IEnumerator PlayOnGroundAnimation()
         {
+            IsFalling = true;
+            //맨 처음에는 가만히 있으니 안티 그래비티 미적용 상태로 만듬
+            MoveTo(Vector2.zero);
             while(transform.position.y > 2f)
             {
-                yield return new WaitForSeconds(0.1f);
+                yield return null;
             }
 
             myAnimator.SetTrigger("IsOnGround");
+            IsFalling = false;
 
             yield break;
         }

@@ -390,6 +390,11 @@ namespace UnityPUBG.Scripts.Entities
 
         public void AimTo(Vector2 direction)
         {
+            if(IsConsuming)
+            {
+                return;
+            }
+
             if (direction == Vector2.zero)
             {
                 if (IsPlayingAttackAnimation)
@@ -432,6 +437,11 @@ namespace UnityPUBG.Scripts.Entities
 
         public void AttackTo(Vector2 direction)
         {
+            if(IsConsuming)
+            {
+                return;
+            }
+
             Vector3 attackDirection;
             if (direction == Vector2.zero)
             {
@@ -816,7 +826,7 @@ namespace UnityPUBG.Scripts.Entities
             consumeProgress.InitializeProgress(consumableData);
 
             //애니메이션 실행
-            myAnimator.SetFloat(consumeSpeed, 2f / consumableData.TimeToUse);
+            myAnimator.SetFloat(consumeSpeed, (2f / consumableData.TimeToUse) * (2f / 3f));
             myAnimator.SetTrigger(isConsume);            
 
             float startTime = Time.time;

@@ -22,20 +22,35 @@ namespace Knife.PostProcessing
             }
         }
 
-        void OnEnable()
+        private void Awake()
+        {
+            enabled = false;
+        }
+
+        private void OnBecameVisible()
+        {
+            enabled = true;
+        }
+
+        private void OnBecameInvisible()
+        {
+            enabled = false;
+        }
+
+        private void OnEnable()
         {
             OutlineRenderer.AddRenderer(CachedRenderer);
             SetupPropertyBlock();
         }
 
+        private void OnDisable()
+        {
+            OutlineRenderer.RemoveRenderer(CachedRenderer);
+        }
+
         private void OnValidate()
         {
             SetupPropertyBlock();
-        }
-
-        void OnDisable()
-        {
-            OutlineRenderer.RemoveRenderer(CachedRenderer);
         }
 
         public void SetTintColor(Color color)

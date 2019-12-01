@@ -20,8 +20,8 @@ namespace UnityPUBG.Scripts.Items
         public float readyToLootDelay = 1f;
 
         private Item item = null;
-        private Rigidbody itemObjectRigidBody;
         private PhotonView photonView;
+        private OutlineRegister outlineRegister;
 
         public Item Item
         {
@@ -51,7 +51,6 @@ namespace UnityPUBG.Scripts.Items
         #region 유니티 메시지
         private void Awake()
         {
-            itemObjectRigidBody = GetComponent<Rigidbody>();
             photonView = GetComponent<PhotonView>();
 
             AllowLoot = false;
@@ -120,9 +119,9 @@ namespace UnityPUBG.Scripts.Items
 
             ModelPrefab = Instantiate(item.Data.Model, transform);
 
-            var outline = ModelPrefab.AddComponent<OutlineRegister>();
+            outlineRegister = ModelPrefab.AddComponent<OutlineRegister>();
             var rarityColor = ItemDataCollection.Instance.ItemColorsByRarity[item.Data.Rarity].Color;
-            outline.SetTintColor(rarityColor);
+            outlineRegister.SetTintColor(rarityColor);
         }
 
         private void ReadyToLoot()

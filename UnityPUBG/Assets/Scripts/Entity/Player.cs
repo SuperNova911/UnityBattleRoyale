@@ -475,6 +475,10 @@ namespace UnityPUBG.Scripts.Entities
 
         public void SwapWeapon()
         {
+            if(isPlayingAttackAnimation)
+            {
+                return;
+            }
             var tempForSwap = EquipedPrimaryWeapon;
             EquipedPrimaryWeapon = EquipedSecondaryWeapon;
             EquipedSecondaryWeapon = tempForSwap;

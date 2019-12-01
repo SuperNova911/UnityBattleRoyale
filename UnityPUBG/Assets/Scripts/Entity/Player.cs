@@ -985,6 +985,7 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
+            primaryWeaponModel.layer = LayerMask.NameToLayer("PlayerModel");
             primaryWeaponModel.transform.localPosition = Vector3.zero;
             primaryWeaponModel.transform.localRotation = Quaternion.identity;
         }

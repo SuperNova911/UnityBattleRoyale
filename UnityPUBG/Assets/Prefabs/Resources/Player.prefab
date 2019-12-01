@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 251370033490789032}
   - component: {fileID: 251370033495823482}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Character_Biker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1437,6 +1437,9 @@ MonoBehaviour:
   currentHealth: 100
   movementSpeed: 5
   rotationSpeed: 0.2
+  playerModelLayer:
+    serializedVersion: 2
+    m_Bits: 16384
   speedMultiplyWhenUseItem: 0.5
   maximumShield: 100
   currentShield: 0

@@ -1443,13 +1443,13 @@ MonoBehaviour:
     value: 2
   OutlineFillAmount:
     overrideState: 1
-    value: 0.2
+    value: 0.249
   DepthOverlap:
     overrideState: 1
     value: 1
   DepthCulling:
     overrideState: 1
-    value: 1
+    value: 0
   InvertDepthCulling:
     overrideState: 0
     value: 0

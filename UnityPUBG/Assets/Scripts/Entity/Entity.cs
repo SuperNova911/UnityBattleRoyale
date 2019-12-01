@@ -56,6 +56,8 @@ namespace UnityPUBG.Scripts.Entities
         public Vector2 MovementDirection { get; protected set; }
         public Vector2 RotateDirection { get; protected set; }
 
+        public float AntiGrivity { get; protected set; }
+
         #region 유니티 메시지
         protected virtual void Awake()
         {
@@ -97,12 +99,13 @@ namespace UnityPUBG.Scripts.Entities
         /// </summary>
         private void MoveEntity()
         {
-            if (MovementDirection == Vector2.zero)
+            if(AntiGrivity == 0 && MovementDirection == Vector2.zero)
             {
                 return;
             }
 
-            Vector3 direction = new Vector3(MovementDirection.x, 0, MovementDirection.y) * movementSpeed * SpeedMultiplier * Time.fixedDeltaTime;
+            Vector3 direction = new Vector3(MovementDirection.x * movementSpeed * SpeedMultiplier,
+                AntiGrivity, MovementDirection.y * movementSpeed * SpeedMultiplier) * Time.fixedDeltaTime;
             entityRigidbody.MovePosition(transform.position + direction);
         }
 

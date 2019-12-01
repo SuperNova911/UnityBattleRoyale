@@ -69,6 +69,7 @@ namespace UnityPUBG.Scripts.Entities
         private bool isConsuming = false;
         private Coroutine tryConsumeItemCoroutine = null;
         private Item equipedPrimaryWeapon;
+        private bool isFalling = false;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
         public event EventHandler OnPrimaryWeaponChange;
@@ -141,6 +142,24 @@ namespace UnityPUBG.Scripts.Entities
             {
                 isConsuming = value;
                 SpeedMultiplier = value ? speedMultiplyWhenUseItem : 1f;
+            }
+        }
+
+        private bool IsFalling
+        {
+            get { return isFalling; }
+            set
+            {
+                isFalling = value;
+
+                if(isFalling)
+                {
+                    AntiGrivity = 100f;
+                }
+                else
+                {
+                    AntiGrivity = 0f;
+                }
             }
         }
 
@@ -336,10 +355,20 @@ namespace UnityPUBG.Scripts.Entities
             if (direction != Vector2.zero)
             {
                 myAnimator.SetBool(isRun, true);
+                //떨어지는 상태라면 움직일 때 안티 그래비티 적용
+                if(IsFalling)
+                {
+                    AntiGrivity = 100;
+                }
             }
             else
             {
                 myAnimator.SetBool(isRun, false);
+                //움직이지 않는다면 안티 그래비티 미적용
+                if(IsFalling)
+                {
+                    AntiGrivity = 0;
+                }
             }
         }
 
@@ -1082,12 +1111,16 @@ namespace UnityPUBG.Scripts.Entities
         //지상에 있는 상태로 변경
         private IEnumerator PlayOnGroundAnimation()
         {
+            IsFalling = true;
+            //맨 처음에는 가만히 있으니 안티 그래비티 미적용 상태로 만듬
+            MoveTo(Vector2.zero);
             while(transform.position.y > 2f)
             {
-                yield return new WaitForSeconds(0.1f);
+                yield return null;
             }
 
             myAnimator.SetTrigger("IsOnGround");
+            IsFalling = false;
 
             yield break;
         }

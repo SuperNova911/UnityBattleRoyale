@@ -29067,6 +29067,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1501880514}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1541156505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 99213045809030773, guid: 7001594cf5e1c8948bc1b21f6b11130a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1268368988}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b0a9e050f4cea44baf0ce632529e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1541727923 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3908805739431913725, guid: dc9a70325f5396446aab164ea6854ceb,
@@ -30843,7 +30855,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.3509887e-38, z: 2.9105607e-11, w: -4.6116877e+18}
+  m_BoundingSphereOverride: {x: 1.1083e-41, y: 6e-44, z: 0, w: 1.0045e-41}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -42773,6 +42785,11 @@ PrefabInstance:
       propertyPath: roundSettings.timeToCloses.Array.data[4]
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604449, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: dropShipPrefab
+      value: 
+      objectReference: {fileID: 1541156505}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26d1174b5a3302d47bef3799fed1c30b, type: 3}
 --- !u!114 &9173340602515692452 stripped

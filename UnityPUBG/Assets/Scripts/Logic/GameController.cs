@@ -35,6 +35,8 @@ namespace UnityPUBG.Scripts.Logic
 
                 //RingSystem.Instance.GenerateRoundDatas();
                 //RingSystem.Instance.StartRingSystem();
+
+                dropShipPrefab.LaunchDropShip();
             }
         }
 

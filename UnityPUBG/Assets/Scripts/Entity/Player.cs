@@ -194,7 +194,7 @@ namespace UnityPUBG.Scripts.Entities
             if(IsMyPlayer)
             {
                 OnDie += OnDieAnimation;
-                OnDie += OnDieDrops;
+                OnDie += OnDieDrops;                
             }
         }
 
@@ -716,6 +716,11 @@ namespace UnityPUBG.Scripts.Entities
                 IsConsuming = false;
             }
         }
+
+        public void StartPlayOnGround()
+        {
+            StartCoroutine(PlayOnGroundAnimation());
+        }
         #endregion
 
         #region private 함수
@@ -1069,6 +1074,20 @@ namespace UnityPUBG.Scripts.Entities
                 yield return new WaitForSecondsRealtime(handAttackAnimationLength);
             }
             IsPlayingAttackAnimation = false;
+
+            yield break;
+        }
+
+        //플레이어가 떨어지는 중이 아니라면
+        //지상에 있는 상태로 변경
+        private IEnumerator PlayOnGroundAnimation()
+        {
+            while(transform.position.y > 2f)
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            myAnimator.SetTrigger("IsOnGround");
 
             yield break;
         }

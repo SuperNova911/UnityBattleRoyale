@@ -79,6 +79,11 @@ namespace UnityPUBG.Scripts.Logic
                 CalculateStatus();
                 MoveDropShip();
             }
+
+            if(Input.GetMouseButtonDown(0))
+            {
+                DropPlayer();
+            }
         }
 
         private void OnDestroy()
@@ -184,6 +189,7 @@ namespace UnityPUBG.Scripts.Logic
             }
 
             player.transform.position = transform.position;
+            player.StartPlayOnGround();
             var playerRigidbody = player.GetComponent<Rigidbody>();
             if (playerRigidbody != null)
             {

@@ -1385,7 +1385,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: b0987a5a9d1963b49b47938649dcd886, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1437,9 +1437,6 @@ MonoBehaviour:
   currentHealth: 100
   movementSpeed: 5
   rotationSpeed: 0.2
-  playerModelLayer:
-    serializedVersion: 2
-    m_Bits: 16384
   speedMultiplyWhenUseItem: 0.5
   maximumShield: 100
   currentShield: 0
@@ -1570,12 +1567,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 2
+    Name: IsRun
+  - Type: 9
+    SynchronizeType: 2
+    Name: MeleeAttack
+  - Type: 9
+    SynchronizeType: 2
+    Name: RangeAttack
+  - Type: 1
+    SynchronizeType: 1
+    Name: AttackSpeed
+  - Type: 9
+    SynchronizeType: 1
+    Name: HandAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: IsDie
+  - Type: 9
+    SynchronizeType: 1
+    Name: IsOnGround
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 2
     LayerIndex: 0
-  - SynchronizeType: 0
+  - SynchronizeType: 2
     LayerIndex: 1
+  - SynchronizeType: 1
+    LayerIndex: 2
+  - SynchronizeType: 1
+    LayerIndex: 3
 --- !u!1 &251370033490516470
 GameObject:
   m_ObjectHideFlags: 0

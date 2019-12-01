@@ -115,7 +115,7 @@ namespace UnityPUBG.Scripts.Logic
         // TODO: Player가 이동할 수 있는 무작위 좌표를 선정
         private Vector2 SelectFinalPosition()
         {
-            return new Vector2(500, 500);
+            return new Vector2(250, 250);
         }
 
         private void CreateRingObject()

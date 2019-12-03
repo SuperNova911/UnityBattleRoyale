@@ -9,7 +9,7 @@ using UnityPUBG.Scripts.Logic;
 
 namespace UnityPUBG.Scripts.UI
 {
-    public class ItemSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+    public class ItemSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
     {
         public int slotIndex;
 
@@ -26,6 +26,9 @@ namespace UnityPUBG.Scripts.UI
         private bool isDrag = false;
         private Vector3 originPosition;
         private GraphicRaycaster graphicRaycaster;
+
+        //마지막 터치 시간
+        private static float lastTouchTime = 0f;
 
         public bool Available
         {
@@ -95,6 +98,7 @@ namespace UnityPUBG.Scripts.UI
             }
         }
 
+        #region Drag 핸들러
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (EntityManager.Instance.MyPlayer.ItemContainer.Count < slotIndex + 1)
@@ -148,6 +152,23 @@ namespace UnityPUBG.Scripts.UI
                     }
                 }
             }
+        }
+        #endregion
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            float currentTimeClick = eventData.clickTime;
+            if (Mathf.Abs(currentTimeClick - lastTouchTime) < 0.75f)
+            {
+                Player myPlayer = EntityManager.Instance.MyPlayer;
+                Item itemAtSlot = myPlayer.ItemContainer.GetItemAt(slotIndex);
+
+                if(itemAtSlot.Data is ConsumableData)
+                {
+                    myPlayer.UseItemAtItemContainer(slotIndex);
+                }
+            }
+            lastTouchTime = currentTimeClick;
         }
     }
 }

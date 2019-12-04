@@ -199,11 +199,13 @@ namespace UnityPUBG.Scripts.Entities
                 myItemLooter = GetComponentInChildren<PlayerItemLooter>();
                 EntityManager.Instance.MyPlayer = this;
                 gameObject.tag = "MyPlayer";
+                CameraManager.Instance.CurrentCamera = CameraManager.Instance.DropShipCamera;
                 //meleeWeaponPosition.gameObject.tag = myWeaponTag;
             }
             else
             {
                 gameObject.tag = "Enemy";
+                myAnimator.SetTrigger("IsOnGround");
                 //meleeWeaponPosition.gameObject.tag = enemyWeaponTag;
             }
         }

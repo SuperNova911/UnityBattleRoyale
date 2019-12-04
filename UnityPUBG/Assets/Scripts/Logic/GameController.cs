@@ -12,7 +12,7 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class GameController : Singleton<GameController>
     {
-        public DropShip dropShipPrefab;
+        //public DropShip dropShipPrefab;
 
         [Header("Photon Networks")]
         public PhotonView photonView;
@@ -36,7 +36,9 @@ namespace UnityPUBG.Scripts.Logic
                 //RingSystem.Instance.GenerateRoundDatas();
                 //RingSystem.Instance.StartRingSystem();
 
-                dropShipPrefab.LaunchDropShip();
+                //dropShipPrefab.LaunchDropShip();
+
+                StartCoroutine(LaunchDropShipWithDelay());
             }
         }
 
@@ -50,6 +52,18 @@ namespace UnityPUBG.Scripts.Logic
         {
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
+        }
+
+        //10초 텀을 두고 드랍쉽 출발
+        private System.Collections.IEnumerator LaunchDropShipWithDelay()
+        {
+            GameObject dropShip =  PhotonNetwork.Instantiate("DropShip", Vector3.zero, Quaternion.identity, 0);
+            
+            yield return new WaitForSeconds(10f);
+
+            dropShip.GetComponent<DropShip>().LaunchDropShip();
+
+            yield break;
         }
     }
 }

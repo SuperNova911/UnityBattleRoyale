@@ -43,11 +43,7 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
-  - SendEntry
-  - SendLeaveRoom
-  - SendMakeList
-  - SendMsg
-  - SendReadyMessage
   - UpdateCurrentStack
   - UpdateItem
+  - WhatModelChoose
   DisableAutoOpenWizard: 1

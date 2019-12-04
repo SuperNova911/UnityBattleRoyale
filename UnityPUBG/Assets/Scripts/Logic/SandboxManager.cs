@@ -29,8 +29,8 @@ namespace UnityPUBG.Scripts.Logic
 
         private void Awake()
         {
-            PhotonNetwork.offlineMode = true;
-            PhotonNetwork.CreateRoom("Sandbox");
+            //PhotonNetwork.offlineMode = true;
+            //PhotonNetwork.CreateRoom("Sandbox");
 
             if (debugMode)
             {
@@ -57,7 +57,7 @@ namespace UnityPUBG.Scripts.Logic
             else
             {
                 SpawnItem();
-                SpawnPlayer();
+                //SpawnPlayer();
                 StartRingSystem();
             }
         }

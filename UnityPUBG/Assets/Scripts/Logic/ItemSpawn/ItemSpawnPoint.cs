@@ -15,31 +15,15 @@ namespace UnityPUBG.Scripts.Logic
     /// </summary>
     public sealed class ItemSpawnPoint : MonoBehaviour
     {
-        [Header("Item")]
-        [SerializeField, ReadOnly] private ItemObject spawnedItem = null;
-
         [Header("Spawn Settings")]
         [SerializeField] private ItemSpawnChance spawnChance = new ItemSpawnChance();
-        [SerializeField] private ItemSpawnGroup spawnGroup = null;
+        [SerializeField] private ItemSpawnGroup spawnGroup;
         [SerializeField] private bool useGroupSetting = true;
 
         [Header("Gizmo Settings")]
         [SerializeField] private Color color = Color.white;
         [SerializeField] private bool showGizmo = true;
 
-        /// <summary>
-        /// 스폰된 아이템 오브젝트
-        /// </summary>
-        public ItemObject SpawnedItem
-        {
-            get { return spawnedItem; }
-            set
-            {
-                spawnedItem = value;
-                spawnedItem.transform.parent = transform;
-                spawnedItem.transform.localPosition = Vector3.zero;
-            }
-        }
         /// <summary>
         /// 스폰 지점이 속해있는 그룹
         /// </summary>

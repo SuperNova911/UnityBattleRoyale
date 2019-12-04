@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 495616}
   - component: {fileID: 3375174}
   - component: {fileID: 2392038}
+  - component: {fileID: 8634002657979176898}
   m_Layer: 0
   m_Name: SM_Env_Bone_Skull_01
   m_TagString: Untagged
@@ -78,3 +79,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8634002657979176898
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151284}
+  m_Material: {fileID: 13400000, guid: e4f609ba0da59534d9ea4272337ba651, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 6fcce90750f14824b879587aec3b40d9, type: 3}

@@ -35,8 +35,7 @@ namespace UnityPUBG.Scripts.Logic
         #region 유니티 메시지
         private void Awake()
         {
-            var spawnPoints = FindSpawnPointsInGroupArea();
-            spawnPoints.ForEach(e => e.SpawnGroup = this);
+            ApplyToItemSpawnPoints();
         }
 
         private void OnDrawGizmos()
@@ -48,6 +47,17 @@ namespace UnityPUBG.Scripts.Logic
             }
         }
         #endregion
+
+        public void ApplyToItemSpawnPoints()
+        {
+            foreach (var childItemSpawnPoint in GetComponentsInChildren<ItemSpawnPoint>())
+            {
+                if (GroupArea.Contains(childItemSpawnPoint.transform.position))
+                {
+                    childItemSpawnPoint.SpawnGroup = this;
+                }
+            }
+        }
 
         /// <summary>
         /// 그룹 범위안에 있는 모든 ItemSpawnPoint의 리스트를 반환

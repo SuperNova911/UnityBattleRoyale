@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 415162}
   - component: {fileID: 3377866}
   - component: {fileID: 2352642}
+  - component: {fileID: 9190840582018192347}
   m_Layer: 0
   m_Name: SM_Env_Bone_Skull_Jaw_01
   m_TagString: Untagged
@@ -78,3 +79,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &9190840582018192347
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191868}
+  m_Material: {fileID: 13400000, guid: e4f609ba0da59534d9ea4272337ba651, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.480689, y: 2.6528456, z: 8.502426}
+  m_Center: {x: -0.10458183, y: 0.6928123, z: 0.014694214}

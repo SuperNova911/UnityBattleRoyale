@@ -199,11 +199,13 @@ namespace UnityPUBG.Scripts.Entities
                 myItemLooter = GetComponentInChildren<PlayerItemLooter>();
                 EntityManager.Instance.MyPlayer = this;
                 gameObject.tag = "MyPlayer";
+                CameraManager.Instance.CurrentCamera = CameraManager.Instance.DropShipCamera;
                 //meleeWeaponPosition.gameObject.tag = myWeaponTag;
             }
             else
             {
                 gameObject.tag = "Enemy";
+                myAnimator.SetTrigger("IsOnGround");
                 //meleeWeaponPosition.gameObject.tag = enemyWeaponTag;
             }
         }
@@ -909,63 +911,6 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        /*
-        // 테스트 전용
-        private void MeleeAttackTest(DamageType damageType)
-        {
-            MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), damageType);
-        }
-
-        private void MeleeAttackTest(float damage, DamageType damageType)
-        {
-            Vector3 attackDirection = transform.forward;
-
-            var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(mouseRay, out var mouseRayHit, 100f, LayerMask.GetMask("Terrain")))
-            {
-                attackDirection = (new Vector3(mouseRayHit.point.x, 0, mouseRayHit.point.z) - transform.position).normalized;
-            }
-            MeleeAttackTest(attackDirection, damage, damageType);
-        }
-
-        private void MeleeAttackTest(Vector3 attackDirection, float damage, DamageType damageType)
-        {
-            float attackRange = 2f;
-            float attackAngle = 90f;
-            int rayNumber = 10;
-
-            Vector3 attackOriginPosition = transform.position + new Vector3(0, 1, 0);
-            Vector3 leftRayDirection = Quaternion.Euler(0, -attackAngle / 2, 0) * attackDirection;
-            Vector3 rightRayDirection = Quaternion.Euler(0, attackAngle / 2, 0) * attackDirection;
-
-            HashSet<IDamageable> hitObjects = new HashSet<IDamageable>();
-
-            for (int i = 0; i < rayNumber; i++)
-            {
-                Vector3 rayDirection = Vector3.Lerp(leftRayDirection, rightRayDirection, i / (float)(rayNumber - 1)).normalized;
-                if (Physics.Raycast(attackOriginPosition, rayDirection, out var hit, attackRange))
-                {
-                    var damageableObject = hit.transform.GetComponent<IDamageable>();
-                    if (damageableObject != null)
-                    {
-                        hitObjects.Add(damageableObject);
-                    }
-
-                    Debug.DrawLine(attackOriginPosition, hit.point, Color.red, 0.1f);
-                }
-                else
-                {
-                    Debug.DrawRay(attackOriginPosition, rayDirection * attackRange, Color.yellow, 0.1f);
-                }
-            }
-
-            foreach (var hitObject in hitObjects)
-            {
-                hitObject.OnTakeDamage(damage, damageType);
-            }
-        }
-        */
-
         private void RangeAttack(Vector3 attackDirection)
         {
             var rangeWeaponData = EquipedPrimaryWeapon.Data as RangeWeaponData;
@@ -1045,6 +990,10 @@ namespace UnityPUBG.Scripts.Entities
             primaryWeaponModel.layer = LayerMask.NameToLayer("PlayerModel");
             primaryWeaponModel.transform.localPosition = Vector3.zero;
             primaryWeaponModel.transform.localRotation = Quaternion.identity;
+
+            //다른 플레이어에게 무슨 무기를 꼈는지 알려줌
+            photonView.RPC(nameof(WhatWeaponEquiped), PhotonTargets.Others, 
+                EquipedPrimaryWeapon.Data.ItemName, PhotonNetwork.player.NickName);
         }
 
         //원거리 애니메이션 재생 중 캐릭터의 바라보는 방향 return
@@ -1146,6 +1095,87 @@ namespace UnityPUBG.Scripts.Entities
             IsFalling = false;
 
             yield break;
+        }
+        #endregion
+
+        #region rpc 함수
+        //어떤 모델을 선택했는지 알아와서 모델을 적용시킴
+        [PunRPC]
+        private void WhatModelChoose(string modelName, string senderName)
+        {
+            if (photonView.owner.NickName != senderName)
+            {
+                return;
+            }
+
+            foreach (Transform child in transform)
+            {
+                if (child.name.StartsWith("Character"))
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+
+            if (modelName != "Character_Random")
+            {
+                transform.Find(modelName).gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.LogError("랜덤은 안됩니다.");
+            }
+        }
+
+        //어떤 무기를 장착했는지 알아와서 모델을 스폰함
+        [PunRPC]
+        private void WhatWeaponEquiped(string weaponName, string senderName)
+        {
+            if(photonView.owner.NickName != senderName)
+            {
+                return;
+            }
+
+            //무기 모델이 있다면 제거
+            if (meleeWeaponPosition.childCount > 0)
+            {
+                int childCount = meleeWeaponPosition.childCount;
+                for (int i = 0; i < childCount; i++)
+                {
+                    Destroy(meleeWeaponPosition.GetChild(0).gameObject);
+                }
+            }
+
+            if (rangeWeaponPosition.childCount > 0)
+            {
+                int childCount = rangeWeaponPosition.childCount;
+                for (int i = 0; i < childCount; i++)
+                {
+                    Destroy(rangeWeaponPosition.GetChild(0).gameObject);
+                }
+            }
+
+            GameObject primaryWeaponModel;
+
+            ItemData weaponData = ItemDataCollection.Instance.ItemDataByName[weaponName];
+
+            //교체할 무기 모델 생성
+            if (weaponData is MeleeWeaponData)
+            {
+                primaryWeaponModel = Instantiate(weaponData.Model, meleeWeaponPosition);
+            }
+            else if (weaponData is RangeWeaponData)
+            {
+                primaryWeaponModel = Instantiate(weaponData.Model, rangeWeaponPosition);
+            }
+            else
+            {
+                Debug.LogError($"무기가 아닙니다, {EquipedPrimaryWeapon.Data.GetType().Name}");
+                return;
+            }
+
+            primaryWeaponModel.layer = LayerMask.NameToLayer("PlayerModel");
+            primaryWeaponModel.transform.localPosition = Vector3.zero;
+            primaryWeaponModel.transform.localRotation = Quaternion.identity;
         }
         #endregion
     }

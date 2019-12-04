@@ -19,6 +19,7 @@ namespace UnityPUBG.Scripts.Lobby
         private void Start()
         {
             Instance = this;
+            PhotonNetwork.autoCleanUpPlayerObjects = false;
         }
         #endregion
 
@@ -60,12 +61,6 @@ namespace UnityPUBG.Scripts.Lobby
         }
         #endregion
 
-        public void LeaveRoom()
-        {
-            Lobby.LobbyManager.Instance.SendLRoom(PhotonTargets.Others, PhotonNetwork.playerName);
-            PhotonNetwork.LeaveRoom();
-        }
-
         /// <summary>
         /// 게임 룸을 로딩하는 함수
         /// </summary>
@@ -83,7 +78,8 @@ namespace UnityPUBG.Scripts.Lobby
             }
 
             Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
-            PhotonNetwork.LoadLevel("GameWorld");
+            //PhotonNetwork.LoadLevel("GameWorld");
+            PhotonNetwork.LoadLevel("Sandbox");
         }
 
         #region 코루틴

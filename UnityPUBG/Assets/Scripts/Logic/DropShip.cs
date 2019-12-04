@@ -74,15 +74,27 @@ namespace UnityPUBG.Scripts.Logic
 
         private void FixedUpdate()
         {
-            if (Status != DropShipStatus.WaitForLaunch)
+            //출발 대기라면 아무것도 안함
+            if(Status == DropShipStatus.WaitForLaunch)
             {
-                CalculateStatus();
-                MoveDropShip();
+                return;
             }
 
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 DropPlayer();
+            }
+
+            if (Status != DropShipStatus.WaitForLaunch)
+            {
+                //마스터 클라이언트만 드랍쉽을 움직임
+                if(!PhotonNetwork.isMasterClient)
+                {
+                    return;
+                }
+
+                CalculateStatus();
+                MoveDropShip();
             }
         }
 
@@ -160,7 +172,7 @@ namespace UnityPUBG.Scripts.Logic
                 return;
             }
 
-            player.transform.position = new Vector3(0, -10, 0);
+            //player.transform.position = new Vector3(0, -10, 0);
             var playerRigidBody = player.GetComponent<Rigidbody>();
             if (playerRigidBody != null)
             {
@@ -290,7 +302,7 @@ namespace UnityPUBG.Scripts.Logic
 
             return intersectionPoints;
         }
-
+               
         [PunRPC]
         private void NotifyPathData(Vector2 launchPosition, Vector2 destinationPosition, Vector2 startDropPosition, Vector2 endDropPosition)
         {
@@ -299,7 +311,7 @@ namespace UnityPUBG.Scripts.Logic
             this.startDropPosition = startDropPosition;
             this.endDropPosition = endDropPosition;
         }
-
+        
         [PunRPC]
         private void NotifyLaunchDropShip()
         {

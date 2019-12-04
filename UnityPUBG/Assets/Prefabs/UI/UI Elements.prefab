@@ -92,7 +92,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 38.25
+  m_fontSize: 25.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 57.4
+  m_fontSize: 38.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 38.3
+  m_fontSize: 25.5
   m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1148,7 +1148,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 38.3
+  m_fontSize: 25.5
   m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1660,9 +1660,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 5342571701380984073}
   - {fileID: 886121388034495508}
   - {fileID: 7058053959828260621}
-  - {fileID: 5342571701380984073}
   - {fileID: 5497328048706568368}
   m_Father: {fileID: 4554568196192701402}
   m_RootOrder: 2
@@ -2106,7 +2106,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34.4
+  m_fontSize: 22.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2291,7 +2291,6 @@ MonoBehaviour:
   - {fileID: 5509225619301990567}
   - {fileID: 1175137081475910771}
   freeSlotColor: {r: 1, g: 1, b: 1, a: 0.2509804}
-  emptySlotColor: {r: 1, g: 1, b: 1, a: 0}
   hasItemColor: {r: 1, g: 1, b: 1, a: 1}
   itemAlmostFullColor: {r: 1, g: 0.5019608, b: 0.5019608, a: 1}
 --- !u!1 &2420660932915955849
@@ -2998,7 +2997,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 34.4
+  m_fontSize: 22.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3596,7 +3595,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 76.55
+  m_fontSize: 51
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3780,7 +3779,7 @@ RectTransform:
   m_Children:
   - {fileID: 132460023060516866}
   m_Father: {fileID: 4192799765070005025}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4025,7 +4024,7 @@ RectTransform:
   - {fileID: 7337310939233568036}
   - {fileID: 855901838818997662}
   m_Father: {fileID: 4192799765070005025}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2, y: 0}
   m_AnchorMax: {x: 0.8, y: 1}
@@ -4160,7 +4159,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 43.1
+  m_fontSize: 28.7
   m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4316,7 +4315,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 51.45
+  m_fontSize: 34.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4976,7 +4975,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 57.4
+  m_fontSize: 38.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5072,7 +5071,7 @@ RectTransform:
   - {fileID: 2405874515759324204}
   - {fileID: 767215203712846027}
   m_Father: {fileID: 4192799765070005025}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.2, y: 1}
@@ -5522,7 +5521,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 43.1
+  m_fontSize: 28.7
   m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6953,7 +6952,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 30.6
+  m_fontSize: 20.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7182,7 +7181,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 45.9
+  m_fontSize: 30.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8436,7 +8435,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 21.4
+  m_fontSize: 14.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -9530,17 +9529,17 @@ PrefabInstance:
     - target: {fileID: 4646987637401684539, guid: 13fb2108a766a1045b5c84905f316dad,
         type: 3}
       propertyPath: m_fontSize
-      value: 21.5
+      value: 14.35
       objectReference: {fileID: 0}
     - target: {fileID: 1112209461503298331, guid: 13fb2108a766a1045b5c84905f316dad,
         type: 3}
       propertyPath: m_fontSize
-      value: 22.6
+      value: 15.05
       objectReference: {fileID: 0}
     - target: {fileID: 2836519114761870109, guid: 13fb2108a766a1045b5c84905f316dad,
         type: 3}
       propertyPath: m_fontSize
-      value: 32.05
+      value: 21.35
       objectReference: {fileID: 0}
     - target: {fileID: 82580460169672472, guid: 13fb2108a766a1045b5c84905f316dad,
         type: 3}

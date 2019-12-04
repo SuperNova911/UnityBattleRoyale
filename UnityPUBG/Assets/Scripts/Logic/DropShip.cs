@@ -172,7 +172,7 @@ namespace UnityPUBG.Scripts.Logic
                 return;
             }
 
-            player.transform.position = new Vector3(0, -10, 0);
+            //player.transform.position = new Vector3(0, -10, 0);
             var playerRigidBody = player.GetComponent<Rigidbody>();
             if (playerRigidBody != null)
             {

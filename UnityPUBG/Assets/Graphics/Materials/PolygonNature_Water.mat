@@ -90,8 +90,8 @@ Material:
     - _WaterDepth: 0.09
     - _WaterFalloff: 2
     - _WaterOpacity: 0.681
-    - _WaterReflection: 1
-    - _WaterScale: 0.6
+    - _WaterReflection: 0.8
+    - _WaterScale: 1
     - _WaterSmoothness: 2
     - _WaterSpecular: 0
     - _WaterSpeed: 0.02
@@ -100,5 +100,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WaterDeepColor: {r: 0.21560162, g: 0.41384456, b: 0.5377358, a: 0}
+    - _WaterDeepColor: {r: 0.23131008, g: 0.35734984, b: 0.4339623, a: 0}
     - _WaterShallowColor: {r: 0.39119795, g: 0.5566038, b: 0.5462659, a: 0}

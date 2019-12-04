@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityPUBG.Scripts.Entities;
 
 namespace UnityPUBG.Scripts.Logic
@@ -26,11 +27,15 @@ namespace UnityPUBG.Scripts.Logic
         [Header("Debug")]
         public GameObject debugButtonCanvas;
         public bool debugMode = false;
+        public bool offlineMode = false;
 
         private void Awake()
         {
-            //PhotonNetwork.offlineMode = true;
-            //PhotonNetwork.CreateRoom("Sandbox");
+            if (offlineMode)
+            {
+                PhotonNetwork.offlineMode = true;
+                PhotonNetwork.CreateRoom("Sandbox");
+            }
 
             if (debugMode)
             {
@@ -50,6 +55,11 @@ namespace UnityPUBG.Scripts.Logic
 
         private void Start()
         {
+            if (offlineMode)
+            {
+                SpawnPlayer();
+            }
+
             if (debugMode)
             {
 
@@ -57,7 +67,6 @@ namespace UnityPUBG.Scripts.Logic
             else
             {
                 SpawnItem();
-                //SpawnPlayer();
                 StartRingSystem();
             }
         }

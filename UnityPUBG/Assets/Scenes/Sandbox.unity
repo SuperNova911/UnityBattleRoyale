@@ -5270,6 +5270,7 @@ MonoBehaviour:
   testPlayerSpawnPosition: {x: 250, y: 0, z: 250}
   debugButtonCanvas: {fileID: 1192592292}
   debugMode: 0
+  offlineMode: 0
 --- !u!4 &1769509351
 Transform:
   m_ObjectHideFlags: 0
@@ -7154,13 +7155,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 324033114654909644, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
-      propertyPath: far clip plane
+      propertyPath: field of view
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 324033114654909644, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
-      propertyPath: field of view
-      value: 50
+      propertyPath: far clip plane
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 5883381151597467312, guid: e2c21cd6693f2be47b0a9ee00f41675e,
         type: 3}
@@ -7181,6 +7182,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Follow
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 324033115428789755, guid: e2c21cd6693f2be47b0a9ee00f41675e,
+        type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2c21cd6693f2be47b0a9ee00f41675e, type: 3}

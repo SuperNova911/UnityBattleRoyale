@@ -46,4 +46,5 @@ MonoBehaviour:
   - UpdateCurrentStack
   - UpdateItem
   - WhatModelChoose
+  - WhatWeaponEquiped
   DisableAutoOpenWizard: 1

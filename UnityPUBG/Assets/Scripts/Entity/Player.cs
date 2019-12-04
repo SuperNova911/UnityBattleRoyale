@@ -990,6 +990,10 @@ namespace UnityPUBG.Scripts.Entities
             primaryWeaponModel.layer = LayerMask.NameToLayer("PlayerModel");
             primaryWeaponModel.transform.localPosition = Vector3.zero;
             primaryWeaponModel.transform.localRotation = Quaternion.identity;
+
+            //다른 플레이어에게 무슨 무기를 꼈는지 알려줌
+            photonView.RPC(nameof(WhatWeaponEquiped), PhotonTargets.Others, 
+                EquipedPrimaryWeapon.Data.ItemName, PhotonNetwork.player.NickName);
         }
 
         //원거리 애니메이션 재생 중 캐릭터의 바라보는 방향 return
@@ -1097,7 +1101,7 @@ namespace UnityPUBG.Scripts.Entities
         #region rpc 함수
         //어떤 모델을 선택했는지 알아와서 모델을 적용시킴
         [PunRPC]
-        public void WhatModelChoose(string modelName, string senderName)
+        private void WhatModelChoose(string modelName, string senderName)
         {
             if (photonView.owner.NickName != senderName)
             {
@@ -1120,6 +1124,58 @@ namespace UnityPUBG.Scripts.Entities
             {
                 Debug.LogError("랜덤은 안됩니다.");
             }
+        }
+
+        //어떤 무기를 장착했는지 알아와서 모델을 스폰함
+        [PunRPC]
+        private void WhatWeaponEquiped(string weaponName, string senderName)
+        {
+            if(photonView.owner.NickName != senderName)
+            {
+                return;
+            }
+
+            //무기 모델이 있다면 제거
+            if (meleeWeaponPosition.childCount > 0)
+            {
+                int childCount = meleeWeaponPosition.childCount;
+                for (int i = 0; i < childCount; i++)
+                {
+                    Destroy(meleeWeaponPosition.GetChild(0).gameObject);
+                }
+            }
+
+            if (rangeWeaponPosition.childCount > 0)
+            {
+                int childCount = rangeWeaponPosition.childCount;
+                for (int i = 0; i < childCount; i++)
+                {
+                    Destroy(rangeWeaponPosition.GetChild(0).gameObject);
+                }
+            }
+
+            GameObject primaryWeaponModel;
+
+            ItemData weaponData = ItemDataCollection.Instance.ItemDataByName[weaponName];
+
+            //교체할 무기 모델 생성
+            if (weaponData is MeleeWeaponData)
+            {
+                primaryWeaponModel = Instantiate(weaponData.Model, meleeWeaponPosition);
+            }
+            else if (weaponData is RangeWeaponData)
+            {
+                primaryWeaponModel = Instantiate(weaponData.Model, rangeWeaponPosition);
+            }
+            else
+            {
+                Debug.LogError($"무기가 아닙니다, {EquipedPrimaryWeapon.Data.GetType().Name}");
+                return;
+            }
+
+            primaryWeaponModel.layer = LayerMask.NameToLayer("PlayerModel");
+            primaryWeaponModel.transform.localPosition = Vector3.zero;
+            primaryWeaponModel.transform.localRotation = Quaternion.identity;
         }
         #endregion
     }

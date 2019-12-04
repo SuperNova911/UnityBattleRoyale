@@ -42,6 +42,9 @@ namespace UnityPUBG.Scripts.MainMenu
         /// </summary>
         private string selectedCharacterName;
 
+        [SerializeField]
+        private Transform CharacterSpawnPosition;
+
         #region 유니티 메시지
         private void Start()
         {
@@ -53,7 +56,12 @@ namespace UnityPUBG.Scripts.MainMenu
         }
 
         private void Update()
-        {
+        {            
+            if (CharacterSpawnPosition == null)
+            {
+                return;
+            }
+
             Vector3 nowpos;
 
 #if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
@@ -62,7 +70,7 @@ namespace UnityPUBG.Scripts.MainMenu
                 if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
                     lastpos = Input.GetTouch(0).position;
-                    lastrot = transform.rotation.eulerAngles;
+                    lastrot = CharacterSpawnPosition.transform.rotation.eulerAngles;
                 }
 
                 if (Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -71,25 +79,23 @@ namespace UnityPUBG.Scripts.MainMenu
 
                     int x = (int)((nowpos - lastpos).x / Screen.width * RotateSpeed);
 
-                    transform.rotation = Quaternion.Euler
+                    CharacterSpawnPosition.transform.rotation = Quaternion.Euler
                             (Vector3.up * deg * x + lastrot);
                 }
 
                 if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
-                    lastrot = transform.rotation.eulerAngles;
+                    lastrot = CharacterSpawnPosition.transform.rotation.eulerAngles;
                     setSelectedCharacter();
                 }
             }
 #else
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MainMenu")
-                return;
 
             // 마우스가 눌림
             if (Input.GetMouseButtonDown(0))
             {
                 isDrag = true;
-                lastrot = transform.rotation.eulerAngles;
+                lastrot = CharacterSpawnPosition.transform.rotation.eulerAngles;
                 lastpos = Input.mousePosition;
             }
 
@@ -97,7 +103,7 @@ namespace UnityPUBG.Scripts.MainMenu
             if (Input.GetMouseButtonUp(0))
             {
                 isDrag = false;
-                lastrot = transform.rotation.eulerAngles;
+                lastrot = CharacterSpawnPosition.transform.rotation.eulerAngles;
                 setSelectedCharacter();
 
                 //Debug.Log(selectedCharacterName);
@@ -109,7 +115,7 @@ namespace UnityPUBG.Scripts.MainMenu
 
                 int x = (int)((nowpos - lastpos).x / Screen.width * RotateSpeed);
 
-                transform.rotation = Quaternion.Euler
+                CharacterSpawnPosition.transform.rotation = Quaternion.Euler
                     (Vector3.up * deg * x + lastrot);
             }
 #endif
@@ -119,7 +125,7 @@ namespace UnityPUBG.Scripts.MainMenu
         /// <summary>
         /// 캐릭터를 스폰함.
         /// </summary>
-        public void SpawnMyCharacter(Transform spawnPos)
+        public void SpawnMyCharacter(Vector3 spawnPos)
         {
             spawnMyCharacter(spawnPos);
         }
@@ -138,10 +144,10 @@ namespace UnityPUBG.Scripts.MainMenu
             float r = circlelen / (2 * Mathf.PI);
 
             //원의 중심
-            Vector3 centerpos = transform.position - Vector3.forward * r;
+            Vector3 centerpos = CharacterSpawnPosition.transform.position - Vector3.forward * r;
 
             //중심 변경
-            transform.position = centerpos;
+            CharacterSpawnPosition.transform.position = centerpos;
 
             //1개 각도
             deg = 360f / num;
@@ -163,7 +169,7 @@ namespace UnityPUBG.Scripts.MainMenu
 
                 characterList.Add(tmp);
 
-                tmp.transform.SetParent(transform);
+                tmp.transform.SetParent(CharacterSpawnPosition.transform);
             }
 
             Camera.main.transform.position = centerpos + Vector3.forward * 7f + Vector3.up;
@@ -204,13 +210,9 @@ namespace UnityPUBG.Scripts.MainMenu
         /// <summary>
         /// 내가 선택한 캐릭터 스폰
         /// </summary>
-        private void spawnMyCharacter(Transform spawnPos)
+        private void spawnMyCharacter(Vector3 spawnPos)
         {
-            GameObject playerCharacter = PhotonNetwork.Instantiate(PlayerCharacter.name, spawnPos.position, Quaternion.identity, 0);
-            if (playerCharacter.GetComponent<PhotonView>().isMine)
-            {
-                CameraManager.Instance.PlayerCamera.Follow = playerCharacter.transform;
-            }
+            GameObject playerCharacter = PhotonNetwork.Instantiate(PlayerCharacter.name, spawnPos, Quaternion.identity, 0);
 
             foreach (Transform child in playerCharacter.transform)
             {
@@ -228,8 +230,14 @@ namespace UnityPUBG.Scripts.MainMenu
             {
                 int randomNum = Random.Range(0, 100) % playerCharacter.transform.childCount;
 
-                playerCharacter.transform.GetChild(randomNum).gameObject.SetActive(true);
+                GameObject selectedModel = playerCharacter.transform.GetChild(randomNum).gameObject;
+
+                selectedModel.SetActive(true);
+                selectedCharacterName = selectedModel.name;
             }
+
+            //다른 플레이어들에게 내가 고른 캐릭터 모델을 알려줌
+            playerCharacter.GetComponent<PhotonView>().RPC("WhatModelChoose", PhotonTargets.Others, selectedCharacterName, PhotonNetwork.player.NickName);
 
             Destroy(gameObject);
         }

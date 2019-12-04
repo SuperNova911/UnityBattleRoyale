@@ -1589,6 +1589,12 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 1
     Name: IsOnGround
+  - Type: 9
+    SynchronizeType: 1
+    Name: IsConsume
+  - Type: 1
+    SynchronizeType: 1
+    Name: ConsumeSpeed
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -1598,6 +1604,8 @@ MonoBehaviour:
     LayerIndex: 2
   - SynchronizeType: 1
     LayerIndex: 3
+  - SynchronizeType: 1
+    LayerIndex: 4
 --- !u!1 &251370033490516470
 GameObject:
   m_ObjectHideFlags: 0

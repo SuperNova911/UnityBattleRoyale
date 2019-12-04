@@ -8,7 +8,6 @@ namespace UnityPUBG.Scripts.CharacterSpawn
 {
     public class CharacterSpawner : MonoBehaviour
     {
-        private InputManager inputManager;
         private CharacterSelecter characterSelecter;
 
         // 내 캐릭터를 스폰했는가?
@@ -17,15 +16,17 @@ namespace UnityPUBG.Scripts.CharacterSpawn
         #region 유니티 메시지
         private void Awake()
         {
-            inputManager = new InputManager();
+            characterSelecter = FindObjectOfType<CharacterSelecter>().
+                                GetComponent<CharacterSelecter>();
         }
 
         private void Start()
         {
-            characterSelecter = FindObjectOfType<CharacterSelecter>().
-                GetComponent<CharacterSelecter>();
+            characterSelecter.SpawnMyCharacter(transform.position);
+            Destroy(gameObject);
         }
 
+        /*
         private void Update()
         {
             //if (inputManager.CharacterSpawner.Spawn.ReadValue<bool>() && isSpawned == false)
@@ -44,12 +45,13 @@ namespace UnityPUBG.Scripts.CharacterSpawn
 #else
             if (Input.anyKey && !isSpawned)
             {
-                characterSelecter.SpawnMyCharacter(transform);
+                characterSelecter.SpawnMyCharacter();
 
                 isSpawned = true;
             }
 #endif
         }
+        */
         #endregion
     }
 }

@@ -909,63 +909,6 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        /*
-        // 테스트 전용
-        private void MeleeAttackTest(DamageType damageType)
-        {
-            MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), damageType);
-        }
-
-        private void MeleeAttackTest(float damage, DamageType damageType)
-        {
-            Vector3 attackDirection = transform.forward;
-
-            var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(mouseRay, out var mouseRayHit, 100f, LayerMask.GetMask("Terrain")))
-            {
-                attackDirection = (new Vector3(mouseRayHit.point.x, 0, mouseRayHit.point.z) - transform.position).normalized;
-            }
-            MeleeAttackTest(attackDirection, damage, damageType);
-        }
-
-        private void MeleeAttackTest(Vector3 attackDirection, float damage, DamageType damageType)
-        {
-            float attackRange = 2f;
-            float attackAngle = 90f;
-            int rayNumber = 10;
-
-            Vector3 attackOriginPosition = transform.position + new Vector3(0, 1, 0);
-            Vector3 leftRayDirection = Quaternion.Euler(0, -attackAngle / 2, 0) * attackDirection;
-            Vector3 rightRayDirection = Quaternion.Euler(0, attackAngle / 2, 0) * attackDirection;
-
-            HashSet<IDamageable> hitObjects = new HashSet<IDamageable>();
-
-            for (int i = 0; i < rayNumber; i++)
-            {
-                Vector3 rayDirection = Vector3.Lerp(leftRayDirection, rightRayDirection, i / (float)(rayNumber - 1)).normalized;
-                if (Physics.Raycast(attackOriginPosition, rayDirection, out var hit, attackRange))
-                {
-                    var damageableObject = hit.transform.GetComponent<IDamageable>();
-                    if (damageableObject != null)
-                    {
-                        hitObjects.Add(damageableObject);
-                    }
-
-                    Debug.DrawLine(attackOriginPosition, hit.point, Color.red, 0.1f);
-                }
-                else
-                {
-                    Debug.DrawRay(attackOriginPosition, rayDirection * attackRange, Color.yellow, 0.1f);
-                }
-            }
-
-            foreach (var hitObject in hitObjects)
-            {
-                hitObject.OnTakeDamage(damage, damageType);
-            }
-        }
-        */
-
         private void RangeAttack(Vector3 attackDirection)
         {
             var rangeWeaponData = EquipedPrimaryWeapon.Data as RangeWeaponData;
@@ -1146,6 +1089,35 @@ namespace UnityPUBG.Scripts.Entities
             IsFalling = false;
 
             yield break;
+        }
+        #endregion
+
+        #region rpc 함수
+        //어떤 모델을 선택했는지 알아와서 모델을 적용시킴
+        [PunRPC]
+        public void WhatModelChoose(string modelName, string senderName)
+        {
+            if (photonView.owner.NickName != senderName)
+            {
+                return;
+            }
+
+            foreach (Transform child in transform)
+            {
+                if (child.name.StartsWith("Character"))
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+
+            if (modelName != "Character_Random")
+            {
+                transform.Find(modelName).gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.LogError("랜덤은 안됩니다.");
+            }
         }
         #endregion
     }

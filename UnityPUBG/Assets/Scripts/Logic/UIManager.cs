@@ -203,7 +203,7 @@ namespace UnityPUBG.Scripts.Logic
             playerHealthSlider.value = targetPlayer.CurrentHealth;
             playerHealthText.text = Mathf.RoundToInt(targetPlayer.CurrentHealth).ToString();
 
-            playerShieldSlider.maxValue = targetPlayer.MaximumShield;
+            playerShieldSlider.maxValue = 100;
             playerShieldSlider.value = targetPlayer.CurrentShield;
             playerShieldText.text = Mathf.RoundToInt(targetPlayer.CurrentShield).ToString();
 
@@ -274,16 +274,24 @@ namespace UnityPUBG.Scripts.Logic
             myPlayer.ItemContainer.OnContainerResize -= MyPlayer_OnContainerResize;
         }
 
-        private void MyPlayer_OnHealthUpdate(object sender, float value)
+        private void MyPlayer_OnHealthUpdate(object sender, float changeAmount)
         {
-            playerHealthSlider.value = value;
-            playerHealthText.text = Mathf.CeilToInt(value).ToString();
+            var targetPlayer = sender as Player;
+            if (targetPlayer.IsMyPlayer)
+            {
+                playerHealthSlider.value = targetPlayer.CurrentHealth;
+                playerHealthText.text = Mathf.CeilToInt(targetPlayer.CurrentHealth).ToString();
+            }
         }
 
-        private void MyPlayer_OnShieldUpdate(object sender, float value)
+        private void MyPlayer_OnShieldUpdate(object sender, float changeAmount)
         {
-            playerShieldSlider.value = value;
-            playerShieldText.text = Mathf.CeilToInt(value).ToString();
+            var targetPlayer = sender as Player;
+            if (targetPlayer.IsMyPlayer)
+            {
+                playerShieldSlider.value = targetPlayer.CurrentShield;
+                playerShieldText.text = Mathf.CeilToInt(targetPlayer.CurrentShield).ToString();
+            }
         }
 
         private void MyPlayer_OnPrimaryWeaponChange(object sender, EventArgs e)

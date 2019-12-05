@@ -20,8 +20,6 @@ namespace UnityPUBG.Scripts.Entities
         #region 유니티 인스펙터
         [Header("Player Settings")]
         [SerializeField, Range(0.1f, 1f)] private float speedMultiplyWhenUseItem = 0.5f;
-        [SerializeField, Range(0, 100)] private int maximumShield = 100;
-        [SerializeField, Range(0f, 100f)] private float currentShield = 0f;
 
         [Header("ItemContainer")]
         [SerializeField, Range(2, 8)] private int defaultContainerCapacity = 6;
@@ -68,8 +66,11 @@ namespace UnityPUBG.Scripts.Entities
         //private readonly string myWeaponTag = "MyWeapon";
         //private readonly string enemyWeaponTag = "EnemyWeapon";
 
+        private float currentShieldForEnemy;
+
         private bool isConsuming = false;
         private Coroutine tryConsumeItemCoroutine = null;
+        private Item equipedArmor;
         private Item equipedPrimaryWeapon;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
@@ -78,34 +79,106 @@ namespace UnityPUBG.Scripts.Entities
 
         public int MaximumShield
         {
-            get { return maximumShield; }
-            set { maximumShield = value; }
+            get 
+            {
+                if (EquipedArmor.IsStackEmpty)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return (EquipedArmor as ShieldItem).MaximumShield;
+                }
+            }
         }
         public float CurrentShield
         {
-            get { return currentShield; }
-            set
+            get
             {
-                float prevShield = currentShield;
-                currentShield = value;
-                currentShield = Mathf.Clamp(currentShield, 0f, MaximumShield);
-
-                float damagedAmount = prevShield - currentShield;
-
-                if (damagedAmount > 0)
-                {
-                    FloatingTextDrawer.Instance.DrawDamageText(transform, damagedAmount);
-                }
-
                 if (IsMyPlayer)
                 {
-                    OnCurrentShieldUpdate?.Invoke(this, currentShield);
+                    if (EquipedArmor.IsStackEmpty)
+                    {
+                        return 0f;
+                    }
+                    else
+                    {
+                        return (EquipedArmor as ShieldItem).CurrentShield;
+                    }
+                }
+                else
+                {
+                    return currentShieldForEnemy;
+                }
+            }
+            private set
+            {
+                if (IsMyPlayer)
+                {
+                    if (EquipedArmor.IsStackEmpty)
+                    {
+                        Debug.LogWarning($"{nameof(EquipedArmor)}가 없는 상태에서 {nameof(CurrentShield)}의 값을 변경하고 있습니다, value: {value}");
+                    }
+                    else
+                    {
+                        float previousShield = (EquipedArmor as ShieldItem).CurrentShield;
+                        (EquipedArmor as ShieldItem).CurrentShield = value;
+                        float currentShield = (EquipedArmor as ShieldItem).CurrentShield;
+
+                        float changeAmount = currentShield - previousShield;
+                        if (changeAmount < 0)
+                        {
+                            FloatingTextDrawer.Instance.DrawDamageText(transform, -changeAmount);
+                        }
+
+                        if (changeAmount != 0)
+                        {
+                            OnCurrentShieldUpdate?.Invoke(this, changeAmount);
+                        }
+                    }
+                }
+                else
+                {
+                    float previousShield = currentShieldForEnemy;
+                    currentShieldForEnemy = value;
+
+                    float changeAmount = currentShieldForEnemy - previousShield;
+                    if (changeAmount < 0)
+                    {
+                        FloatingTextDrawer.Instance.DrawDamageText(transform, -changeAmount);
+                    }
+
+                    if(changeAmount != 0)
+                    {
+                        OnCurrentShieldUpdate?.Invoke(this, changeAmount);
+                    }
                 }
             }
         }
         public ItemContainer ItemContainer { get; private set; }
         public ItemData[] ItemQuickBar { get; private set; }
-        public Item EquipedArmor { get; private set; }
+        public Item EquipedArmor
+        {
+            get { return equipedArmor; }
+            set
+            {
+                var previousArmor = equipedArmor as ShieldItem;
+                equipedArmor = value;
+
+                float shieldChangeAmount = 0f;
+                if (previousArmor != null && previousArmor.IsStackEmpty == false)
+                {
+                    shieldChangeAmount -= previousArmor.CurrentShield;
+                }
+                if (equipedArmor.IsStackEmpty == false)
+                {
+                    shieldChangeAmount += (equipedArmor as ShieldItem).CurrentShield;
+                }
+
+                shieldChangeAmount = Mathf.Max(shieldChangeAmount, 0f);
+                OnCurrentShieldUpdate?.Invoke(this, shieldChangeAmount);
+            }
+        }
         public Item EquipedBackpack { get; private set; }
         public Item EquipedPrimaryWeapon
         {
@@ -158,7 +231,6 @@ namespace UnityPUBG.Scripts.Entities
                 Debug.LogError($"{nameof(photonView)}가 없습니다");
             }
 
-            CurrentShield = MaximumShield / 2f;     // Test value
             ItemContainer = new ItemContainer(defaultContainerCapacity);
             ItemQuickBar = new ItemData[quickBarCapacity];
             myAnimator = GetComponent<Animator>();
@@ -280,11 +352,8 @@ namespace UnityPUBG.Scripts.Entities
         {
             if (stream.isWriting)
             {
-                // 체력 동기화
                 stream.SendNext(CurrentHealth);
-                // 실드 동기화
                 stream.SendNext(CurrentShield);
-                // 공격 애니메이션 실행 여부 동기화
                 stream.SendNext(IsPlayingAttackAnimation);
             }
             else
@@ -299,31 +368,22 @@ namespace UnityPUBG.Scripts.Entities
         #region IDamageable 인터페이스 
         //캐릭터 주인만 hp 조작
         //그러면 자동으로 hp가 동기화 됨
-        public void OnTakeDamage(float damage, DamageType type)
+        public void OnTakeDamage(float damage, DamageType damageType)
         {
             if (IsMyPlayer)
             {
-                float leftDamage = damage - CurrentShield;
+                switch (damageType)
+                {
+                    case DamageType.IgnoreShield:
+                        CurrentHealth -= damage;
+                        break;
 
-                if (leftDamage >= 0)
-                {
-                    CurrentShield = 0;
-                }
-                else
-                {
-                    CurrentShield -= damage;
-                    return;
-                }
-
-                float damagedHealth = CurrentHealth - leftDamage;
-                
-                if(damagedHealth <= 0)
-                {
-                    CurrentHealth = 0;
-                }
-                else
-                {
-                    CurrentHealth = damagedHealth;
+                    case DamageType.Normal:
+                    default:
+                        float leftDamage = damage - CurrentShield;
+                        CurrentShield -= damage;
+                        CurrentHealth -= leftDamage;
+                        break;
                 }
             }
         }
@@ -460,12 +520,11 @@ namespace UnityPUBG.Scripts.Entities
             EquipedSecondaryWeapon = tempForSwap;
         }
 
-        // TODO: 쉴드
-        public void EquipArmor(Item armorItem)
+        public void EquipArmor(ShieldItem shieldItem)
         {
-            if ((armorItem.Data is ArmorData) == false)
+            if ((shieldItem.Data is ArmorData) == false)
             {
-                Debug.LogWarning($"착용하려는 아이템이 {nameof(ArmorData)}가 아닙니다, {nameof(ItemData)}: {armorItem.Data.GetType().Name}");
+                Debug.LogWarning($"착용하려는 아이템이 {nameof(ArmorData)}가 아닙니다, {nameof(ItemData)}: {shieldItem.Data.GetType().Name}");
                 return;
             }
 
@@ -473,9 +532,7 @@ namespace UnityPUBG.Scripts.Entities
             {
                 DropItem(EquipedArmor);
             }
-            EquipedArmor = armorItem;
-
-            MaximumShield = (EquipedArmor.Data as ArmorData).ShieldAmount;
+            EquipedArmor = shieldItem;
         }
 
         public void EquipBackpack(Item backpackItem)
@@ -532,7 +589,6 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        // TODO: 쉴드 제거
         public void DropArmor()
         {
             if (EquipedArmor.IsStackEmpty == false)
@@ -582,9 +638,9 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            if (lootItemObject.Item.Data is ArmorData)
+            if (lootItemObject.Item is ShieldItem && lootItemObject.Item.Data is ArmorData)
             {
-                EquipArmor(lootItemObject.Item);
+                EquipArmor(lootItemObject.Item as ShieldItem);
                 LootAnimator.Instance.CreateNewLootAnimation(this, lootItemObject);
                 lootItemObject.RequestDestroy();
             }
@@ -769,7 +825,6 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        // TODO: 아이템 사용 시전 중단 기능
         private IEnumerator TryConsumeItem(ConsumableData consumableData)
         {
             if (consumableData == null)
@@ -911,7 +966,6 @@ namespace UnityPUBG.Scripts.Entities
             projectileBase.Fire();
         }
 
-        // Renamed: SwitchWeaponModel -> UpdatePrimaryWeaponModel
         private void UpdatePrimaryWeaponModel()
         {
             //무기 모델이 있다면 제거
@@ -982,13 +1036,20 @@ namespace UnityPUBG.Scripts.Entities
         //사망시 아이템 모두 떨굼
         private void OnDieDrops(object sender, EventArgs e)
         {
+            // 쉴드를 가득 채워서 버림
+            if (EquipedArmor.IsStackEmpty == false)
+            {
+                var shieldItem = EquipedArmor as ShieldItem;
+                shieldItem.CurrentShield = shieldItem.MaximumShield;
+                DropArmor();
+            }
+
+            DropBackpack();
             DropPrimaryWeapon();
             DropSecondaryWeapon();
-            DropBackpack();
-            DropArmor();
 
             //컨테이너에 든 아이템을 모두 떨굼
-            while(!ItemContainer.IsEmpty)
+            while(ItemContainer.IsEmpty == false)
             {
                 DropItemsAtSlot(0, ItemContainer.GetItemAt(0).CurrentStack);
             }

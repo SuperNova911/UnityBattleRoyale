@@ -73,7 +73,16 @@ namespace UnityPUBG.Scripts.Items
 
         public void NotifyUpdateItem()
         {
-            photonView.RPC(nameof(UpdateItem), PhotonTargets.Others, Item.Data.ItemName);
+            switch (Item)
+            {
+                case ShieldItem shieldItem:
+                    photonView.RPC(nameof(UpdateShieldItem), PhotonTargets.Others, Item.Data.ItemName, shieldItem.CurrentShield);
+                    break;
+                default:
+                    photonView.RPC(nameof(UpdateItem), PhotonTargets.Others, Item.Data.ItemName);
+                    break;
+            }
+
             photonView.RPC(nameof(UpdateCurrentStack), PhotonTargets.Others, Item.CurrentStack);
         }
 
@@ -137,6 +146,29 @@ namespace UnityPUBG.Scripts.Items
                 if (ItemDataCollection.Instance.ItemDataByName.TryGetValue(newItemDataName, out var newItemData))
                 {
                     Item = new Item(newItemData);
+                }
+                else
+                {
+                    Debug.LogError($"{newItemData}와 일치하는 ItemName이 없습니다");
+                }
+            }
+        }
+
+        [PunRPC]
+        private void UpdateShieldItem(string newItemDataName, float currentShield)
+        {
+            if (Item == null || Item.Data.ItemName != newItemDataName)
+            {
+                if (ItemDataCollection.Instance.ItemDataByName.TryGetValue(newItemDataName, out var newItemData))
+                {
+                    if (newItemData is ArmorData)
+                    {
+                        Item = new ShieldItem(newItemData as ArmorData, currentShield);
+                    }
+                    else
+                    {
+                        Debug.LogError($"{newItemData.ItemName}은 {nameof(ArmorData)}가 아닙니다");
+                    }
                 }
                 else
                 {

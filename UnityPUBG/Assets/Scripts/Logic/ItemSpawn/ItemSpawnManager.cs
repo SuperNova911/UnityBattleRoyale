@@ -56,13 +56,23 @@ namespace UnityPUBG.Scripts.Logic
             var targetSpawnPoints = FindAllSpawnPoints();
             foreach (var spawnPoint in targetSpawnPoints)
             {
-                var selectedItemData = ItemDataCollection.Instance.SelectRandomItemData(spawnPoint.SpawnChance);
+                ItemData selectedItemData = ItemDataCollection.Instance.SelectRandomItemData(spawnPoint.SpawnChance);
                 if (selectedItemData == null)
                 {
                     continue;
                 }
 
-                var spawnedItemObject = SpawnItemObjectAt(new Item(selectedItemData), spawnPoint.transform.position);
+                ItemObject spawnedItemObject;
+                switch (selectedItemData)
+                {
+                    case ArmorData armorData:
+                        spawnedItemObject = SpawnItemObjectAt(new ShieldItem(armorData, armorData.ShieldAmount), spawnPoint.transform.position);
+                        break;
+                    default:
+                        spawnedItemObject = SpawnItemObjectAt(new Item(selectedItemData), spawnPoint.transform.position);
+                        break;
+                }
+
                 if (spawnedItemObject != null)
                 {
                     spawnedItemObject.transform.parent = transform;

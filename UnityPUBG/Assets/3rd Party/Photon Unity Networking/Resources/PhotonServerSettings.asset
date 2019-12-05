@@ -50,4 +50,5 @@ MonoBehaviour:
   - UpdateItem
   - WhatModelChoose
   - WhatWeaponEquiped
+  - UpdateShieldItem
   DisableAutoOpenWizard: 1

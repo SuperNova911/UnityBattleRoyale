@@ -214,7 +214,7 @@ namespace UnityPUBG.Scripts.Logic
                     var entity = (Entity)damageable;
                     if ((new Vector2(entity.transform.position.x, entity.transform.position.z) - CurrentRingCenter).sqrMagnitude > CurrentRingRadius * CurrentRingRadius)
                     {
-                        damageable.OnTakeDamage(CurrentRingTickDamage, DamageType.Absolute);
+                        damageable.OnTakeDamage(CurrentRingTickDamage, DamageType.IgnoreShield);
                     }
                 }
 

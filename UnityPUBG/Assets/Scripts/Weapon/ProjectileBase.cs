@@ -42,7 +42,7 @@ namespace UnityPUBG.Scripts
         private void OnTriggerEnter(Collider other)
         {
             var damageableEntity = other.gameObject.GetComponent<IDamageable>();
-            if (damageableEntity != null && other.tag != myPlayerTag)
+            if (damageableEntity != null /* && other.tag != myPlayerTag*/)
             {
                 damageableEntity.OnTakeDamage(projectileInfo.damage, projectileInfo.damageType);
                 SaveToPool();

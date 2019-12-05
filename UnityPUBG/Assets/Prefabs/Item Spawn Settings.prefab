@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 531460791443775845}
   m_Layer: 0
   m_Name: Spawn Groups
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

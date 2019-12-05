@@ -12,6 +12,7 @@ namespace UnityPUBG.Scripts.Logic
 {
     public class ItemSpawnManager : Singleton<ItemSpawnManager>
     {
+        public GameObject itemSpawnGroups;
         [SerializeField] private ItemObject baseItemObjectPrefab;
 
         #region 유니티 메시지
@@ -66,6 +67,14 @@ namespace UnityPUBG.Scripts.Logic
                 {
                     spawnedItemObject.transform.parent = transform;
                 }
+            }
+        }
+
+        public void DestroyItemSpawnGroups()
+        {
+            if (itemSpawnGroups != null)
+            {
+                Destroy(itemSpawnGroups);
             }
         }
 

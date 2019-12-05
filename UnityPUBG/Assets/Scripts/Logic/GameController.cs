@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace UnityPUBG.Scripts.Logic
     public class GameController : Singleton<GameController>
     {
         //public DropShip dropShipPrefab;
+        public float dropShipLaunchDelay = 10f;
 
         [Header("Photon Networks")]
         public PhotonView photonView;
@@ -31,14 +33,15 @@ namespace UnityPUBG.Scripts.Logic
         {
             if (PhotonNetwork.isMasterClient)
             {
-                //ItemSpawnManager.Instance.SpawnRandomItemsAtSpawnPoints();
+                ItemSpawnManager.Instance.SpawnRandomItemsAtSpawnPoints();
+                ItemSpawnManager.Instance.DestroyItemSpawnGroups();
 
-                //RingSystem.Instance.GenerateRoundDatas();
-                //RingSystem.Instance.StartRingSystem();
-
-                //dropShipPrefab.LaunchDropShip();
-
-                StartCoroutine(LaunchDropShipWithDelay());
+                StartCoroutine(StartRingSystem(20f));
+                StartCoroutine(LaunchDropShipWithDelay(dropShipLaunchDelay));
+            }
+            else
+            {
+                ItemSpawnManager.Instance.DestroyItemSpawnGroups();
             }
         }
 
@@ -55,15 +58,21 @@ namespace UnityPUBG.Scripts.Logic
         }
 
         //10초 텀을 두고 드랍쉽 출발
-        private System.Collections.IEnumerator LaunchDropShipWithDelay()
+        private IEnumerator LaunchDropShipWithDelay(float delay)
         {
             GameObject dropShip =  PhotonNetwork.Instantiate("DropShip", Vector3.zero, Quaternion.identity, 0);
-            
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(delay);
 
             dropShip.GetComponent<DropShip>().LaunchDropShip();
-
             yield break;
+        }
+
+        private IEnumerator StartRingSystem(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            RingSystem.Instance.GenerateRoundDatas();
+            RingSystem.Instance.StartRingSystem();
         }
     }
 }

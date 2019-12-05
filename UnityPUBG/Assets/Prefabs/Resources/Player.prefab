@@ -1437,6 +1437,8 @@ MonoBehaviour:
   currentHealth: 100
   movementSpeed: 5
   rotationSpeed: 0.2
+  dropSpeed: 8
+  flySpeed: 20
   speedMultiplyWhenUseItem: 0.5
   maximumShield: 100
   currentShield: 0

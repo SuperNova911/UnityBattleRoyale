@@ -75,7 +75,7 @@ namespace UnityPUBG.Scripts.Logic
         private void FixedUpdate()
         {
             //출발 대기라면 아무것도 안함
-            if(Status == DropShipStatus.WaitForLaunch)
+            if (Status == DropShipStatus.WaitForLaunch)
             {
                 return;
             }
@@ -88,7 +88,7 @@ namespace UnityPUBG.Scripts.Logic
             if (Status != DropShipStatus.WaitForLaunch)
             {
                 //마스터 클라이언트만 드랍쉽을 움직임
-                if(!PhotonNetwork.isMasterClient)
+                if (!PhotonNetwork.isMasterClient)
                 {
                     return;
                 }
@@ -137,7 +137,7 @@ namespace UnityPUBG.Scripts.Logic
             var randomPoint = UnityEngine.Random.insideUnitCircle;
             randomPoint = (randomPoint * centerRadius) + mapCenter;
             var randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
-            
+
             var intersections = FindIntersections(mapCenter, allowDropRadius, randomPoint, randomDirection + randomPoint);
             startDropPosition = intersections[0];
             endDropPosition = intersections[1];
@@ -186,6 +186,11 @@ namespace UnityPUBG.Scripts.Logic
 
         public void DropPlayer()
         {
+            if (Status != DropShipStatus.Drop)
+            {
+                return;
+            }
+
             if (MyPlayerIsOnBoard == false)
             {
                 Debug.LogWarning($"{nameof(Player)}가 탑승중이 아닙니다");
@@ -202,11 +207,6 @@ namespace UnityPUBG.Scripts.Logic
 
             player.transform.position = transform.position;
             player.StartPlayOnGround();
-            var playerRigidbody = player.GetComponent<Rigidbody>();
-            if (playerRigidbody != null)
-            {
-                playerRigidbody.useGravity = true;
-            }
 
             CameraManager.Instance.CurrentCamera = CameraManager.Instance.PlayerCamera;
 
@@ -236,11 +236,11 @@ namespace UnityPUBG.Scripts.Logic
                     progress = Mathf.InverseLerp(0, (endDropPosition - startDropPosition).sqrMagnitude, (new Vector2(transform.position.x, transform.position.z) - startDropPosition).sqrMagnitude);
                     if (progress >= 1)
                     {
-                        Status = DropShipStatus.Finishing;
                         if (MyPlayerIsOnBoard)
                         {
                             DropPlayer();
                         }
+                        Status = DropShipStatus.Finishing;
 
                         OnEndDrop?.Invoke(this, EventArgs.Empty);
                     }
@@ -302,7 +302,7 @@ namespace UnityPUBG.Scripts.Logic
 
             return intersectionPoints;
         }
-               
+
         [PunRPC]
         private void NotifyPathData(Vector2 launchPosition, Vector2 destinationPosition, Vector2 startDropPosition, Vector2 endDropPosition)
         {
@@ -311,7 +311,7 @@ namespace UnityPUBG.Scripts.Logic
             this.startDropPosition = startDropPosition;
             this.endDropPosition = endDropPosition;
         }
-        
+
         [PunRPC]
         private void NotifyLaunchDropShip()
         {

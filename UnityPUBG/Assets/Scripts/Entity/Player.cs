@@ -71,10 +71,10 @@ namespace UnityPUBG.Scripts.Entities
         private bool isConsuming = false;
         private Coroutine tryConsumeItemCoroutine = null;
         private Item equipedPrimaryWeapon;
-        private bool isFalling = false;
 
         public event EventHandler<float> OnCurrentShieldUpdate;
         public event EventHandler OnPrimaryWeaponChange;
+        public event EventHandler OnLand;
 
         public int MaximumShield
         {
@@ -146,25 +146,7 @@ namespace UnityPUBG.Scripts.Entities
                 SpeedMultiplier = value ? speedMultiplyWhenUseItem : 1f;
             }
         }
-
-        private bool IsFalling
-        {
-            get { return isFalling; }
-            set
-            {
-                isFalling = value;
-
-                if(isFalling)
-                {
-                    AntiGrivity = 20f;
-                }
-                else
-                {
-                    AntiGrivity = 0f;
-                }
-            }
-        }
-
+        
         #region 유니티 메시지
         protected override void Awake()
         {
@@ -196,9 +178,9 @@ namespace UnityPUBG.Scripts.Entities
 
             if (IsMyPlayer)
             {
+                gameObject.tag = "MyPlayer";
                 myItemLooter = GetComponentInChildren<PlayerItemLooter>();
                 EntityManager.Instance.MyPlayer = this;
-                gameObject.tag = "MyPlayer";
                 CameraManager.Instance.CurrentCamera = CameraManager.Instance.DropShipCamera;
                 //meleeWeaponPosition.gameObject.tag = myWeaponTag;
             }
@@ -230,54 +212,52 @@ namespace UnityPUBG.Scripts.Entities
                 return;
             }
 
-            if (Keyboard.current.digit9Key.wasPressedThisFrame)
-            {
-                var overflows = ItemContainer.ResizeCapacity(ItemContainer.Capacity - 2);
-                foreach (var item in overflows)
-                {
-                    DropItem(item);
-                }
-            }
-            else if (Keyboard.current.digit8Key.wasPressedThisFrame)
-            {
-                var overflows = ItemContainer.ResizeCapacity(ItemContainer.Capacity + 2);
-                foreach (var item in overflows)
-                {
-                    DropItem(item);
-                }
-            }
-            else if (Keyboard.current.digit7Key.wasPressedThisFrame)
-            {
-                DropBackpack();
-            }
-            else if (Keyboard.current.digit6Key.wasPressedThisFrame)
-            {
-                DropArmor();
-            }
-            else if (Keyboard.current.digit5Key.wasPressedThisFrame)
-            {
-                DropPrimaryWeapon();
-            }
-            else if (Keyboard.current.digit4Key.wasPressedThisFrame)
-            {
-                CurrentShield -= 9.11f;
-                CurrentHealth -= 9.11f;
-            }
+            //if (Keyboard.current.digit9Key.wasPressedThisFrame)
+            //{
+            //    var overflows = ItemContainer.ResizeCapacity(ItemContainer.Capacity - 2);
+            //    foreach (var item in overflows)
+            //    {
+            //        DropItem(item);
+            //    }
+            //}
+            //else if (Keyboard.current.digit8Key.wasPressedThisFrame)
+            //{
+            //    var overflows = ItemContainer.ResizeCapacity(ItemContainer.Capacity + 2);
+            //    foreach (var item in overflows)
+            //    {
+            //        DropItem(item);
+            //    }
+            //}
+            //else if (Keyboard.current.digit7Key.wasPressedThisFrame)
+            //{
+            //    DropBackpack();
+            //}
+            //else if (Keyboard.current.digit6Key.wasPressedThisFrame)
+            //{
+            //    DropArmor();
+            //}
+            //else if (Keyboard.current.digit5Key.wasPressedThisFrame)
+            //{
+            //    DropPrimaryWeapon();
+            //}
+            //else if (Keyboard.current.digit4Key.wasPressedThisFrame)
+            //{
+            //    CurrentShield -= 9.11f;
+            //    CurrentHealth -= 9.11f;
+            //}
+            //else if (Keyboard.current.pKey.wasPressedThisFrame)
+            //{
+            //    transform.position += Vector3.up * 50;
+            //    IsDroping = true;
+            //    StartCoroutine(PlayOnGroundAnimation());
+            //}
 
-            if (photonView.isMine)
-            {
-                if (Keyboard.current.spaceKey.wasPressedThisFrame)
-                {
-                    RangeAttack(transform.forward);
-                }
-
-#if !UNITY_ANDRIOD
-                //if (Input.GetKeyDown(KeyCode.Mouse0))
-                //{
-                //    MeleeAttackTest(UnityEngine.Random.Range(0f, 100f), DamageType.Normal);
-                //}
-#endif
-            }
+            //if (photonView.isMine)
+            //{
+            //    if (Keyboard.current.spaceKey.wasPressedThisFrame)
+            //    {
+            //    }
+            //}
         }
 
         protected override void FixedUpdate()
@@ -356,24 +336,7 @@ namespace UnityPUBG.Scripts.Entities
             MovementDirection = direction.normalized;
 
             //이동 애니메이션 설정
-            if (direction != Vector2.zero)
-            {
-                myAnimator.SetBool(isRun, true);
-                //떨어지는 상태라면 움직일 때 안티 그래비티 적용
-                if(IsFalling)
-                {
-                    AntiGrivity = 20;
-                }
-            }
-            else
-            {
-                myAnimator.SetBool(isRun, false);
-                //움직이지 않는다면 안티 그래비티 미적용
-                if(IsFalling)
-                {
-                    AntiGrivity = 0;
-                }
-            }
+            myAnimator.SetBool(isRun, direction != Vector2.zero);
         }
 
         public void RotateTo(Vector2 direction)
@@ -1083,17 +1046,15 @@ namespace UnityPUBG.Scripts.Entities
         //지상에 있는 상태로 변경
         private IEnumerator PlayOnGroundAnimation()
         {
-            IsFalling = true;
-            //맨 처음에는 가만히 있으니 안티 그래비티 미적용 상태로 만듬
-            MoveTo(Vector2.zero);
+            IsDroping = true;
             while(transform.position.y > 2f)
             {
                 yield return null;
             }
 
             myAnimator.SetTrigger("IsOnGround");
-            IsFalling = false;
-
+            IsDroping = false;
+            OnLand?.Invoke(this, EventArgs.Empty);
             yield break;
         }
         #endregion

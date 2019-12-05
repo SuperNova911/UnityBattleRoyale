@@ -66,8 +66,8 @@ namespace UnityPUBG.Scripts.Logic
             }
             else
             {
-                SpawnItem();
-                StartRingSystem();
+                //SpawnItem();
+                //StartRingSystem();
             }
         }
 
@@ -79,6 +79,7 @@ namespace UnityPUBG.Scripts.Logic
         public void SpawnItem()
         {
             ItemSpawnManager.Instance.SpawnRandomItemsAtSpawnPoints();
+            ItemSpawnManager.Instance.DestroyItemSpawnGroups();
         }
 
         public void StartRingSystem()

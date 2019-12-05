@@ -195,7 +195,8 @@ namespace UnityPUBG.Scripts.Logic
 
                     UpdateRingObject();
 
-                    yield return new WaitForSeconds(0.02f);
+                    yield return null;
+                    //yield return new WaitForSeconds(0.02f);
                 }
 
                 // After Closing

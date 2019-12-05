@@ -139,11 +139,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   altitude: 50
   speed: 15
-  mapCenter: {x: 250, y: 250}
-  centerRadius: 50
-  allowDropRadius: 230
-  preparationTime: 8
-  finishingTime: 8
+  mapCenter: {x: 243.4, y: 244.2}
+  centerRadius: 100
+  allowDropRadius: 210
+  preparationTime: 6
+  finishingTime: 6
   launchPosition: {x: -65.57555, y: -25.387249}
   destinationPosition: {x: 621.09607, y: 444.2001}
   startDropPosition: {x: 33.477283, y: 42.351498}

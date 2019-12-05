@@ -16,8 +16,12 @@ namespace UnityPUBG.Scripts.Entities
         [Header("Movement")]
         [SerializeField] [Range(0f, 20f)] private float movementSpeed = 5f;
         [SerializeField] [Range(0f, 1f)] private float rotationSpeed = 0.2f;
+        [SerializeField] [Range(1f, 50f)] private float dropSpeed = 8f;
+        [SerializeField] [Range(1f, 100f)] private float flySpeed = 20f;
 
         private Rigidbody entityRigidbody;
+        private bool isDroping = false;
+        private Vector3 currentVelocity;
 
         public event EventHandler<float> OnCurrentHealthUpdate;
         public event EventHandler OnDie;
@@ -52,11 +56,18 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
         public bool IsDead { get; private set; }
+        public bool IsDroping
+        { 
+            get { return isDroping; }
+            protected set
+            {
+                isDroping = value;
+                entityRigidbody.useGravity = isDroping ? false : true;
+            }
+        }
         public float SpeedMultiplier { get; set; }
         public Vector2 MovementDirection { get; protected set; }
         public Vector2 RotateDirection { get; protected set; }
-
-        public float AntiGrivity { get; protected set; }
 
         #region 유니티 메시지
         protected virtual void Awake()
@@ -99,14 +110,21 @@ namespace UnityPUBG.Scripts.Entities
         /// </summary>
         private void MoveEntity()
         {
-            if(AntiGrivity == 0 && MovementDirection == Vector2.zero)
+            if(MovementDirection == Vector2.zero && IsDroping == false)
             {
                 return;
             }
 
-            Vector3 direction = new Vector3(MovementDirection.x * movementSpeed * SpeedMultiplier,
-                AntiGrivity, MovementDirection.y * movementSpeed * SpeedMultiplier) * Time.fixedDeltaTime;
-            entityRigidbody.MovePosition(transform.position + direction);
+            if (IsDroping)
+            {
+                var targetVelocity = new Vector3(MovementDirection.x * flySpeed, -1 * dropSpeed, MovementDirection.y * flySpeed);
+                entityRigidbody.velocity = Vector3.SmoothDamp(entityRigidbody.velocity, targetVelocity, ref currentVelocity, 0.5f);
+            }
+            else
+            {
+                var direction = new Vector3(MovementDirection.x, 0, MovementDirection.y) * movementSpeed * SpeedMultiplier * Time.fixedDeltaTime;
+                entityRigidbody.MovePosition(transform.position + direction);
+            }
         }
 
         /// <summary>

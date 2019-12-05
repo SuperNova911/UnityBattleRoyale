@@ -91,6 +91,8 @@ namespace UnityPUBG.Scripts.Entities
                 }
             }
         }
+
+        public float KnockBackPower = 500f;
         public float CurrentShield
         {
             get

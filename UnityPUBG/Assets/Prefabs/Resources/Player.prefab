@@ -1440,8 +1440,6 @@ MonoBehaviour:
   dropSpeed: 8
   flySpeed: 20
   speedMultiplyWhenUseItem: 0.5
-  maximumShield: 100
-  currentShield: 0
   defaultContainerCapacity: 4
   quickBarCapacity: 4
   projectileBasePrefab: {fileID: 2364344030809358519, guid: 3ff01fddd5ff0f6468bb67588f02dfe3,
@@ -1449,6 +1447,7 @@ MonoBehaviour:
   projectileFirePosition: {fileID: 4133543043523785284}
   meleeWeaponPosition: {fileID: 2053244640088670907}
   rangeWeaponPosition: {fileID: 6303089189300066232}
+  KnockBackPower: 500
 --- !u!114 &1330880535016543195
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -558,7 +558,7 @@ PrefabInstance:
     - target: {fileID: 1758639501078851949, guid: 6a01c05a63e5cee439f475deb5c215d9,
         type: 3}
       propertyPath: MaxPlayersPerRoom
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1758639501078851948, guid: 6a01c05a63e5cee439f475deb5c215d9,
         type: 3}

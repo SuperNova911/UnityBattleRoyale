@@ -30,6 +30,11 @@ namespace UnityPUBG.Scripts.Logic
         [Range(3, 50)]
         public int resolutionY = 3;
 
+        [Header("Ring Sprite")]
+        public SpriteRenderer currentRingSpriteRenderer;
+        public SpriteRenderer closedRingSpriteRenderer;
+        public float altitude = 10f;
+
         [Header("Debug")]
         public bool showRingGizmos;
 
@@ -37,17 +42,39 @@ namespace UnityPUBG.Scripts.Logic
         private GameObject ringObject;
         private RingMeshGenerator ringMeshGenerator;
 
+        private Vector2 currentRingCenter;
+        private float currentRingRadius;
+
         public event EventHandler<RoundData> OnRoundStart;
         public event EventHandler<RoundData> OnRingCloseStart;
 
         public RoundData[] RoundDatas { get; private set; }
-        public Vector2 CurrentRingCenter { get; private set; }
+        public Vector2 CurrentRingCenter
+        {
+            get { return currentRingCenter; }
+            private set
+            {
+                currentRingCenter = value;
+                currentRingSpriteRenderer.transform.position = new Vector3(currentRingCenter.x, altitude, currentRingCenter.y);
+            }
+        }
         public float CurrentRingTickDamage { get; private set; }
-        public float CurrentRingRadius { get; private set; }
+        public float CurrentRingRadius
+        {
+            get { return currentRingRadius; }
+            private set
+            {
+                currentRingRadius = value;
+                currentRingSpriteRenderer.transform.localScale = Vector3.one * currentRingRadius * 2f;
+            }
+        }
 
         #region 유니티 메시지
         private void Awake()
         {
+            currentRingSpriteRenderer.enabled = false;
+            closedRingSpriteRenderer.enabled = false;
+
             photonView = GetComponent<PhotonView>();
             CreateRingObject();
         }
@@ -170,10 +197,16 @@ namespace UnityPUBG.Scripts.Logic
             CurrentRingTickDamage = initialTickDamage;
             UpdateRingObject();
 
+            currentRingSpriteRenderer.enabled = true;
+            closedRingSpriteRenderer.enabled = true;
+
             // Each Round
             for (int i = 0; i < roundDatas.Length; i++)
             {
                 OnRoundStart?.Invoke(this, roundDatas[i]);
+
+                closedRingSpriteRenderer.transform.position = new Vector3(roundDatas[i].Center.x, altitude, roundDatas[i].Center.y);
+                closedRingSpriteRenderer.transform.localScale = Vector3.one * roundDatas[i].DiameterAfterClosing;
 
                 // Ring Countdown
                 float startTime = Time.time;

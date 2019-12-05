@@ -10064,6 +10064,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &9116833919478676541
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4026766102284740691, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: m_Name
+      value: Ring Center Indicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847703012597899517, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847703012597899517, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847703012597899517, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847703012597899517, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847703012597899517, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847703012597899517, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847703012597899517, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6847703012597899517, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033642227658807150, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: playerPosition
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033642227658807150, guid: 8502bba1afa3d1f4a99617debb1993f5,
+        type: 3}
+      propertyPath: ringCenterPosition
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8502bba1afa3d1f4a99617debb1993f5, type: 3}
 --- !u!1001 &9173340602515692451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10482,6 +10546,56 @@ PrefabInstance:
         type: 3}
       propertyPath: showRingGizmos
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.waitPeriods.Array.data[0]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.waitPeriods.Array.data[1]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.waitPeriods.Array.data[2]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.waitPeriods.Array.data[3]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.waitPeriods.Array.data[4]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.timeToCloses.Array.data[0]
+      value: 9.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.timeToCloses.Array.data[1]
+      value: 9.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.timeToCloses.Array.data[2]
+      value: 9.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.timeToCloses.Array.data[3]
+      value: 9.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173340600907604453, guid: 26d1174b5a3302d47bef3799fed1c30b,
+        type: 3}
+      propertyPath: roundSettings.timeToCloses.Array.data[4]
+      value: 9.3
       objectReference: {fileID: 0}
     - target: {fileID: 9173340600907604449, guid: 26d1174b5a3302d47bef3799fed1c30b,
         type: 3}

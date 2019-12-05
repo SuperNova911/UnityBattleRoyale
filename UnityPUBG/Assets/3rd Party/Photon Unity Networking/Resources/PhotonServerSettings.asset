@@ -36,6 +36,7 @@ MonoBehaviour:
   - InstantiateRpc
   - NotifyLaunchDropShip
   - NotifyPathData
+  - NotifyStartRingSystem
   - PickupItemInit
   - PlayLootAnimation
   - PunPickup
@@ -43,10 +44,10 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+  - SyncRangeAttack
+  - SyncRoundDatas
   - UpdateCurrentStack
   - UpdateItem
   - WhatModelChoose
   - WhatWeaponEquiped
-  - SyncRoundDatas
-  - NotifyStartRingSystem
   DisableAutoOpenWizard: 1

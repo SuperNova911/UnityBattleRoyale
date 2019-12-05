@@ -45,6 +45,7 @@ namespace UnityPUBG.Scripts
             if (damageableEntity != null /* && other.tag != myPlayerTag*/)
             {
                 damageableEntity.OnTakeDamage(projectileInfo.damage, projectileInfo.damageType);
+                other.attachedRigidbody.AddForce(transform.forward * 500f);
                 SaveToPool();
             }
         }

@@ -41,6 +41,9 @@ namespace UnityPUBG.Scripts
                     {
                         other.GetComponent<Entities.IDamageable>().OnTakeDamage
                             (Random.Range(0f, 100f), Utilities.DamageType.Normal);
+
+                        //넉백
+                        other.attachedRigidbody.AddForce(EnemyOwner.transform.forward * EnemyOwner.KnockBackPower);
                     }
                 }
             }

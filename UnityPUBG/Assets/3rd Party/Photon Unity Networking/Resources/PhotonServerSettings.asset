@@ -47,4 +47,6 @@ MonoBehaviour:
   - UpdateItem
   - WhatModelChoose
   - WhatWeaponEquiped
+  - SyncRoundDatas
+  - NotifyStartRingSystem
   DisableAutoOpenWizard: 1

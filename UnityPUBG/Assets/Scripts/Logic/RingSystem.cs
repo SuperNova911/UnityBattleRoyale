@@ -34,6 +34,7 @@ namespace UnityPUBG.Scripts.Logic
         [Header("Debug")]
         public bool showRingGizmos;
 
+        private PhotonView photonView;
         private GameObject ringObject;
         private RingMeshGenerator ringMeshGenerator;
 
@@ -48,6 +49,7 @@ namespace UnityPUBG.Scripts.Logic
         #region 유니티 메시지
         private void Awake()
         {
+            photonView = GetComponent<PhotonView>();
             CreateRingObject();
         }
 
@@ -96,20 +98,19 @@ namespace UnityPUBG.Scripts.Logic
                     roundSettings.timeToCloses[round],
                     roundSettings.tickDamages[round]);
             }
+
+            photonView.RPC(nameof(SyncRoundDatas), PhotonTargets.OthersBuffered,
+                RoundDatas.Length,
+                RoundDatas.Select(e => e.Center).ToArray(),
+                RoundDatas.Select(e => e.DiameterAfterClosing).ToArray(),
+                RoundDatas.Select(e => e.WaitPeriod).ToArray(),
+                RoundDatas.Select(e => e.TimeToClose).ToArray(),
+                RoundDatas.Select(e => e.TickDamage).ToArray());
         }
 
         public void StartRingSystem()
         {
-            if (RoundDatas == null)
-            {
-                Debug.LogWarning($"{nameof(RoundDatas)}를 먼저 생성해야 합니다");
-                return;
-            }
-
-            StartCoroutine(RingCountDown(RoundDatas));
-
-            float tickPeriod = 1f;
-            StartCoroutine(OnRingTick(tickPeriod));
+            photonView.RPC(nameof(NotifyStartRingSystem), PhotonTargets.AllBuffered);
         }
 
         // TODO: Player가 이동할 수 있는 무작위 좌표를 선정
@@ -219,6 +220,31 @@ namespace UnityPUBG.Scripts.Logic
 
                 yield return new WaitForSeconds(tickPeriod);
             }
+        }
+
+        [PunRPC]
+        private void SyncRoundDatas(int totalRound, Vector2[] centers, float[] diametersAfterClosing, float[] waitPeriods, float[] timeToCloses, float[] tickDamages)
+        {
+            RoundDatas = new RoundData[totalRound];
+            for (int round = 0; round < totalRound; round++)
+            {
+                RoundDatas[round] = new RoundData(round + 1, centers[round], diametersAfterClosing[round], waitPeriods[round], timeToCloses[round], tickDamages[round]);
+            }
+        }
+
+        [PunRPC]
+        private void NotifyStartRingSystem()
+        {
+            if (RoundDatas == null)
+            {
+                Debug.LogWarning($"{nameof(RoundDatas)}를 먼저 생성해야 합니다");
+                return;
+            }
+
+            StartCoroutine(RingCountDown(RoundDatas));
+
+            float tickPeriod = 1f;
+            StartCoroutine(OnRingTick(tickPeriod));
         }
 
         [Serializable]

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 433408}
   - component: {fileID: 3353642}
   - component: {fileID: 2388560}
-  - component: {fileID: 277101398256543484}
+  - component: {fileID: -7726422398557440530}
   m_Layer: 0
   m_Name: SM_Env_DirtMound_01
   m_TagString: Untagged
@@ -79,7 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &277101398256543484
+--- !u!64 &-7726422398557440530
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

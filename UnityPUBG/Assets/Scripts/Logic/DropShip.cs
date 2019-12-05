@@ -85,17 +85,12 @@ namespace UnityPUBG.Scripts.Logic
                 DropPlayer();
             }
 
-            if (Status != DropShipStatus.WaitForLaunch)
+            //마스터 클라이언트만 드랍쉽을 움직임
+            if (PhotonNetwork.isMasterClient)
             {
-                //마스터 클라이언트만 드랍쉽을 움직임
-                if (!PhotonNetwork.isMasterClient)
-                {
-                    return;
-                }
-
-                CalculateStatus();
                 MoveDropShip();
             }
+            CalculateStatus();
         }
 
         private void OnDestroy()

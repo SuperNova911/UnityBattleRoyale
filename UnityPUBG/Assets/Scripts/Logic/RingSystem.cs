@@ -13,12 +13,11 @@ namespace UnityPUBG.Scripts.Logic
     public class RingSystem : Singleton<RingSystem>
     {
         [Header("Settings")]
-        public Vector2 initialRingCenter = new Vector2(500, 500);
-        [Range(0f, 1000f)]
-        public float initialRingRadius = 700f;
-        [Range(0f, 100f)]
-        public float initialTickDamage = 1f;
-
+        public Vector2 initialRingCenter = new Vector2(250, 250);
+        [Range(0f, 1000f)] public float initialRingRadius = 350;
+        [Range(0f, 100f)] public float initialTickDamage = 1f;
+        public Vector2 finalPositionCenter = new Vector2(250, 250);
+        [Range(0f, 400f)] public float finalPositionRadius = 200;
         [Space]
         public RoundSetttings roundSettings = new RoundSetttings();
 
@@ -57,7 +56,12 @@ namespace UnityPUBG.Scripts.Logic
         {
             if (showRingGizmos && RoundDatas != null)
             {
-                DrawDebugRingGizmos(RoundDatas);
+                DebugExtension.DrawCircle(new Vector3(initialRingCenter.x, 0, initialRingCenter.y), Color.cyan, initialRingRadius);
+                DebugExtension.DrawCircle(new Vector3(finalPositionCenter.x, 0, finalPositionCenter.y), Color.magenta, finalPositionRadius);
+                if (RoundDatas != null)
+                {
+                    DrawDebugRingGizmos(RoundDatas);
+                }
             }
         }
 
@@ -116,7 +120,8 @@ namespace UnityPUBG.Scripts.Logic
         // TODO: Player가 이동할 수 있는 무작위 좌표를 선정
         private Vector2 SelectFinalPosition()
         {
-            return new Vector2(250, 250);
+            Vector2 randomPosition = UnityEngine.Random.insideUnitCircle;
+            return finalPositionCenter + (randomPosition * finalPositionRadius);
         }
 
         private void CreateRingObject()

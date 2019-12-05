@@ -147,31 +147,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2d719ad463138f4a8de9feff83292d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialRingCenter: {x: 500, y: 500}
-  initialRingRadius: 700
+  initialRingCenter: {x: 220, y: 250}
+  initialRingRadius: 300
   initialTickDamage: 1
+  finalPositionCenter: {x: 220, y: 250}
+  finalPositionRadius: 150
   roundSettings:
     roundNumber: 5
     waitPeriods:
+    - 90
     - 60
+    - 40
+    - 30
+    - 20
+    timeToCloses:
     - 50
     - 40
     - 30
-    - 10
-    timeToCloses:
-    - 30
-    - 25
     - 20
-    - 15
-    - 5
-    diametersAfterClosing:
-    - 400
-    - 150
-    - 50
     - 10
+    diametersAfterClosing:
+    - 350
+    - 200
+    - 80
+    - 20
     - 0
     tickDamages:
-    - 2.5
+    - 2
     - 5
     - 10
     - 15

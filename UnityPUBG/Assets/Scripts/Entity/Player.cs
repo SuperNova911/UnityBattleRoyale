@@ -1063,6 +1063,8 @@ namespace UnityPUBG.Scripts.Entities
             //myAnimator.runtimeAnimatorController.
 
             myAnimator.SetTrigger(rangeAttack);
+            SpeedMultiplier = (EquipedPrimaryWeapon.Data as RangeWeaponData).MovementSpeedMultiplier;
+
             float aimTime = 1.1f;
             yield return new WaitForSecondsRealtime(aimTime);
             while (true)
@@ -1080,6 +1082,7 @@ namespace UnityPUBG.Scripts.Entities
                     yield return new WaitForSecondsRealtime(rangeAttackAnimationLength - aimTime);
 
                     IsPlayingAttackAnimation = false;
+                    SpeedMultiplier = 1f;
                     yield break;
                 }
             }

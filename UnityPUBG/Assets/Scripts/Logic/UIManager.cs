@@ -54,6 +54,11 @@ namespace UnityPUBG.Scripts.Logic
         public List<EquipItemSlot> inventoryEquipItemSlots = new List<EquipItemSlot>();
         public List<QuickItemSlot> quickItemSlots = new List<QuickItemSlot>();
         [SerializeField] private SpriteAtlas iconAtlas;
+        [Space]
+        public GameObject ResultPanel;
+        public TMP_Text rankText;
+        public TMP_Text playerNameText;
+        public TMP_Text resultText;
 
         [Header("Debug Options")]
         public bool keyboardMovement = false;
@@ -98,6 +103,9 @@ namespace UnityPUBG.Scripts.Logic
             quickSlotUIElements.SetActive(true);
             inventoryUIElements.SetActive(true);
             inventoryUIElements.SetActive(false);
+            //결과 창 초기화
+            ResultPanel.SetActive(false);
+            ResultPanel.GetComponent<CanvasGroup>().alpha = 0f;
 
             EntityManager.Instance.OnMyPlayerSpawn += ConnectMyPlayerUIElements;
             EntityManager.Instance.OnPlayerSpawn += EntityManager_OnPlayerSpawn;
@@ -272,6 +280,8 @@ namespace UnityPUBG.Scripts.Logic
             myPlayer.ItemContainer.OnContainerUpdate -= MyPlayer_OnContainerUpdate;
             myPlayer.ItemContainer.OnContainerUpdate -= MyPlayer_OnContainerUpdate;
             myPlayer.ItemContainer.OnContainerResize -= MyPlayer_OnContainerResize;
+
+            StartCoroutine(FadeInResultPanel(false));
         }
 
         private void MyPlayer_OnHealthUpdate(object sender, float changeAmount)
@@ -449,6 +459,64 @@ namespace UnityPUBG.Scripts.Logic
             yield return null;
         }
 
+        private IEnumerator FadeInResultPanel(bool isWin)
+        {
+            int livePlayerCount = EntityManager.Instance.Players.Where(entity => entity.IsDead == false).Count();
+
+            if (livePlayerCount > 1 && isWin)
+            {
+                Debug.Log("살아남은 플레이어가 2명 이상인데 승리 할 수 없습니다.");
+                yield break;
+            }
+
+            //혼자 일 때에는 패배 메시지가 안뜨도록 함
+            if (livePlayerCount == 0 && !isWin)
+            {
+                yield break;
+            }
+
+            playerNameText.text = PhotonNetwork.player.NickName;
+            //패배 텍스트
+            if (!isWin)
+            {
+                rankText.text = $"<color=yellow>#{livePlayerCount + 1}</color>/{EntityManager.Instance.Players.Count}";
+                resultText.text = "그럴 수도 있어. 이런 날도 있는 거지 뭐.";
+
+                //최후의 1인이 남았다면 해당 플레이어에게 승리 메시지를 보냄
+                if (livePlayerCount == 1)
+                {
+                    //승리한 플레이어의 이름 저장
+                    string winnerPlayerName = EntityManager.Instance.Players
+                        .Where(entity => entity.IsDead == false).ToArray()[0].playerName;
+                    GameController.Instance.photonView.RPC(nameof(FadeInWinnerResultPanel), PhotonTargets.Others, winnerPlayerName);
+                }
+            }
+            else
+            {
+                rankText.text = $"<color=yellow>#1</color>/{EntityManager.Instance.Players.Count}";
+                resultText.text = "이겼닭! 오늘 저녁은 치킨이닭!";
+            }
+
+            float fadeInTime = 2f;
+            float currentTime = 0f;
+
+            float fadeInDelta = 0.01f;
+            float fadeInDeltaTime = 0.02f;
+
+            ResultPanel.SetActive(true);
+
+            CanvasGroup resultPanelGroup = ResultPanel.GetComponent<CanvasGroup>();
+
+            while (currentTime < fadeInTime)
+            {
+                resultPanelGroup.alpha += fadeInDelta;
+                currentTime += fadeInDeltaTime;
+                yield return new WaitForSecondsRealtime(fadeInDeltaTime);
+            }
+
+            yield break;
+        }
+
         private void UpdateRemainAmmoText()
         {
             Player targetPlayer = EntityManager.Instance.MyPlayer;
@@ -493,6 +561,17 @@ namespace UnityPUBG.Scripts.Logic
             int myPlayerKillCount = 0;
 
             survivePlayersText.text = myPlayerKillCount > 0 ? $"{survivePlayerCount}명 생존 / {myPlayerKillCount}명 처치" : $"{survivePlayerCount}명 생존";
+        }
+
+        [PunRPC]
+        private void FadeInWinnerResultPanel(string winnerPlayerName)
+        {
+            if(EntityManager.Instance.MyPlayer.playerName != winnerPlayerName)
+            {
+                return;
+            }
+
+            StartCoroutine(FadeInResultPanel(true));
         }
     }
 }

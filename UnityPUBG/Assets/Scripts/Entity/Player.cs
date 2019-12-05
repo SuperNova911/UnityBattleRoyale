@@ -202,6 +202,7 @@ namespace UnityPUBG.Scripts.Entities
 
         public int PhotonViewId => photonView.viewID;
         public bool IsMyPlayer => photonView.isMine;
+        public string playerName => photonView.owner.NickName;
 
         public bool IsAiming
         {

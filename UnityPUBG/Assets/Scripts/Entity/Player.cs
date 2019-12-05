@@ -904,6 +904,9 @@ namespace UnityPUBG.Scripts.Entities
                 requireAmmoData.ColliderRadius, rangeWeaponData.Damage, rangeWeaponData.DamageType, rangeWeaponData.KnockbackPower);
             projectileBase.InitializeProjectile(projectileInfo, projectileFirePosition.position);
 
+            //발사 동기화
+            photonView.RPC(nameof(SyncRangeAttack), PhotonTargets.Others, attackDirection, rangeWeaponData.ItemName, PhotonNetwork.player.NickName);
+
             projectileBase.Fire();
         }
 
@@ -1137,6 +1140,46 @@ namespace UnityPUBG.Scripts.Entities
             primaryWeaponModel.layer = LayerMask.NameToLayer("PlayerModel");
             primaryWeaponModel.transform.localPosition = Vector3.zero;
             primaryWeaponModel.transform.localRotation = Quaternion.identity;
+        }
+
+        //원거리 공격 탄약 동기화
+        [PunRPC]
+        private void SyncRangeAttack(Vector3 attackDirection, string weaponName, string playerName)
+        {
+            if(photonView.owner.NickName != playerName)
+            {
+                return;
+            }
+
+            var rangeWeaponData = ItemDataCollection.Instance.ItemDataByName[weaponName] as RangeWeaponData;
+            var requireAmmoData = rangeWeaponData.RequireAmmo;
+            if (requireAmmoData == null)
+            {
+                Debug.LogWarning($"탄약이 필요하지 않는 무기는 구현하지 않음, {rangeWeaponData.ItemName}");
+                return;
+            }
+
+            // 쿨다운 검사
+            //if (lastAttackTime + rangeWeaponData.AttackCooldown > Time.time)
+            //{
+            //    return;
+            //}
+
+            // 필요한 탄약이 있는지 검사
+            //int ammoSlot = ItemContainer.FindMatchItemSlotFromLast(rangeWeaponData.RequireAmmo.ItemName);
+            //if (ammoSlot < 0)
+            //{
+            //    return;
+            //}
+            //ItemContainer.SubtrackItemAtSlot(ammoSlot);
+
+            // Projectile 설정
+            var projectileBase = ObjectPoolManager.Instance.ReuseObject(projectileBasePrefab.gameObject).GetComponent<ProjectileBase>();
+            var projectileInfo = new ProjectileBase.ProjectileInfo(attackDirection, requireAmmoData.ProjectileSpeed, rangeWeaponData.AttackRange / requireAmmoData.ProjectileSpeed,
+                requireAmmoData.ColliderRadius, rangeWeaponData.Damage, rangeWeaponData.DamageType, rangeWeaponData.KnockbackPower);
+            projectileBase.InitializeProjectile(projectileInfo, projectileFirePosition.position);
+
+            projectileBase.Fire();
         }
         #endregion
     }

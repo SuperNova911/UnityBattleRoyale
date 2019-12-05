@@ -475,6 +475,8 @@ namespace UnityPUBG.Scripts.Entities
                 DropItem(EquipedArmor);
             }
             EquipedArmor = armorItem;
+
+            MaximumShield = (EquipedArmor.Data as ArmorData).ShieldAmount;
         }
 
         public void EquipBackpack(Item backpackItem)

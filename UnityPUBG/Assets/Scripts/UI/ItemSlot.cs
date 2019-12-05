@@ -21,6 +21,7 @@ namespace UnityPUBG.Scripts.UI
         [Header("Slot")]
         public Image slotImage;
         public Sprite defaultSlotSprite;
+        public TMPro.TextMeshProUGUI itemCountText;
 
         private bool available;
         private bool isDrag = false;
@@ -41,6 +42,7 @@ namespace UnityPUBG.Scripts.UI
                 {
                     backgroundImage.sprite = defaultBackGroundSprite;
                     slotImage.sprite = defaultSlotSprite;
+                    itemCountText.text = string.Empty;
                 }
 
                 Color newColor = backgroundImage.color;
@@ -80,10 +82,12 @@ namespace UnityPUBG.Scripts.UI
             {
                 slotImage.sprite = defaultSlotSprite;
                 backgroundImage.sprite = defaultBackGroundSprite;
+                itemCountText.text = string.Empty;
             }
             else
             {
                 slotImage.sprite = itemAtSlot.Data.Icon;
+                itemCountText.text = itemAtSlot.CurrentStack.ToString();
 
                 for (int quickBarSlot = 0; quickBarSlot < targetPlayer.ItemQuickBar.Length; quickBarSlot++)
                 {

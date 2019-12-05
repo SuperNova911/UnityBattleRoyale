@@ -741,6 +741,11 @@ namespace UnityPUBG.Scripts.Entities
 
         public void UseItemAtQuickBar(int slot)
         {
+            if (IsPlayingAttackAnimation)
+            {
+                return;
+            }
+
             if (slot < 0 || slot >= quickBarCapacity)
             {
                 Debug.LogWarning($"퀵바의 범위를 벗어나는 슬롯 인덱스, {nameof(slot)}: {slot}");
@@ -758,6 +763,11 @@ namespace UnityPUBG.Scripts.Entities
 
         public void UseItemAtItemContainer(int slot)
         {
+            if (IsPlayingAttackAnimation)
+            {
+                return;
+            }
+
             if (slot < 0 || slot >= ItemContainer.Count)
             {
                 Debug.LogWarning($"{nameof(ItemContainer)}의 범위를 벗어나는 슬롯 인덱스, {nameof(slot)}: {slot}");

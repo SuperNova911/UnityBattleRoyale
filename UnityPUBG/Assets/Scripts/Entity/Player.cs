@@ -152,8 +152,6 @@ namespace UnityPUBG.Scripts.Entities
         {
             base.Awake();
 
-            ObjectPoolManager.Instance.InitializeObjectPool(projectileBasePrefab.gameObject, 20);
-
             photonView = GetComponent<PhotonView>();
             if (photonView == null)
             {
@@ -182,6 +180,7 @@ namespace UnityPUBG.Scripts.Entities
                 myItemLooter = GetComponentInChildren<PlayerItemLooter>();
                 EntityManager.Instance.MyPlayer = this;
                 CameraManager.Instance.CurrentCamera = CameraManager.Instance.DropShipCamera;
+                ObjectPoolManager.Instance.InitializeObjectPool(projectileBasePrefab.gameObject, 20);
                 //meleeWeaponPosition.gameObject.tag = myWeaponTag;
             }
             else

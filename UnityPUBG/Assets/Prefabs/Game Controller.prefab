@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 9196620116391044016}
   - component: {fileID: 9173340600907604455}
   - component: {fileID: 9101536519121333136}
+  - component: {fileID: 5099261071305473852}
+  - component: {fileID: 235976790188536782}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: GameController
@@ -52,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9812baba6e6f29d4ba9095367487bcf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropShipLaunchDelay: 10
   photonView: {fileID: 9173340600907604455}
 --- !u!114 &9173340600907604458
 MonoBehaviour:
@@ -129,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026e5f7a0310328428463e5c4075d0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSpawnGroups: {fileID: 0}
   baseItemObjectPrefab: {fileID: -6387929660299491319, guid: 4f11389b6db4c784280e21ac9592c0fb,
     type: 3}
 --- !u!114 &9173340600907604453
@@ -189,7 +193,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f3c8cae13812d4687be0f5f60483be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
   damageTextPrefab: {fileID: 7237751850981093448, guid: 43e73897f883f0943ab12023d252e370,
     type: 3}
 --- !u!114 &9196620116391044016
@@ -245,6 +248,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd38da35ebcdd6043ac4cb53c6de54c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterCanvas: {fileID: 0}
+  floatingUIHolder: {fileID: 0}
+  normalUIElements: {fileID: 0}
+  quickSlotUIElements: {fileID: 0}
+  inventoryUIElements: {fileID: 0}
+  movementJoystickPivot: {fileID: 0}
+  attackJoystickPivot: {fileID: 0}
   playerMovementJoystick: {fileID: 0}
   playerAttackJoystick: {fileID: 0}
   playerHealthSlider: {fileID: 0}
@@ -258,7 +268,39 @@ MonoBehaviour:
   roundMessage: {fileID: 0}
   roundSubMessage: {fileID: 0}
   killMessage: {fileID: 0}
-  inventoryWindow: {fileID: 0}
-  quickSlot: {fileID: 0}
+  remainAmmoText: {fileID: 0}
+  survivePlayersText: {fileID: 0}
+  playerWeaponSwapButton: {fileID: 0}
+  playerQuickLootButton: {fileID: 0}
+  itemConsumeProgress: {fileID: 0}
+  inventoryPreview: {fileID: 0}
+  inventoryItemSlots: []
+  inventoryEquipItemSlots: []
+  quickItemSlots: []
   iconAtlas: {fileID: 0}
-  normalUIElements: {fileID: 0}
+  keyboardMovement: 0
+--- !u!114 &5099261071305473852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173340600907604450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38f8116cf25ef24fb609e8f6e23b42d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessVolume: {fileID: 0}
+--- !u!114 &235976790188536782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9173340600907604450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4df05bca65f3549a75ecffe1c3cdfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

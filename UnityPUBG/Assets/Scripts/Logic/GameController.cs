@@ -60,7 +60,7 @@ namespace UnityPUBG.Scripts.Logic
         //10초 텀을 두고 드랍쉽 출발
         private IEnumerator LaunchDropShipWithDelay(float delay)
         {
-            GameObject dropShip =  PhotonNetwork.Instantiate("DropShip", Vector3.zero, Quaternion.identity, 0);
+            GameObject dropShip = PhotonNetwork.Instantiate("DropShip", Vector3.zero, Quaternion.identity, 0);
             yield return new WaitForSeconds(delay);
 
             dropShip.GetComponent<DropShip>().LaunchDropShip();

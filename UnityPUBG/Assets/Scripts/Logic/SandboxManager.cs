@@ -57,6 +57,8 @@ namespace UnityPUBG.Scripts.Logic
         {
             if (offlineMode)
             {
+                StartRingSystem();
+                SpawnItem();
                 SpawnPlayer();
             }
 
@@ -66,8 +68,7 @@ namespace UnityPUBG.Scripts.Logic
             }
             else
             {
-                //SpawnItem();
-                //StartRingSystem();
+
             }
         }
 

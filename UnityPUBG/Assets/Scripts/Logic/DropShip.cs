@@ -80,11 +80,6 @@ namespace UnityPUBG.Scripts.Logic
                 return;
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                DropPlayer();
-            }
-
             //마스터 클라이언트만 드랍쉽을 움직임
             if (PhotonNetwork.isMasterClient)
             {
@@ -175,6 +170,7 @@ namespace UnityPUBG.Scripts.Logic
             }
 
             CameraManager.Instance.CurrentCamera = CameraManager.Instance.DropShipCamera;
+            UIManager.Instance.ShowDropShipUI(true);
 
             photonView.RPC(nameof(IncreaseOnBoardPlayerCount), PhotonTargets.All);
         }
@@ -204,6 +200,7 @@ namespace UnityPUBG.Scripts.Logic
             player.StartPlayOnGround();
 
             CameraManager.Instance.CurrentCamera = CameraManager.Instance.PlayerCamera;
+            UIManager.Instance.ShowDropShipUI(false);
 
             photonView.RPC(nameof(DecreaseOnBoardPlayerCount), PhotonTargets.All);
         }
@@ -216,6 +213,7 @@ namespace UnityPUBG.Scripts.Logic
                 case DropShipStatus.Preparation:
                     var leftDistance = Vector2.Distance(startDropPosition, new Vector2(transform.position.x, transform.position.z));
                     TimeBeforeDrop = leftDistance / speed;
+                    UIManager.Instance.UpdateDropCountdown(TimeBeforeDrop);
 
                     progress = Mathf.InverseLerp(0, (startDropPosition - launchPosition).sqrMagnitude, (new Vector2(transform.position.x, transform.position.z) - launchPosition).sqrMagnitude);
                     if (progress >= 1)
@@ -318,12 +316,14 @@ namespace UnityPUBG.Scripts.Logic
         private void IncreaseOnBoardPlayerCount()
         {
             OnBoardPlayerCount++;
+            UIManager.Instance.UpdateDropShipRemainPlayerCount(OnBoardPlayerCount);
         }
 
         [PunRPC]
         private void DecreaseOnBoardPlayerCount()
         {
             OnBoardPlayerCount--;
+            UIManager.Instance.UpdateDropShipRemainPlayerCount(OnBoardPlayerCount);
         }
     }
 }

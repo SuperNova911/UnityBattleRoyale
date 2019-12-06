@@ -21,6 +21,7 @@ namespace UnityPUBG.Scripts.Logic
         public GameObject normalUIElements;
         public GameObject quickSlotUIElements;
         public GameObject inventoryUIElements;
+        public GameObject dropShipUIElements;
         [Space]
         public GameObject movementJoystickPivot;
         public GameObject attackJoystickPivot;
@@ -59,6 +60,10 @@ namespace UnityPUBG.Scripts.Logic
         public TMP_Text rankText;
         public TMP_Text playerNameText;
         public TMP_Text resultText;
+        [Space]
+        public TMP_Text DropCountdownText;
+        public TMP_Text DropShipRemainPlayerCountText;
+        public Button DropButton;
 
         [Header("Debug Options")]
         public bool keyboardMovement = false;
@@ -103,9 +108,12 @@ namespace UnityPUBG.Scripts.Logic
             quickSlotUIElements.SetActive(true);
             inventoryUIElements.SetActive(true);
             inventoryUIElements.SetActive(false);
+            dropShipUIElements.SetActive(false);
             //결과 창 초기화
             ResultPanel.SetActive(false);
             ResultPanel.GetComponent<CanvasGroup>().alpha = 0f;
+
+            DropButton.onClick.AddListener(() => DropMyPlayer());
 
             EntityManager.Instance.OnMyPlayerSpawn += ConnectMyPlayerUIElements;
             EntityManager.Instance.OnPlayerSpawn += EntityManager_OnPlayerSpawn;
@@ -192,6 +200,58 @@ namespace UnityPUBG.Scripts.Logic
             foreach (var equipItemSlot in inventoryEquipItemSlots)
             {
                 equipItemSlot.UpdateEquipItemSlot();
+            }
+        }
+
+        public void ShowDropShipUI(bool show)
+        {
+            if (show)
+            {
+                normalUIElements.SetActive(false);
+                quickSlotUIElements.SetActive(false);
+                dropShipUIElements.SetActive(true);
+            }
+            else
+            {
+                normalUIElements.SetActive(true);
+                quickSlotUIElements.SetActive(true);
+                dropShipUIElements.SetActive(false);
+            }
+        }
+
+        public void UpdateDropCountdown(float time)
+        {
+            if (time > 0.5f)
+            {
+                DropCountdownText.text = $"낙하까지 <color=yellow>{Mathf.RoundToInt(time).ToString()}초</color>";
+                DropCountdownText.enabled = true;
+            }
+            else
+            {
+                DropCountdownText.text = $"낙하~!";
+                DropCountdownText.enabled = true;
+            }
+        }
+
+        public void UpdateDropShipRemainPlayerCount(int remainPlayerCount)
+        {
+            if (remainPlayerCount > 0)
+            {
+                DropShipRemainPlayerCountText.text = $"남은 플레이어: {remainPlayerCount}명";
+                DropShipRemainPlayerCountText.enabled = true;
+            }
+            else
+            {
+                DropShipRemainPlayerCountText.enabled = false;
+            }
+        }
+
+        private void DropMyPlayer()
+        {
+            var dropShipObject = GameObject.FindGameObjectsWithTag("GameController").FirstOrDefault(e => e.GetComponent<DropShip>() != null);
+            if (dropShipObject != null)
+            {
+                dropShipObject.GetComponent<DropShip>().DropPlayer();
             }
         }
 

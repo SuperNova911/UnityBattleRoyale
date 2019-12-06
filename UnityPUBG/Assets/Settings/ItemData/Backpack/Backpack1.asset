@@ -15,8 +15,8 @@ MonoBehaviour:
   itemName: Test Backpack 1
   rarity: 0
   sortingOrder: 200
-  model: {fileID: 173872, guid: 1443e4401faed3943904ee13bf25e471, type: 3}
-  icon: {fileID: 6787042950800356519, guid: f6070c8ccbbc1fb4ab15bcaceab9c990, type: 3}
+  model: {fileID: 187608, guid: 58f064d8e0e738544af5174c3d1f2ddb, type: 3}
+  icon: {fileID: 21300000, guid: c868e43024d8494409184a044ffa7982, type: 3}
   maximumStack: 1
   defaultStack: 1
   bonusCapacity: 2

@@ -16,7 +16,7 @@ MonoBehaviour:
   rarity: 2
   sortingOrder: 510
   model: {fileID: 116620, guid: a549a4cc97eebc74caffe60129d5d759, type: 3}
-  icon: {fileID: 21300000, guid: 55d1f4acebe13433988c11f25708aa86, type: 3}
+  icon: {fileID: 21300000, guid: ef005ff6f10bcfb4c9748eeb605ac8a3, type: 3}
   maximumStack: 1
   defaultStack: 1
   timeToUse: 10

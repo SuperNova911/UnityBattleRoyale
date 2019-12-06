@@ -1,0 +1,245 @@
+fileFormatVersion: 2
+guid: 96224039a328cce408e1ba457ce7e7fd
+timeCreated: 1498380250
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Bone01
+    100004: Bone02
+    100006: bow01
+    100008: bows01
+    100010: Object002
+    100012: Object003
+    100014: Object004
+    100016: Object005
+    100018: arrows01
+    100020: bow02
+    100022: bow03
+    100024: bow04
+    100026: bow05
+    100028: HandleBone
+    100030: StringBone
+    100032: bow06
+    100034: bow03_black
+    100036: bow03_blue
+    100038: bow03_green
+    100040: bow03_red
+    100042: bow01_black
+    100044: bow01_brown
+    100046: bow01_green
+    100048: bow01_purple
+    100050: bow01_yellow
+    100052: bow02_blue
+    100054: bow02_brown
+    100056: bow02_green
+    100058: bow02_orange
+    100060: bow02_red
+    100062: bow03_brown
+    100064: bow04_black
+    100066: bow04_blue
+    100068: bow04_brown
+    100070: bow04_white
+    100072: bow04_yellow
+    100074: bow05_black
+    100076: bow05_blue
+    100078: bow05_brown
+    100080: bow05_green
+    100082: bow05_red
+    400000: //RootNode
+    400002: Bone01
+    400004: Bone02
+    400006: bow01
+    400008: bows01
+    400010: Object002
+    400012: Object003
+    400014: Object004
+    400016: Object005
+    400018: arrows01
+    400020: bow02
+    400022: bow03
+    400024: bow04
+    400026: bow05
+    400028: HandleBone
+    400030: StringBone
+    400032: bow06
+    400034: bow03_black
+    400036: bow03_blue
+    400038: bow03_green
+    400040: bow03_red
+    400042: bow01_black
+    400044: bow01_brown
+    400046: bow01_green
+    400048: bow01_purple
+    400050: bow01_yellow
+    400052: bow02_blue
+    400054: bow02_brown
+    400056: bow02_green
+    400058: bow02_orange
+    400060: bow02_red
+    400062: bow03_brown
+    400064: bow04_black
+    400066: bow04_blue
+    400068: bow04_brown
+    400070: bow04_white
+    400072: bow04_yellow
+    400074: bow05_black
+    400076: bow05_blue
+    400078: bow05_brown
+    400080: bow05_green
+    400082: bow05_red
+    2300000: //RootNode
+    2300002: bows01
+    2300004: Object002
+    2300006: Object003
+    2300008: Object004
+    2300010: Object005
+    2300012: arrows01
+    3300000: //RootNode
+    3300002: bows01
+    3300004: Object002
+    3300006: Object003
+    3300008: Object004
+    3300010: Object005
+    3300012: arrows01
+    4300000: bows01
+    4300002: bow01
+    4300004: Object002
+    4300006: Object003
+    4300008: Object004
+    4300010: Object005
+    4300012: arrows01
+    4300014: bow02
+    4300016: bow03
+    4300018: bow05
+    4300020: bow04
+    4300022: bow06
+    4300024: bow03_green
+    4300026: bow03_blue
+    4300028: bow03_red
+    4300030: bow03_black
+    4300032: bow01_brown
+    4300034: bow02_brown
+    4300036: bow03_brown
+    4300038: bow05_brown
+    4300040: bow04_brown
+    4300042: bow01_yellow
+    4300044: bow01_purple
+    4300046: bow01_green
+    4300048: bow01_black
+    4300050: bow02_blue
+    4300052: bow02_orange
+    4300054: bow02_green
+    4300056: bow02_red
+    4300058: bow04_blue
+    4300060: bow04_yellow
+    4300062: bow04_black
+    4300064: bow04_white
+    4300066: bow05_red
+    4300068: bow05_blue
+    4300070: bow05_black
+    4300072: bow05_green
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: bow01
+    13700002: bow02
+    13700004: bow03
+    13700006: bow04
+    13700008: bow05
+    13700010: bow06
+    13700012: bow03_black
+    13700014: bow03_blue
+    13700016: bow03_green
+    13700018: bow03_red
+    13700020: bow01_black
+    13700022: bow01_brown
+    13700024: bow01_green
+    13700026: bow01_purple
+    13700028: bow01_yellow
+    13700030: bow02_blue
+    13700032: bow02_brown
+    13700034: bow02_green
+    13700036: bow02_orange
+    13700038: bow02_red
+    13700040: bow03_brown
+    13700042: bow04_black
+    13700044: bow04_blue
+    13700046: bow04_brown
+    13700048: bow04_white
+    13700050: bow04_yellow
+    13700052: bow05_black
+    13700054: bow05_blue
+    13700056: bow05_brown
+    13700058: bow05_green
+    13700060: bow05_red
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,2216 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: Mobile Cartoon GUI Theme 02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f514313262e3d141ad017b60809752a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 0ba1f0d80268e4491a2624d9e1b9e998, type: 2}
+  items:
+  - name: Badge_01
+    region:
+      serializedVersion: 2
+      x: .293457031
+      y: .943359375
+      width: .0229492188
+      height: .046875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 47, y: 48}
+    textureGUID: 8100985e9abc5415cb7b7f0584ccfb07
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Badge_02
+    region:
+      serializedVersion: 2
+      x: .442871094
+      y: .9453125
+      width: .0126953125
+      height: .0283203125
+    border:
+      m_Left: 12
+      m_Right: 12
+      m_Top: 12
+      m_Bottom: 15
+    rotated: 0
+    sizeInPixels: {x: 26, y: 29}
+    textureGUID: f40fec7988b4c40f5bcb1fdedc246867
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Banner_01
+    region:
+      serializedVersion: 2
+      x: .479492188
+      y: .829101562
+      width: .02734375
+      height: .0546875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 56, y: 56}
+    textureGUID: ad250867614c94e63bbbe9a46f4eeb17
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Banner_02
+    region:
+      serializedVersion: 2
+      x: .54296875
+      y: .827148438
+      width: .02734375
+      height: .0546875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 56, y: 56}
+    textureGUID: fefbe62a7df4f4286ab762f105a89628
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_01
+    region:
+      serializedVersion: 2
+      x: .2578125
+      y: .873046875
+      width: .0087890625
+      height: .017578125
+    border:
+      m_Left: 9
+      m_Right: 9
+      m_Top: 9
+      m_Bottom: 9
+    rotated: 0
+    sizeInPixels: {x: 18, y: 18}
+    textureGUID: 3945af125452d4a10b86a3770ba5b553
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_02
+    region:
+      serializedVersion: 2
+      x: .193359375
+      y: .798828125
+      width: .0087890625
+      height: .017578125
+    border:
+      m_Left: 9
+      m_Right: 9
+      m_Top: 9
+      m_Bottom: 9
+    rotated: 0
+    sizeInPixels: {x: 18, y: 18}
+    textureGUID: 31a44aa24d77b4ffa833b5c1c4054145
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_03
+    region:
+      serializedVersion: 2
+      x: .157226562
+      y: .565429688
+      width: .0087890625
+      height: .017578125
+    border:
+      m_Left: 9
+      m_Right: 9
+      m_Top: 9
+      m_Bottom: 9
+    rotated: 0
+    sizeInPixels: {x: 18, y: 18}
+    textureGUID: 565548cfd8a7148ff9ac76eda6ea8dc6
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_04
+    region:
+      serializedVersion: 2
+      x: .365722656
+      y: .977539062
+      width: .0087890625
+      height: .017578125
+    border:
+      m_Left: 9
+      m_Right: 9
+      m_Top: 9
+      m_Bottom: 9
+    rotated: 0
+    sizeInPixels: {x: 18, y: 18}
+    textureGUID: 94ea40bd82d02417a8dc18d51b4836d8
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_05
+    region:
+      serializedVersion: 2
+      x: .354980469
+      y: .977539062
+      width: .0087890625
+      height: .017578125
+    border:
+      m_Left: 9
+      m_Right: 9
+      m_Top: 9
+      m_Bottom: 9
+    rotated: 0
+    sizeInPixels: {x: 18, y: 18}
+    textureGUID: d05e1623f035d4d229c75fdddf85557c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_06
+    region:
+      serializedVersion: 2
+      x: .376464844
+      y: .977539062
+      width: .0087890625
+      height: .017578125
+    border:
+      m_Left: 9
+      m_Right: 9
+      m_Top: 9
+      m_Bottom: 9
+    rotated: 0
+    sizeInPixels: {x: 18, y: 18}
+    textureGUID: 003be1ebc245f45d3880cd7d5a09b72f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_07
+    region:
+      serializedVersion: 2
+      x: .204101562
+      y: .798828125
+      width: .0087890625
+      height: .017578125
+    border:
+      m_Left: 9
+      m_Right: 9
+      m_Top: 9
+      m_Bottom: 9
+    rotated: 0
+    sizeInPixels: {x: 18, y: 18}
+    textureGUID: e04ea0d7b3b2243e786579adf9f0c964
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_08
+    region:
+      serializedVersion: 2
+      x: .268554688
+      y: .873046875
+      width: .0087890625
+      height: .017578125
+    border:
+      m_Left: 9
+      m_Right: 9
+      m_Top: 9
+      m_Bottom: 9
+    rotated: 0
+    sizeInPixels: {x: 18, y: 18}
+    textureGUID: e225d5764034d4b62b59515dd94440d4
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_BG
+    region:
+      serializedVersion: 2
+      x: .12890625
+      y: .68359375
+      width: .0185546875
+      height: .037109375
+    border:
+      m_Left: 18
+      m_Right: 18
+      m_Top: 16
+      m_Bottom: 21
+    rotated: 0
+    sizeInPixels: {x: 38, y: 38}
+    textureGUID: 70eae8b1c90e140858c49225cf97823b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_Slot
+    region:
+      serializedVersion: 2
+      x: .583984375
+      y: .321289062
+      width: .0185546875
+      height: .041015625
+    border:
+      m_Left: 18
+      m_Right: 18
+      m_Top: 18
+      m_Bottom: 23
+    rotated: 0
+    sizeInPixels: {x: 38, y: 42}
+    textureGUID: a77a8752c696247c880559c2d3d4ab53
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Bar_Slot_02
+    region:
+      serializedVersion: 2
+      x: .89453125
+      y: .509765625
+      width: .01171875
+      height: .0234375
+    border:
+      m_Left: 11
+      m_Right: 11
+      m_Top: 11
+      m_Bottom: 11
+    rotated: 0
+    sizeInPixels: {x: 24, y: 24}
+    textureGUID: d75e43e5e61d64dde8cdb3a87b4a604e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Button_BG
+    region:
+      serializedVersion: 2
+      x: .583984375
+      y: .237304688
+      width: .0361328125
+      height: .080078125
+    border:
+      m_Left: 35
+      m_Right: 35
+      m_Top: 36
+      m_Bottom: 43
+    rotated: 0
+    sizeInPixels: {x: 74, y: 82}
+    textureGUID: 2031ef3f347cc4d238d6b3fc2106db83
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Button_BG_round
+    region:
+      serializedVersion: 2
+      x: .572265625
+      y: .571289062
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: f3266a3fd14814b39a1def3f769f0899
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Button_BG_round_s
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .875
+      width: .048828125
+      height: .099609375
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 100, y: 102}
+    textureGUID: 5ff810d64738b496c8a25c0c4dc7770b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Button_BG_round_xs
+    region:
+      serializedVersion: 2
+      x: .442871094
+      y: .896484375
+      width: .0219726562
+      height: .044921875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 45, y: 46}
+    textureGUID: fcee8991ac4804d86817d7d05174f5c3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Accept
+    region:
+      serializedVersion: 2
+      x: .765625
+      y: .571289062
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: fd2f4aa629bf54371acda3b16a8a7406
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Achievement
+    region:
+      serializedVersion: 2
+      x: .572265625
+      y: .439453125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: b543d84985f804c9ba1a25067c9f3344
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Back
+    region:
+      serializedVersion: 2
+      x: .193359375
+      y: .8203125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: c3d1ba7347be94b1d838fed99fb24617
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_BGM
+    region:
+      serializedVersion: 2
+      x: .455078125
+      y: .237304688
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 63dd82b11ae214b8f8323942a5db68da
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_BGMOff
+    region:
+      serializedVersion: 2
+      x: .63671875
+      y: .571289062
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 636d4f2dfd39f480b8bb5985294d027f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Camera
+    region:
+      serializedVersion: 2
+      x: .157226562
+      y: .594726562
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 06db9efdddd5c42fba294f166e245de6
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Cancel
+    region:
+      serializedVersion: 2
+      x: .064453125
+      y: .743164062
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 91af5bf5fc3444228bcc36cc61778de3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Decrease
+    region:
+      serializedVersion: 2
+      x: .37890625
+      y: .6328125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: c9817216f1b984ad094f2f0bf12b1c92
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Down
+    region:
+      serializedVersion: 2
+      x: .37890625
+      y: .500976562
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: c07cf3ced75d5498485f4a606f98027c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_DownArrow
+    region:
+      serializedVersion: 2
+      x: .350585938
+      y: .764648438
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 0b198db3a4b4d493dacd9f8dc8fa9780
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Download
+    region:
+      serializedVersion: 2
+      x: .12890625
+      y: .858398438
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 4df6db932bfb64950baa96a13101eb76
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Facebook
+    region:
+      serializedVersion: 2
+      x: .37890625
+      y: .369140625
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 846634524310b4c59a43f68c5801b1bb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Heart
+    region:
+      serializedVersion: 2
+      x: .286132812
+      y: .764648438
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 709c85ac871614f2aba87f22d2ed5ee7
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Help
+    region:
+      serializedVersion: 2
+      x: .830078125
+      y: .439453125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: c5f593aaa94d3408abdfc81ef5011944
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_HighScore
+    region:
+      serializedVersion: 2
+      x: .443359375
+      y: .500976562
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: f1e3a213934fb4546878ee9ae08e3f71
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_HorizontalSlider
+    region:
+      serializedVersion: 2
+      x: .443359375
+      y: .6328125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 5240e90877b524a54bf4530b7dc8a45f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Increase
+    region:
+      serializedVersion: 2
+      x: .572265625
+      y: .703125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: c9b9456c72cbc4fb5815f5daf8d76297
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Info
+    region:
+      serializedVersion: 2
+      x: .25
+      y: .424804688
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: f653b1e8c7886425199d7b3bae3b77af
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_LeaderBoard
+    region:
+      serializedVersion: 2
+      x: .314453125
+      y: .6328125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 3b895c754c0d14c0a89a3c26a0eb61fe
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_LeftArrow
+    region:
+      serializedVersion: 2
+      x: .701171875
+      y: .439453125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 9e21e36aab05849f28decd51105ce214
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_LevelSelect
+    region:
+      serializedVersion: 2
+      x: .63671875
+      y: .439453125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: a8b9e9c1a915e4ffba3545b8c37f8740
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Like
+    region:
+      serializedVersion: 2
+      x: .26171875
+      y: .237304688
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: e23425f832ba8414998ffb0acf8cc9cb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Lock
+    region:
+      serializedVersion: 2
+      x: .89453125
+      y: .538085938
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 6c52fe2fc87794d688207ea530474fce
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Mail
+    region:
+      serializedVersion: 2
+      x: .064453125
+      y: .611328125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 9a4472bee792240f99726d24f814235e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_MainMenu
+    region:
+      serializedVersion: 2
+      x: .415039062
+      y: .764648438
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: c92a4df4069ed4bf585d1b4e9485b1a1
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Menu
+    region:
+      serializedVersion: 2
+      x: .89453125
+      y: .669921875
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 6992b257daa80468eb3af18d4d1414cb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Multiplayer
+    region:
+      serializedVersion: 2
+      x: .5078125
+      y: .369140625
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 96842cf7eeb0d4e3e85a169119897111
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Mute
+    region:
+      serializedVersion: 2
+      x: .314453125
+      y: .500976562
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 272acef91b34a4c37bb6f9477e7e4b33
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Next
+    region:
+      serializedVersion: 2
+      x: .765625
+      y: .439453125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: af135a7a43c244a05bf3bd5b55b5e556
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Pause
+    region:
+      serializedVersion: 2
+      x: .5078125
+      y: .6328125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: cc1e22280ba47405682e15749e81d6df
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Refresh
+    region:
+      serializedVersion: 2
+      x: .5078125
+      y: .500976562
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 335eeb23adaf048279de0dc4b1716ecc
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Restart
+    region:
+      serializedVersion: 2
+      x: .51953125
+      y: .237304688
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 2ff9e4d123ae9459eafc9cdd520a799b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_RightArrow
+    region:
+      serializedVersion: 2
+      x: .12890625
+      y: .7265625
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 4784270b073d34f6e8df38d9f153ee11
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Settings
+    region:
+      serializedVersion: 2
+      x: .25
+      y: .556640625
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: b0151ff928a984fc19a150cb11ad447b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Share
+    region:
+      serializedVersion: 2
+      x: .314453125
+      y: .369140625
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 8fc33a100cf1c4a32841faa5085fc424
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Shop
+    region:
+      serializedVersion: 2
+      x: .9296875
+      y: .274414062
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 6908e2ef70ea64709ac61c21caba3e31
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Skull
+    region:
+      serializedVersion: 2
+      x: .9296875
+      y: .142578125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 14ac05e19428e47b29faa78e4db7a5dd
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Sound
+    region:
+      serializedVersion: 2
+      x: .390625
+      y: .237304688
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: de43f6f092d1340b8a963f33f852fbf8
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_SpeechBubble
+    region:
+      serializedVersion: 2
+      x: .701171875
+      y: .571289062
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: d3250fcd744804264927e724eb904086
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Trash
+    region:
+      serializedVersion: 2
+      x: .221679688
+      y: .688476562
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 0d2ddc955ab184737882b7bb744acc74
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Twitter
+    region:
+      serializedVersion: 2
+      x: .9296875
+      y: .40625
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 2e5b7ea8603224411bc1a458b54f612d
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Up
+    region:
+      serializedVersion: 2
+      x: .443359375
+      y: .369140625
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: a95b3ff16326d46dea7fe344759be963
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_UpArrow
+    region:
+      serializedVersion: 2
+      x: .326171875
+      y: .237304688
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 20d5b8c0f50e046fabc2c04b5b0d5e9d
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_Upload
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .611328125
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: b6cc0e8eff90449a198eb491e9804ee2
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_UserProfile
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .743164062
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: 72cb708b47c47405ea57b064efbad888
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ButtonIcons_VerticalSlider
+    region:
+      serializedVersion: 2
+      x: .830078125
+      y: .571289062
+      width: .0625
+      height: .127929688
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 128, y: 131}
+    textureGUID: b123ede67e6b54caf868f27237662985
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Check_badge
+    region:
+      serializedVersion: 2
+      x: .268554688
+      y: .943359375
+      width: .0229492188
+      height: .046875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 47, y: 48}
+    textureGUID: c66770493fdb04aa3a9d88cf3d334af6
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Check_Box
+    region:
+      serializedVersion: 2
+      x: .343261719
+      y: .896484375
+      width: .0229492188
+      height: .046875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 47, y: 48}
+    textureGUID: cca7e935ef31b41f48792c88f9ede8fb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Check_Dot
+    region:
+      serializedVersion: 2
+      x: .41796875
+      y: .896484375
+      width: .0229492188
+      height: .046875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 47, y: 48}
+    textureGUID: 7f4431d3174894a0f8b1dafce45ace46
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Check_fail
+    region:
+      serializedVersion: 2
+      x: .368164062
+      y: .896484375
+      width: .0229492188
+      height: .046875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 47, y: 48}
+    textureGUID: af356c6b809204d5c8a6679f9e014aed
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Check_success
+    region:
+      serializedVersion: 2
+      x: .393066406
+      y: .896484375
+      width: .0229492188
+      height: .046875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 47, y: 48}
+    textureGUID: d6dd8fab330274eb8a8febc962fad2e7
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_bomb
+    region:
+      serializedVersion: 2
+      x: .221679688
+      y: .594726562
+      width: .0244140625
+      height: .076171875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 50, y: 78}
+    textureGUID: 0c7eea77c1ffc452fb1568a85e668143
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_coin
+    region:
+      serializedVersion: 2
+      x: .572265625
+      y: .369140625
+      width: .0302734375
+      height: .06640625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 62, y: 68}
+    textureGUID: da268eb3e4d094d1ca2e25b7833d1d44
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_coin_2
+    region:
+      serializedVersion: 2
+      x: .291015625
+      y: .896484375
+      width: .029296875
+      height: .04296875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 60, y: 44}
+    textureGUID: c6aee38b0c46f4eacbeaeb4ff6169589
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_coin_3
+    region:
+      serializedVersion: 2
+      x: .509765625
+      y: .827148438
+      width: .03125
+      height: .0498046875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 64, y: 51}
+    textureGUID: d865e957d866b4f7fa34903ec008af2b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_coin_4
+    region:
+      serializedVersion: 2
+      x: .26171875
+      y: .369140625
+      width: .0327148438
+      height: .048828125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 67, y: 50}
+    textureGUID: 92c21fd7395e64e0da57ca103bcbbe70
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_diamond
+    region:
+      serializedVersion: 2
+      x: .958984375
+      y: .606445312
+      width: .0307617188
+      height: .064453125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 63, y: 66}
+    textureGUID: bcd672a6c49bd40f3899b5e623f8e1eb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_diamond_2
+    region:
+      serializedVersion: 2
+      x: .2578125
+      y: .896484375
+      width: .03125
+      height: .041015625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 64, y: 42}
+    textureGUID: b7535c7d50fd54341b278ada91c7b6c5
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_diamond_3
+    region:
+      serializedVersion: 2
+      x: .231445312
+      y: .952148438
+      width: .03515625
+      height: .0390625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 72, y: 40}
+    textureGUID: 6edbd5f32745147b3b89bbaf31a60510
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_energy
+    region:
+      serializedVersion: 2
+      x: .322265625
+      y: .896484375
+      width: .0190429688
+      height: .060546875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 39, y: 62}
+    textureGUID: 9b245f392d1fa4935a61de0b70dbeadb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_health
+    region:
+      serializedVersion: 2
+      x: .509765625
+      y: .764648438
+      width: .0283203125
+      height: .056640625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 58, y: 58}
+    textureGUID: bb069baa1249f47bd9281f52bf36717c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_lock
+    region:
+      serializedVersion: 2
+      x: .193359375
+      y: .7265625
+      width: .0244140625
+      height: .068359375
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 50, y: 70}
+    textureGUID: a5ad7f56caa6446cea0ac2034273f864
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_magnet
+    region:
+      serializedVersion: 2
+      x: .540039062
+      y: .764648438
+      width: .02734375
+      height: .05859375
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 56, y: 60}
+    textureGUID: 56aabe00b7d4449c3af8197dc633fff1
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_poison
+    region:
+      serializedVersion: 2
+      x: .12890625
+      y: .611328125
+      width: .0234375
+      height: .068359375
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 48, y: 70}
+    textureGUID: 89e0aa51341db4f80a112c68df6bc608
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_potion
+    region:
+      serializedVersion: 2
+      x: .604492188
+      y: .321289062
+      width: .0224609375
+      height: .068359375
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 46, y: 70}
+    textureGUID: 20877c5ec8db343bcba73b1f7787e9f4
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_ruby
+    region:
+      serializedVersion: 2
+      x: .958984375
+      y: .538085938
+      width: .0307617188
+      height: .064453125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 63, y: 66}
+    textureGUID: fa2915422ce34446999c89f557b73e56
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_ruby_2
+    region:
+      serializedVersion: 2
+      x: .508789062
+      y: .880859375
+      width: .03125
+      height: .041015625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 64, y: 42}
+    textureGUID: 56fabe9092da64501b564a313cb27bf1
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_ruby_3
+    region:
+      serializedVersion: 2
+      x: .193359375
+      y: .952148438
+      width: .0361328125
+      height: .041015625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 74, y: 42}
+    textureGUID: ae741408a33374abab5ae4f69bb3581b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_shield
+    region:
+      serializedVersion: 2
+      x: .286132812
+      y: .688476562
+      width: .0263671875
+      height: .064453125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 54, y: 66}
+    textureGUID: 5fb50ed345567446b844c6a14ab8531a
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_skull
+    region:
+      serializedVersion: 2
+      x: .479492188
+      y: .764648438
+      width: .0283203125
+      height: .060546875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 58, y: 62}
+    textureGUID: 6b0ddd9cce56349318e8bb53d80d6911
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_star
+    region:
+      serializedVersion: 2
+      x: .89453125
+      y: .439453125
+      width: .0317382812
+      height: .06640625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 65, y: 68}
+    textureGUID: a080b6916dc30400f848befcc93b0fd3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Icon_timer
+    region:
+      serializedVersion: 2
+      x: .958984375
+      y: .740234375
+      width: .02734375
+      height: .064453125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 56, y: 66}
+    textureGUID: b7158f6727c264ce6bcdb26a94dd586c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Level_BG
+    region:
+      serializedVersion: 2
+      x: .94921875
+      y: 0
+      width: .0439453125
+      height: .111328125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 80
+      m_Bottom: 20
+    rotated: 0
+    sizeInPixels: {x: 90, y: 114}
+    textureGUID: 586046a69eae947599b4b985f6b7c23f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Light_01
+    region:
+      serializedVersion: 2
+      x: .78125
+      y: .142578125
+      width: .146484375
+      height: .29296875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 300, y: 300}
+    textureGUID: 078816ec805994bddbdb088fa960f41b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Light_02
+    region:
+      serializedVersion: 2
+      x: .6328125
+      y: .142578125
+      width: .146484375
+      height: .29296875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 300, y: 300}
+    textureGUID: 7e95444f315e344b2bbe2f350c34f19f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: PriceTag_01
+    region:
+      serializedVersion: 2
+      x: .368652344
+      y: .947265625
+      width: .01171875
+      height: .0263671875
+    border:
+      m_Left: 11
+      m_Right: 11
+      m_Top: 12
+      m_Bottom: 13
+    rotated: 0
+    sizeInPixels: {x: 24, y: 27}
+    textureGUID: 594ec5ee63ba8457a819cbd99f25d325
+    deleted: 0
+    texture: {fileID: 0}
+  - name: PriceTag_02
+    region:
+      serializedVersion: 2
+      x: .382324219
+      y: .947265625
+      width: .01171875
+      height: .0263671875
+    border:
+      m_Left: 11
+      m_Right: 11
+      m_Top: 12
+      m_Bottom: 13
+    rotated: 0
+    sizeInPixels: {x: 24, y: 27}
+    textureGUID: 79317567a9a244b1aa0cda9f948b900e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: PriceTag_03
+    region:
+      serializedVersion: 2
+      x: .354980469
+      y: .947265625
+      width: .01171875
+      height: .0263671875
+    border:
+      m_Left: 11
+      m_Right: 11
+      m_Top: 12
+      m_Bottom: 13
+    rotated: 0
+    sizeInPixels: {x: 24, y: 27}
+    textureGUID: 187afc02faed04dc5aa8f19379d7265d
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Ribbon_01
+    region:
+      serializedVersion: 2
+      x: .6328125
+      y: 0
+      width: .314453125
+      height: .138671875
+    border:
+      m_Left: 322
+      m_Right: 322
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 644, y: 142}
+    textureGUID: b4afd0e39924a44bd89c4aeabd8e1325
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Ribbon_02
+    region:
+      serializedVersion: 2
+      x: .31640625
+      y: 0
+      width: .314453125
+      height: .233398438
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 644, y: 239}
+    textureGUID: 087f5d20d9ef54e26beecff90765fd88
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Ribbon_03
+    region:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: .314453125
+      height: .233398438
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 644, y: 239}
+    textureGUID: 34336c4fa3e3b47b98edc285d166960b
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ScrollDot
+    region:
+      serializedVersion: 2
+      x: .920898438
+      y: .509765625
+      width: .0068359375
+      height: .0126953125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 14, y: 13}
+    textureGUID: 6b1b2e46955df40e2b70f8aecf2edadc
+    deleted: 0
+    texture: {fileID: 0}
+  - name: ScrollDot_white
+    region:
+      serializedVersion: 2
+      x: .387207031
+      y: .977539062
+      width: .0068359375
+      height: .0126953125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 14, y: 13}
+    textureGUID: 804fa15254cda4093aa7486e04b1f5dd
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Star_Level
+    region:
+      serializedVersion: 2
+      x: .604492188
+      y: .393554688
+      width: .0180664062
+      height: .0341796875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 37, y: 35}
+    textureGUID: ebd4130871acf4b05b68264b4415b83e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Star_LevelBG
+    region:
+      serializedVersion: 2
+      x: .318359375
+      y: .9609375
+      width: .0180664062
+      height: .0341796875
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 37, y: 35}
+    textureGUID: 9caff87a93a564658bcbd4bd9bc9c6df
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Star_Result
+    region:
+      serializedVersion: 2
+      x: .0786132812
+      y: .459960938
+      width: .0766601562
+      height: .147460938
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 157, y: 151}
+    textureGUID: 4ae7c6189f7bb4790a06beda1cbb87d1
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Star_ResultBG
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .459960938
+      width: .0766601562
+      height: .147460938
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 157, y: 151}
+    textureGUID: c37d103fb05b2493baecd070fe79634e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: StoreIcon_BG
+    region:
+      serializedVersion: 2
+      x: .2578125
+      y: .8203125
+      width: .0244140625
+      height: .048828125
+    border:
+      m_Left: 24
+      m_Right: 24
+      m_Top: 24
+      m_Bottom: 24
+    rotated: 0
+    sizeInPixels: {x: 50, y: 50}
+    textureGUID: 72ed3ade3662f4b33b4a229a480a5d5e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: StoreItem_BG
+    region:
+      serializedVersion: 2
+      x: .958984375
+      y: .674804688
+      width: .029296875
+      height: .0615234375
+    border:
+      m_Left: 28
+      m_Right: 28
+      m_Top: 28
+      m_Bottom: 31
+    rotated: 0
+    sizeInPixels: {x: 60, y: 63}
+    textureGUID: 7030944ccf08b4f6ab3ca730c39f7ae8
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Tab_01
+    region:
+      serializedVersion: 2
+      x: .1015625
+      y: .875
+      width: .0244140625
+      height: .052734375
+    border:
+      m_Left: 24
+      m_Right: 24
+      m_Top: 24
+      m_Bottom: 28
+    rotated: 0
+    sizeInPixels: {x: 50, y: 54}
+    textureGUID: da3ae3ad2b8d84f85aad2ca224eb9148
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Tab_02
+    region:
+      serializedVersion: 2
+      x: .1015625
+      y: .931640625
+      width: .0244140625
+      height: .052734375
+    border:
+      m_Left: 24
+      m_Right: 24
+      m_Top: 24
+      m_Bottom: 28
+    rotated: 0
+    sizeInPixels: {x: 50, y: 54}
+    textureGUID: 46113194000b749308c3b4c3665f71e7
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Text_Label
+    region:
+      serializedVersion: 2
+      x: .338378906
+      y: .9609375
+      width: .0146484375
+      height: .033203125
+    border:
+      m_Left: 14
+      m_Right: 14
+      m_Top: 14
+      m_Bottom: 18
+    rotated: 0
+    sizeInPixels: {x: 30, y: 34}
+    textureGUID: 64c62059755a141baaddc88e9fa19d1f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_Bar_BG
+    region:
+      serializedVersion: 2
+      x: .479492188
+      y: .887695312
+      width: .0244140625
+      height: .048828125
+    border:
+      m_Left: 24
+      m_Right: 24
+      m_Top: 24
+      m_Bottom: 24
+    rotated: 0
+    sizeInPixels: {x: 50, y: 50}
+    textureGUID: 748f537109ca4405ab4f989a7ed2465f
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_blue
+    region:
+      serializedVersion: 2
+      x: .157226562
+      y: .495117188
+      width: .0087890625
+      height: .03125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 18, y: 32}
+    textureGUID: 3a3fbb26147294456b48cdca0888586c
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_cyan
+    region:
+      serializedVersion: 2
+      x: .622070312
+      y: .237304688
+      width: .0087890625
+      height: .03125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 18, y: 32}
+    textureGUID: a83407f1924134aacbbeecb88f098911
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_Dot
+    region:
+      serializedVersion: 2
+      x: .05078125
+      y: .9765625
+      width: .0078125
+      height: .015625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 16, y: 16}
+    textureGUID: f8b6eb46eceda4104b5c62040d2b31f5
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_green
+    region:
+      serializedVersion: 2
+      x: .157226562
+      y: .530273438
+      width: .0087890625
+      height: .03125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 18, y: 32}
+    textureGUID: 48606b980f01e4b089844bbce40859fc
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_grey
+    region:
+      serializedVersion: 2
+      x: .157226562
+      y: .459960938
+      width: .0087890625
+      height: .03125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 18, y: 32}
+    textureGUID: 9fbada3ba3e834927b5ff5c5a09332b3
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_orange
+    region:
+      serializedVersion: 2
+      x: .466796875
+      y: .896484375
+      width: .0087890625
+      height: .03125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 18, y: 32}
+    textureGUID: eca800706f25d49c9a33a019dabe01de
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_pink
+    region:
+      serializedVersion: 2
+      x: .466796875
+      y: .931640625
+      width: .0087890625
+      height: .03125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 18, y: 32}
+    textureGUID: c0a89cc5bac9f4a4ba7a782e61007bc6
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_purple
+    region:
+      serializedVersion: 2
+      x: .622070312
+      y: .272460938
+      width: .0087890625
+      height: .03125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 18, y: 32}
+    textureGUID: 28998831df45a4061ab32efb27c512f0
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_red
+    region:
+      serializedVersion: 2
+      x: .395996094
+      y: .947265625
+      width: .0087890625
+      height: .03125
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 18, y: 32}
+    textureGUID: 1b5c01f4622a4486aae6c1175540718e
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_slot
+    region:
+      serializedVersion: 2
+      x: .296386719
+      y: .369140625
+      width: .013671875
+      height: .041015625
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 28, y: 42}
+    textureGUID: e96a90574544149e1bba7b8c7e03b3f6
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Upgrade_slot_square
+    region:
+      serializedVersion: 2
+      x: .908203125
+      y: .509765625
+      width: .0107421875
+      height: .021484375
+    border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    rotated: 0
+    sizeInPixels: {x: 22, y: 22}
+    textureGUID: 6e21149d58a744004b09c146c5d5a0bb
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Window_BG_1
+    region:
+      serializedVersion: 2
+      x: 0
+      y: .237304688
+      width: .166015625
+      height: .21875
+    border:
+      m_Left: 160
+      m_Right: 160
+      m_Top: 130
+      m_Bottom: 74
+    rotated: 0
+    sizeInPixels: {x: 340, y: 224}
+    textureGUID: 56b7c9865b3d948169ffc4af326dd698
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Window_BG_2
+    region:
+      serializedVersion: 2
+      x: .16796875
+      y: .424804688
+      width: .080078125
+      height: .166015625
+    border:
+      m_Left: 80
+      m_Right: 80
+      m_Top: 80
+      m_Bottom: 88
+    rotated: 0
+    sizeInPixels: {x: 164, y: 170}
+    textureGUID: e2fdf4e73902e4a1084c6575a58e0e17
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Window_Field_01
+    region:
+      serializedVersion: 2
+      x: .05078125
+      y: .875
+      width: .048828125
+      height: .09765625
+    border:
+      m_Left: 45
+      m_Right: 45
+      m_Top: 45
+      m_Bottom: 45
+    rotated: 0
+    sizeInPixels: {x: 100, y: 100}
+    textureGUID: 2d5f038ac93f140e79d9c96cd1292959
+    deleted: 0
+    texture: {fileID: 0}
+  - name: Window_Field_02
+    region:
+      serializedVersion: 2
+      x: .16796875
+      y: .237304688
+      width: .091796875
+      height: .18359375
+    border:
+      m_Left: 90
+      m_Right: 90
+      m_Top: 90
+      m_Bottom: 90
+    rotated: 0
+    sizeInPixels: {x: 188, y: 188}
+    textureGUID: e15deac4f9f7d44ec999e9b0bd09d894
+    deleted: 0
+    texture: {fileID: 0}
+  generator: 0
+  imageFileGUID: 
+  dataFileGUID: 
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

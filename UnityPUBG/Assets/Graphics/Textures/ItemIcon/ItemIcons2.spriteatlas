@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ItemIcons2
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 0f4c45eee3223c44e81e5914c64bc235, type: 3}
+    totalSpriteSurfaceArea: 1441792
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c868e43024d8494409184a044ffa7982, type: 3}
+  - {fileID: 21300000, guid: 5cd6ae50b4dc64c4b9b38e745eaab61b, type: 3}
+  - {fileID: 21300000, guid: 75ee04f0713cc22468a14f2d72481823, type: 3}
+  - {fileID: 21300000, guid: 992a8d61761e0f3438d281cae5024559, type: 3}
+  - {fileID: 21300000, guid: 5257f371fbc16304ba5c02c73266e300, type: 3}
+  - {fileID: 21300000, guid: b2181bb152c7af648ad3bd864b1e212c, type: 3}
+  - {fileID: 21300000, guid: 5a4d3cf1afa1ed64d8c6eb9cf0223d27, type: 3}
+  - {fileID: 21300000, guid: 5a0657f260a1e9947b318343fd72cbc3, type: 3}
+  - {fileID: 21300000, guid: ee623a53c03ff0340a4546d37925f60f, type: 3}
+  - {fileID: 21300000, guid: bab2841465921fd4589a5b17f9324238, type: 3}
+  - {fileID: 21300000, guid: 7105a1f5f6e8424478367e676e17c42c, type: 3}
+  - {fileID: 21300000, guid: ef005ff6f10bcfb4c9748eeb605ac8a3, type: 3}
+  - {fileID: 21300000, guid: dcfcfb275c1ddea458893de6ea890251, type: 3}
+  - {fileID: 21300000, guid: 801a41a7b3f18fe47b80b7432fddbbad, type: 3}
+  - {fileID: 21300000, guid: 3b91a829e17fa234a9e2f224973522e8, type: 3}
+  - {fileID: 21300000, guid: 8d2762b9b06ec974687c8919c51fc34a, type: 3}
+  - {fileID: 21300000, guid: 2d089cf99dd114647b788f7bac1c8785, type: 3}
+  - {fileID: 21300000, guid: d0b15dbb020421e4bb772843d093eb2d, type: 3}
+  - {fileID: 21300000, guid: 4bc3a1eba2c41fa49825fcc4ae8f73ee, type: 3}
+  - {fileID: 21300000, guid: 53d3c69c1827ca846843d15ecf01dcfa, type: 3}
+  - {fileID: 21300000, guid: 1aa0b03d94eb89548bd558c677625366, type: 3}
+  - {fileID: 21300000, guid: 61a7abad236942641942be0cc5f4b438, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Backpack1
+  - HealthKit2
+  - Bow4
+  - ShieldKit1
+  - Ammo1
+  - Backpack3
+  - Sword2
+  - HealthKit1
+  - ShieldKit2
+  - Bow1
+  - Armor2
+  - PhoenixKit
+  - Sword3
+  - Bow2
+  - Backpack4
+  - Sword1
+  - Armor1
+  - Bow3
+  - Armor3
+  - Backpack2
+  - Armor4
+  - Sword4
+  m_Tag: ItemIcons2
+  m_IsVariant: 0

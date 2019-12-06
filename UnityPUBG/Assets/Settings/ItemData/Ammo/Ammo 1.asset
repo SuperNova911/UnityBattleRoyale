@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5c07f4a9bce0b4b81284c400af3f13, type: 3}
+  m_Name: Ammo 1
+  m_EditorClassIdentifier: 
+  itemName: Test Ammo 1
+  rarity: 0
+  sortingOrder: 600
+  model: {fileID: 1629019535537138, guid: 0ffa2f05a3f8df84d8a3c4ea97c567b6, type: 3}
+  icon: {fileID: 21300000, guid: 5257f371fbc16304ba5c02c73266e300, type: 3}
+  maximumStack: 30
+  defaultStack: 15
+  projectileSpeed: 20
+  colliderRadius: 0.1

@@ -1,0 +1,208 @@
+fileFormatVersion: 2
+guid: d3cacba3d1fee1e4896c79d0065e5975
+timeCreated: 1498391499
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: arrow01_blue
+    100004: arrow01_green
+    100006: arrow01_grey
+    100008: arrow01_red
+    100010: arrow01_yellow
+    100012: arrow02_blue
+    100014: arrow02_green
+    100016: arrow02_grey
+    100018: arrow02_red
+    100020: arrow02_yellow
+    100022: arrow03_blue
+    100024: arrow03_green
+    100026: arrow03_grey
+    100028: arrow03_red
+    100030: arrow03_yellow
+    100032: arrow04_blue
+    100034: arrow04_green
+    100036: arrow04_grey
+    100038: arrow04_red
+    100040: arrow04_yellow
+    100042: arrow05_blue
+    100044: arrow05_green
+    100046: arrow05_grey
+    100048: arrow05_red
+    100050: arrow05_yellow
+    400000: //RootNode
+    400002: arrow01_blue
+    400004: arrow01_green
+    400006: arrow01_grey
+    400008: arrow01_red
+    400010: arrow01_yellow
+    400012: arrow02_blue
+    400014: arrow02_green
+    400016: arrow02_grey
+    400018: arrow02_red
+    400020: arrow02_yellow
+    400022: arrow03_blue
+    400024: arrow03_green
+    400026: arrow03_grey
+    400028: arrow03_red
+    400030: arrow03_yellow
+    400032: arrow04_blue
+    400034: arrow04_green
+    400036: arrow04_grey
+    400038: arrow04_red
+    400040: arrow04_yellow
+    400042: arrow05_blue
+    400044: arrow05_green
+    400046: arrow05_grey
+    400048: arrow05_red
+    400050: arrow05_yellow
+    2300000: //RootNode
+    2300002: arrow01_blue
+    2300004: arrow01_green
+    2300006: arrow01_grey
+    2300008: arrow01_red
+    2300010: arrow01_yellow
+    2300012: arrow02_blue
+    2300014: arrow02_green
+    2300016: arrow02_grey
+    2300018: arrow02_red
+    2300020: arrow02_yellow
+    2300022: arrow03_blue
+    2300024: arrow03_green
+    2300026: arrow03_grey
+    2300028: arrow03_red
+    2300030: arrow03_yellow
+    2300032: arrow04_blue
+    2300034: arrow04_green
+    2300036: arrow04_grey
+    2300038: arrow04_red
+    2300040: arrow04_yellow
+    2300042: arrow05_blue
+    2300044: arrow05_green
+    2300046: arrow05_grey
+    2300048: arrow05_red
+    2300050: arrow05_yellow
+    3300000: //RootNode
+    3300002: arrow01_blue
+    3300004: arrow01_green
+    3300006: arrow01_grey
+    3300008: arrow01_red
+    3300010: arrow01_yellow
+    3300012: arrow02_blue
+    3300014: arrow02_green
+    3300016: arrow02_grey
+    3300018: arrow02_red
+    3300020: arrow02_yellow
+    3300022: arrow03_blue
+    3300024: arrow03_green
+    3300026: arrow03_grey
+    3300028: arrow03_red
+    3300030: arrow03_yellow
+    3300032: arrow04_blue
+    3300034: arrow04_green
+    3300036: arrow04_grey
+    3300038: arrow04_red
+    3300040: arrow04_yellow
+    3300042: arrow05_blue
+    3300044: arrow05_green
+    3300046: arrow05_grey
+    3300048: arrow05_red
+    3300050: arrow05_yellow
+    4300000: arrows01
+    4300002: arrow05_red
+    4300004: arrow04_red
+    4300006: arrow03_red
+    4300008: arrow02_red
+    4300010: arrow01_red
+    4300012: arrow05_green
+    4300014: arrow04_green
+    4300016: arrow03_green
+    4300018: arrow02_green
+    4300020: arrow01_green
+    4300022: arrow05_blue
+    4300024: arrow04_blue
+    4300026: arrow03_blue
+    4300028: arrow02_blue
+    4300030: arrow01_blue
+    4300032: arrow05_yellow
+    4300034: arrow04_yellow
+    4300036: arrow03_yellow
+    4300038: arrow02_yellow
+    4300040: arrow01_yellow
+    4300042: arrow05_grey
+    4300044: arrow04_grey
+    4300046: arrow03_grey
+    4300048: arrow02_grey
+    4300050: arrow01_grey
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

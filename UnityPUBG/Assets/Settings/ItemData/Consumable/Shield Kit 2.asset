@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7b0aae498f12a498a87406362c12fc, type: 3}
+  m_Name: Shield Kit 2
+  m_EditorClassIdentifier: 
+  itemName: Shield Kit 2
+  rarity: 1
+  sortingOrder: 520
+  model: {fileID: 121822, guid: 85f2662645ed3f2469e1c33587e14819, type: 3}
+  icon: {fileID: 21300000, guid: ee623a53c03ff0340a4546d37925f60f, type: 3}
+  maximumStack: 3
+  defaultStack: 1
+  timeToUse: 5
+  healthRestoreAmount: 0
+  shieldRestoreAmount: 100

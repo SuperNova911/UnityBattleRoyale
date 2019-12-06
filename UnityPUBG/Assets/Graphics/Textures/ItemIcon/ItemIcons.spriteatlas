@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ItemIcons
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: acdc0f3f80260854e9e41bb0d41f8f13, type: 3}
+    - {fileID: 102900000, guid: e0db9ee36b994514bb2c8bca500f9a7b, type: 3}
+    - {fileID: 102900000, guid: 3b8769c4bbbe3cc4297bb2f0addec18f, type: 3}
+    totalSpriteSurfaceArea: 3145728
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 189556906263923473, guid: cd62ea302bc491f4ab604d8b03424350, type: 3}
+  - {fileID: -6468514136094491921, guid: 9b246c15db5ab614e9498333edaefe17, type: 3}
+  - {fileID: -6216810531167895743, guid: b6d26bb5940f8d145bf1d179318ad49c, type: 3}
+  - {fileID: 9037835400008695888, guid: 376eddf9121dbe3499d4ba4818a9b7c0, type: 3}
+  - {fileID: 6061325413636719081, guid: 320895aa46159a24eadfb2a467468fb0, type: 3}
+  - {fileID: -3261248842603347068, guid: 53230b6caeb12504d85d87db7259be3a, type: 3}
+  - {fileID: 6787042950800356519, guid: f6070c8ccbbc1fb4ab15bcaceab9c990, type: 3}
+  - {fileID: 65308587496296009, guid: 2ca20e9c5beb6fd40912efbcc9d19815, type: 3}
+  - {fileID: -3448368210441442691, guid: fbf1e9ac7f5c09d44af31f72a01365bd, type: 3}
+  - {fileID: 236646946643517938, guid: cee29bac849de9b40b34022dcd40eafe, type: 3}
+  - {fileID: 4202990157716287660, guid: 9d1b18cc2a2ffcd4d95b375ceb3f26dd, type: 3}
+  - {fileID: 6298618881965463450, guid: 45e6b31f93a5ce148b06d7cbe4dee984, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - sack01_green_0Degree0
+  - sword2h21_green_0Degree0
+  - sack01_yellow_0Degree0
+  - shield02_green_180Degree0
+  - sack01_black_0Degree0
+  - shield10_white_180Degree0
+  - sack01_brown_0Degree0
+  - sword1h01_grey_0Degree0
+  - sword2h03_blue_0Degree0
+  - shield11_beige_180Degree0
+  - sword2h18_yellow_0Degree0
+  - shield15_blue_180Degree0
+  m_Tag: ItemIcons
+  m_IsVariant: 0

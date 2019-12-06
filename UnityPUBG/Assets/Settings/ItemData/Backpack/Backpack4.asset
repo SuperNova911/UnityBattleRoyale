@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb0b9faba530d940ba0bf4eff0e9df4, type: 3}
+  m_Name: Backpack4
+  m_EditorClassIdentifier: 
+  itemName: Test Backpack 4
+  rarity: 3
+  sortingOrder: 200
+  model: {fileID: 168898, guid: 29d5287f2e6447a45b5394460e377508, type: 3}
+  icon: {fileID: 21300000, guid: 3b91a829e17fa234a9e2f224973522e8, type: 3}
+  maximumStack: 1
+  defaultStack: 1
+  bonusCapacity: 6

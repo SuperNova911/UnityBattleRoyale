@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2edee5c58d82540a51f03df9d42094, type: 3}
+  m_Name: LWRP-MobileQuality
+  m_EditorClassIdentifier: 
+  k_AssetVersion: 4
+  m_RendererType: 0
+  m_RendererData: {fileID: 11400000, guid: 7f0523987b4045848b078e4b2c787485, type: 2}
+  m_RequireDepthTexture: 0
+  m_RequireOpaqueTexture: 0
+  m_OpaqueDownsampling: 1
+  m_SupportsHDR: 1
+  m_MSAA: 1
+  m_RenderScale: 1
+  m_MainLightRenderingMode: 1
+  m_MainLightShadowsSupported: 1
+  m_MainLightShadowmapResolution: 512
+  m_AdditionalLightsRenderingMode: 1
+  m_AdditionalLightsPerObjectLimit: 2
+  m_AdditionalLightShadowsSupported: 0
+  m_AdditionalLightsShadowmapResolution: 2048
+  m_ShadowDistance: 20
+  m_ShadowCascades: 0
+  m_Cascade2Split: 0.6989159
+  m_Cascade4Split: {x: 0.19576725, y: 0.34246588, z: 0.65056205}
+  m_ShadowDepthBias: 2
+  m_ShadowNormalBias: 0
+  m_SoftShadowsSupported: 1
+  m_UseSRPBatcher: 0
+  m_SupportsDynamicBatching: 1
+  m_MixedLightingSupported: 1
+  m_ShadowType: 2
+  m_LocalShadowsSupported: 1
+  m_LocalShadowsAtlasResolution: 1024
+  m_MaxPixelLights: 4
+  m_ShadowAtlasResolution: 1024
+  m_ShaderVariantLogLevel: 0

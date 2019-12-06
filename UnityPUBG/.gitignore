@@ -37,4 +37,4 @@ sysinfo.txt
 
 .vscode/settings.json
 
-Assets/3rd Party/ignore resource/*
+Assets/3rd Party/ignore resource*

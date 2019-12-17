@@ -19,6 +19,9 @@ namespace UnityPUBG.Scripts.Entities
         [SerializeField] [Range(1f, 50f)] private float dropSpeed = 8f;
         [SerializeField] [Range(1f, 100f)] private float flySpeed = 20f;
 
+        [Header("SoundPlayer")]
+        [SerializeField] protected PlayerSoundPlayer soundPlayer;
+
         private Rigidbody entityRigidbody;
         private bool isDroping = false;
         private Vector3 currentVelocity;
@@ -44,10 +47,12 @@ namespace UnityPUBG.Scripts.Entities
                 if (changeAmount > 0)
                 {
                     UI.FloatingTextDrawer.Instance.DrawDamageText(transform, changeAmount);
+                    soundPlayer.PlayEffectSound(PlayerSoundPlayer.SoundType.Hit);
                 }
                 OnCurrentHealthUpdate?.Invoke(this, changeAmount);
 
                 IsDead = currentHealth <= 0;
+
                 if (IsDead)
                 {
                     OnDie?.Invoke(this, EventArgs.Empty);

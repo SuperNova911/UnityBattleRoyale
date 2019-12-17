@@ -34,6 +34,7 @@ namespace UnityPUBG.Scripts.Entities
         [Header("Weapon Position")]
         [SerializeField] private Transform meleeWeaponPosition;
         [SerializeField] private Transform rangeWeaponPosition;
+        public float KnockBackPower = 500f;
         #endregion
 
         #region 애니메이션 파라미터
@@ -63,15 +64,14 @@ namespace UnityPUBG.Scripts.Entities
         private Vector3 rangeAttackDirection = Vector3.zero;
         private Vector2 previousAnimationDirection = Vector2.zero;
 
-        //private readonly string myWeaponTag = "MyWeapon";
-        //private readonly string enemyWeaponTag = "EnemyWeapon";
-
         private float currentShieldForEnemy;
 
         private bool isConsuming = false;
         private Coroutine tryConsumeItemCoroutine = null;
         private Item equipedArmor;
         private Item equipedPrimaryWeapon;
+
+        private bool IsDamaged { get; set; }
 
         public event EventHandler<float> OnCurrentShieldUpdate;
         public event EventHandler OnPrimaryWeaponChange;
@@ -92,7 +92,7 @@ namespace UnityPUBG.Scripts.Entities
             }
         }
 
-        public float KnockBackPower = 500f;
+       
         public float CurrentShield
         {
             get
@@ -127,12 +127,12 @@ namespace UnityPUBG.Scripts.Entities
                         (EquipedArmor as ShieldItem).CurrentShield = value;
                         float currentShield = (EquipedArmor as ShieldItem).CurrentShield;
 
-                        float changeAmount = currentShield - previousShield;
-                        if (changeAmount < 0)
+                        float changeAmount =  previousShield - currentShield;
+                        if (changeAmount > 0)
                         {
-                            FloatingTextDrawer.Instance.DrawDamageText(transform, -changeAmount);
+                            FloatingTextDrawer.Instance.DrawDamageText(transform, changeAmount);
+                            soundPlayer.PlayEffectSound(PlayerSoundPlayer.SoundType.Hit);
                         }
-
                         if (changeAmount != 0)
                         {
                             OnCurrentShieldUpdate?.Invoke(this, changeAmount);
@@ -144,10 +144,11 @@ namespace UnityPUBG.Scripts.Entities
                     float previousShield = currentShieldForEnemy;
                     currentShieldForEnemy = value;
 
-                    float changeAmount = currentShieldForEnemy - previousShield;
-                    if (changeAmount < 0)
+                    float changeAmount = previousShield - currentShieldForEnemy;
+                    if (changeAmount > 0)
                     {
-                        FloatingTextDrawer.Instance.DrawDamageText(transform, -changeAmount);
+                        FloatingTextDrawer.Instance.DrawDamageText(transform, changeAmount);
+                        soundPlayer.PlayEffectSound(PlayerSoundPlayer.SoundType.Hit);
                     }
 
                     if(changeAmount != 0)
@@ -383,9 +384,19 @@ namespace UnityPUBG.Scripts.Entities
 
                     case DamageType.Normal:
                     default:
-                        float leftDamage = damage - CurrentShield;
-                        CurrentShield -= damage;
-                        CurrentHealth -= leftDamage;
+                        if (IsDamaged)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            //피격시 1초 무적
+                            StartCoroutine(HitCoolDown());
+
+                            float leftDamage = damage - CurrentShield;
+                            CurrentShield -= damage;
+                            CurrentHealth -= leftDamage;
+                        }
                         break;
                 }
             }
@@ -977,6 +988,7 @@ namespace UnityPUBG.Scripts.Entities
             photonView.RPC(nameof(SyncRangeAttack), PhotonTargets.Others, attackDirection, rangeWeaponData.ItemName, PhotonNetwork.player.NickName);
 
             projectileBase.Fire();
+            soundPlayer.PlayEffectSound(PlayerSoundPlayer.SoundType.Shoot);
         }
 
         private void UpdatePrimaryWeaponModel()
@@ -1110,6 +1122,7 @@ namespace UnityPUBG.Scripts.Entities
             if (!EquipedPrimaryWeapon.IsStackEmpty)
             {
                 myAnimator.SetTrigger(meleeAttack);
+                soundPlayer.PlayEffectSound(PlayerSoundPlayer.SoundType.MeleeAttack);
 
                 yield return new WaitForSecondsRealtime(meleeAttackAnimationLength);
             }
@@ -1136,6 +1149,18 @@ namespace UnityPUBG.Scripts.Entities
             myAnimator.SetTrigger("IsOnGround");
             IsDroping = false;
             OnLand?.Invoke(this, EventArgs.Empty);
+            yield break;
+        }
+
+        //무적 시간
+        private IEnumerator HitCoolDown()
+        {
+            IsDamaged = true;
+
+            yield return new WaitForSecondsRealtime(1f);
+
+            IsDamaged = false;
+
             yield break;
         }
         #endregion
@@ -1258,6 +1283,7 @@ namespace UnityPUBG.Scripts.Entities
             projectileBase.InitializeProjectile(projectileInfo, projectileFirePosition.position);
 
             projectileBase.Fire();
+            soundPlayer.PlayEffectSound(PlayerSoundPlayer.SoundType.Shoot);
         }
         #endregion
     }

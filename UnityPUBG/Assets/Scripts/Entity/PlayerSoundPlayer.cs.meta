@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 59852d641027b82488d9fb20ef510f38
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - effectSoundPlayer: {instanceID: 0}
+  - hitSound: {fileID: 8300000, guid: 9221a68be6ff1544091e192edb2100df, type: 3}
+  - shootSound: {fileID: 8300000, guid: 85a71a2be2bf9f84dae23cd4f9aa9658, type: 3}
+  - meleeAttackSound: {fileID: 8300000, guid: f36fd5940b14fcf4e9b7289a29bd427b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

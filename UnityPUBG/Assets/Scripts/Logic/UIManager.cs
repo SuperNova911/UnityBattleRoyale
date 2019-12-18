@@ -521,6 +521,8 @@ namespace UnityPUBG.Scripts.Logic
 
         private IEnumerator FadeInResultPanel(bool isWin)
         {
+            yield return new WaitForSeconds(0.5f);
+
             int livePlayerCount = EntityManager.Instance.Players.Where(entity => entity.IsDead == false).Count();
 
             if (livePlayerCount > 1 && isWin)
@@ -560,8 +562,8 @@ namespace UnityPUBG.Scripts.Logic
             float fadeInTime = 2f;
             float currentTime = 0f;
 
-            float fadeInDelta = 0.01f;
-            float fadeInDeltaTime = 0.02f;
+            float fadeInDelta = 0.02f;
+            float fadeInDeltaTime = 0.04f;
 
             ResultPanel.SetActive(true);
 

@@ -1,0 +1,193 @@
+fileFormatVersion: 2
+guid: c463152d6e4d2bf438a1d6b1c2f4b579
+timeCreated: 1536121510
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: SM_Veh_Plane_Cargo_Door_01
+    100004: SM_Veh_Plane_Cargo_Door_02
+    100006: SM_Veh_Plane_Cockpit_Stick_L
+    100008: SM_Veh_Plane_Cockpit_Stick_R
+    100010: SM_Veh_Plane_Flap_fl_01
+    100012: SM_Veh_Plane_Flap_fl_02
+    100014: SM_Veh_Plane_Flap_fr_01
+    100016: SM_Veh_Plane_Flap_fr_02
+    100018: SM_Veh_Plane_Flap_rl
+    100020: SM_Veh_Plane_Flap_rr
+    100022: SM_Veh_Plane_Glass_01
+    100024: SM_Veh_Plane_Prop_01
+    100026: SM_Veh_Plane_Prop_02
+    100028: SM_Veh_Plane_Prop_03
+    100030: SM_Veh_Plane_Prop_04
+    100032: SM_Veh_Plane_Wheel_Door_F
+    100034: SM_Veh_Plane_Wheel_Door_L
+    100036: SM_Veh_Plane_Wheel_Door_R
+    100038: SM_Veh_Plane_Wheel_F
+    100040: SM_Veh_Plane_Wheels_L
+    100042: SM_Veh_Plane_Wheels_R
+    100044: SM_Veh_Plane_Flap_Tail_01
+    400000: //RootNode
+    400002: SM_Veh_Plane_Cargo_Door_01
+    400004: SM_Veh_Plane_Cargo_Door_02
+    400006: SM_Veh_Plane_Cockpit_Stick_L
+    400008: SM_Veh_Plane_Cockpit_Stick_R
+    400010: SM_Veh_Plane_Flap_fl_01
+    400012: SM_Veh_Plane_Flap_fl_02
+    400014: SM_Veh_Plane_Flap_fr_01
+    400016: SM_Veh_Plane_Flap_fr_02
+    400018: SM_Veh_Plane_Flap_rl
+    400020: SM_Veh_Plane_Flap_rr
+    400022: SM_Veh_Plane_Glass_01
+    400024: SM_Veh_Plane_Prop_01
+    400026: SM_Veh_Plane_Prop_02
+    400028: SM_Veh_Plane_Prop_03
+    400030: SM_Veh_Plane_Prop_04
+    400032: SM_Veh_Plane_Wheel_Door_F
+    400034: SM_Veh_Plane_Wheel_Door_L
+    400036: SM_Veh_Plane_Wheel_Door_R
+    400038: SM_Veh_Plane_Wheel_F
+    400040: SM_Veh_Plane_Wheels_L
+    400042: SM_Veh_Plane_Wheels_R
+    400044: SM_Veh_Plane_Flap_Tail_01
+    2300000: //RootNode
+    2300002: SM_Veh_Plane_Cargo_Door_01
+    2300004: SM_Veh_Plane_Cargo_Door_02
+    2300006: SM_Veh_Plane_Cockpit_Stick_L
+    2300008: SM_Veh_Plane_Cockpit_Stick_R
+    2300010: SM_Veh_Plane_Flap_fl_01
+    2300012: SM_Veh_Plane_Flap_fl_02
+    2300014: SM_Veh_Plane_Flap_fr_01
+    2300016: SM_Veh_Plane_Flap_fr_02
+    2300018: SM_Veh_Plane_Flap_rl
+    2300020: SM_Veh_Plane_Flap_rr
+    2300022: SM_Veh_Plane_Glass_01
+    2300024: SM_Veh_Plane_Prop_01
+    2300026: SM_Veh_Plane_Prop_02
+    2300028: SM_Veh_Plane_Prop_03
+    2300030: SM_Veh_Plane_Prop_04
+    2300032: SM_Veh_Plane_Wheel_Door_F
+    2300034: SM_Veh_Plane_Wheel_Door_L
+    2300036: SM_Veh_Plane_Wheel_Door_R
+    2300038: SM_Veh_Plane_Wheel_F
+    2300040: SM_Veh_Plane_Wheels_L
+    2300042: SM_Veh_Plane_Wheels_R
+    2300044: SM_Veh_Plane_Flap_Tail_01
+    3300000: //RootNode
+    3300002: SM_Veh_Plane_Cargo_Door_01
+    3300004: SM_Veh_Plane_Cargo_Door_02
+    3300006: SM_Veh_Plane_Cockpit_Stick_L
+    3300008: SM_Veh_Plane_Cockpit_Stick_R
+    3300010: SM_Veh_Plane_Flap_fl_01
+    3300012: SM_Veh_Plane_Flap_fl_02
+    3300014: SM_Veh_Plane_Flap_fr_01
+    3300016: SM_Veh_Plane_Flap_fr_02
+    3300018: SM_Veh_Plane_Flap_rl
+    3300020: SM_Veh_Plane_Flap_rr
+    3300022: SM_Veh_Plane_Glass_01
+    3300024: SM_Veh_Plane_Prop_01
+    3300026: SM_Veh_Plane_Prop_02
+    3300028: SM_Veh_Plane_Prop_03
+    3300030: SM_Veh_Plane_Prop_04
+    3300032: SM_Veh_Plane_Wheel_Door_F
+    3300034: SM_Veh_Plane_Wheel_Door_L
+    3300036: SM_Veh_Plane_Wheel_Door_R
+    3300038: SM_Veh_Plane_Wheel_F
+    3300040: SM_Veh_Plane_Wheels_L
+    3300042: SM_Veh_Plane_Wheels_R
+    3300044: SM_Veh_Plane_Flap_Tail_01
+    4300000: SM_Veh_Plane_01
+    4300002: SM_Veh_Plane_Glass_01
+    4300004: SM_Veh_Plane_Cockpit_Stick_R
+    4300006: SM_Veh_Plane_Cockpit_Stick_L
+    4300008: SM_Veh_Plane_Cargo_Door_01
+    4300010: SM_Veh_Plane_Cargo_Door_02
+    4300012: SM_Veh_Plane_Prop_02
+    4300014: SM_Veh_Plane_Wheel_Door_R
+    4300016: SM_Veh_Plane_Wheel_Door_F
+    4300018: SM_Veh_Plane_Prop_01
+    4300020: SM_Veh_Plane_Flap_fl_02
+    4300022: SM_Veh_Plane_Flap_fl_01
+    4300024: SM_Veh_Plane_Wheel_Door_L
+    4300026: SM_Veh_Plane_Prop_03
+    4300028: SM_Veh_Plane_Prop_04
+    4300030: SM_Veh_Plane_Flap_fr_02
+    4300032: SM_Veh_Plane_Flap_fr_01
+    4300034: SM_Veh_Plane_Flap_rl
+    4300036: SM_Veh_Plane_Flap_rr
+    4300038: SM_Veh_Plane_Wheels_R
+    4300040: SM_Veh_Plane_Wheels_L
+    4300042: SM_Veh_Plane_Wheel_F
+    4300044: SM_Veh_Plane_Flap_Tail_01
+    9500000: //RootNode
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 5
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

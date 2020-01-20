@@ -1,0 +1,186 @@
+ <!--
+Design by Bryant Smith
+http://www.bryantsmith.com
+http://www.aszx.net
+email: template [-at-] bryantsmith [-dot-] com
+Released under Creative Commons Attribution 2.5 Generic.  In other words, do with it what you please; but please leave the link if you'd be so kind :)
+
+Name       : Green Creative
+Description: One column, with top naviagation
+Version    : 1.0
+Released   : 20081222
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<title>Mesh Online - Polygon Reduction Tool for Unity</title>
+</head>
+
+<body>
+    <div id="page">
+		
+        <div id="header">
+        	<div id="headerTitle">Mesh Online</div>
+            <div id="headerSubText">We contribute professional mesh simplification solution for Unity.</div>
+            
+        </div>
+        <div class="contentTitle"><h1>Introduction (Standard Edition and Professional Edition)</h1></div>
+        <div class="contentText">
+          <p>Mantis LOD Editor is a polygon reduction toolset(include several editor extensions, a command line utility and a standalone app), you can simplify your 3d models and make LOD from within Unity's editor, from command line, or from the standalone app.</p>
+          <p>&nbsp;</p>
+          <p>Most important, the toolset can generate high quality LOD with very low triangle count, this is very important to mobile games.</p>
+          <p>&nbsp;</p>
+          <p>We have brought the world's first commercial progressive mesh technology in the professional edition, you never have to make LOD manually like before, now, you can simplify all your 3d models in batch, then turn them to progressive meshes in batch, this is very useful if you have hundreds of 3d models to convert.</p>
+          <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>Features</h1></div>
+        <div class="contentText">
+          <p>- Generate LOD for both static meshes and skinned meshes. (All edition)</p>
+          <p>- Automatically protect UV boundaries and material boundaries . (All edition)</p>
+          <p>- Protect all open boundaries or smartly merge some smooth parts of open boundaries. (All edition)</p>
+          <p>- Protect all blend shapes. (All edition)</p>
+          <p>- Super fast, it can simplify 50,000 triangles per second. (Standard edition and professional edition)</p>
+          <p>- Preview final effect in real time. (Standard edition and professional edition)</p>
+          <p>- Can simplify huge 3d models. (Standard edition and professional edition)</p>
+          <p>- Simplify hundreds of 3d models in batch. (Professional edition)</p>
+          <p>- Advanced progressive mesh technology. (Professional edition)</p>
+          <p>- Generate progressive meshes for hundreds of 3d models in batch. (Professional edition)</p>
+          <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>How to install?</h1></div>
+        <div class="contentText">
+          <p>All Editions: Remove all old editions, then copy the whole directory of 'MantisLODEditor'(include all subdirectories) to your project’s Assets path.</p>
+          <p>&nbsp;</p>
+          <p>Standard Edition: Unzip 'MantisLODEditor/Utility/Standalone.zip'.</p>
+          <p>&nbsp;</p>
+          <p>Professional Edition: Unzip 'MantisLODEditor/Utility/CommandLine.zip' and 'MantisLODEditor/Utility/Standalone.zip'.</p>
+          <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>Quick Start (Online Edition)</h1></div>
+        <div class="contentText">
+          <p>1. Select the GameObject from the hierarchy panel, go to the menu('Window/Mantis LOD Editor->Component->Editor->Mantis LOD Editor Online') to add a 'Mantis LOD Editor Online' component.</p>
+          <p>2. Click 'Upload Mesh Data' to upload necessary mesh data to the server side.</p>
+          <p>3. Drag the quality slider or type a quality value directly to simplify the meshes.</p>
+          <p>4. Click 'Save Current Mesh' to save the simplified meshes as LOD versions of assets.</p>
+          <p>5. Repeat step 3 to step 4 several times, make LOD with different qualities and save as assets.</p>
+          <p>6. Remove 'Mantis LOD Editor Online' component from the GameObject.</p>
+          <p>7. Duplicate the meshes several times.
+          <p>8. Drag the saved assets onto the corresponding mesh filter properties.</p>
+          <p>9. All done.</p>
+        </div>
+        <div class="contentTitle"><h1>Quick Start (Standard Edition)</h1></div>
+        <div class="contentText">
+          <p>1. Select the GameObject from the hierarchy panel, go to the menu('Window/Mantis LOD Editor->Component->Editor->Mantis LOD Editor Standard') to add a 'Mantis LOD Editor Standard' component.</p>
+          <p>2. Drag the quality slider or type a quality value directly to simplify the meshes.</p>
+          <p>3. Click 'Save Current Mesh' to save the simplified meshes as LOD versions of assets.</p>
+          <p>4. Repeat step 2 to step 3 several times, make LOD with different qualities and save as assets.</p>
+          <p>5. Remove 'Mantis LOD Editor Standard' component from the GameObject.</p>
+          <p>6. Duplicate the meshes several times.
+          <p>7. Drag the saved assets onto the corresponding mesh filter properties.</p>
+          <p>8. All done.</p>
+        </div>
+        <div class="contentTitle"><h1>Quick Start (Professional Edition)</h1></div>
+        <div class="contentText">
+          <p>1. Select the GameObject from the hierarchy panel, go to the menu('Window/Mantis LOD Editor->Component->Editor->Mantis LOD Editor Professional') to add a 'Mantis LOD Editor Professional' component.</p>
+          <p>2. Click 'Save Progressive Mesh' to generate and save the progressive mesh as an asset.</p>
+          <p>3. Remove 'Mantis LOD Editor Professional' component from the GameObject.</p>
+          <p>4. Go to the menu('Window/Mantis LOD Editor->Component->Runtime->Progressive Mesh Runtime') to add a 'Progressive Mesh Runtime' component.</p>
+          <p>5. Drag the saved asset onto the progressive mesh property of the 'Progressive Mesh Runtime' component.</p>
+          <p>6. All done.</p>
+        </div>
+        <div class="contentTitle"><h1>Quick Start (Batch Edition)</h1></div>
+        <div class="contentText">
+          <p>1. Create 'Assets/Resources' directory, copy all your 3d models into the directory.</p>
+          <p>2. Go to the menu('Window/Mantis LOD Editor->Assets->Create->Mantis LOD Editor Batch') to run the batch edition.</p>
+          <p>3. Click 'Batch Generate' to generate and save the progressive meshes into the same directory.</p>
+          <p>4. All done.</p>
+        </div>
+        <div class="contentTitle"><h1>Tutorial Videos</h1></div>
+        <div class="contentText">
+          <p>The latest tutorial videos: <a href="http://www.mesh-online.net/showcase.html">http://www.mesh-online.net/showcase.html</a></p>
+        </div>
+        <div class="contentTitle"><h1>Introduction (Standalone Edition)</h1></div>
+        <div class="contentText">
+          <p>Mantis LOD Editor - Standalone Edition are multiple platform standalone applications which help you to simplify your 3d models while remaining all animation/rigs, it can simplify huge 3d models as you wish!</p>
+          <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>How to install?</h1></div>
+        <div class="contentText">
+          <p>It’s green software, no need to install, just unzip the package anywhere.</p>
+          <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>How to run?</h1></div>
+        <div class="contentText">
+          <p>It can run on Windows(XP/7/8/10) and OSX(10.8/10.9/10.10), to run the standalone edition, your machine must full support OpenGL 2.0, if you are using a virtual machine, we recommend VirtualBox, their OpenGL driver for Windows 7 has been approved to run the standalone edition.</p>
+          <p>&nbsp;</p>
+          <p>On Windows, go to the 'Win32' subdirectory, double click MantisLODEditor.exe to launch.</p>
+          <p>&nbsp;</p>
+          <p>On OSX, go to the 'Mac' subdirectory, double click MantisLODEditor.app to launch.</p>
+          <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>Which 3d format does it support?</h1></div>
+        <div class="contentText">
+            <p>It can import FBX, DAE, OBJ, DXF and 3DS files, export FBX, DAE, OBJ and DXF files, we recommend FBX format.</p>
+          <p>&nbsp;</p>
+          <p>Both static and skinned 3d models are supported, if you have troubles with some formats, please convert your 3d model to FBX format with Autodesk’s free convert tool.</p>
+          <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>Can I simplify multiple parts of 3d model with different qualities?</h1></div>
+        <div class="contentText">
+            <p>Just select the parts you want to simplify with certain quality, then drag the slide bar or type the quality number to simplify the selected parts, repeat untill you are satisfied with all parts.</p>
+            <p>&nbsp;</p>
+            <p>If you select nothing, simplification will apply to all parts.</p>
+            <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>Introduction (Command Line Edition)</h1></div>
+        <div class="contentText">
+          <p>Mantis LOD Editor - Command Line Edition has the same functions as the Standalone Edition, you can use this utility to simplify hundreds of 3d models in batch.</p>
+          <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>How to use the command line utility?</h1></div>
+        <div class="contentText">
+          <p>If you run the utility without any parameters in a terminal window, it will display the usage and some examples.</p>
+          <p>&nbsp;</p>
+          <p>Usage: ./mle options</p>
+          <p>Options:</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;-h,--help&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show this help message</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;-b,--protect_boundary&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y/n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Protect open boundary, optional, default value is yes</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;-d,--protect_detail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y/n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Protect detail, optional, default value is no</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;-s,--protect_symmetry&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y/n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Protect symmetry, optional, default value is no</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;-t,--triangle_count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maximum triangles count, optional, default number is 5000</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;-i,--input&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Input file name, must be assigned</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;-o,--output&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output file name, must be assigned</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;-f,--output_format&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0/1/2/3/4/5/6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output format, optional, default format is 0</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;Where:</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0:fbx_2013_binary</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:fbx_2013_ascii</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:dae</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:fbx_6.0_binary</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:fbx_6.0_ascii</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5:obj</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6:dxf</p>
+          <p>Examples:</p>
+          <p>./mle -h</p>
+          <p>./mle -t 1500 -i abc.fbx -o abc2.fbx</p>
+          <p>./mle -b y -d y -s y -t 3000 -i abc.fbx -o abc2.fbx</p>
+          <p>./mle -b y -d y -s y -t 3000 -i abc.fbx -o abc2.dae -f 2</p>
+          <p>&nbsp;</p>
+          <p>For example, if you want to simplify a 3d model to 3000 triangles use default settings, you can run command like this:</p>
+          <p>OSX:</p>
+          <p>./mle -t 3000 -i banana.fbx -o banana2.fbx</p>
+          <p>Windows:</p>
+          <p>mle.exe -t 3000 -i banana.fbx -o banana2.fbx</p>
+          <p>&nbsp;</p>
+        </div>
+        <div class="contentTitle"><h1>Learn more</h1></div>
+        <div class="contentText">
+          <p>If you still have doubts, visit <a href="http://www.mesh-online.net/">our web site</a> to learn more.</p>
+        </div>
+</div>
+        <div id="footer"><a href="http://www.aszx.net">web development</a> by <a href="http://www.bryantsmith.com">bryant smith</a></div>
+</body>
+</html>
